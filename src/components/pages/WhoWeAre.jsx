@@ -7,16 +7,17 @@ export function WhoWeAre() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
 
   const notes = [
-    "A custom confidence layer that is aligned to risk and compliance goals.",
-    "AI stack optimization across retrieval, orchestration, and evaluation.",
-    "What does your team actually need this quarter?",
+    "ROI Question: Where is the tangible ROI?",
+    "Relevance Question: What is our winning use case?",
+    "Security Question: Will this scale into production-grade?",
+    "Noise Question: Which framework and model should we bet on?",
   ];
 
   const stats = [
-    { value: "14 Days", label: "Idea cycle" },
-    { value: "90%", label: "Process wins" },
-    { value: "12 +", label: "Astro realization" },
-    { value: "Proprietory", label: "Postset play" },
+    { value: "50+", label: "AI engagements shipped" },
+    { value: "6-10 wks", label: "Typical production timeline" },
+    { value: "2x", label: "Faster than traditional AI delivery" },
+    { value: "40+ yrs", label: "Leadership experience in AI" },
   ];
 
   return (
@@ -41,7 +42,7 @@ export function WhoWeAre() {
                 color: T.ink40,
               }}
             >
-              Our Values, Our Purpose
+              About
             </p>
             <h2
               style={{
@@ -55,11 +56,7 @@ export function WhoWeAre() {
                 maxWidth: 560,
               }}
             >
-              We build the systems
-              <br />
-              that optimize for
-              <br />
-              precision and power.
+              On a mission to simplify automation.
             </h2>
             <p
               style={{
@@ -71,9 +68,8 @@ export function WhoWeAre() {
                 color: T.ink60,
               }}
             >
-              Applied AI Labs operates with a new form of digital clarity. Digital labor
-              allows for the coordinated operation of capabilities at scale, where first-order
-              outcomes become measurable and practical.
+              We are a GenAI-first company built to make AI easy to use. The secret?
+              Deep know-how, business-first thinking, and fast applied research.
             </p>
           </div>
         </Reveal>
@@ -90,7 +86,7 @@ export function WhoWeAre() {
                 textTransform: "uppercase",
               }}
             >
-              We calibrate to where value and velocity meet.
+              Questions enterprise leaders ask behind the GenAI hype.
             </p>
             <div style={{ display: "grid", gap: 0 }}>
               {notes.map((item, idx) => (
@@ -137,6 +133,23 @@ export function WhoWeAre() {
         </h3>
       </Reveal>
 
+      <Reveal delay={0.18} distance={14} blurFrom={6}>
+        <p
+          style={{
+            margin: "0 auto",
+            maxWidth: 860,
+            textAlign: "center",
+            fontFamily: font.sans,
+            fontSize: isSmallMobile ? 13 : 15,
+            lineHeight: 1.72,
+            color: T.ink60,
+          }}
+        >
+          Heuristic Labs acts as your Applied AI Lab, turning AI ambition into secure,
+          scalable, production-ready systems.
+        </p>
+      </Reveal>
+
       <div
         style={{
           border: `1px solid ${T.ink12}`,
@@ -145,7 +158,7 @@ export function WhoWeAre() {
           overflow: "hidden",
           display: "grid",
           gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
-          marginTop: 4,
+          marginTop: 14,
         }}
       >
         {stats.map((item, index) => (

@@ -40,6 +40,12 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     },
   );
 
+  const detailBlocks = [
+    { label: "Objective", text: caseStudy.objective || caseStudy.body },
+    { label: "Solution", text: caseStudy.solution || caseStudy.body },
+    { label: "Outcome", text: caseStudy.outcome || caseStudy.body },
+  ];
+
   return (
     <Section id="case-study-detail">
       <Reveal>
@@ -164,17 +170,34 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
               gap: isSmallMobile ? 16 : 22,
             }}
           >
-            <p
-              style={{
-                margin: 0,
-                fontFamily: font.sans,
-                fontSize: isSmallMobile ? 14 : 16,
-                lineHeight: 1.82,
-                color: T.ink60,
-              }}
-            >
-              {caseStudy.body}
-            </p>
+            {detailBlocks.map((block) => (
+              <div key={`${caseStudy.title}-${block.label}`}>
+                <p
+                  style={{
+                    margin: "0 0 6px",
+                    fontFamily: font.sans,
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: ".08em",
+                    textTransform: "uppercase",
+                    color: T.ink40,
+                  }}
+                >
+                  {block.label}
+                </p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontFamily: font.sans,
+                    fontSize: isSmallMobile ? 14 : 16,
+                    lineHeight: 1.82,
+                    color: T.ink60,
+                  }}
+                >
+                  {block.text}
+                </p>
+              </div>
+            ))}
 
             <div
               style={{
@@ -183,9 +206,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                 gap: 8,
               }}
             >
-              {caseStudy.metrics.map((metric) => (
+              {(caseStudy.techTags || caseStudy.metrics.map((metric) => metric.label)).map((tag) => (
                 <span
-                  key={metric.label}
+                  key={`${caseStudy.title}-${tag}`}
                   style={{
                     fontFamily: font.sans,
                     fontSize: 11,
@@ -199,7 +222,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     padding: "5px 10px",
                   }}
                 >
-                  {metric.label}
+                  {tag}
                 </span>
               ))}
             </div>

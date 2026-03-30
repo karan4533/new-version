@@ -71,6 +71,20 @@ export function Contact() {
                 together.
               </h2>
 
+              <p
+                style={{
+                  margin: "0 0 10px",
+                  maxWidth: 460,
+                  fontFamily: font.sans,
+                  fontSize: isSmallMobile ? 13 : 14,
+                  lineHeight: 1.7,
+                  color: T.ink60,
+                }}
+              >
+                Whether you have a defined use case or are still mapping the AI opportunity,
+                let&apos;s start a conversation.
+              </p>
+
               <div
                 style={{
                   display: "grid",
@@ -97,7 +111,7 @@ export function Contact() {
                       color: T.ink40,
                     }}
                   >
-                    Address
+                    Phone
                   </p>
                   <p
                     style={{
@@ -109,14 +123,16 @@ export function Contact() {
                       color: T.ink,
                     }}
                   >
-                    connect@heuristiclabs.ai
+                    +91 97399 86763
                   </p>
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 24, height: 24 }}>
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M12 21C15.9 17.1 18.2 14.6 18.2 11.8C18.2 8.4 15.5 5.7 12.1 5.7C8.7 5.7 6 8.4 6 11.8C6 14.6 8.3 17.1 12 21Z" stroke={T.amber} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="12.1" cy="11.7" r="2.2" stroke={T.amber} strokeWidth="2" />
+                    <circle cx="12" cy="12" r="8" stroke={T.amber} strokeWidth="2" />
+                    <path d="M4 12H20" stroke={T.amber} strokeWidth="2" strokeLinecap="round" />
+                    <path d="M12 4C14.2 6.3 15.3 9 15.3 12C15.3 15 14.2 17.7 12 20" stroke={T.amber} strokeWidth="2" strokeLinecap="round" />
+                    <path d="M12 4C9.8 6.3 8.7 9 8.7 12C8.7 15 9.8 17.7 12 20" stroke={T.amber} strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </div>
                 <div>
@@ -129,7 +145,7 @@ export function Contact() {
                       color: T.ink40,
                     }}
                   >
-                    As
+                    Website
                   </p>
                   <p
                     style={{
@@ -141,7 +157,7 @@ export function Contact() {
                       color: T.ink,
                     }}
                   >
-                    Chennai, India
+                    www.HeuristicLabs.ai
                   </p>
                 </div>
 
@@ -163,7 +179,7 @@ export function Contact() {
                       color: T.ink40,
                     }}
                   >
-                    Plan a call
+                    Email
                   </p>
                   <p
                     style={{
@@ -175,7 +191,7 @@ export function Contact() {
                       color: T.ink,
                     }}
                   >
-                    Book a 30-min consultation
+                    connect@heuristiclabs.ai
                   </p>
                 </div>
               </div>
@@ -195,6 +211,25 @@ export function Contact() {
               <Reveal delay={0.14} distance={12} blurFrom={6}>
                 <div style={rowStyle}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36 }}>
+                    <span style={{ color: T.teal, fontSize: 20 }}>◫</span>
+                  </div>
+                  <div>
+                    <h3 style={{ margin: 0, fontFamily: font.serif, fontWeight: 600, fontSize: 16, lineHeight: 1.2, color: T.ink }}>
+                      Schedule a Discovery Call
+                    </h3>
+                    <p style={{ margin: "6px 0 0", fontFamily: font.sans, fontSize: 14, lineHeight: 1.55, color: T.ink60 }}>
+                      Best for use-case scoping, architecture direction, and delivery planning.
+                    </p>
+                  </div>
+                  <a href="#" style={{ ...actionBtnStyle, border: "1px solid transparent", background: T.ink, color: T.w }}>
+                    Schedule a Discovery Call <span style={{ opacity: 0.95, fontSize: 16, lineHeight: 1 }}>→</span>
+                  </a>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.2} distance={12} blurFrom={6}>
+                <div style={rowStyle}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36 }}>
                     <span style={{ color: T.teal, fontSize: 20 }}>✉</span>
                   </div>
                   <div>
@@ -211,25 +246,6 @@ export function Contact() {
                 </div>
               </Reveal>
 
-              <Reveal delay={0.2} distance={12} blurFrom={6}>
-                <div style={rowStyle}>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36 }}>
-                    <span style={{ color: T.teal, fontSize: 20 }}>◫</span>
-                  </div>
-                  <div>
-                    <h3 style={{ margin: 0, fontFamily: font.serif, fontWeight: 600, fontSize: 16, lineHeight: 1.2, color: T.ink }}>
-                      Rather talk directly?
-                    </h3>
-                    <p style={{ margin: "6px 0 0", fontFamily: font.sans, fontSize: 14, lineHeight: 1.55, color: T.ink60 }}>
-                      Schedule a free 30-minute consultation
-                    </p>
-                  </div>
-                  <a href="#" style={{ ...actionBtnStyle, border: "1px solid transparent", background: T.ink, color: T.w }}>
-                    Book a meeting <span style={{ opacity: 0.95, fontSize: 16, lineHeight: 1 }}>→</span>
-                  </a>
-                </div>
-              </Reveal>
-
               <Reveal delay={0.26} distance={12} blurFrom={6}>
                 <div
                   style={{
@@ -238,18 +254,18 @@ export function Contact() {
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36 }}>
-                    <span style={{ color: T.teal, fontSize: 20 }}>in</span>
+                    <span style={{ color: T.teal, fontSize: 20 }}>☎</span>
                   </div>
                   <div>
                     <h3 style={{ margin: 0, fontFamily: font.serif, fontWeight: 600, fontSize: 16, lineHeight: 1.2, color: T.ink }}>
-                      Stay connected
+                      Need a quick call?
                     </h3>
                     <p style={{ margin: "6px 0 0", fontFamily: font.sans, fontSize: 14, lineHeight: 1.55, color: T.ink60 }}>
-                      Follow us on LinkedIn for the latest insights
+                      Reach us directly at +91 97399 86763
                     </p>
                   </div>
-                  <a href="https://www.linkedin.com/company/heuristic-labs-ai/" target="_blank" rel="noopener noreferrer" style={{ ...actionBtnStyle, border: `1px solid ${T.ink12}`, background: "rgba(221,216,206,.72)", color: T.ink }}>
-                    Connect with us <span style={{ opacity: 0.95, fontSize: 16, lineHeight: 1 }}>→</span>
+                  <a href="tel:+919739986763" style={{ ...actionBtnStyle, border: `1px solid ${T.ink12}`, background: "rgba(221,216,206,.72)", color: T.ink }}>
+                    Call now <span style={{ opacity: 0.95, fontSize: 16, lineHeight: 1 }}>→</span>
                   </a>
                 </div>
               </Reveal>

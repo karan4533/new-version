@@ -5,25 +5,30 @@ import { Section } from "../shared";
 import { Reveal } from "../shared";
 import { CASES } from "../../constants/data/cases";
 
-const leftMenuLabels = [
-  "Product Inventory",
-  "Contract Intelligence",
-  "Filter / Techniques",
-  "Clinical Contracts Intelligence",
-  "Case Full Inquiry Year Agent",
-];
-
 export function CaseStudies({ onOpenCaseStudy }) {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const visibleCases = CASES.slice(0, 5);
   const activeCase = visibleCases[activeIndex] ?? visibleCases[0];
 
-  const metrics = [
+  const handlePrevCase = () => {
+    setActiveIndex((current) =>
+      current === 0 ? visibleCases.length - 1 : current - 1,
+    );
+  };
+
+  const handleNextCase = () => {
+    setActiveIndex((current) =>
+      current === visibleCases.length - 1 ? 0 : current + 1,
+    );
+  };
+
+  const summaryMetrics = [
     ...(activeCase?.metrics || []),
     { val: activeCase?.weeks || "8 weeks", label: "delivery timeline" },
-    { val: activeCase?.cat || "Enterprise", label: "domain" },
+    { val: activeCase?.cat || "Enterprise", label: "industry" },
   ].slice(0, 4);
 
   return (
@@ -39,7 +44,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
             color: T.ink40,
           }}
         >
-          The. C-Case. Indonny Droite.
+          Case studies
         </p>
       </Reveal>
 
@@ -55,7 +60,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
             letterSpacing: "-.02em",
           }}
         >
-          Case Studies.
+          Real systems. Measurable results.
         </h2>
       </Reveal>
 
@@ -66,54 +71,159 @@ export function CaseStudies({ onOpenCaseStudy }) {
           display: "grid",
           gridTemplateColumns: isTablet ? "1fr" : "minmax(300px,0.74fr) minmax(0,1.26fr)",
           gap: isSmallMobile ? 12 : 18,
-          alignItems: "start",
+          alignItems: "stretch",
         }}
       >
-        <Reveal distance={16} blurFrom={8}>
+        <Reveal distance={16} blurFrom={8} style={{ height: isTablet ? "auto" : "100%" }}>
           <aside
             style={{
               borderRadius: 8,
               overflow: "hidden",
-              background: "transparent",
+              background: "rgba(255,255,255,.42)",
+              border: `1px solid ${T.ink12}`,
+              height: isTablet ? "auto" : "100%",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            {visibleCases.map((item, index) => {
-              const isActive = index === activeIndex;
-              const menuLabel = leftMenuLabels[index] || item.title;
+            <div style={{ display: "grid" }}>
+              {visibleCases.map((item, index) => {
+                const isActive = index === activeIndex;
+                const isHovered = hoveredIndex === index;
 
-              return (
-                <button
-                  key={item.title}
-                  type="button"
-                  onClick={() => setActiveIndex(index)}
+                return (
+                  <button
+                    key={item.title}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{
+                      width: "100%",
+                      border: "none",
+                      borderTop: index === 0 ? `1px solid ${T.ink12}` : "none",
+                      borderBottom: `1px solid ${T.ink12}`,
+                      borderLeft: isActive ? `2px solid ${T.amber}` : "2px solid transparent",
+                      background: isActive
+                        ? "rgba(255,255,255,.66)"
+                        : isHovered
+                          ? "rgba(255,255,255,.5)"
+                          : "transparent",
+                      padding: isSmallMobile ? "11px 12px" : "12px 12px",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      fontFamily: font.sans,
+                      color: isActive ? T.ink : T.ink60,
+                      transition: "background .22s ease, transform .22s ease, color .22s ease",
+                      transform: isHovered && !isActive ? "translateX(2px)" : "none",
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: 10,
+                        fontWeight: 700,
+                        letterSpacing: ".06em",
+                        textTransform: "uppercase",
+                        color: isActive ? T.ink40 : "rgba(30,26,16,.45)",
+                        marginBottom: 3,
+                      }}
+                    >
+                      {item.cat} | {item.weeks}
+                    </span>
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: isSmallMobile ? 12 : 13,
+                        fontWeight: isActive ? 700 : 600,
+                        lineHeight: 1.34,
+                        whiteSpace: "normal",
+                      }}
+                    >
+                      {item.shortTitle || item.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {!isTablet && (
+              <div
+                style={{
+                  marginTop: "auto",
+                  padding: "12px 12px 13px",
+                  borderTop: `1px solid ${T.ink12}`,
+                  background: "rgba(255,255,255,.6)",
+                }}
+              >
+                <p
                   style={{
-                    width: "100%",
-                    border: "none",
-                    borderTop: index === 0 ? `1px solid ${T.ink12}` : "none",
-                    borderBottom: `1px solid ${T.ink12}`,
-                    borderLeft: isActive ? `2px solid ${T.amber}` : "2px solid transparent",
-                    background: "transparent",
-                    padding: "13px 10px 13px 12px",
-                    textAlign: "left",
-                    cursor: "pointer",
+                    margin: "0 0 10px",
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 12 : 13,
-                    color: isActive ? T.ink : T.ink60,
-                    fontWeight: isActive ? 600 : 500,
-                    lineHeight: 1.4,
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
+                    fontSize: 11,
+                    lineHeight: 1.45,
+                    color: T.ink40,
                   }}
                 >
-                  {menuLabel}
-                </button>
-              );
-            })}
+                  Select a case to instantly update objective, solution, and outcomes.
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <button
+                    type="button"
+                    onClick={handlePrevCase}
+                    style={{
+                      border: `1px solid ${T.ink12}`,
+                      borderRadius: 999,
+                      background: "rgba(255,255,255,.72)",
+                      color: T.ink,
+                      fontFamily: font.sans,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: ".04em",
+                      textTransform: "uppercase",
+                      padding: "5px 10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Prev
+                  </button>
+                  <span
+                    style={{
+                      fontFamily: font.sans,
+                      fontSize: 11,
+                      color: T.ink40,
+                      letterSpacing: ".04em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {activeIndex + 1} / {visibleCases.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleNextCase}
+                    style={{
+                      border: `1px solid ${T.ink12}`,
+                      borderRadius: 999,
+                      background: "rgba(255,255,255,.72)",
+                      color: T.ink,
+                      fontFamily: font.sans,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: ".04em",
+                      textTransform: "uppercase",
+                      padding: "5px 10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
           </aside>
         </Reveal>
 
-        <Reveal delay={0.08} distance={20} blurFrom={10}>
+        <Reveal delay={0.08} distance={20} blurFrom={10} style={{ height: isTablet ? "auto" : "100%" }}>
           <article
             style={{
               border: `1px solid ${T.ink12}`,
@@ -122,6 +232,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
               padding: isSmallMobile ? "12px" : "16px 18px 14px",
               display: "grid",
               gap: 10,
+              height: isTablet ? "auto" : "100%",
             }}
           >
             <p
@@ -134,7 +245,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 color: T.ink40,
               }}
             >
-              Non - We Studies
+              {`${activeCase.cat} | ${activeCase.weeks}`}
             </p>
 
             <h3
@@ -159,17 +270,81 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 gap: 14,
               }}
             >
+              <div>
+                <p
+                  style={{
+                    margin: "0 0 4px",
+                    fontFamily: font.sans,
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: ".08em",
+                    textTransform: "uppercase",
+                    color: T.ink40,
+                  }}
+                >
+                  Objective
+                </p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontFamily: font.sans,
+                    fontSize: isSmallMobile ? 12 : 13,
+                    lineHeight: 1.58,
+                    color: T.ink60,
+                    maxWidth: 380,
+                  }}
+                >
+                  {activeCase.objective || activeCase.body}
+                </p>
+              </div>
+              <div>
+                <p
+                  style={{
+                    margin: "0 0 4px",
+                    fontFamily: font.sans,
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: ".08em",
+                    textTransform: "uppercase",
+                    color: T.ink40,
+                  }}
+                >
+                  Solution
+                </p>
+                <p
+                  style={{
+                    margin: 0,
+                    fontFamily: font.sans,
+                    fontSize: isSmallMobile ? 12 : 13,
+                    lineHeight: 1.58,
+                    color: T.ink60,
+                    maxWidth: 380,
+                  }}
+                >
+                  {activeCase.solution || activeCase.body}
+                </p>
+              </div>
+            </div>
+
+            <div
+              style={{
+                borderTop: `1px solid ${T.ink12}`,
+                borderBottom: `1px solid ${T.ink12}`,
+                padding: "10px 0",
+              }}
+            >
               <p
                 style={{
-                  margin: 0,
+                  margin: "0 0 4px",
                   fontFamily: font.sans,
-                  fontSize: isSmallMobile ? 12 : 13,
-                  lineHeight: 1.58,
-                  color: T.ink60,
-                  maxWidth: 380,
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: ".08em",
+                  textTransform: "uppercase",
+                  color: T.ink40,
                 }}
               >
-                {activeCase.body}
+                Outcome
               </p>
               <p
                 style={{
@@ -178,12 +353,41 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   fontSize: isSmallMobile ? 12 : 13,
                   lineHeight: 1.58,
                   color: T.ink60,
-                  maxWidth: 380,
                 }}
               >
-                {"Gotmme a compare optic? ADC section enters with concise wins where metrics translate to business and operations impact."}
+                {activeCase.outcome || activeCase.body}
               </p>
             </div>
+
+            {!!activeCase.techTags?.length && (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 6,
+                }}
+              >
+                {activeCase.techTags.map((tag) => (
+                  <span
+                    key={`${activeCase.title}-${tag}`}
+                    style={{
+                      fontFamily: font.sans,
+                      fontSize: 10,
+                      fontWeight: 700,
+                      letterSpacing: ".05em",
+                      textTransform: "uppercase",
+                      color: T.ink60,
+                      border: `1px solid ${T.ink12}`,
+                      borderRadius: 100,
+                      background: T.ink07,
+                      padding: "4px 9px",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
             <button
               type="button"
@@ -203,7 +407,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 cursor: "pointer",
               }}
             >
-              Open Case Study
+              Read full case study
             </button>
 
             <div
@@ -214,23 +418,34 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 display: "grid",
                 gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
                 gap: 8,
+                alignItems: "stretch",
               }}
             >
-              {metrics.map((metric) => (
-                <div key={`${metric.label}-${metric.val}`}>
+              {summaryMetrics.map((metric) => (
+                <div
+                  key={`${metric.label}-${metric.val}`}
+                  style={{
+                    minHeight: isSmallMobile ? 74 : 88,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 3,
+                  }}
+                >
                   <div
                     style={{
                       fontFamily: font.serif,
                       fontSize: isSmallMobile ? 26 : 30,
-                      lineHeight: 1,
+                      lineHeight: 1.02,
                       color: T.amber,
-                      marginBottom: 3,
+                      maxWidth: "100%",
+                      overflowWrap: "anywhere",
                     }}
                   >
                     {metric.val}
                   </div>
                   <div
                     style={{
+                      marginTop: "auto",
                       fontFamily: font.sans,
                       fontSize: 9,
                       color: T.ink40,

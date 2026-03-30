@@ -2,54 +2,10 @@ import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section } from "../shared";
 import { Reveal } from "../shared";
+import { SERVICES } from "../../constants/data/services";
 
 export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
-
-  const cards = [
-    {
-      title: "Custom AI Solutions",
-      desc: "Custom AI stacks tuned to real workflows and measurable business outcomes.",
-      topTag: "3 CMCCS C003",
-      chipA: "RISKY DECIS",
-      chipB: "PROJECT ANCODOS",
-    },
-    {
-      title: "GenAI for Industrial Automation",
-      desc: "Automations for repetitive and complex operations in production pipelines.",
-      topTag: "CANWEL C03E",
-      chipA: "L CENNE",
-      chipB: "ENROC DNODES",
-    },
-    {
-      title: "Data and AI Governance",
-      desc: "Guardrails for secure model rollout across enterprise data lifecycles.",
-      topTag: "PRODUCT CODE",
-      chipA: "EARWALITY",
-      chipB: "KGS DODLEY",
-    },
-    {
-      title: "AI Strategic Consulting",
-      desc: "Roadmaps that convert AI ambition into prioritized, executable plans.",
-      topTag: "5 AMEL ORG6",
-      chipA: "COMA HENDCET",
-      chipB: "FAUN FPROCES",
-    },
-    {
-      title: "Applied LED and Service",
-      desc: "Applied intelligence services designed for continuous delivery and scale.",
-      topTag: "EAWICS ENICE",
-      chipA: "HIE TECOOS",
-      chipB: "SOK OPONC",
-    },
-    {
-      title: "Academic and Industry Partnerships",
-      desc: "Collaborations that strengthen capability, research depth, and deployment velocity.",
-      topTag: "MULINE A CORE",
-      chipA: "FLS CHANGES",
-      chipB: "FRESH TOOLING",
-    },
-  ];
 
   return (
     <Section id="services">
@@ -74,7 +30,7 @@ export function Services() {
                 color: T.ink40,
               }}
             >
-              Inteligone
+              What we do
             </p>
             <h2
               style={{
@@ -87,9 +43,7 @@ export function Services() {
                 fontSize: isSmallMobile ? 46 : isMobile ? 52 : 62,
               }}
             >
-              Modular
-              <br />
-              Intelligence.
+              Six ways we turn AI ambition into production reality.
             </h2>
           </div>
         </Reveal>
@@ -105,8 +59,13 @@ export function Services() {
               color: T.ink60,
             }}
           >
-            Module centric stacks, inner win layers, and practical execution models that
-            bring strategy, automation, and measurable outcomes into one system.
+            Most enterprises have a strategy. Few have systems that run in production.
+            We bridge that gap as your on-demand Applied AI Lab. Every engagement starts
+            with business outcomes, not technology.
+            <br />
+            <br />
+            We scope, validate, build, and ship, typically in 4 to 16 weeks depending on
+            complexity. No hand-waving. No slide decks that never ship.
           </p>
         </Reveal>
       </div>
@@ -118,9 +77,9 @@ export function Services() {
           gap: isSmallMobile ? 10 : 12,
         }}
       >
-        {cards.map((card, index) => (
+        {SERVICES.map((card, index) => (
           <Reveal
-            key={card.title}
+            key={card.name}
             delay={0.08 + index * 0.05}
             distance={16}
             blurFrom={7}
@@ -132,7 +91,7 @@ export function Services() {
                 background: "rgba(255,255,255,.74)",
                 borderRadius: 10,
                 padding: isSmallMobile ? "12px" : "14px 14px 12px",
-                minHeight: isSmallMobile ? 206 : 232,
+                minHeight: isSmallMobile ? 232 : 258,
                 display: "grid",
                 alignContent: "start",
                 gap: 7,
@@ -148,7 +107,7 @@ export function Services() {
                   letterSpacing: "-.01em",
                 }}
               >
-                {String(index + 1).padStart(2, "0")}
+                  {card.id || String(index + 1).padStart(2, "0")}
               </span>
               <span
                 style={{
@@ -164,7 +123,7 @@ export function Services() {
                   color: "rgba(30,26,16,.48)",
                 }}
               >
-                {card.topTag}
+                {`Timeline: ${card.timeline}`}
               </span>
               <h3
                 style={{
@@ -178,7 +137,7 @@ export function Services() {
                   maxWidth: 220,
                 }}
               >
-                {card.title}
+                {card.name}
               </h3>
               <p
                 style={{
@@ -196,15 +155,15 @@ export function Services() {
               <div
                 style={{
                   display: "flex",
-                  alignItems: "center",
+                  alignItems: "flex-start",
                   flexWrap: "wrap",
                   gap: 5,
                   marginTop: 2,
                 }}
               >
-                {[card.chipA, card.chipB].map((chip) => (
+                {[card.technicalTags.join(" | "), card.seoTags.join(" | ")].map((chip) => (
                   <span
-                    key={`${card.title}-${chip}`}
+                    key={`${card.name}-${chip}`}
                     style={{
                       display: "inline-block",
                       border: `1px solid ${T.ink12}`,

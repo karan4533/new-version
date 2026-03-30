@@ -1,25 +1,30 @@
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
-import { SERVICES } from "../../constants/data/services";
 
 export function Footer() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
 
-  const navigateLinks = [
-    ["Home", "#home"],
+  const serviceLinks = [
+    ["Custom AI Solutions", "#services"],
+    ["GenAI for Industry", "#services"],
+    ["AI Governance", "#services"],
+    ["AI Strategy", "#services"],
+    ["R&D as a Service", "#services"],
+  ];
+
+  const companyLinks = [
     ["About", "#about"],
-    ["Service", "#services"],
     ["Case Studies", "#case-studies"],
-    ["Research Updates", "#research-updates"],
+    ["Team", "#team"],
     ["Contact", "#contact"],
   ];
 
-  const serviceLinks = SERVICES.map((service) => [service.name, "#services"]);
-
-  const connectLinks = [
-    ["Talk to us", "#contact"],
-    ["Email Us", "mailto:connect@heuristiclabs.ai"],
-    ["LinkedIn", "https://www.linkedin.com/company/heuristic-labs-ai/posts/?feedView=all"],
+  const industryLinks = [
+    ["Manufacturing", "#industry-footprint"],
+    ["Legal Tech", "#industry-footprint"],
+    ["Healthcare", "#industry-footprint"],
+    ["E-Commerce", "#industry-footprint"],
+    ["Enterprise", "#industry-footprint"],
   ];
 
   const columnHeading = {
@@ -89,7 +94,7 @@ export function Footer() {
             </div>
             <p
               style={{
-                margin: 0,
+                margin: "0 0 10px",
                 fontFamily: font.sans,
                 fontSize: 13,
                 lineHeight: 1.72,
@@ -97,20 +102,18 @@ export function Footer() {
                 maxWidth: 300,
               }}
             >
-              Your Applied AI Lab - turning AI ambition into secure, scalable, production-ready systems.
-              Unlocking value in weeks.
+              Applied AI Lab for GenAI Transformation
             </p>
-          </div>
 
-          <div style={{ padding: "4px 0" }}>
-            <p style={columnHeading}>Navigate</p>
-            <div style={{ display: "grid", gap: 10 }}>
-              {navigateLinks.map(([label, href]) => (
-                <a key={label} href={href} style={linkStyle}>
-                  {label}
-                </a>
-              ))}
-            </div>
+            <p style={{ margin: "0 0 4px", fontSize: 13, color: "rgba(255,255,255,.56)" }}>
+              +91 97399 86763
+            </p>
+            <p style={{ margin: "0 0 4px", fontSize: 13, color: "rgba(255,255,255,.56)" }}>
+              www.HeuristicLabs.ai
+            </p>
+            <p style={{ margin: 0, fontSize: 13, color: "rgba(255,255,255,.56)" }}>
+              Chennai, India
+            </p>
           </div>
 
           <div style={{ padding: "4px 0" }}>
@@ -125,14 +128,23 @@ export function Footer() {
           </div>
 
           <div style={{ padding: "4px 0" }}>
-            <p style={columnHeading}>Connect</p>
+            <p style={columnHeading}>Company</p>
             <div style={{ display: "grid", gap: 10 }}>
-              {connectLinks.map(([label, href]) => (
+              {companyLinks.map(([label, href]) => (
+                <a key={label} href={href} style={linkStyle}>
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ padding: "4px 0" }}>
+            <p style={columnHeading}>Industries</p>
+            <div style={{ display: "grid", gap: 10 }}>
+              {industryLinks.map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   style={linkStyle}
                 >
                   {label}
@@ -155,8 +167,8 @@ export function Footer() {
             fontSize: isSmallMobile ? 11 : 12,
           }}
         >
-          <span>© 2026 Heuristic Labs (Frux Consulting LLP). All rights reserved.</span>
-          <span>www.heuristiclabs.ai</span>
+          <span>© 2026 Heuristic Labs. All rights reserved.</span>
+          <span>Headquarters: Chennai, India</span>
         </div>
       </div>
     </footer>

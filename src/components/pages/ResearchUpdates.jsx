@@ -8,18 +8,18 @@ export function ResearchUpdates() {
   const visibleUpdates = RESEARCH_UPDATES.slice(0, 3);
 
   return (
-    <Section id="research-updates">
+    <Section id="how-we-work">
       <Reveal>
         <SecHeader
-          pill="Research updates"
+          pill="How We Work"
           title={
             <>
-              Research and
+              Our AI
               <br />
-              <Em>updates</Em>.
+              <Em>Operating Engine</Em>
             </>
           }
-          desc="Latest product launches, model breakthroughs, and company updates from our applied AI lab."
+          desc="Research-backed engineering. Production-first delivery."
         />
       </Reveal>
 
@@ -92,17 +92,17 @@ export function ResearchUpdates() {
                   </h3>
                 )}
 
-                {item.date && (
+                {item.detail && (
                   <p
                     style={{
                       margin: "10px 0 14px",
                       fontFamily: font.sans,
                       fontSize: isSmallMobile ? 13 : 14,
                       color: T.ink60,
-                      lineHeight: 1.4,
+                      lineHeight: 1.55,
                     }}
                   >
-                    {item.date}
+                    {item.detail}
                   </p>
                 )}
 

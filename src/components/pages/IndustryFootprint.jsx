@@ -4,29 +4,29 @@ import { Section } from "../shared";
 import { Reveal } from "../shared";
 
 const sectors = [
-  "Fashion",
+  "Manufacturing and Automotive",
   "Retail",
-  "Healthcare",
+  "Legal Tech",
+  "E-Commerce",
+  "Services",
+  "Government and Public Sector",
+  "Energy and Utilities",
+  "Education",
   "Real Estate",
   "Construction",
-  "Legal",
-  "Apparel",
-  "Retail Ops",
-  "Vision AI",
-  "B2B",
 ];
 
 const sectorIcon = {
-  Fashion: "👗",
+  "Manufacturing and Automotive": "🏭",
   Retail: "🛍️",
-  Healthcare: "🏥",
+  "Legal Tech": "⚖️",
+  "E-Commerce": "🛒",
+  Services: "🧩",
+  "Government and Public Sector": "🏛️",
+  "Energy and Utilities": "⚡",
+  Education: "🎓",
   "Real Estate": "🏢",
   Construction: "🏗️",
-  Legal: "⚖️",
-  Apparel: "🧵",
-  "Retail Ops": "📦",
-  "Vision AI": "👁️",
-  B2B: "🤝",
 };
 
 export function IndustryFootprint() {
@@ -46,14 +46,14 @@ export function IndustryFootprint() {
             fontSize: isSmallMobile ? 30 : isMobile ? 38 : 48,
           }}
         >
-          Industry Footprint.
+          Industries We Serve.
         </h2>
       </Reveal>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: isMobile ? "repeat(3,minmax(0,1fr))" : "repeat(5,minmax(0,1fr))",
+          gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(5,minmax(0,1fr))",
           gap: 10,
           maxWidth: 920,
           margin: "0 auto",
@@ -86,9 +86,8 @@ export function IndustryFootprint() {
                 style={{
                   fontFamily: font.sans,
                   color: T.ink60,
-                  fontSize: 11,
-                  letterSpacing: ".04em",
-                  textTransform: "uppercase",
+                  fontSize: 10,
+                  lineHeight: 1.35,
                 }}
               >
                 {sector}

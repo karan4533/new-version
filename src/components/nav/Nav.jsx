@@ -11,10 +11,10 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
   const links = [
     { label: "Home", onClick: onHomeClick },
     { label: "About", href: "#about" },
-    { label: "Leadership", href: "#team" },
-    { label: "Service", href: "#services" },
+    { label: "Services", href: "#services" },
     { label: "Case Studies", href: "#case-studies", hasCaret: true },
     { label: "Contact", onClick: onContactClick },
+    { label: "Book a Discovery Call", onClick: onContactClick, isCta: true },
   ];
 
   return (
@@ -120,18 +120,18 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
                     onClick={link.onClick}
                     style={{
                       border: "none",
-                      background: "transparent",
-                      color: "rgba(30,26,16,.74)",
+                      background: link.isCta ? T.ink : "transparent",
+                      color: link.isCta ? T.w : "rgba(30,26,16,.74)",
                       fontFamily: font.sans,
                       fontSize: 14,
-                      fontWeight: 600,
+                      fontWeight: link.isCta ? 700 : 600,
                       letterSpacing: ".015em",
                       textDecoration: "none",
                       cursor: "pointer",
-                      borderRadius: 10,
-                      padding: "6px 4px",
+                      borderRadius: link.isCta ? 999 : 10,
+                      padding: link.isCta ? "8px 14px" : "6px 4px",
                       whiteSpace: "nowrap",
-                      transition: "color 0.2s",
+                      transition: "color 0.2s, background 0.2s",
                       display: "inline-flex",
                       alignItems: "center",
                       gap: link.hasCaret ? 8 : 0,
@@ -160,18 +160,19 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
                   <a
                     href={link.href}
                     style={{
-                      color: "rgba(30,26,16,.74)",
+                      color: link.isCta ? T.w : "rgba(30,26,16,.74)",
                       textDecoration: "none",
                       fontFamily: font.sans,
                       fontSize: 14,
-                      fontWeight: 600,
+                      fontWeight: link.isCta ? 700 : 600,
                       letterSpacing: ".015em",
-                      borderRadius: 10,
-                      padding: "6px 4px",
+                      borderRadius: link.isCta ? 999 : 10,
+                      padding: link.isCta ? "8px 14px" : "6px 4px",
                       whiteSpace: "nowrap",
-                      transition: "color 0.2s",
+                      transition: "color 0.2s, background 0.2s",
                       display: "inline-flex",
                       alignItems: "center",
+                      background: link.isCta ? T.ink : "transparent",
                     }}
                   >
                     {link.label}
@@ -237,10 +238,10 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
                 setMobileMenuOpen(false);
               }}
               style={{
-                border: "1px solid rgba(30,26,16,.14)",
+                border: link.isCta ? "1px solid transparent" : "1px solid rgba(30,26,16,.14)",
                 borderRadius: 10,
-                background: "rgba(255,255,255,.75)",
-                color: T.ink,
+                background: link.isCta ? T.ink : "rgba(255,255,255,.75)",
+                color: link.isCta ? T.w : T.ink,
                 textDecoration: "none",
                 fontFamily: font.sans,
                 fontSize: 14,

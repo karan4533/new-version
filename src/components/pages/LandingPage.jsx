@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal } from "../shared";
+
+const HERO_USE_CASES = [
+  "Agentic AI Automation",
+  "Multilingual Voice Agents",
+  "Autonomous Customer Support",
+  "Conversational Bots",
+  "Document Analysis",
+  "Vision Intelligence",
+  "Compliance Monitoring",
+  "Conversational Data Insights",
+  "Agentic Knowledge Search",
+];
 
 function HeroBtn({ label, onClick, primary }) {
   return (
@@ -26,8 +39,17 @@ function HeroBtn({ label, onClick, primary }) {
   );
 }
 
-export function LandingPage({ onAbout, onContact }) {
+export function LandingPage({ onCaseStudies, onContact }) {
   const { isMobile, isSmallMobile } = useViewport();
+  const [useCaseIndex, setUseCaseIndex] = useState(0);
+
+  useEffect(() => {
+    const ticker = window.setInterval(() => {
+      setUseCaseIndex((current) => (current + 1) % HERO_USE_CASES.length);
+    }, 2000);
+
+    return () => window.clearInterval(ticker);
+  }, []);
 
   return (
     <section
@@ -99,11 +121,36 @@ export function LandingPage({ onAbout, onContact }) {
               color: T.ink60,
             }}
           >
-            We help you build AI systems that are useful, production-ready, and measurable.
+            Strategy, custom agentic systems, and applied R&D - from idea to production in
+            weeks.
           </p>
         </Reveal>
 
         <Reveal delay={0.28} distance={16} blurFrom={6}>
+          <p
+            style={{
+              margin: "14px auto 0",
+              maxWidth: 760,
+              fontFamily: font.sans,
+              fontSize: isSmallMobile ? 12 : 13,
+              lineHeight: 1.6,
+              color: T.ink60,
+            }}
+          >
+            Enterprises engage us for{" "}
+            <span
+              style={{
+                color: T.ink,
+                fontWeight: 700,
+                letterSpacing: ".01em",
+              }}
+            >
+              [{HERO_USE_CASES[useCaseIndex]}]
+            </span>
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.34} distance={16} blurFrom={6}>
           <div
             style={{
               marginTop: 22,
@@ -114,8 +161,8 @@ export function LandingPage({ onAbout, onContact }) {
               gap: 10,
             }}
           >
-            <HeroBtn label="Book a Discovery Call" onClick={onContact} primary />
-            <HeroBtn label="Explore Our Services" onClick={onAbout} />
+            <HeroBtn label="See our work" onClick={onCaseStudies} primary />
+            <HeroBtn label="Book a call" onClick={onContact} />
           </div>
         </Reveal>
       </div>

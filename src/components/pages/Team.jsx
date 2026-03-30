@@ -31,7 +31,7 @@ export function Team() {
             transform: "translateX(-50%)",
           }}
         >
-          Meet the Team
+          Leadership Team
         </p>
       </Reveal>
 
@@ -48,10 +48,7 @@ export function Team() {
             fontSize: isSmallMobile ? 30 : isMobile ? 38 : 50,
           }}
         >
-          Enterprise AI
-          <br />
-          <span style={{ color: T.amber, fontStyle: "italic", fontWeight: 700 }}>expertise</span>{" "}
-          in every profile.
+          You&apos;re in experienced hands.
         </h2>
       </Reveal>
 
@@ -67,7 +64,8 @@ export function Team() {
             color: T.ink60,
           }}
         >
-          No layers of management. You work directly with the specialists who understand your business and build your AI systems from first principles to production.
+          Our leadership team brings 40+ years of combined experience in AI, ML, and
+          enterprise software from research labs to production systems.
         </p>
       </Reveal>
 
@@ -165,7 +163,7 @@ export function Team() {
                     padding: 0,
                     listStyle: "none",
                     display: "grid",
-                    gap: 2,
+                    gap: 4,
                   }}
                 >
                   {member.bullets.map((bullet) => (
@@ -182,6 +180,30 @@ export function Team() {
                     </li>
                   ))}
                 </ul>
+
+                {!!member.linkedin && (
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      marginTop: 10,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontFamily: font.sans,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: ".04em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,.82)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    LinkedIn
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                )}
               </div>
             </article>
           </Reveal>
