@@ -2,23 +2,32 @@ import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section } from "../shared";
 import { Reveal } from "../shared";
+import {
+  SiAccenture,
+  SiAdidas,
+  SiAtlassian,
+  SiMeta,
+  SiSamsung,
+  SiUber,
+} from "react-icons/si";
+import { FaMicrosoft, FaStripe } from "react-icons/fa6";
 
-const temporaryLogos = [
-  { name: "AJIO", mark: "AJ" },
-  { name: "NAUTICA", mark: "NT" },
-  { name: "LIFESTYLE", mark: "LS" },
-  { name: "MYNTRA", mark: "MY" },
-  { name: "FRENCH CONNECTION", mark: "FC" },
-  { name: "HAMLEYS", mark: "HM" },
-  { name: "GERBER", mark: "GB" },
-  { name: "GAP", mark: "GP" },
-  { name: "CONNEXION", mark: "CX" },
-  { name: "UNLIMITED", mark: "UN" },
+const companyLogos = [
+  { name: "IBM", wordmark: "IBM" },
+  { name: "Samsung", Icon: SiSamsung },
+  { name: "Meta", Icon: SiMeta },
+  { name: "Uber", Icon: SiUber },
+  { name: "Ingenico", wordmark: "ingenico" },
+  { name: "Accenture", Icon: SiAccenture },
+  { name: "Adidas", Icon: SiAdidas },
+  { name: "Atlassian", Icon: SiAtlassian },
+  { name: "Microsoft", Icon: FaMicrosoft },
+  { name: "Stripe", Icon: FaStripe },
 ];
 
 export function IndustryFootprint() {
   const { isMobile, isSmallMobile } = useViewport();
-  const marqueeLogos = [...temporaryLogos, ...temporaryLogos];
+  const marqueeLogos = [...companyLogos, ...companyLogos];
 
   return (
     <Section id="industry-footprint">
@@ -56,11 +65,17 @@ export function IndustryFootprint() {
           <div className="industry-marquee-mask" role="region" aria-label="Client logos ticker">
             <div className="industry-marquee-track">
               {marqueeLogos.map((logo, index) => (
-                <div className="industry-marquee-item" key={`${logo.name}-${index}`}>
-                  <span className="industry-marquee-mark" aria-hidden="true">
-                    {logo.mark}
-                  </span>
-                  <span className="industry-marquee-name">{logo.name}</span>
+                <div
+                  className="industry-marquee-item"
+                  key={`${logo.name}-${index}`}
+                  aria-label={logo.name}
+                  title={logo.name}
+                >
+                  {logo.Icon ? (
+                    <logo.Icon className="industry-marquee-logo" aria-hidden="true" />
+                  ) : (
+                    <span className="industry-marquee-wordmark">{logo.wordmark || logo.name}</span>
+                  )}
                 </div>
               ))}
             </div>

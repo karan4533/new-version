@@ -80,7 +80,6 @@ export function LandingPage({ onCaseStudies, onContact }) {
               color: T.ink40,
             }}
           >
-            Why work with us? We operate as your Applied AI Lab
           </p>
         </Reveal>
 
