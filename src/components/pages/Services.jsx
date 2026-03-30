@@ -82,7 +82,7 @@ export function Services() {
         <Reveal delay={0.08} distance={16} blurFrom={8}>
           <p
             style={{
-              margin: isTablet ? 0 : "24px 0 0",
+              margin: isTablet ? 0 : "56px 0 0",
               maxWidth: 520,
               fontFamily: font.sans,
               fontSize: isSmallMobile ? 12 : 13,
