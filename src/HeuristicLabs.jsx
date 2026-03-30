@@ -493,11 +493,6 @@ function Nav({ onLogoClick, onHomeClick, isLanding }) {
     { label:"Contact", href:"#contact" },
   ];
 
-  const handleNavClick = (onClick, href) => {
-    if (onClick) onClick();
-    setMobileMenuOpen(false);
-  };
-
   return (
     <>
       <nav style={{

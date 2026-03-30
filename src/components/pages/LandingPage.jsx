@@ -1,5 +1,6 @@
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
+import { Reveal } from "../shared";
 
 function HeroBtn({ label, onClick, primary }) {
   return (
@@ -46,69 +47,77 @@ export function LandingPage({ onAbout, onContact }) {
           textAlign: "center",
         }}
       >
-        <p
-          style={{
-            margin: 0,
-            fontFamily: font.sans,
-            fontSize: isSmallMobile ? 11 : 12,
-            letterSpacing: ".09em",
-            textTransform: "uppercase",
-            color: T.ink40,
-          }}
-        >
-          Why work with us? We operate as your Applied AI Lab
-        </p>
-
-        <h1
-          style={{
-            margin: isSmallMobile ? "16px 0 10px" : "20px 0 12px",
-            fontFamily: font.serif,
-            fontWeight: 600,
-            letterSpacing: "-.02em",
-            color: T.ink,
-            lineHeight: 1.05,
-            fontSize: isMobile ? "clamp(42px, 13vw, 64px)" : "clamp(66px, 7.4vw, 108px)",
-          }}
-        >
-          Your on-demand
-          <span
+        <Reveal delay={0.04} distance={14} blurFrom={10}>
+          <p
             style={{
-              display: "block",
-              color: T.amber,
-              fontStyle: "italic",
-              fontWeight: 700,
+              margin: 0,
+              fontFamily: font.sans,
+              fontSize: isSmallMobile ? 11 : 12,
+              letterSpacing: ".09em",
+              textTransform: "uppercase",
+              color: T.ink40,
             }}
           >
-            Applied AI Lab.
-          </span>
-        </h1>
+            Why work with us? We operate as your Applied AI Lab
+          </p>
+        </Reveal>
 
-        <p
-          style={{
-            margin: "0 auto",
-            maxWidth: 720,
-            fontFamily: font.sans,
-            fontSize: isSmallMobile ? 13 : 14,
-            lineHeight: 1.75,
-            color: T.ink60,
-          }}
-        >
-          We help you build AI systems that are useful, production-ready, and measurable.
-        </p>
+        <Reveal delay={0.12} distance={22} blurFrom={12}>
+          <h1
+            style={{
+              margin: isSmallMobile ? "16px 0 10px" : "20px 0 12px",
+              fontFamily: font.serif,
+              fontWeight: 600,
+              letterSpacing: "-.02em",
+              color: T.ink,
+              lineHeight: 1.05,
+              fontSize: isMobile ? "clamp(42px, 13vw, 64px)" : "clamp(66px, 7.4vw, 108px)",
+            }}
+          >
+            Your on-demand
+            <span
+              style={{
+                display: "block",
+                color: T.amber,
+                fontStyle: "italic",
+                fontWeight: 700,
+              }}
+            >
+              Applied AI Lab.
+            </span>
+          </h1>
+        </Reveal>
 
-        <div
-          style={{
-            marginTop: 22,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: 10,
-          }}
-        >
-          <HeroBtn label="Book a Discovery Call" onClick={onContact} primary />
-          <HeroBtn label="Explore Our Services" onClick={onAbout} />
-        </div>
+        <Reveal delay={0.2} distance={18} blurFrom={8}>
+          <p
+            style={{
+              margin: "0 auto",
+              maxWidth: 720,
+              fontFamily: font.sans,
+              fontSize: isSmallMobile ? 13 : 14,
+              lineHeight: 1.75,
+              color: T.ink60,
+            }}
+          >
+            We help you build AI systems that are useful, production-ready, and measurable.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.28} distance={16} blurFrom={6}>
+          <div
+            style={{
+              marginTop: 22,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: 10,
+            }}
+          >
+            <HeroBtn label="Book a Discovery Call" onClick={onContact} primary />
+            <HeroBtn label="Explore Our Services" onClick={onAbout} />
+          </div>
+        </Reveal>
       </div>
     </section>
   );
