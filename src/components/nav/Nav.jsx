@@ -1,0 +1,258 @@
+import { useState } from "react";
+import { T, font } from "../../constants/designTokens";
+import { useViewport } from "../../hooks/useViewport";
+import companyLogo from "../../assets/logo (1).png";
+
+export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
+  const { isTablet, isSmallMobile } = useViewport();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isDesktop = !isTablet;
+
+  const links = [
+    { label: "Home", onClick: onHomeClick },
+    { label: "About", href: "#about" },
+    { label: "Leadership", href: "#team" },
+    { label: "Service", href: "#services" },
+    { label: "Case Studies", href: "#case-studies", hasCaret: true },
+    { label: "Contact", onClick: onContactClick },
+  ];
+
+  return (
+    <>
+      <nav
+        style={{
+          position: "sticky",
+          top: isDesktop ? 12 : isSmallMobile ? 8 : 10,
+          zIndex: isDesktop ? 200 : 240,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "nowrap",
+          rowGap: 0,
+          width: isDesktop ? "min(1240px, calc(100% - 44px))" : "calc(100% - 14px)",
+          margin: "0 auto",
+          marginTop: isDesktop ? 0 : isSmallMobile ? 8 : 10,
+          border: isDesktop ? "1px solid rgba(30,26,16,.07)" : "1px solid rgba(30,26,16,.14)",
+          borderRadius: 999,
+          background: "#EEE9E0",
+          backgroundClip: "padding-box",
+          backdropFilter: "none",
+          boxShadow: isDesktop
+            ? "0 2px 8px rgba(20,16,8,.05)"
+            : "0 8px 16px rgba(22,17,10,.06)",
+          isolation: "isolate",
+          overflow: "visible",
+          height: isDesktop ? 74 : "auto",
+          padding: isDesktop ? "0 26px" : isSmallMobile ? "8px 14px" : "12px 18px",
+          fontFamily: font.sans,
+          transition:
+            "padding 0.25s, height 0.25s, background 0.25s, box-shadow 0.25s, border-color 0.25s",
+        }}
+      >
+        <button
+          type="button"
+          onClick={onLogoClick}
+          style={{
+            border: "none",
+            background: "transparent",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: isDesktop ? 10 : isSmallMobile ? 8 : 12,
+            cursor: "pointer",
+            color: T.ink,
+            padding: isDesktop ? "7px 10px" : 0,
+            order: 1,
+            flex: "0 0 auto",
+            textAlign: "left",
+            borderRadius: 14,
+            transform: "translateY(0px)",
+            transition: "background 0.2s, transform 0.15s, box-shadow 0.2s",
+            boxShadow: "none",
+          }}
+          aria-label="Go to home"
+        >
+          <img
+            src={companyLogo}
+            alt="Heuristic Labs"
+            style={{
+              width: isDesktop ? 30 : isSmallMobile ? 24 : 28,
+              height: isDesktop ? 30 : isSmallMobile ? 24 : 28,
+              objectFit: "contain",
+              filter: "brightness(0) saturate(100%)",
+              flexShrink: 0,
+              transform: "scale(1)",
+              transition: "transform 0.2s",
+            }}
+          />
+          <span
+            style={{
+              fontFamily: font.serif,
+              fontSize: isDesktop ? 19 : isSmallMobile ? 13 : 15,
+              fontWeight: 700,
+              color: T.ink,
+              letterSpacing: "0em",
+              whiteSpace: "nowrap",
+              lineHeight: 1,
+              transition: "letter-spacing 0.2s",
+            }}
+          >
+            Heuristic Labs
+          </span>
+        </button>
+
+        {isDesktop ? (
+          <ul
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 30,
+              listStyle: "none",
+              margin: "0 0 0 auto",
+              padding: 0,
+              order: 2,
+            }}
+          >
+            {links.map((link) => (
+              <li key={link.label} style={{ position: "relative" }}>
+                {link.onClick ? (
+                  <button
+                    type="button"
+                    onClick={link.onClick}
+                    style={{
+                      border: "none",
+                      background: "transparent",
+                      color: "rgba(30,26,16,.74)",
+                      fontFamily: font.sans,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      letterSpacing: ".015em",
+                      textDecoration: "none",
+                      cursor: "pointer",
+                      borderRadius: 10,
+                      padding: "6px 4px",
+                      whiteSpace: "nowrap",
+                      transition: "color 0.2s",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: link.hasCaret ? 8 : 0,
+                    }}
+                  >
+                    {link.hasCaret ? (
+                      <>
+                        <span>{link.label}</span>
+                        <span
+                          aria-hidden="true"
+                          style={{
+                            width: 7,
+                            height: 7,
+                            borderRight: "1.6px solid rgba(30,26,16,.72)",
+                            borderBottom: "1.6px solid rgba(30,26,16,.72)",
+                            transform: "rotate(45deg) translateY(-1px)",
+                            transition: "transform 0.2s",
+                          }}
+                        />
+                      </>
+                    ) : (
+                      link.label
+                    )}
+                  </button>
+                ) : (
+                  <a
+                    href={link.href}
+                    style={{
+                      color: "rgba(30,26,16,.74)",
+                      textDecoration: "none",
+                      fontFamily: font.sans,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      letterSpacing: ".015em",
+                      borderRadius: 10,
+                      padding: "6px 4px",
+                      whiteSpace: "nowrap",
+                      transition: "color 0.2s",
+                      display: "inline-flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((value) => !value)}
+            aria-expanded={mobileMenuOpen}
+            aria-label="Toggle menu"
+            style={{
+              height: 36,
+              minWidth: 68,
+              borderRadius: 999,
+              border: "1px solid rgba(30,26,16,.14)",
+              background: "rgba(255,255,255,.7)",
+              fontFamily: font.sans,
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: ".03em",
+              color: T.ink,
+              cursor: "pointer",
+              textTransform: "uppercase",
+              justifySelf: "end",
+            }}
+          >
+            {mobileMenuOpen ? "Close" : "Menu"}
+          </button>
+        )}
+      </nav>
+
+      {isTablet && mobileMenuOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: isSmallMobile ? 60 : 72,
+            left: 10,
+            right: 10,
+            zIndex: 241,
+            border: "1px solid rgba(30,26,16,.14)",
+            background: "#f0ece4",
+            borderRadius: 16,
+            padding: "10px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            boxShadow: "0 12px 26px rgba(22,17,10,.12)",
+          }}
+        >
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href || "#home"}
+              onClick={(event) => {
+                if (typeof link.onClick === "function") {
+                  event.preventDefault();
+                  link.onClick();
+                }
+                setMobileMenuOpen(false);
+              }}
+              style={{
+                border: "1px solid rgba(30,26,16,.14)",
+                borderRadius: 10,
+                background: "rgba(255,255,255,.75)",
+                color: T.ink,
+                textDecoration: "none",
+                fontFamily: font.sans,
+                fontSize: 14,
+                fontWeight: 700,
+                padding: "11px 12px",
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}

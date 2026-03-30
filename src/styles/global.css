@@ -1,0 +1,240 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+:root {
+  --site-base-bg: #e8e3d9;
+  --ui-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ui-fast: 0.22s;
+  --ui-med: 0.38s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--site-base-bg);
+  background-color: #e8e3d9;
+  overflow-x: hidden;
+}
+
+#root {
+  animation: pageEnter 0.7s var(--ui-ease) both;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  transition:
+    color var(--ui-fast) ease,
+    background-color var(--ui-fast) ease,
+    border-color var(--ui-fast) ease,
+    box-shadow var(--ui-fast) ease,
+    transform var(--ui-fast) var(--ui-ease),
+    opacity var(--ui-fast) ease;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(176, 120, 69, 0.7);
+  outline-offset: 2px;
+}
+
+a:hover,
+button:hover {
+  transform: translateY(-1px);
+}
+
+section article,
+section [role="article"],
+section .card {
+  transition:
+    transform var(--ui-med) var(--ui-ease),
+    box-shadow var(--ui-med) var(--ui-ease),
+    border-color var(--ui-med) var(--ui-ease),
+    background-color var(--ui-med) var(--ui-ease);
+}
+
+section article:hover,
+section [role="article"]:hover,
+section .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(30, 26, 16, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  section article,
+  section [role="article"],
+  section .card {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+@keyframes floatBrain {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes fadeInLanding {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes landingCinematicIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes revealSoftUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroHeadlineIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroButtonPop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  62% {
+    opacity: 1;
+    transform: translateY(0) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroPhraseSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroBlobFloat {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-10px) translateX(6px);
+  }
+}
+
+@keyframes heroHaloSpin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes heroCompanyMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideUpLanding {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDownMenu {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

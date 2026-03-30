@@ -1,0 +1,12 @@
+export { Hero } from "./Hero";
+export { WhoWeAre } from "./WhoWeAre";
+export { Services } from "./Services";
+export { CaseStudies } from "./CaseStudies";
+export { CaseStudyDetailPage } from "./CaseStudyDetailPage";
+export { IndustryFootprint } from "./IndustryFootprint";
+export { Team } from "./Team";
+export { ResearchUpdates } from "./ResearchUpdates";
+export { FAQ } from "./FAQ";
+export { Contact } from "./Contact";
+export { Footer } from "./Footer";
+export { LandingPage } from "./LandingPage";
