@@ -36,12 +36,17 @@ export function CaseStudies({ onOpenCaseStudy }) {
       <Reveal distance={14} blurFrom={8}>
         <p
           style={{
-            margin: "0 0 4px",
+            margin: "0 0 16px",
             fontFamily: font.sans,
-            fontSize: 10,
-            letterSpacing: ".16em",
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: ".08em",
             textTransform: "uppercase",
-            color: T.ink40,
+            display: "inline-block",
+            padding: "6px 12px",
+            borderRadius: 100,
+            background: T.ink07,
+            color: "#B07845",
           }}
         >
           Case studies

@@ -487,7 +487,7 @@ function Nav({ onLogoClick, onHomeClick, isLanding }) {
   
   const navLinks = [
     { label:"Home", onClick: onHomeClick },
-    { label:"About", href:"#about" },
+    { label:"About", href:"#" },
     { label:"Service", href:"#services" },
     { label:"Case Studies", href:"#case-studies" },
     { label:"Contact", href:"#contact" },

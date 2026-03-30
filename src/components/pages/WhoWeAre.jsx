@@ -7,10 +7,9 @@ export function WhoWeAre() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
 
   const notes = [
-    "ROI Question: Where is the tangible ROI?",
-    "Relevance Question: What is our winning use case?",
-    "Security Question: Will this scale into production-grade?",
-    "Noise Question: Which framework and model should we bet on?",
+    "Is your data architecture ready to support real LLM reasoning, not just retrieval?",
+    "Are your agents autonomous, or just scripted loops dressed up as AI?",
+    "Where is token waste bleeding your margins?",
   ];
 
   const stats = [
@@ -25,24 +24,29 @@ export function WhoWeAre() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: isTablet ? "1fr" : "minmax(0,.92fr) minmax(0,1.08fr)",
-          gap: isSmallMobile ? 16 : 26,
+          gridTemplateColumns: isTablet ? "1fr" : "minmax(0,1fr) minmax(0,1fr)",
+          gap: isSmallMobile ? 16 : isTablet ? 24 : 34,
           alignItems: "start",
         }}
       >
         <Reveal distance={18} blurFrom={10}>
-          <div>
+          <div style={{ paddingRight: isTablet ? 0 : 10 }}>
             <p
               style={{
-                margin: "0 0 8px",
+                margin: "0 0 16px",
                 fontFamily: font.sans,
                 fontSize: 11,
-                letterSpacing: ".11em",
+                fontWeight: 600,
+                letterSpacing: ".08em",
                 textTransform: "uppercase",
-                color: T.ink40,
+                display: "inline-block",
+                padding: "6px 12px",
+                borderRadius: 100,
+                background: T.ink07,
+                color: "#B07845",
               }}
             >
-              About
+              The Mission
             </p>
             <h2
               style={{
@@ -56,7 +60,7 @@ export function WhoWeAre() {
                 maxWidth: 560,
               }}
             >
-              On a mission to simplify automation.
+              We build the intelligence that scales your edge.
             </h2>
             <p
               style={{
@@ -68,17 +72,23 @@ export function WhoWeAre() {
                 color: T.ink60,
               }}
             >
-              We are a GenAI-first company built to make AI easy to use. The secret?
-              Deep know-how, business-first thinking, and fast applied research.
+              Heuristic Labs operates at the intersection of academic rigor and startup
+              velocity. We don't just consult - we embed into your product cycle to ship
+              production-ready AI that compounds directly into EBITDA.
             </p>
           </div>
         </Reveal>
 
         <Reveal delay={0.08} distance={18} blurFrom={8}>
-          <div style={{ paddingTop: isTablet ? 0 : 18 }}>
+          <div
+            style={{
+              paddingLeft: isTablet ? 0 : 8,
+              paddingTop: 0,
+            }}
+          >
             <p
               style={{
-                margin: "0 0 12px",
+                margin: "0 0 14px",
                 fontFamily: font.sans,
                 fontSize: 10,
                 color: T.ink40,
@@ -86,7 +96,7 @@ export function WhoWeAre() {
                 textTransform: "uppercase",
               }}
             >
-              Questions enterprise leaders ask behind the GenAI hype.
+              The questions we answer before your competitors ask them:
             </p>
             <div style={{ display: "grid", gap: 0 }}>
               {notes.map((item, idx) => (
@@ -95,7 +105,7 @@ export function WhoWeAre() {
                   style={{
                     borderTop: idx === 0 ? `1px solid ${T.ink12}` : "none",
                     borderBottom: `1px solid ${T.ink12}`,
-                    padding: "12px 0 13px 14px",
+                    padding: "14px 0",
                   }}
                 >
                   <p

@@ -12,6 +12,7 @@ export function ResearchUpdates() {
       <Reveal>
         <SecHeader
           pill="How We Work"
+          pillColor="#B07845"
           title={
             <>
               Our AI

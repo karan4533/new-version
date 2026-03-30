@@ -22,12 +22,17 @@ export function Services() {
           <div>
             <p
               style={{
-                margin: "0 0 6px",
+                margin: "0 0 16px",
                 fontFamily: font.sans,
-                fontSize: 10,
-                letterSpacing: ".16em",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: ".08em",
                 textTransform: "uppercase",
-                color: T.ink40,
+                display: "inline-block",
+                padding: "6px 12px",
+                borderRadius: 100,
+                background: T.ink07,
+                color: "#B07845",
               }}
             >
               What we do

@@ -137,14 +137,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
             }}
           >
             Enterprises engage us for{" "}
-            <span
-              style={{
-                color: T.ink,
-                fontWeight: 700,
-                letterSpacing: ".01em",
-              }}
-            >
-              [{HERO_USE_CASES[useCaseIndex]}]
+            <span className="hero-use-case-shell">
+              <span key={useCaseIndex} className="hero-use-case-word">
+                [{HERO_USE_CASES[useCaseIndex]}]
+              </span>
             </span>
           </p>
         </Reveal>

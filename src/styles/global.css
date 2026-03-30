@@ -158,6 +158,22 @@ section .card:hover {
   color: rgba(30, 26, 16, 0.68);
 }
 
+.hero-use-case-shell {
+  display: inline-grid;
+  align-items: center;
+  min-height: 1.25em;
+  vertical-align: baseline;
+}
+
+.hero-use-case-word {
+  display: inline-block;
+  color: #1e1a10;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  animation: heroUseCaseSwap 0.52s var(--ui-ease) both;
+  will-change: transform, opacity, filter, color;
+}
+
 @media (prefers-reduced-motion: reduce) {
   #root,
   a,
@@ -168,7 +184,8 @@ section .card:hover {
   section article,
   section [role="article"],
   section .card,
-  .industry-marquee-track {
+  .industry-marquee-track,
+  .hero-use-case-word {
     animation: none !important;
     transition: none !important;
     transform: none !important;
@@ -295,6 +312,27 @@ a:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes heroUseCaseSwap {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(12px) scale(0.985);
+    color: rgba(30, 26, 16, 0.34);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+    color: rgba(30, 26, 16, 0.58);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+    color: #1e1a10;
   }
 }
 
