@@ -51,6 +51,7 @@ export function WhoWeAre() {
             <h2
               style={{
                 margin: 0,
+                marginTop: isTablet ? 0 : 14,
                 fontFamily: font.serif,
                 fontSize: isSmallMobile ? 34 : isMobile ? 42 : 50,
                 fontWeight: 500,
@@ -83,7 +84,7 @@ export function WhoWeAre() {
           <div
             style={{
               paddingLeft: isTablet ? 0 : 8,
-              paddingTop: 0,
+              paddingTop: isTablet ? 0 : 44,
             }}
           >
             <p
