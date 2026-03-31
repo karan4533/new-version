@@ -462,7 +462,7 @@ export function CaseStudies() {
                 display: "grid",
                 gridTemplateColumns: isSmallMobile
                   ? "repeat(2,minmax(0,1fr))"
-                  : "repeat(auto-fit,minmax(170px,1fr))",
+                  : "repeat(4,minmax(0,1fr))",
                 gap: isSmallMobile ? 12 : isCompactDesktop ? 14 : 18,
                 alignItems: "stretch",
               }}
@@ -470,7 +470,6 @@ export function CaseStudies() {
               {activePreview.metrics.map((metric) => {
                 const metricValue = String(metric.val || "").trim();
                 const isTextMetric = /[A-Za-z]/.test(metricValue);
-                const shouldWrapValue = metricValue.length > 10;
 
                 return (
                 <div
@@ -488,16 +487,17 @@ export function CaseStudies() {
                     style={{
                       fontFamily: font.sans,
                       fontSize: getMetricValueFontSize(metricValue),
-                      lineHeight: shouldWrapValue ? 1.08 : 1.02,
+                      lineHeight: 1.02,
                       fontWeight: 700,
                       color: T.amber,
                       fontStyle: "normal",
-                      whiteSpace: shouldWrapValue ? "normal" : "nowrap",
-                      wordBreak: shouldWrapValue ? "break-word" : "normal",
-                      overflowWrap: "anywhere",
-                      letterSpacing: isTextMetric ? "0" : ".01em",
+                      whiteSpace: "nowrap",
+                      wordBreak: "normal",
+                      overflowWrap: "normal",
+                      letterSpacing: isTextMetric ? "-.01em" : ".01em",
                       maxWidth: "100%",
-                      overflow: "visible",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
                     }}
                   >
                     {metricValue}

@@ -137,9 +137,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
               margin: "14px auto 0",
               maxWidth: 760,
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 12 : 13,
+              fontSize: isSmallMobile ? 12 : isTablet ? 12 : 13,
               lineHeight: 1.6,
               color: T.ink60,
+              whiteSpace: isMobile ? "normal" : "nowrap",
             }}
           >
             Enterprises engage us for{" "}
