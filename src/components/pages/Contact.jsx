@@ -45,6 +45,26 @@ export function Contact() {
           padding: `0 ${isSmallMobile ? 16 : isMobile ? 24 : isTablet ? 32 : 48}px`,
         }}
       >
+        <Reveal distance={12} blurFrom={7}>
+          <p
+            style={{
+              margin: "0 0 16px",
+              fontFamily: font.sans,
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: ".08em",
+              textTransform: "uppercase",
+              display: "inline-block",
+              padding: "6px 12px",
+              borderRadius: 999,
+              background: T.ink07,
+              color: "#B07845",
+            }}
+          >
+            Contact
+          </p>
+        </Reveal>
+
         <div
           style={{
             display: "grid",

@@ -159,8 +159,19 @@ export function CaseStudies() {
         ? "clamp(30px,2vw,38px)"
         : "clamp(36px,2.5vw,46px)";
   const detailBodyFontSize = isSmallMobile ? 13 : isCompactDesktop ? 14 : 15;
-  const metricValueFontSize = isSmallMobile ? 21 : isCompactDesktop ? 22 : 23;
   const metricMinHeight = isSmallMobile ? 78 : isCompactDesktop ? 90 : 98;
+
+  const getMetricValueFontSize = (rawValue) => {
+    const value = String(rawValue || "").trim();
+    const length = value.length;
+
+    if (length > 18) return isSmallMobile ? 14 : isCompactDesktop ? 15 : 16;
+    if (length > 14) return isSmallMobile ? 16 : isCompactDesktop ? 17 : 18;
+    if (length > 10) return isSmallMobile ? 18 : isCompactDesktop ? 19 : 20;
+    if (length > 7) return isSmallMobile ? 20 : isCompactDesktop ? 21 : 22;
+
+    return isSmallMobile ? 21 : isCompactDesktop ? 22 : 23;
+  };
   const visibleCases = CASES.slice(0, 5);
   const defaultCaseIndex = visibleCases.findIndex(
     (item) => item.cat.toLowerCase() === "legal",
@@ -449,43 +460,47 @@ export function CaseStudies() {
               style={{
                 paddingTop: isSmallMobile ? 10 : isCompactDesktop ? 14 : 18,
                 display: "grid",
-                gridTemplateColumns:
-                  isMobile || isNarrowDetail
-                    ? "repeat(2,minmax(0,1fr))"
-                    : "repeat(4,minmax(0,1fr))",
+                gridTemplateColumns: isSmallMobile
+                  ? "repeat(2,minmax(0,1fr))"
+                  : "repeat(auto-fit,minmax(150px,1fr))",
                 gap: isSmallMobile ? 12 : isCompactDesktop ? 14 : 18,
                 alignItems: "stretch",
               }}
             >
               {activePreview.metrics.map((metric) => {
+                const metricValue = String(metric.val || "").trim();
+                const isTextMetric = /[A-Za-z]/.test(metricValue);
+                const shouldWrapValue = metricValue.length > 10;
+
                 return (
                 <div
                   key={`${metric.label}-${metric.val}`}
                   style={{
                     minHeight: metricMinHeight,
+                    minWidth: 0,
                     display: "flex",
                     flexDirection: "column",
                     gap: 3,
-                    overflow: "hidden",
+                    overflow: "visible",
                   }}
                 >
                   <div
                     style={{
                       fontFamily: font.sans,
-                      fontSize: metricValueFontSize,
-                      lineHeight: 1.02,
+                      fontSize: getMetricValueFontSize(metricValue),
+                      lineHeight: shouldWrapValue ? 1.08 : 1.02,
                       fontWeight: 700,
                       color: T.amber,
                       fontStyle: "normal",
-                      whiteSpace: "nowrap",
-                      wordBreak: "normal",
-                      overflowWrap: "normal",
-                      letterSpacing: "0",
+                      whiteSpace: shouldWrapValue ? "normal" : "nowrap",
+                      wordBreak: shouldWrapValue ? "break-word" : "normal",
+                      overflowWrap: "anywhere",
+                      letterSpacing: isTextMetric ? "0" : ".01em",
                       maxWidth: "100%",
                       overflow: "visible",
                     }}
                   >
-                    {metric.val}
+                    {metricValue}
                   </div>
                   <div
                     style={{
