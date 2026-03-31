@@ -269,15 +269,15 @@ export function CaseStudies() {
                     onClick={() => setActiveIndex(index)}
                     style={{
                       width: "100%",
-                      minHeight: isSmallMobile ? 58 : isMobile ? 66 : 74,
+                      minHeight: isTablet ? "auto" : isSmallMobile ? 58 : isMobile ? 66 : 74,
                       display: "flex",
-                      alignItems: "center",
-                      overflow: "hidden",
+                      alignItems: isTablet ? "flex-start" : "center",
+                      overflow: isTablet ? "visible" : "hidden",
                       border: "none",
                       borderTop: index === 0 ? `1px solid ${T.ink12}` : "none",
                       borderBottom: isActive ? `2px solid ${T.amber}` : `1px solid ${T.ink12}`,
                       background: "transparent",
-                      padding: isSmallMobile ? "10px 6px" : "12px 8px",
+                      padding: isTablet ? "12px 8px" : isSmallMobile ? "10px 6px" : "12px 8px",
                       textAlign: "left",
                       cursor: "pointer",
                       color: isActive ? T.ink : "rgba(30,26,16,.58)",
@@ -295,9 +295,9 @@ export function CaseStudies() {
                         lineHeight: 1.08,
                         letterSpacing: "-.01em",
                         marginBottom: 0,
-                        whiteSpace: isMobile ? "normal" : "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
+                        whiteSpace: isTablet ? "normal" : "nowrap",
+                        overflow: isTablet ? "visible" : "hidden",
+                        textOverflow: isTablet ? "clip" : "ellipsis",
                       }}
                     >
                       {preview.listTitle}
@@ -462,7 +462,7 @@ export function CaseStudies() {
                 display: "grid",
                 gridTemplateColumns: isSmallMobile
                   ? "repeat(2,minmax(0,1fr))"
-                  : "repeat(auto-fit,minmax(150px,1fr))",
+                  : "repeat(auto-fit,minmax(170px,1fr))",
                 gap: isSmallMobile ? 12 : isCompactDesktop ? 14 : 18,
                 alignItems: "stretch",
               }}

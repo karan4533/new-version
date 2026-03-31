@@ -40,7 +40,7 @@ function HeroBtn({ label, onClick, primary }) {
 }
 
 export function LandingPage({ onCaseStudies, onContact }) {
-  const { isMobile, isSmallMobile } = useViewport();
+  const { isMobile, isTablet, isSmallMobile } = useViewport();
   const [useCaseIndex, setUseCaseIndex] = useState(0);
 
   useEffect(() => {
@@ -55,9 +55,15 @@ export function LandingPage({ onCaseStudies, onContact }) {
     <section
       id="home"
       style={{
-        minHeight: isMobile ? "auto" : "clamp(520px, 64vh, 640px)",
+        minHeight: isMobile || isTablet ? "auto" : "clamp(520px, 64vh, 640px)",
         scrollMarginTop: 84,
-        padding: isSmallMobile ? "54px 0 24px" : isMobile ? "62px 0 30px" : "74px 0 30px",
+        padding: isSmallMobile
+          ? "54px 0 24px"
+          : isMobile
+            ? "62px 0 30px"
+            : isTablet
+              ? "66px 0 18px"
+              : "74px 0 30px",
         background: "var(--site-base-bg)",
       }}
     >

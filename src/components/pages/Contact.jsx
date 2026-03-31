@@ -7,19 +7,20 @@ export function Contact() {
 
   const rowStyle = {
     display: "grid",
-    gridTemplateColumns: isSmallMobile ? "1fr" : "auto minmax(0,1fr) auto",
-    alignItems: "center",
-    gap: "6px 14px",
-    padding: "20px 18px",
+    gridTemplateColumns: isMobile ? "auto minmax(0,1fr)" : "auto minmax(0,1fr) auto",
+    alignItems: isMobile ? "start" : "center",
+    gap: isMobile ? "10px 12px" : "6px 14px",
+    padding: isSmallMobile ? "16px 14px" : "20px 18px",
     borderBottom: `1px solid ${T.ink12}`,
   };
 
   const actionBtnStyle = {
     display: "inline-flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: isMobile ? "space-between" : "center",
     gap: 12,
-    minWidth: 170,
+    minWidth: isMobile ? 0 : 170,
+    width: isMobile ? "100%" : "auto",
     padding: "10px 14px",
     borderRadius: 9,
     textDecoration: "none",
@@ -29,6 +30,13 @@ export function Contact() {
     letterSpacing: ".01em",
     whiteSpace: "nowrap",
   };
+
+  const actionBtnPlacement = isMobile
+    ? {
+        gridColumn: "1 / -1",
+        marginTop: 2,
+      }
+    : undefined;
 
   return (
     <section
@@ -241,7 +249,16 @@ export function Contact() {
                       Best for use-case scoping, architecture direction, and delivery planning.
                     </p>
                   </div>
-                  <a href="#" style={{ ...actionBtnStyle, border: "1px solid transparent", background: T.ink, color: T.w }}>
+                  <a
+                    href="#"
+                    style={{
+                      ...actionBtnStyle,
+                      ...actionBtnPlacement,
+                      border: "1px solid transparent",
+                      background: T.ink,
+                      color: T.w,
+                    }}
+                  >
                     Schedule a Discovery Call <span style={{ opacity: 0.95, fontSize: 16, lineHeight: 1 }}>→</span>
                   </a>
                 </div>
@@ -260,7 +277,16 @@ export function Contact() {
                       Send us a message at <a href="mailto:connect@heuristiclabs.ai" style={{ color: T.teal, textDecoration: "none", fontWeight: 700 }}>connect@heuristiclabs.ai</a>
                     </p>
                   </div>
-                  <a href="mailto:connect@heuristiclabs.ai" style={{ ...actionBtnStyle, border: `1px solid ${T.ink12}`, background: "rgba(221,216,206,.72)", color: T.ink }}>
+                  <a
+                    href="mailto:connect@heuristiclabs.ai"
+                    style={{
+                      ...actionBtnStyle,
+                      ...actionBtnPlacement,
+                      border: `1px solid ${T.ink12}`,
+                      background: "rgba(221,216,206,.72)",
+                      color: T.ink,
+                    }}
+                  >
                     Send an email <span style={{ opacity: 0.95, fontSize: 16, lineHeight: 1 }}>→</span>
                   </a>
                 </div>
@@ -284,7 +310,16 @@ export function Contact() {
                       Reach us directly at +91 97399 86763
                     </p>
                   </div>
-                  <a href="tel:+919739986763" style={{ ...actionBtnStyle, border: `1px solid ${T.ink12}`, background: "rgba(221,216,206,.72)", color: T.ink }}>
+                  <a
+                    href="tel:+919739986763"
+                    style={{
+                      ...actionBtnStyle,
+                      ...actionBtnPlacement,
+                      border: `1px solid ${T.ink12}`,
+                      background: "rgba(221,216,206,.72)",
+                      color: T.ink,
+                    }}
+                  >
                     Call now <span style={{ opacity: 0.95, fontSize: 16, lineHeight: 1 }}>→</span>
                   </a>
                 </div>
