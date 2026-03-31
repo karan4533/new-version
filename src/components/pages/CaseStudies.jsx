@@ -159,9 +159,8 @@ export function CaseStudies() {
         ? "clamp(30px,2vw,38px)"
         : "clamp(36px,2.5vw,46px)";
   const detailBodyFontSize = isSmallMobile ? 13 : isCompactDesktop ? 14 : 15;
-        const metricValueFontSize = isSmallMobile ? 28 : isCompactDesktop ? 32 : 36;
-        const metricTextValueFontSize = isSmallMobile ? 24 : isCompactDesktop ? 27 : 30;
-        const metricMinHeight = isSmallMobile ? 78 : isCompactDesktop ? 90 : 98;
+  const metricValueFontSize = isSmallMobile ? 24 : isCompactDesktop ? 24 : 26;
+  const metricMinHeight = isSmallMobile ? 78 : isCompactDesktop ? 90 : 98;
   const visibleCases = CASES.slice(0, 5);
   const defaultCaseIndex = visibleCases.findIndex(
     (item) => item.cat.toLowerCase() === "legal",
@@ -459,8 +458,6 @@ export function CaseStudies() {
               }}
             >
               {activePreview.metrics.map((metric) => {
-                const isTextMetric = /[A-Za-z]/.test(metric.val);
-
                 return (
                 <div
                   key={`${metric.label}-${metric.val}`}
@@ -475,16 +472,17 @@ export function CaseStudies() {
                   <div
                     style={{
                       fontFamily: font.sans,
-                      fontSize: isTextMetric ? metricTextValueFontSize : metricValueFontSize,
-                      lineHeight: isTextMetric ? 1.06 : 1.02,
+                      fontSize: metricValueFontSize,
+                      lineHeight: 1.02,
                       fontWeight: 700,
                       color: T.amber,
                       fontStyle: "normal",
-                      whiteSpace: isTextMetric ? "normal" : "nowrap",
-                      wordBreak: isTextMetric ? "break-word" : "normal",
+                      whiteSpace: "nowrap",
+                      wordBreak: "normal",
+                      overflowWrap: "normal",
                       letterSpacing: ".01em",
                       maxWidth: "100%",
-                      overflow: "visible",
+                      overflow: "hidden",
                     }}
                   >
                     {metric.val}
