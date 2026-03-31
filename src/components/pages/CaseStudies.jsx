@@ -159,7 +159,7 @@ export function CaseStudies() {
         ? "clamp(30px,2vw,38px)"
         : "clamp(36px,2.5vw,46px)";
   const detailBodyFontSize = isSmallMobile ? 13 : isCompactDesktop ? 14 : 15;
-  const metricValueFontSize = isSmallMobile ? 24 : isCompactDesktop ? 24 : 26;
+  const metricValueFontSize = isSmallMobile ? 21 : isCompactDesktop ? 22 : 23;
   const metricMinHeight = isSmallMobile ? 78 : isCompactDesktop ? 90 : 98;
   const visibleCases = CASES.slice(0, 5);
   const defaultCaseIndex = visibleCases.findIndex(
@@ -205,7 +205,7 @@ export function CaseStudies() {
       <Reveal delay={0.08} distance={16} blurFrom={10}>
         <h2
           style={{
-            margin: "0 0 16px",
+            margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 24px" : "0 0 30px",
             fontFamily: font.serif,
             fontWeight: 600,
             color: T.ink,
@@ -480,9 +480,9 @@ export function CaseStudies() {
                       whiteSpace: "nowrap",
                       wordBreak: "normal",
                       overflowWrap: "normal",
-                      letterSpacing: ".01em",
+                      letterSpacing: "0",
                       maxWidth: "100%",
-                      overflow: "hidden",
+                      overflow: "visible",
                     }}
                   >
                     {metric.val}
