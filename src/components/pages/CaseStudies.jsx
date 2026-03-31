@@ -159,8 +159,8 @@ export function CaseStudies() {
         ? "clamp(30px,2vw,38px)"
         : "clamp(36px,2.5vw,46px)";
   const detailBodyFontSize = isSmallMobile ? 13 : isCompactDesktop ? 14 : 15;
-        const metricValueFontSize = isSmallMobile ? 32 : isCompactDesktop ? 36 : 40;
-        const metricTextValueFontSize = isSmallMobile ? 28 : isCompactDesktop ? 31 : 34;
+        const metricValueFontSize = isSmallMobile ? 28 : isCompactDesktop ? 32 : 36;
+        const metricTextValueFontSize = isSmallMobile ? 24 : isCompactDesktop ? 27 : 30;
         const metricMinHeight = isSmallMobile ? 78 : isCompactDesktop ? 90 : 98;
   const visibleCases = CASES.slice(0, 5);
   const defaultCaseIndex = visibleCases.findIndex(
@@ -468,21 +468,21 @@ export function CaseStudies() {
                     minHeight: metricMinHeight,
                     display: "flex",
                     flexDirection: "column",
-                    gap: 6,
+                    gap: 3,
                     overflow: "hidden",
                   }}
                 >
                   <div
                     style={{
-                      fontFamily: font.serif,
+                      fontFamily: font.sans,
                       fontSize: isTextMetric ? metricTextValueFontSize : metricValueFontSize,
-                      lineHeight: isTextMetric ? 1.02 : 1,
-                      fontWeight: 600,
+                      lineHeight: isTextMetric ? 1.06 : 1.02,
+                      fontWeight: 700,
                       color: T.amber,
-                      fontStyle: isTextMetric ? "italic" : "normal",
+                      fontStyle: "normal",
                       whiteSpace: isTextMetric ? "normal" : "nowrap",
                       wordBreak: isTextMetric ? "break-word" : "normal",
-                      letterSpacing: isTextMetric ? "-.01em" : "normal",
+                      letterSpacing: ".01em",
                       maxWidth: "100%",
                       overflow: "visible",
                     }}
@@ -491,9 +491,9 @@ export function CaseStudies() {
                   </div>
                   <div
                     style={{
-                      marginTop: "auto",
+                      marginTop: 2,
                       fontFamily: font.sans,
-                      fontSize: 9,
+                      fontSize: 8,
                       fontWeight: 600,
                       color: T.ink40,
                       textTransform: "uppercase",
