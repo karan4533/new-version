@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section } from "../shared";
@@ -9,10 +9,6 @@ export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
   const interactiveCardsEnabled = !isMobile;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
-
-  useEffect(() => {
-    setActiveCardIndex(null);
-  }, [interactiveCardsEnabled]);
 
   const handleCardMove = (event, index) => {
     if (!interactiveCardsEnabled) return;

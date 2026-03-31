@@ -55,9 +55,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
     <section
       id="home"
       style={{
-        minHeight: isMobile ? "auto" : "76vh",
+        minHeight: isMobile ? "auto" : "clamp(520px, 64vh, 640px)",
         scrollMarginTop: 84,
-        padding: isSmallMobile ? "54px 0 28px" : isMobile ? "64px 0 36px" : "82px 0 52px",
+        padding: isSmallMobile ? "54px 0 24px" : isMobile ? "62px 0 30px" : "74px 0 30px",
         background: "var(--site-base-bg)",
       }}
     >
@@ -92,7 +92,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               letterSpacing: "-.02em",
               color: T.ink,
               lineHeight: 1.05,
-              fontSize: isMobile ? "clamp(42px, 13vw, 64px)" : "clamp(66px, 7.4vw, 108px)",
+              fontSize: isMobile ? "clamp(38px, 12vw, 58px)" : "clamp(60px, 6.9vw, 98px)",
             }}
           >
             Your on-demand
