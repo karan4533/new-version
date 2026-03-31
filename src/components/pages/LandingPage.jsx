@@ -126,8 +126,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               color: T.ink60,
             }}
           >
-            Strategy, custom agentic systems, and applied R&D - from idea to production in
-            weeks.
+           
           </p>
         </Reveal>
 
@@ -136,6 +135,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
             style={{
               margin: "14px auto 0",
               maxWidth: 760,
+              display: "inline-flex",
+              alignItems: "baseline",
+              justifyContent: "center",
+              gap: 6,
               fontFamily: font.sans,
               fontSize: isSmallMobile ? 12 : isTablet ? 12 : 13,
               lineHeight: 1.6,
@@ -143,10 +146,17 @@ export function LandingPage({ onCaseStudies, onContact }) {
               whiteSpace: isMobile ? "normal" : "nowrap",
             }}
           >
-            Enterprises engage us for{" "}
-            <span className="hero-use-case-shell">
+            <span style={{ flexShrink: 0 }}>Enterprises engage us for</span>
+            <span
+              className="hero-use-case-shell"
+              style={{
+                minWidth: isMobile ? "unset" : "25ch",
+                justifyItems: "start",
+                textAlign: "left",
+              }}
+            >
               <span key={useCaseIndex} className="hero-use-case-word">
-                [{HERO_USE_CASES[useCaseIndex]}]
+                {HERO_USE_CASES[useCaseIndex]}
               </span>
             </span>
           </p>
