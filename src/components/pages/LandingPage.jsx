@@ -134,13 +134,13 @@ export function LandingPage({ onCaseStudies, onContact }) {
           <p
             style={{
               margin: "14px auto 0",
-              maxWidth: 760,
+              maxWidth: 860,
               display: "inline-flex",
               alignItems: "baseline",
               justifyContent: "center",
-              gap: 6,
+              gap: isSmallMobile ? 4 : 6,
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 12 : isTablet ? 12 : 13,
+              fontSize: isSmallMobile ? 12 : isTablet ? 13 : 14,
               lineHeight: 1.6,
               color: T.ink60,
               whiteSpace: isMobile ? "normal" : "nowrap",
@@ -149,11 +149,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
             <span style={{ flexShrink: 0 }}>Enterprises engage us for</span>
             <span
               className="hero-use-case-shell"
-              style={{
-                minWidth: isMobile ? "unset" : "25ch",
-                justifyItems: "start",
-                textAlign: "left",
-              }}
+              style={{ width: "auto", minWidth: 0 }}
             >
               <span key={useCaseIndex} className="hero-use-case-word">
                 {HERO_USE_CASES[useCaseIndex]}

@@ -357,7 +357,7 @@ function LandingPage({ onExit, onHome, onAbout, onService, onCaseStudies, onCont
         }}>
           Heuristic Labs helps enterprises turn AI ambition into reliable business outcomes through
           strategy, custom systems, and fast applied R&D.
-        </p>
+          </p>
 
         <button
           onClick={onExit}
