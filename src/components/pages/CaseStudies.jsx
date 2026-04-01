@@ -160,7 +160,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
         <Reveal delay={0.06} distance={20} blurFrom={10}>
           <div
             style={{
-              marginTop: isSmallMobile ? 0 : isTablet ? -8 : -24,
+              marginTop: isSmallMobile ? 0 : isTablet ? -14 : -36,
             }}
           >
             <div
