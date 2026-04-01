@@ -145,7 +145,7 @@ export function WhoWeAre() {
       <Reveal delay={0.12} distance={16} blurFrom={8}>
         <h3
           style={{
-            margin: isSmallMobile ? "60px 0 18px" : isMobile ? "76px 0 22px" : "96px 0 26px",
+            margin: isSmallMobile ? "44px 0 18px" : isMobile ? "60px 0 22px" : "76px 0 26px",
             textAlign: "center",
             fontFamily: font.serif,
             fontWeight: 500,
