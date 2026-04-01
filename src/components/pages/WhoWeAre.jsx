@@ -58,10 +58,25 @@ export function WhoWeAre() {
                 lineHeight: 1.04,
                 letterSpacing: "-.02em",
                 color: T.ink,
-                maxWidth: 560,
+                maxWidth: isSmallMobile ? 520 : 700,
               }}
             >
-              We build the intelligence that scales your edge.
+              <span
+                style={{
+                  display: "block",
+                  whiteSpace: isTablet ? "normal" : "nowrap",
+                }}
+              >
+                We build the intelligence
+              </span>
+              <span
+                style={{
+                  display: "block",
+                  whiteSpace: isTablet ? "normal" : "nowrap",
+                }}
+              >
+                that scales your edge.
+              </span>
             </h2>
             <p
               style={{
@@ -84,7 +99,7 @@ export function WhoWeAre() {
           <div
             style={{
               paddingLeft: isTablet ? 0 : 8,
-              paddingTop: isTablet ? 0 : 44,
+              paddingTop: isTablet ? 0 : 74,
             }}
           >
             <p
