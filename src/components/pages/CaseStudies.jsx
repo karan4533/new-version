@@ -73,11 +73,6 @@ export function CaseStudies({ onOpenCaseStudy }) {
 
   return (
     <Section id="case-studies">
-      <div
-        style={{
-          marginTop: isSmallMobile ? -8 : isTablet ? -12 : -16,
-        }}
-      >
       <Reveal distance={14} blurFrom={8}>
         <p
           style={{
@@ -163,7 +158,11 @@ export function CaseStudies({ onOpenCaseStudy }) {
         </Reveal>
 
         <Reveal delay={0.06} distance={20} blurFrom={10}>
-          <div>
+          <div
+            style={{
+              marginTop: isSmallMobile ? 0 : isTablet ? -8 : -24,
+            }}
+          >
             <div
               style={{
                 display: "flex",
@@ -327,7 +326,6 @@ export function CaseStudies({ onOpenCaseStudy }) {
             </article>
           </div>
         </Reveal>
-      </div>
       </div>
     </Section>
   );
