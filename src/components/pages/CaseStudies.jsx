@@ -1,198 +1,83 @@
 import { useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
-import { Section } from "../shared";
-import { Reveal } from "../shared";
+import { Reveal, Section } from "../shared";
 import { CASES } from "../../constants/data/cases";
+
+const THEME_BY_CATEGORY = {
+  "E-Commerce": {
+    bg: "linear-gradient(135deg, #4f6679 0%, #2f4252 48%, #1f2b36 100%)",
+    overlay: "linear-gradient(180deg, rgba(17,20,24,.28) 0%, rgba(17,20,24,.74) 100%)",
+  },
+  Legal: {
+    bg: "linear-gradient(135deg, #556a79 0%, #3b4e5c 48%, #263641 100%)",
+    overlay: "linear-gradient(180deg, rgba(16,20,24,.24) 0%, rgba(16,20,24,.72) 100%)",
+  },
+  Construction: {
+    bg: "linear-gradient(135deg, #3f5d63 0%, #2f474f 48%, #1f3136 100%)",
+    overlay: "linear-gradient(180deg, rgba(14,20,20,.24) 0%, rgba(14,20,20,.72) 100%)",
+  },
+  "Medico-Legal": {
+    bg: "linear-gradient(135deg, #4d5866 0%, #384452 48%, #232f3b 100%)",
+    overlay: "linear-gradient(180deg, rgba(16,18,24,.24) 0%, rgba(16,18,24,.72) 100%)",
+  },
+  "D2C Brand": {
+    bg: "linear-gradient(135deg, #6b5f53 0%, #4f453d 48%, #322b26 100%)",
+    overlay: "linear-gradient(180deg, rgba(24,18,16,.24) 0%, rgba(24,18,16,.72) 100%)",
+  },
+};
+
+const DEFAULT_THEME = {
+  bg: "linear-gradient(135deg, #5d646d 0%, #424b54 48%, #2a3138 100%)",
+  overlay: "linear-gradient(180deg, rgba(16,20,24,.24) 0%, rgba(16,20,24,.72) 100%)",
+};
 
 const getCompactText = (value, maxChars) => {
   if (!value) return "";
 
   const cleaned = String(value).replace(/\s+/g, " ").trim();
-  const firstSentenceMatch = cleaned.match(/.*?[.!?](?:\s|$)/);
-  const firstSentence = firstSentenceMatch?.[0]?.trim();
-  const candidate =
-    firstSentence && firstSentence.length <= maxChars ? firstSentence : cleaned;
-
-  if (candidate.length <= maxChars) return candidate;
-
-  return `${candidate.slice(0, maxChars - 1).trimEnd()}…`;
+  if (cleaned.length <= maxChars) return cleaned;
+  return `${cleaned.slice(0, maxChars - 1).trimEnd()}...`;
 };
 
-const CASE_PREVIEW = {
-  "Product Taxonomy and Attribute Enrichment Engine": {
-    listTitle: "Product Taxonomy",
-    title: "Product Taxonomy and Enrichment Engine",
-    objective:
-      "Classify and enrich 100,000+ SKUs across 4,000 taxonomy nodes with minimal manual intervention.",
-    solution:
-      "Built an agentic enrichment pipeline with fine-tuned Llama 3.2 and Hybrid RAG across supplier catalogs and product assets.",
-    outcome:
-      "Cut processing time from ~3 months to ~2 weeks while increasing consistency across listing operations.",
-    metrics: [
-      { val: "92%", label: "end-to-end automation" },
-      { val: "2 weeks", label: "100K SKU cycle" },
-      { val: "100K+", label: "SKUs processed" },
-      { val: "Hybrid RAG", label: "core architecture" },
-    ],
-  },
-  "Legal Contracts Intelligence Assistant": {
-    listTitle: "Contracts Intelligence",
-    title: "Legal Contracts Intelligence Assistant",
-    meta: "LEGAL TECH | 12 WEEKS",
-    objective:
-      "Extract complex legal obligations and risk factors from multi-hundred page service agreements with human-level precision.",
-    solution:
-      "Deployed a bespoke agentic RAG system using Claude 3.5 Sonnet for logical reasoning and proprietary vector reranking.",
-    outcome:
-      "Reduced legal review time by 85%, allowing senior counsel to focus on high-stakes negotiations rather than initial document triage.",
-    metrics: [
-      { val: "85%", label: "time saved per doc" },
-      { val: "< 3 mins", label: "full audit speed" },
-      { val: "99.8%", label: "extraction accuracy" },
-      { val: "Multi-Agent", label: "verification logic" },
-    ],
-  },
-  "Real-Time Safety Vision System": {
-    listTitle: "Safety Vision System",
-    title: "Real-Time Safety Vision System",
-    objective:
-      "Detect PPE non-compliance and restricted-zone breaches in real time across active construction sites.",
-    solution:
-      "Deployed edge computer vision with YOLOv8 and DeepSORT tracking for low-latency detection and instant alerts.",
-    outcome:
-      "Lowered safety violations by 60% in the first month with sub-second intervention loops.",
-    metrics: [
-      { val: "60%", label: "violation reduction" },
-      { val: "< 1 sec", label: "alert latency" },
-      { val: "24/7", label: "continuous monitoring" },
-      { val: "Edge AI", label: "deployment model" },
-    ],
-  },
-  "Multimodal Clinical Document Intelligence": {
-    listTitle: "Clinical Document Intelligence",
-    title: "Clinical Document Intelligence",
-    objective:
-      "Review mixed-format medical records rapidly while preserving chronology, traceability, and legal defensibility.",
-    solution:
-      "Used multimodal OCR and layout-aware extraction to generate structured timelines with source-level audit links.",
-    outcome:
-      "Reduced manual review from days to minutes with high reliability on handwritten and scanned records.",
-    metrics: [
-      { val: "97%", label: "extraction accuracy" },
-      { val: "minutes", label: "review turnaround" },
-      { val: "10K+", label: "pages per case" },
-      { val: "Audit-Ready", label: "output quality" },
-    ],
-  },
-  "Customer Support Voice Agent": {
-    listTitle: "Customer Support Voice Agent",
-    title: "Customer Support Voice Agent",
-    objective:
-      "Scale support operations for orders, returns, payments, and product discovery without adding headcount.",
-    solution:
-      "Implemented a modular multi-agent voice stack with Hybrid RAG grounded in live order and policy data.",
-    outcome:
-      "Improved first-contact resolution and reduced common-query handling time by 80%.",
-    metrics: [
-      { val: "80%", label: "query time reduction" },
-      { val: "800ms", label: "avg response latency" },
-      { val: "24/7", label: "voice availability" },
-      { val: "Multi-Agent", label: "orchestration" },
-    ],
-  },
-};
+const toTabLabel = (value) =>
+  String(value)
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .trim()
+    .toUpperCase();
 
-const getCasePreview = (caseStudy, isSmallMobile) => {
-  if (!caseStudy) {
-    return {
-      listTitle: "",
-      title: "",
-      meta: "",
-      objective: "",
-      solution: "",
-      outcome: "",
-      metrics: [],
-    };
-  }
+const getTheme = (category) => THEME_BY_CATEGORY[category] || DEFAULT_THEME;
 
-  const override = CASE_PREVIEW[caseStudy.title] || {};
-  const fallbackMetrics = [
-    ...(caseStudy.metrics || []).slice(0, 2),
-    { val: caseStudy.weeks || "8 weeks", label: "delivery timeline" },
-    { val: caseStudy.cat || "Enterprise", label: "industry" },
-  ].slice(0, 4);
+export function CaseStudies({ onOpenCaseStudy }) {
+  const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const showcaseCases = CASES.slice(0, 5);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  return {
-    listTitle: override.listTitle || caseStudy.shortTitle || caseStudy.title,
-    title: override.title || caseStudy.shortTitle || caseStudy.title,
-    meta: override.meta || `${caseStudy.cat} | ${caseStudy.weeks}`,
-    objective:
-      override.objective ||
-      getCompactText(caseStudy.objective || caseStudy.body, isSmallMobile ? 120 : 150),
-    solution:
-      override.solution ||
-      getCompactText(caseStudy.solution || caseStudy.body, isSmallMobile ? 120 : 150),
-    outcome:
-      override.outcome ||
-      getCompactText(caseStudy.outcome || caseStudy.body, isSmallMobile ? 150 : 220),
-    metrics: (override.metrics || fallbackMetrics).slice(0, 4),
-  };
-};
+  const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
+  const activeTheme = getTheme(activeCase?.cat);
 
-export function CaseStudies() {
-  const { width, isMobile, isTablet, isSmallMobile } = useViewport();
-  const isCompactDesktop = !isTablet && width < 1320;
-  const isNarrowDetail = !isMobile && width < 1180;
-  const leftItemFontSize = isSmallMobile
-    ? 18
-    : isMobile
-      ? 22
-      : isCompactDesktop
-        ? "clamp(16px,1vw,20px)"
-        : "clamp(18px,1.2vw,24px)";
-  const detailTitleFontSize = isSmallMobile
-    ? 30
-    : isMobile
-      ? 38
-      : isCompactDesktop
-        ? "clamp(30px,2vw,38px)"
-        : "clamp(36px,2.5vw,46px)";
-  const detailBodyFontSize = isSmallMobile ? 13 : isCompactDesktop ? 14 : 15;
-  const metricMinHeight = isSmallMobile ? 78 : isCompactDesktop ? 90 : 98;
+  if (!activeCase) return null;
 
-  const getMetricValueFontSize = (rawValue) => {
-    const value = String(rawValue || "").trim();
-    const length = value.length;
-
-    if (length > 18) return isSmallMobile ? 14 : isCompactDesktop ? 15 : 16;
-    if (length > 14) return isSmallMobile ? 16 : isCompactDesktop ? 17 : 18;
-    if (length > 10) return isSmallMobile ? 18 : isCompactDesktop ? 19 : 20;
-    if (length > 7) return isSmallMobile ? 20 : isCompactDesktop ? 21 : 22;
-
-    return isSmallMobile ? 21 : isCompactDesktop ? 22 : 23;
-  };
-  const visibleCases = CASES.slice(0, 5);
-  const defaultCaseIndex = visibleCases.findIndex(
-    (item) => item.cat.toLowerCase() === "legal",
+  const objectivePreview = getCompactText(
+    activeCase.objective || activeCase.body,
+    isSmallMobile ? 120 : 180,
   );
-
-  const [activeIndex, setActiveIndex] = useState(
-    defaultCaseIndex >= 0 ? defaultCaseIndex : 0,
+  const outcomePreview = getCompactText(
+    activeCase.outcome || activeCase.body,
+    isSmallMobile ? 120 : 160,
   );
-
-  const caseCards = visibleCases.map((item) => ({
-    item,
-    preview: getCasePreview(item, isSmallMobile),
-  }));
-
-  const activeCard = caseCards[activeIndex] ?? caseCards[0];
-  const activeCase = activeCard?.item ?? visibleCases[0];
-  const activePreview =
-    activeCard?.preview ?? getCasePreview(activeCase, isSmallMobile);
+  const tags =
+    (activeCase.techTags?.length
+      ? activeCase.techTags
+      : activeCase.metrics?.map((metric) => metric.label)) || [];
 
   return (
     <Section id="case-studies">
+      <div
+        style={{
+          marginTop: isSmallMobile ? -8 : isTablet ? -12 : -16,
+        }}
+      >
       <Reveal distance={14} blurFrom={8}>
         <p
           style={{
@@ -206,322 +91,243 @@ export function CaseStudies() {
             padding: "6px 12px",
             borderRadius: 100,
             background: T.ink07,
-            color: "#B07845",
+            color: T.amber,
           }}
         >
           Case studies
         </p>
       </Reveal>
 
-      <Reveal delay={0.08} distance={16} blurFrom={10}>
-        <h2
-          style={{
-            margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 24px" : "0 0 30px",
-            fontFamily: font.serif,
-            fontWeight: 600,
-            color: T.ink,
-            fontSize: isSmallMobile ? 34 : isMobile ? 42 : 50,
-            lineHeight: 1.04,
-            letterSpacing: "-.02em",
-          }}
-        >
-          Real systems. Measurable results.
-        </h2>
-      </Reveal>
-
       <div
         style={{
-          maxWidth: 1160,
+          maxWidth: 1200,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: isTablet ? "1fr" : "minmax(230px,0.68fr) minmax(0,1.32fr)",
-          gap: isSmallMobile ? 16 : isCompactDesktop ? 24 : 30,
+          gridTemplateColumns: isTablet ? "1fr" : "minmax(0,.35fr) minmax(0,.65fr)",
+          gap: isSmallMobile ? 18 : isTablet ? 24 : 30,
           alignItems: "start",
         }}
       >
-        <Reveal
-          distance={16}
-          blurFrom={8}
-          style={{
-            height: isTablet ? "auto" : "100%",
-            minWidth: 0,
-          }}
-        >
-          <aside
-            style={{
-              height: isTablet ? "auto" : "100%",
-              minWidth: 0,
-            }}
-          >
-            <div
+        <Reveal distance={16} blurFrom={8}>
+          <div>
+            <h2
               style={{
-                display: "grid",
-                padding: isSmallMobile ? "0 10px" : "0 12px",
-              }}
-            >
-              {caseCards.map(({ item, preview }, index) => {
-                const isActive = index === activeIndex;
-
-                return (
-                  <button
-                    key={item.title}
-                    type="button"
-                    onClick={() => setActiveIndex(index)}
-                    style={{
-                      width: "100%",
-                      minHeight: isTablet ? "auto" : isSmallMobile ? 58 : isMobile ? 66 : 74,
-                      display: "flex",
-                      alignItems: isTablet ? "flex-start" : "center",
-                      overflow: isTablet ? "visible" : "hidden",
-                      border: "none",
-                      borderTop: index === 0 ? `1px solid ${T.ink12}` : "none",
-                      borderBottom: isActive ? `2px solid ${T.amber}` : `1px solid ${T.ink12}`,
-                      background: "transparent",
-                      padding: isTablet ? "12px 8px" : isSmallMobile ? "10px 6px" : "12px 8px",
-                      textAlign: "left",
-                      cursor: "pointer",
-                      color: isActive ? T.ink : "rgba(30,26,16,.58)",
-                      transition: "color .22s ease",
-                    }}
-                  >
-                    <span
-                      style={{
-                        display: "block",
-                        width: "100%",
-                        minWidth: 0,
-                        fontFamily: font.serif,
-                        fontSize: leftItemFontSize,
-                        fontWeight: isActive ? 700 : 500,
-                        lineHeight: 1.08,
-                        letterSpacing: "-.01em",
-                        marginBottom: 0,
-                        whiteSpace: isTablet ? "normal" : "nowrap",
-                        overflow: isTablet ? "visible" : "hidden",
-                        textOverflow: isTablet ? "clip" : "ellipsis",
-                      }}
-                    >
-                      {preview.listTitle}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </aside>
-        </Reveal>
-
-        <Reveal delay={0.08} distance={20} blurFrom={10} style={{ minWidth: 0 }}>
-          <article
-            style={{
-              border: `1px solid ${T.ink12}`,
-              borderRadius: 12,
-              background: "rgba(255,255,255,.44)",
-              padding: isSmallMobile
-                ? "16px 14px"
-                : isCompactDesktop
-                  ? "20px 22px 18px"
-                  : "24px 26px 20px",
-              display: "grid",
-              gap: isSmallMobile ? 12 : isCompactDesktop ? 14 : 18,
-              overflow: "hidden",
-              minWidth: 0,
-            }}
-          >
-            <p
-              style={{
-                margin: 0,
-                fontFamily: font.sans,
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: ".14em",
-                textTransform: "uppercase",
-                color: T.amber,
-              }}
-            >
-              {activePreview.meta}
-            </p>
-
-            <h3
-              style={{
-                margin: 0,
+                margin: "0 0 12px",
                 fontFamily: font.serif,
                 fontWeight: 600,
                 color: T.ink,
-                fontSize: detailTitleFontSize,
-                lineHeight: 1.08,
+                lineHeight: 1.02,
                 letterSpacing: "-.02em",
-                maxWidth: isCompactDesktop ? 600 : 680,
+                fontSize: isSmallMobile ? 34 : isMobile ? 44 : 58,
+                maxWidth: 520,
               }}
             >
-              {activePreview.title}
-            </h3>
+              We&apos;ve built systems for global enterprises
+            </h2>
+
+            <p
+              style={{
+                margin: "0 0 12px",
+                maxWidth: 460,
+                fontFamily: font.sans,
+                fontSize: isSmallMobile ? 13 : 15,
+                lineHeight: 1.65,
+                color: T.ink60,
+              }}
+            >
+              Click a category tab to preview how we solve real production problems.
+            </p>
 
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: isMobile || isNarrowDetail ? "1fr" : "repeat(2,minmax(0,1fr))",
-                columnGap: isSmallMobile ? 12 : isCompactDesktop ? 16 : 20,
-                rowGap: isSmallMobile ? 12 : 14,
-                alignItems: "start",
-              }}
-            >
-              <div>
-                <p
-                  style={{
-                    margin: "0 0 8px",
-                    fontFamily: font.sans,
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: ".16em",
-                    textTransform: "uppercase",
-                    color: T.ink40,
-                  }}
-                >
-                  Objective
-                </p>
-                <p
-                  style={{
-                    margin: 0,
-                    fontFamily: font.sans,
-                    fontSize: detailBodyFontSize,
-                    lineHeight: 1.54,
-                    color: T.ink60,
-                    maxWidth: 440,
-                    overflowWrap: "anywhere",
-                  }}
-                >
-                  {activePreview.objective}
-                </p>
-              </div>
-              <div>
-                <p
-                  style={{
-                    margin: "0 0 8px",
-                    fontFamily: font.sans,
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: ".16em",
-                    textTransform: "uppercase",
-                    color: T.ink40,
-                  }}
-                >
-                  Solution
-                </p>
-                <p
-                  style={{
-                    margin: 0,
-                    fontFamily: font.sans,
-                    fontSize: detailBodyFontSize,
-                    lineHeight: 1.54,
-                    color: T.ink60,
-                    maxWidth: 440,
-                    overflowWrap: "anywhere",
-                  }}
-                >
-                  {activePreview.solution}
-                </p>
-              </div>
-            </div>
-
-            <div
-              style={{
+                borderTop: `1px solid ${T.ink12}`,
                 borderBottom: `1px solid ${T.ink12}`,
-                padding: isSmallMobile ? "2px 0 10px" : isCompactDesktop ? "4px 0 12px" : "6px 0 14px",
+                padding: "12px 0",
+                marginBottom: 14,
               }}
             >
-              <p
-                style={{
-                  margin: "0 0 8px",
-                  fontFamily: font.sans,
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: ".16em",
-                  textTransform: "uppercase",
-                  color: T.ink40,
-                }}
-              >
-                Outcome
-              </p>
               <p
                 style={{
                   margin: 0,
                   fontFamily: font.sans,
-                  fontSize: detailBodyFontSize,
-                  lineHeight: 1.54,
+                  fontSize: isSmallMobile ? 12 : 13,
+                  lineHeight: 1.6,
                   color: T.ink60,
-                  maxWidth: 920,
-                  overflowWrap: "anywhere",
                 }}
               >
-                {activePreview.outcome}
+                {outcomePreview}
               </p>
             </div>
 
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.06} distance={20} blurFrom={10}>
+          <div>
             <div
               style={{
-                paddingTop: isSmallMobile ? 10 : isCompactDesktop ? 14 : 18,
-                display: "grid",
-                gridTemplateColumns: isSmallMobile
-                  ? "repeat(2,minmax(0,1fr))"
-                  : "repeat(4,minmax(0,1fr))",
-                gap: isSmallMobile ? 12 : isCompactDesktop ? 14 : 18,
-                alignItems: "stretch",
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                marginBottom: 12,
+                overflowX: isTablet ? "auto" : "visible",
+                paddingBottom: isTablet ? 4 : 0,
               }}
             >
-              {activePreview.metrics.map((metric) => {
-                const metricValue = String(metric.val || "").trim();
-                const isTextMetric = /[A-Za-z]/.test(metricValue);
+              {showcaseCases.map((caseItem, index) => {
+                const isActive = index === activeIndex;
 
                 return (
-                <div
-                  key={`${metric.label}-${metric.val}`}
-                  style={{
-                    minHeight: metricMinHeight,
-                    minWidth: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 3,
-                    overflow: "visible",
-                  }}
-                >
-                  <div
+                  <button
+                    key={caseItem.title}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
                     style={{
+                      border: `1px solid ${isActive ? "transparent" : T.ink12}`,
+                      borderRadius: 999,
+                      background: isActive ? T.ink : "rgba(255,255,255,.56)",
+                      color: isActive ? T.w : T.ink40,
+                      padding: "7px 13px",
                       fontFamily: font.sans,
-                      fontSize: getMetricValueFontSize(metricValue),
-                      lineHeight: 1.02,
+                      fontSize: 10,
                       fontWeight: 700,
-                      color: T.amber,
-                      fontStyle: "normal",
-                      whiteSpace: "nowrap",
-                      wordBreak: "normal",
-                      overflowWrap: "normal",
-                      letterSpacing: isTextMetric ? "-.01em" : ".01em",
-                      maxWidth: "100%",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
-                    {metricValue}
-                  </div>
-                  <div
-                    style={{
-                      marginTop: 2,
-                      fontFamily: font.sans,
-                      fontSize: 8,
-                      fontWeight: 600,
-                      color: T.ink40,
+                      letterSpacing: ".07em",
                       textTransform: "uppercase",
-                      letterSpacing: ".14em",
-                      lineHeight: 1.45,
+                      whiteSpace: "nowrap",
+                      cursor: "pointer",
+                      flexShrink: 0,
                     }}
                   >
-                    {metric.label}
-                  </div>
-                </div>
+                    {toTabLabel(caseItem.cat)}
+                  </button>
                 );
               })}
             </div>
-          </article>
+
+            <article
+              style={{
+                borderRadius: 14,
+                overflow: "hidden",
+                border: `1px solid ${T.ink12}`,
+                background: activeTheme.bg,
+                minHeight: isSmallMobile ? 290 : isTablet ? 360 : 470,
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: activeTheme.overlay,
+                }}
+              />
+
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 1,
+                  height: "100%",
+                  minHeight: isSmallMobile ? 290 : isTablet ? 360 : 470,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  gap: 14,
+                  padding: isSmallMobile ? "18px 14px" : "22px 20px",
+                }}
+              >
+                <div>
+                  <p
+                    style={{
+                      margin: "0 0 8px",
+                      fontFamily: font.sans,
+                      fontSize: 10,
+                      fontWeight: 700,
+                      letterSpacing: ".1em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,.88)",
+                    }}
+                  >
+                    {`${activeCase.cat} | ${activeCase.weeks}`}
+                  </p>
+                  <h3
+                    style={{
+                      margin: 0,
+                      maxWidth: 620,
+                      fontFamily: font.sans,
+                      fontSize: isSmallMobile ? 32 : isMobile ? 40 : 48,
+                      fontWeight: 700,
+                      lineHeight: 1.05,
+                      letterSpacing: "-.02em",
+                      color: T.w,
+                    }}
+                  >
+                    {activeCase.shortTitle || activeCase.title}
+                  </h3>
+                </div>
+
+                <div>
+                  <p
+                    style={{
+                      margin: "0 0 12px",
+                      maxWidth: 620,
+                      fontFamily: font.sans,
+                      fontSize: isSmallMobile ? 13 : 15,
+                      lineHeight: 1.6,
+                      color: "rgba(255,255,255,.88)",
+                    }}
+                  >
+                    {objectivePreview}
+                  </p>
+
+                  <p
+                    style={{
+                      margin: "0 0 10px",
+                      fontFamily: font.sans,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: ".08em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,.78)",
+                    }}
+                  >
+                    Trusted by teams using
+                  </p>
+
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isSmallMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
+                      gap: 8,
+                    }}
+                  >
+                    {tags.slice(0, 4).map((tag) => (
+                      <div
+                        key={`${activeCase.title}-${tag}`}
+                        style={{
+                          border: "1px solid rgba(255,255,255,.22)",
+                          borderRadius: 8,
+                          padding: "8px 10px",
+                          background: "rgba(20,20,20,.26)",
+                          fontFamily: font.sans,
+                          fontSize: 11,
+                          fontWeight: 600,
+                          lineHeight: 1.35,
+                          color: "rgba(255,255,255,.9)",
+                          minHeight: 42,
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        {tag}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
         </Reveal>
+      </div>
       </div>
     </Section>
   );
