@@ -372,19 +372,6 @@ export function Services() {
                         ))}
                       </ul>
 
-                      <p
-                        style={{
-                          margin: "2px 0 0",
-                          fontFamily: font.sans,
-                          fontSize: 9,
-                          fontWeight: 700,
-                          letterSpacing: ".08em",
-                          textTransform: "uppercase",
-                          color: T.ink40,
-                        }}
-                      >
-                        {interactiveCardsEnabled ? "Move out to close" : "Tap again to close"}
-                      </p>
                     </div>
                   </article>
                 </div>
