@@ -119,9 +119,11 @@ export function Services() {
             {(() => {
               const isFlipped = activeCardIndex === index;
               const highlights = (card.items || []).slice(0, 5);
+              const technicalTagLine = (card.technicalTags || []).join(" | ").toUpperCase();
+              const seoTagLine = (card.seoTags || []).join(" | ").toUpperCase();
 
               return (
-                <div style={{ perspective: "1200px", height: "100%" }}>
+                <div style={{ perspective: "2200px", height: "100%" }}>
                   <article
                     onMouseEnter={() => {
                       if (!interactiveCardsEnabled) return;
@@ -149,29 +151,33 @@ export function Services() {
                       height: "100%",
                       transformStyle: "preserve-3d",
                       transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                      transition: "transform .55s cubic-bezier(0.22,1,0.36,1)",
+                      transition: "transform .34s ease",
+                      transformOrigin: "center center",
                       outline: "none",
+                      cursor: "pointer",
+                      willChange: "transform",
                     }}
                   >
                     <div
                       style={{
                         position: "absolute",
                         inset: 0,
-                        border: `1px solid ${T.ink12}`,
-                        background: "rgba(255,255,255,.74)",
-                        borderRadius: 10,
-                        padding: isSmallMobile ? "12px" : "14px 14px 12px",
+                        border: `1px solid rgba(30,26,16,.14)`,
+                        background:
+                          "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
+                        borderRadius: 14,
+                        padding: isSmallMobile ? "13px" : "15px 15px 13px",
                         display: "grid",
                         alignContent: "start",
-                        gap: 7,
+                        gap: 8,
                         backfaceVisibility: "hidden",
-                        boxShadow: "0 4px 12px rgba(30,26,16,.05)",
+                        boxShadow: "0 8px 18px rgba(30,26,16,.08)",
                       }}
                     >
                       <span
                         style={{
                           fontFamily: font.serif,
-                          fontSize: isSmallMobile ? 44 : 46,
+                          fontSize: isSmallMobile ? 42 : 44,
                           lineHeight: 1,
                           color: "rgba(176,120,69,.24)",
                           letterSpacing: "-.01em",
@@ -201,7 +207,7 @@ export function Services() {
                           fontFamily: font.serif,
                           fontWeight: 600,
                           color: T.ink,
-                          fontSize: isSmallMobile ? 18 : 19,
+                          fontSize: isSmallMobile ? 18 : 20,
                           lineHeight: 1.1,
                           letterSpacing: "-.01em",
                           maxWidth: 220,
@@ -222,53 +228,84 @@ export function Services() {
                         {card.desc}
                       </p>
 
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          flexWrap: "wrap",
-                          gap: 5,
-                          marginTop: 2,
-                        }}
-                      >
-                        {[card.technicalTags.join(" | "), card.seoTags.join(" | ")].map((chip) => (
-                          <span
-                            key={`${card.name}-${chip}`}
-                            style={{
-                              display: "inline-block",
-                              border: `1px solid ${T.ink12}`,
-                              borderRadius: 3,
-                              padding: "1px 5px",
-                              fontFamily: font.sans,
-                              fontSize: 7,
-                              fontWeight: 600,
-                              color: T.ink40,
-                              letterSpacing: ".04em",
-                              textTransform: "uppercase",
-                              background: "rgba(255,255,255,.7)",
-                            }}
-                          >
-                            {chip}
-                          </span>
-                        ))}
-                      </div>
+                      {(technicalTagLine || seoTagLine) && (
+                        <div
+                          style={{
+                            display: "grid",
+                            gap: 5,
+                          }}
+                        >
+                          {!!technicalTagLine && (
+                            <span
+                              style={{
+                                display: "inline-block",
+                                width: "fit-content",
+                                maxWidth: "100%",
+                                border: `1px solid ${T.ink12}`,
+                                borderRadius: 6,
+                                padding: "2px 6px",
+                                fontFamily: font.sans,
+                                fontSize: isSmallMobile ? 7 : 8,
+                                fontWeight: 700,
+                                letterSpacing: ".07em",
+                                lineHeight: 1.35,
+                                textTransform: "uppercase",
+                                color: T.ink40,
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
+                              title={technicalTagLine}
+                            >
+                              {technicalTagLine}
+                            </span>
+                          )}
+
+                          {!!seoTagLine && (
+                            <span
+                              style={{
+                                display: "inline-block",
+                                width: "fit-content",
+                                maxWidth: "100%",
+                                border: `1px solid ${T.ink12}`,
+                                borderRadius: 6,
+                                padding: "2px 6px",
+                                fontFamily: font.sans,
+                                fontSize: isSmallMobile ? 7 : 8,
+                                fontWeight: 700,
+                                letterSpacing: ".07em",
+                                lineHeight: 1.35,
+                                textTransform: "uppercase",
+                                color: T.ink40,
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
+                              title={seoTagLine}
+                            >
+                              {seoTagLine}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
                     </div>
 
                     <div
                       style={{
                         position: "absolute",
                         inset: 0,
-                        border: "1px solid rgba(176,120,69,.52)",
+                        border: "1px solid rgba(30,26,16,.16)",
                         background:
-                          "linear-gradient(180deg, rgba(139,106,32,.96) 0%, rgba(122,92,22,.96) 100%)",
-                        borderRadius: 10,
-                        padding: isSmallMobile ? "12px" : "14px 14px 12px",
+                          "linear-gradient(180deg, rgba(247,242,232,.98) 0%, rgba(239,231,216,.98) 100%)",
+                        borderRadius: 14,
+                        padding: isSmallMobile ? "13px" : "15px 15px 13px",
                         display: "grid",
                         alignContent: "start",
-                        gap: 8,
+                        gap: 9,
                         transform: "rotateY(180deg)",
                         backfaceVisibility: "hidden",
-                        boxShadow: "0 18px 34px rgba(30,26,16,.16)",
+                        boxShadow: "0 10px 22px rgba(30,26,16,.1)",
                       }}
                     >
                       <span
@@ -277,13 +314,13 @@ export function Services() {
                           width: "fit-content",
                           padding: "2px 6px",
                           borderRadius: 4,
-                          background: "rgba(255,255,255,.16)",
+                          background: "rgba(176,120,69,.14)",
                           fontFamily: font.sans,
                           fontSize: 8,
                           fontWeight: 700,
                           letterSpacing: ".08em",
                           textTransform: "uppercase",
-                          color: "rgba(255,255,255,.88)",
+                          color: T.amber,
                         }}
                       >
                         Key points
@@ -293,8 +330,8 @@ export function Services() {
                           margin: 0,
                           fontFamily: font.serif,
                           fontWeight: 600,
-                          color: "#fffdf8",
-                          fontSize: isSmallMobile ? 18 : 19,
+                          color: T.ink,
+                          fontSize: isSmallMobile ? 18 : 20,
                           lineHeight: 1.14,
                           letterSpacing: "-.01em",
                         }}
@@ -318,7 +355,7 @@ export function Services() {
                               display: "flex",
                               alignItems: "flex-start",
                               gap: 8,
-                              color: "rgba(255,255,255,.95)",
+                              color: T.ink60,
                               fontFamily: font.sans,
                               fontSize: 11,
                               lineHeight: 1.4,
@@ -326,14 +363,28 @@ export function Services() {
                           >
                             <span
                               aria-hidden="true"
-                              style={{ color: "rgba(255,224,149,.96)", fontSize: 13 }}
+                              style={{ color: T.amber, fontSize: 13 }}
                             >
-                              +
+                              •
                             </span>
                             <span>{item}</span>
                           </li>
                         ))}
                       </ul>
+
+                      <p
+                        style={{
+                          margin: "2px 0 0",
+                          fontFamily: font.sans,
+                          fontSize: 9,
+                          fontWeight: 700,
+                          letterSpacing: ".08em",
+                          textTransform: "uppercase",
+                          color: T.ink40,
+                        }}
+                      >
+                        {interactiveCardsEnabled ? "Move out to close" : "Tap again to close"}
+                      </p>
                     </div>
                   </article>
                 </div>
