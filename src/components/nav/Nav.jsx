@@ -282,11 +282,9 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
                   setMobileMenuOpen(false);
                 }}
                 style={{
-                  border: link.isCta
-                    ? "1px solid transparent"
-                    : "1px solid rgba(30,26,16,.14)",
+                  border: "none",
                   borderRadius: 10,
-                  background: link.isCta ? T.ink : "rgba(255,255,255,.75)",
+                  background: link.isCta ? T.ink : "transparent",
                   color: link.isCta ? T.w : T.ink,
                   textDecoration: "none",
                   fontFamily: font.sans,
