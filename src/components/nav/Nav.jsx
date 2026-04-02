@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import companyLogo from "../../assets/logo (1).png";
@@ -7,6 +7,12 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
   const { isTablet, isSmallMobile } = useViewport();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isDesktop = !isTablet;
+
+  useEffect(() => {
+    if (isDesktop && mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  }, [isDesktop, mobileMenuOpen]);
 
   const links = [
     { label: "Home", onClick: onHomeClick },
@@ -23,7 +29,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
         style={{
           position: "sticky",
           top: isDesktop ? 12 : isSmallMobile ? 8 : 10,
-          zIndex: isDesktop ? 200 : 240,
+          zIndex: isDesktop ? 1200 : 2200,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -188,72 +194,112 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle menu"
             style={{
-              height: 36,
-              minWidth: 68,
-              borderRadius: 999,
-              border: "1px solid rgba(30,26,16,.14)",
-              background: "rgba(255,255,255,.7)",
-              fontFamily: font.sans,
-              fontSize: 12,
-              fontWeight: 700,
-              letterSpacing: ".03em",
-              color: T.ink,
+              height: 40,
+              width: 40,
+              borderRadius: 12,
+              border: "1px solid rgba(176,120,69,.38)",
+              background: "transparent",
+              color: T.amber,
               cursor: "pointer",
-              textTransform: "uppercase",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
               justifySelf: "end",
+              padding: 0,
             }}
           >
-            {mobileMenuOpen ? "Close" : "Menu"}
-          </button>
-        )}
-      </nav>
-
-      {isTablet && mobileMenuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: isSmallMobile ? 60 : 72,
-            left: 10,
-            right: 10,
-            zIndex: 241,
-            border: "1px solid rgba(30,26,16,.14)",
-            background: "#f0ece4",
-            borderRadius: 16,
-            padding: "10px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 8,
-            boxShadow: "0 12px 26px rgba(22,17,10,.12)",
-          }}
-        >
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href || "#home"}
-              onClick={(event) => {
-                if (typeof link.onClick === "function") {
-                  event.preventDefault();
-                  link.onClick();
-                }
-                setMobileMenuOpen(false);
-              }}
+            <span
+              aria-hidden="true"
               style={{
-                border: link.isCta ? "1px solid transparent" : "1px solid rgba(30,26,16,.14)",
-                borderRadius: 10,
-                background: link.isCta ? T.ink : "rgba(255,255,255,.75)",
-                color: link.isCta ? T.w : T.ink,
-                textDecoration: "none",
-                fontFamily: font.sans,
-                fontSize: 14,
-                fontWeight: 700,
-                padding: "11px 12px",
+                position: "relative",
+                width: 18,
+                height: 12,
+                display: "inline-block",
               }}
             >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
+              {[0, 1, 2].map((barIndex) => {
+                const transforms = mobileMenuOpen
+                  ? [
+                      "translateY(5px) rotate(45deg)",
+                      "scaleX(0)",
+                      "translateY(-5px) rotate(-45deg)",
+                    ]
+                  : ["none", "none", "none"];
+
+                const tops = [0, 5, 10];
+
+                return (
+                  <span
+                    key={barIndex}
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: tops[barIndex],
+                      width: "100%",
+                      height: 2,
+                      borderRadius: 99,
+                      background: T.amber,
+                      transform: transforms[barIndex],
+                      transition: "transform .24s ease, opacity .2s ease",
+                      opacity: mobileMenuOpen && barIndex === 1 ? 0 : 1,
+                      transformOrigin: "center",
+                    }}
+                  />
+                );
+              })}
+            </span>
+          </button>
+        )}
+
+        {isTablet && mobileMenuOpen && (
+          <div
+            style={{
+              position: "absolute",
+              top: `calc(100% + ${isSmallMobile ? 8 : 10}px)`,
+              left: 0,
+              right: 0,
+              zIndex: 2201,
+              border: "1px solid rgba(30,26,16,.14)",
+              background: "#f0ece4",
+              borderRadius: 16,
+              padding: "10px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+              boxShadow: "0 12px 26px rgba(22,17,10,.12)",
+            }}
+          >
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href || "#home"}
+                onClick={(event) => {
+                  if (typeof link.onClick === "function") {
+                    event.preventDefault();
+                    link.onClick();
+                  }
+                  setMobileMenuOpen(false);
+                }}
+                style={{
+                  border: link.isCta
+                    ? "1px solid transparent"
+                    : "1px solid rgba(30,26,16,.14)",
+                  borderRadius: 10,
+                  background: link.isCta ? T.ink : "rgba(255,255,255,.75)",
+                  color: link.isCta ? T.w : T.ink,
+                  textDecoration: "none",
+                  fontFamily: font.sans,
+                  fontSize: 14,
+                  fontWeight: 700,
+                  padding: "11px 12px",
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </nav>
     </>
   );
 }
