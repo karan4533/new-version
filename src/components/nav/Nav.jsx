@@ -30,9 +30,11 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
           position: "sticky",
           top: isDesktop ? 12 : isSmallMobile ? 8 : 10,
           zIndex: isDesktop ? 1200 : 2200,
-          display: "flex",
+          display: isDesktop ? "flex" : "grid",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: isDesktop ? "space-between" : "stretch",
+          gridTemplateColumns: isDesktop ? undefined : "minmax(0, 1fr) auto",
+          columnGap: isDesktop ? undefined : isSmallMobile ? 8 : 12,
           flexWrap: "nowrap",
           rowGap: 0,
           width: isDesktop ? "min(1240px, calc(100% - 44px))" : "calc(100% - 14px)",
@@ -63,12 +65,14 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
             background: "transparent",
             display: "inline-flex",
             alignItems: "center",
-            gap: isDesktop ? 10 : isSmallMobile ? 8 : 12,
+            gap: isDesktop ? 10 : isSmallMobile ? 9 : 13,
             cursor: "pointer",
             color: T.ink,
             padding: isDesktop ? "7px 10px" : 0,
             order: isDesktop ? 1 : 0,
             flex: "0 0 auto",
+            width: isDesktop ? "auto" : "100%",
+            minWidth: 0,
             textAlign: "left",
             borderRadius: 14,
             transform: "translateY(0px)",
@@ -81,8 +85,8 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
             src={companyLogo}
             alt="Heuristic Labs"
             style={{
-              width: isDesktop ? 30 : isSmallMobile ? 24 : 28,
-              height: isDesktop ? 30 : isSmallMobile ? 24 : 28,
+              width: isDesktop ? 30 : isSmallMobile ? 26 : 30,
+              height: isDesktop ? 30 : isSmallMobile ? 26 : 30,
               objectFit: "contain",
               filter: "brightness(0) saturate(100%)",
               flexShrink: 0,
@@ -93,11 +97,14 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
           <span
             style={{
               fontFamily: font.serif,
-              fontSize: isDesktop ? 19 : isSmallMobile ? 13 : 15,
+              fontSize: isDesktop ? 19 : isSmallMobile ? 16 : 18,
               fontWeight: 700,
               color: T.ink,
               letterSpacing: "0em",
               whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              maxWidth: isDesktop ? "none" : isSmallMobile ? 178 : 220,
               lineHeight: 1,
               transition: "letter-spacing 0.2s",
             }}
@@ -206,6 +213,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
               justifyContent: "center",
               justifySelf: "end",
               order: 1,
+              marginLeft: 0,
               padding: 0,
             }}
           >
