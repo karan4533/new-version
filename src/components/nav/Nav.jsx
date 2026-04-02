@@ -67,7 +67,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
             cursor: "pointer",
             color: T.ink,
             padding: isDesktop ? "7px 10px" : 0,
-            order: 1,
+            order: isDesktop ? 1 : 0,
             flex: "0 0 auto",
             textAlign: "left",
             borderRadius: 14,
@@ -197,7 +197,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
               height: 40,
               width: 40,
               borderRadius: 12,
-              border: "1px solid rgba(176,120,69,.38)",
+              border: "none",
               background: "transparent",
               color: T.amber,
               cursor: "pointer",
@@ -205,6 +205,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
               alignItems: "center",
               justifyContent: "center",
               justifySelf: "end",
+              order: 1,
               padding: 0,
             }}
           >
