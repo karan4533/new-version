@@ -253,9 +253,9 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       margin: 0,
                       maxWidth: 620,
                       fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 32 : isMobile ? 40 : 48,
+                      fontSize: isSmallMobile ? 24 : isMobile ? 30 : 36,
                       fontWeight: 700,
-                      lineHeight: 1.05,
+                      lineHeight: 1.08,
                       letterSpacing: "-.02em",
                       color: T.w,
                     }}
@@ -289,7 +289,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       color: "rgba(255,255,255,.78)",
                     }}
                   >
-                    Trusted by teams using
+
                   </p>
 
                   <div

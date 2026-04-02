@@ -1,7 +1,7 @@
 /* Case Studies Data */
 export const CASES = [
   {
-    cat: "E-Commerce",
+    cat: "Data analytics",
     weeks: "8 weeks",
     shortTitle: "Product Taxonomy and Enrichment Engine",
     title: "Product Taxonomy and Attribute Enrichment Engine",
