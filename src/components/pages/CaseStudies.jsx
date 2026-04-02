@@ -69,11 +69,11 @@ export function CaseStudies({ onOpenCaseStudy }) {
 
   const objectivePreview = getCompactText(
     activeCase.objective || activeCase.body,
-    isSmallMobile ? 120 : 180,
+    isSmallMobile ? 120 : isMobile ? 140 : isTablet ? 160 : 180,
   );
   const outcomePreview = getCompactText(
     activeCase.outcome || activeCase.body,
-    isSmallMobile ? 120 : 160,
+    isSmallMobile ? 120 : isMobile ? 140 : 160,
   );
   const tags =
     (activeCase.techTags?.length
@@ -120,10 +120,10 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 fontFamily: font.serif,
                 fontWeight: 600,
                 color: T.ink,
-                lineHeight: 1.02,
+                lineHeight: 1.06,
                 letterSpacing: "-.02em",
-                fontSize: isSmallMobile ? 34 : isMobile ? 44 : 58,
-                maxWidth: 520,
+                fontSize: isSmallMobile ? 28 : isMobile ? 36 : isTablet ? 48 : 58,
+                maxWidth: isMobile ? "100%" : 520,
               }}
             >
               We&apos;ve built systems for global enterprises
@@ -134,8 +134,8 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 margin: "0 0 12px",
                 maxWidth: 460,
                 fontFamily: font.sans,
-                fontSize: isSmallMobile ? 13 : 15,
-                lineHeight: 1.65,
+                fontSize: isSmallMobile ? 12 : 15,
+                lineHeight: 1.6,
                 color: T.ink60,
               }}
             >
@@ -169,17 +169,20 @@ export function CaseStudies({ onOpenCaseStudy }) {
         <Reveal delay={0.06} distance={20} blurFrom={10}>
           <div
             style={{
-              marginTop: isSmallMobile ? 0 : isTablet ? -14 : -36,
+              marginTop: isTablet ? 0 : -36,
+              minWidth: 0,
             }}
           >
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 8,
+                gap: isSmallMobile ? 6 : 8,
                 marginBottom: 12,
-                overflowX: isTablet ? "auto" : "visible",
-                paddingBottom: isTablet ? 4 : 0,
+                flexWrap: isSmallMobile ? "wrap" : "nowrap",
+                overflowX: isSmallMobile ? "visible" : isTablet ? "auto" : "visible",
+                paddingBottom: isSmallMobile ? 0 : isTablet ? 4 : 0,
+                scrollbarWidth: "none",
               }}
             >
               {showcaseCases.map((caseItem, index) => {
@@ -195,11 +198,11 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       borderRadius: 999,
                       background: isActive ? T.ink : "rgba(255,255,255,.56)",
                       color: isActive ? T.w : T.ink40,
-                      padding: "7px 13px",
+                      padding: isSmallMobile ? "6px 10px" : "7px 13px",
                       fontFamily: font.sans,
-                      fontSize: 10,
+                      fontSize: isSmallMobile ? 9 : 10,
                       fontWeight: 700,
-                      letterSpacing: ".07em",
+                      letterSpacing: isSmallMobile ? ".05em" : ".07em",
                       textTransform: "uppercase",
                       whiteSpace: "nowrap",
                       cursor: "pointer",
@@ -217,11 +220,14 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 borderRadius: 14,
                 overflow: "hidden",
                 border: `1px solid ${T.ink12}`,
-                background: activeTheme.image
-                  ? `center / cover no-repeat url(${activeTheme.image})`
-                  : activeTheme.bg,
-                minHeight: isSmallMobile ? 290 : isTablet ? 360 : 470,
+                background: activeTheme.image ? undefined : activeTheme.bg,
+                backgroundImage: activeTheme.image ? `url(${activeTheme.image})` : undefined,
+                backgroundPosition: isMobile ? "center top" : "center center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                minHeight: isSmallMobile ? 260 : isMobile ? 320 : isTablet ? 360 : 470,
                 position: "relative",
+                width: "100%",
               }}
             >
               <div
@@ -236,13 +242,13 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 style={{
                   position: "relative",
                   zIndex: 1,
-                  height: "100%",
-                  minHeight: isSmallMobile ? 290 : isTablet ? 360 : 470,
+                  minHeight: isSmallMobile ? 280 : isMobile ? 320 : isTablet ? 360 : 470,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                   gap: 14,
                   padding: isSmallMobile ? "18px 14px" : "22px 20px",
+                  minWidth: 0,
                 }}
               >
                 <div>
@@ -262,13 +268,14 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   <h3
                     style={{
                       margin: 0,
-                      maxWidth: 620,
+                      maxWidth: isTablet ? 560 : 620,
                       fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 24 : isMobile ? 30 : 36,
+                      fontSize: isSmallMobile ? 24 : isMobile ? 28 : isTablet ? 32 : 36,
                       fontWeight: 700,
                       lineHeight: 1.08,
                       letterSpacing: "-.02em",
                       color: T.w,
+                      overflowWrap: "anywhere",
                     }}
                   >
                     {activeCase.shortTitle || activeCase.title}
@@ -279,34 +286,25 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   <p
                     style={{
                       margin: "0 0 12px",
-                      maxWidth: 620,
+                      maxWidth: isTablet ? 560 : 620,
                       fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 13 : 15,
+                      fontSize: isSmallMobile ? 12 : isMobile ? 14 : 15,
                       lineHeight: 1.6,
                       color: "rgba(255,255,255,.88)",
+                      overflowWrap: "anywhere",
                     }}
                   >
                     {objectivePreview}
                   </p>
 
-                  <p
-                    style={{
-                      margin: "0 0 10px",
-                      fontFamily: font.sans,
-                      fontSize: 11,
-                      fontWeight: 700,
-                      letterSpacing: ".08em",
-                      textTransform: "uppercase",
-                      color: "rgba(255,255,255,.78)",
-                    }}
-                  >
-
-                  </p>
-
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: isSmallMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
+                      gridTemplateColumns: isSmallMobile
+                        ? "1fr"
+                        : isMobile || isTablet
+                          ? "repeat(2,minmax(0,1fr))"
+                          : "repeat(4,minmax(0,1fr))",
                       gap: 8,
                     }}
                   >
@@ -319,13 +317,15 @@ export function CaseStudies({ onOpenCaseStudy }) {
                           padding: "8px 10px",
                           background: "rgba(20,20,20,.26)",
                           fontFamily: font.sans,
-                          fontSize: 11,
+                          fontSize: isSmallMobile ? 10 : 11,
                           fontWeight: 600,
                           lineHeight: 1.35,
                           color: "rgba(255,255,255,.9)",
-                          minHeight: 42,
+                          minHeight: isSmallMobile ? 38 : 42,
                           display: "flex",
                           alignItems: "center",
+                          minWidth: 0,
+                          overflowWrap: "anywhere",
                         }}
                       >
                         {tag}
