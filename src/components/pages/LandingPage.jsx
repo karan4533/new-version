@@ -55,16 +55,16 @@ export function LandingPage({ onCaseStudies, onContact }) {
     <section
       id="home"
       style={{
-        minHeight: isMobile
-          ? isSmallMobile
-            ? "calc(100dvh - 86px)"
-            : "calc(100dvh - 96px)"
-          : isTablet
-            ? "auto"
-            : "clamp(520px, 64vh, 640px)",
-        display: isMobile ? "flex" : "block",
-        alignItems: isMobile ? "center" : undefined,
-        justifyContent: isMobile ? "center" : undefined,
+        minHeight: isTablet
+          ? isMobile
+            ? isSmallMobile
+              ? "calc(100dvh - 86px)"
+              : "calc(100dvh - 96px)"
+            : "calc(100dvh - 104px)"
+          : "clamp(520px, 64vh, 640px)",
+        display: isTablet ? "flex" : "block",
+        alignItems: isTablet ? "center" : undefined,
+        justifyContent: isTablet ? "center" : undefined,
         scrollMarginTop: 84,
         padding: isSmallMobile
           ? "54px 0 24px"
