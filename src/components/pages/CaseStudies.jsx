@@ -3,27 +3,36 @@ import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal, Section } from "../shared";
 import { CASES } from "../../constants/data/cases";
+import dataAnalyticsImage from "../../assets/data analytics.png";
+import legalImage from "../../assets/legal.png";
+import constructionImage from "../../assets/constuction.png";
+import d2cImage from "../../assets/D2C.png";
+import medicoLegalImage from "../../assets/medigo legal.png";
 
 const THEME_BY_CATEGORY = {
+  "Data analytics": {
+    image: dataAnalyticsImage,
+    overlay: "linear-gradient(180deg, rgba(12,18,26,.32) 0%, rgba(12,18,26,.78) 100%)",
+  },
   "E-Commerce": {
     bg: "linear-gradient(135deg, #4f6679 0%, #2f4252 48%, #1f2b36 100%)",
     overlay: "linear-gradient(180deg, rgba(17,20,24,.28) 0%, rgba(17,20,24,.74) 100%)",
   },
   Legal: {
-    bg: "linear-gradient(135deg, #556a79 0%, #3b4e5c 48%, #263641 100%)",
-    overlay: "linear-gradient(180deg, rgba(16,20,24,.24) 0%, rgba(16,20,24,.72) 100%)",
+    image: legalImage,
+    overlay: "linear-gradient(180deg, rgba(12,16,22,.34) 0%, rgba(12,16,22,.78) 100%)",
   },
   Construction: {
-    bg: "linear-gradient(135deg, #3f5d63 0%, #2f474f 48%, #1f3136 100%)",
-    overlay: "linear-gradient(180deg, rgba(14,20,20,.24) 0%, rgba(14,20,20,.72) 100%)",
+    image: constructionImage,
+    overlay: "linear-gradient(180deg, rgba(14,20,20,.28) 0%, rgba(14,20,20,.76) 100%)",
   },
   "Medico-Legal": {
-    bg: "linear-gradient(135deg, #4d5866 0%, #384452 48%, #232f3b 100%)",
-    overlay: "linear-gradient(180deg, rgba(16,18,24,.24) 0%, rgba(16,18,24,.72) 100%)",
+    image: medicoLegalImage,
+    overlay: "linear-gradient(180deg, rgba(16,18,24,.3) 0%, rgba(16,18,24,.76) 100%)",
   },
   "D2C Brand": {
-    bg: "linear-gradient(135deg, #6b5f53 0%, #4f453d 48%, #322b26 100%)",
-    overlay: "linear-gradient(180deg, rgba(24,18,16,.24) 0%, rgba(24,18,16,.72) 100%)",
+    image: d2cImage,
+    overlay: "linear-gradient(180deg, rgba(24,18,16,.28) 0%, rgba(24,18,16,.74) 100%)",
   },
 };
 
@@ -208,7 +217,9 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 borderRadius: 14,
                 overflow: "hidden",
                 border: `1px solid ${T.ink12}`,
-                background: activeTheme.bg,
+                background: activeTheme.image
+                  ? `center / cover no-repeat url(${activeTheme.image})`
+                  : activeTheme.bg,
                 minHeight: isSmallMobile ? 290 : isTablet ? 360 : 470,
                 position: "relative",
               }}
