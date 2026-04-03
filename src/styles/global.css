@@ -28,6 +28,7 @@ body {
 
 #root {
   animation: pageEnter 0.7s var(--ui-ease) both;
+  overflow-x: clip;
 }
 
 a,
@@ -172,6 +173,10 @@ section .card:hover {
   letter-spacing: 0.01em;
   animation: heroUseCaseSwap 0.52s var(--ui-ease) both;
   will-change: transform, opacity, filter, color;
+}
+
+.case-studies-tab-strip::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

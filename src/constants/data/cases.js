@@ -1,9 +1,9 @@
 /* Case Studies Data */
 export const CASES = [
   {
-    cat: "Data analytics",
+    cat: "E-Commerce",
     weeks: "8 weeks",
-    shortTitle: "Product Taxonomy and Enrichment Engine",
+    shortTitle: "Product Taxonomy and Attribute Enrichment Engine",
     title: "Product Taxonomy and Attribute Enrichment Engine",
     body: "A large e-commerce operator managed 100,000+ SKUs across suppliers with inconsistent schemas.",
     objective:
@@ -24,7 +24,7 @@ export const CASES = [
   {
     cat: "Legal",
     weeks: "8 weeks",
-    shortTitle: "Contracts Intelligence Assistant",
+    shortTitle: "Legal Contracts Assistant",
     title: "Legal Contracts Intelligence Assistant",
     body: "A legal and business services organisation needed to make over 500,000 contracts searchable and conversational.",
     objective:
@@ -66,7 +66,7 @@ export const CASES = [
   {
     cat: "Medico-Legal",
     weeks: "4 weeks",
-    shortTitle: "Clinical Document Intelligence",
+    shortTitle: "Multimodal Clinical Document Intelligence",
     title: "Multimodal Clinical Document Intelligence",
     body: "Legal and healthcare teams were required to review and summarise 10,000+ pages of handwritten, scanned, and typed medical records per case.",
     objective:
@@ -103,6 +103,137 @@ export const CASES = [
     metrics: [
       { val: "80%", label: "resolution time reduction" },
       { val: "800ms", label: "avg end-to-end voice latency" },
+    ],
+  },
+  {
+    cat: "Sales Tech",
+    tabLabel: "Sales Copilot",
+    weeks: "8 weeks",
+    shortTitle: "Conversational Business Intelligence Copilot",
+    title: "Conversational Business Intelligence Copilot",
+    body: "The organisation relied on static dashboards and manual reporting workflows, limiting real-time decision-making.",
+    objective:
+      "The organisation relied on static dashboards and manual reporting workflows, limiting real-time decision-making and requiring technical teams for ad hoc analysis.",
+    solution:
+      "Built a conversational GenAI engine combining Hybrid RAG with Text-to-SQL query generation. Designed orchestration workflows to dynamically query and synthesise data across multiple structured and unstructured sources. Implemented validation layers to verify SQL accuracy and prevent hallucinated outputs. Enabled automatic generation of charts, tables, and narrative insights in a unified interface.",
+    outcome:
+      "Delivered instant on-demand access to trustworthy insights across complex datasets. Reduced dependency on manual reporting and BI teams. Enabled faster data-driven decision-making across business functions.",
+    techTags: [
+      "Hybrid RAG + Text-to-SQL pipelines",
+      "Dynamic visualisation generation",
+    ],
+    metrics: [
+      { val: "Instant", label: "access to trusted insights" },
+      { val: "Lower", label: "dependency on manual reporting" },
+    ],
+  },
+  {
+    cat: "Enterprise",
+    tabLabel: "Enterprise Search",
+    weeks: "10 weeks",
+    shortTitle: "Hybrid Search/Open Search for Enterprise",
+    title: "Hybrid Search/Open Search for Enterprise",
+    body: "Enterprises with millions of internal documents needed contextual search in regulated environments.",
+    objective:
+      "Enterprises managing millions of internal documents required contextual and accurate search in regulated or air-gapped environments where cloud GenAI solutions were not permitted.",
+    solution:
+      "Built a hybrid retrieval engine combining BM25 keyword search, semantic vector search, and metadata filtering. Added agentic RAG orchestration with parsing, retrieval, reasoning, and response validation agents. Deployed fully on-prem LLMs with zero external API dependency. Enforced RBAC with audit logging and document-grounded citations.",
+    outcome:
+      "Reduced enterprise knowledge-search time by 70-85%. Achieved near-zero hallucinations through citation-only responses. Enabled GenAI adoption in regulated and restricted environments.",
+    techTags: [
+      "Hybrid retrieval (BM25 + vector + metadata)",
+      "On-prem agentic RAG with RBAC",
+    ],
+    metrics: [
+      { val: "70-85%", label: "knowledge search time reduction" },
+      { val: "Near-zero", label: "hallucinations with cited outputs" },
+    ],
+  },
+  {
+    cat: "Enterprise",
+    tabLabel: "AI Governance",
+    weeks: "8 weeks",
+    shortTitle: "AI Governance and Model Risk",
+    title: "AI Governance and Model Risk Management Framework",
+    body: "Rapid AI adoption created risks around hallucinations, bias, and weak traceability.",
+    objective:
+      "Rapid AI adoption across business functions created risks around hallucinations, bias, regulatory non-compliance, and lack of traceability in regulated industries.",
+    solution:
+      "Implemented a centralised AI governance layer enforcing enterprise-wide usage policies. Added a model registry with lifecycle management, approvals, and version control. Deployed agent-based validation for hallucination detection, bias monitoring, and output verification. Captured immutable audit logs with prompt/response traceability aligned to regulatory frameworks.",
+    outcome:
+      "Reduced AI-related compliance and operational risk. Improved audit readiness through automated traceability. Enabled safe and scalable GenAI deployment across business units.",
+    techTags: [
+      "AI governance + model risk controls",
+      "Explainable validation + immutable audit logs",
+    ],
+    metrics: [
+      { val: "Lower", label: "compliance and operational AI risk" },
+      { val: "Faster", label: "regulatory audit readiness" },
+    ],
+  },
+  {
+    cat: "Automotive",
+    weeks: "16 weeks",
+    shortTitle: "Assembly Line Quality Control",
+    title: "Vision Inspection System: Assembly Line Quality Control",
+    body: "Manual inspection on high-speed automotive lines caused defect leakage and bottlenecks.",
+    objective:
+      "Manual inspection on high-speed automotive assembly lines resulted in defect leakage, inspection bottlenecks, and inconsistent quality control.",
+    solution:
+      "Built multi-point high-resolution image capture using industrial cameras. Trained custom CNN models for alignment, fixation, and surface-defect detection. Synced real-time inference with PLC control logic. Added a centralised dashboard with anomaly flagging and automated corrective triggers.",
+    outcome:
+      "Achieved near-zero false positives in automated inspection. Detected defects earlier to reduce downstream rework. Improved line throughput and operational reliability.",
+    techTags: [
+      "CNN-based defect detection",
+      "Industrial vision + PLC integration",
+    ],
+    metrics: [
+      { val: "Near-zero", label: "false positives in inspection" },
+      { val: "Higher", label: "line throughput reliability" },
+    ],
+  },
+  {
+    cat: "Enterprise",
+    tabLabel: "Translation",
+    weeks: "6 weeks",
+    shortTitle: "Vernacular-First Translation Model",
+    title: "Machine Translation: Vernacular-First Enterprise Model",
+    body: "Enterprises across multilingual regions needed faster and consistent translation of manuals and SOPs.",
+    objective:
+      "Enterprises operating across multilingual regions required accurate translation of manuals, SOPs, and policies while maintaining terminology consistency and reducing turnaround time.",
+    solution:
+      "Built a domain-adapted neural machine translation engine trained on industry corpora. Added terminology management for technical consistency. Implemented XML-aware parsing to preserve document structure and formatting. Added a version-linked pipeline with human-in-the-loop validation.",
+    outcome:
+      "Reduced translation turnaround by 60-70%. Delivered 40-50% cost savings versus manual workflows. Improved multilingual consistency from a single source of truth.",
+    techTags: [
+      "Neural machine translation + domain adaptation",
+      "Terminology management + XML-aware parsing",
+    ],
+    metrics: [
+      { val: "60-70%", label: "turnaround time reduction" },
+      { val: "40-50%", label: "cost savings vs manual process" },
+    ],
+  },
+  {
+    cat: "Enterprise",
+    tabLabel: "Video Localization",
+    weeks: "8 weeks",
+    shortTitle: "Voice-to-Voice Video Localization",
+    title: "Voice-to-Voice Multilingual Conversion: Video Localization",
+    body: "The enterprise needed scalable multilingual video localization without manual dubbing delays.",
+    objective:
+      "The enterprise required scalable multilingual video localization for training and compliance content without manual dubbing delays, terminology loss, or timeline misalignment.",
+    solution:
+      "Implemented ASR-based speech-to-text transcription with word-level timestamps. Applied LLM-driven translation with SSML-based prosody and timing control. Generated high-quality TTS output with domain terminology preservation. Automated audio alignment and synchronised video rendering.",
+    outcome:
+      "Reduced localization time by 70-80%. Lowered cost significantly compared to manual dubbing. Accelerated global rollout of training and compliance content.",
+    techTags: [
+      "ASR + LLM translation + SSML/TTS",
+      "Automated audio/video synchronization pipeline",
+    ],
+    metrics: [
+      { val: "70-80%", label: "video localization time reduction" },
+      { val: "Lower", label: "localization cost vs manual dubbing" },
     ],
   },
 ];

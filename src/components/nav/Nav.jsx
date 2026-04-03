@@ -14,6 +14,20 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
     }
   }, [isDesktop, mobileMenuOpen]);
 
+  useEffect(() => {
+    if (isDesktop || !mobileMenuOpen) return;
+
+    const closeMenu = () => setMobileMenuOpen(false);
+
+    window.addEventListener("scroll", closeMenu, { passive: true });
+    window.addEventListener("orientationchange", closeMenu, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", closeMenu);
+      window.removeEventListener("orientationchange", closeMenu);
+    };
+  }, [isDesktop, mobileMenuOpen]);
+
   const links = [
     { label: "Home", onClick: onHomeClick },
     { label: "About", href: "#about" },
@@ -275,6 +289,10 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
               display: "flex",
               flexDirection: "column",
               gap: 8,
+              maxHeight: isSmallMobile ? "min(62vh, 360px)" : "min(68vh, 440px)",
+              overflowY: "auto",
+              overscrollBehavior: "contain",
+              WebkitOverflowScrolling: "touch",
               boxShadow: "0 12px 26px rgba(22,17,10,.12)",
             }}
           >
