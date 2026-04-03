@@ -59,7 +59,7 @@ const getTheme = (category) => THEME_BY_CATEGORY[category] || DEFAULT_THEME;
 
 export function CaseStudies({ onOpenCaseStudy }) {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
-  const showcaseCases = CASES.slice(0, 5);
+  const showcaseCases = CASES;
   const [activeIndex, setActiveIndex] = useState(0);
 
   const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
@@ -128,7 +128,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
             >
               We&apos;ve built systems for global enterprises
             </h2>
-
+        
             <p
               style={{
                 margin: "0 0 12px",
@@ -139,7 +139,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 color: T.ink60,
               }}
             >
-              Click a category tab to preview how we solve real production problems.
+            Click a category tab to preview how we solve real production problems.
             </p>
 
             <div
@@ -179,9 +179,9 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 alignItems: "center",
                 gap: isSmallMobile ? 6 : 8,
                 marginBottom: 12,
-                flexWrap: isSmallMobile ? "wrap" : "nowrap",
-                overflowX: isSmallMobile ? "visible" : isTablet ? "auto" : "visible",
-                paddingBottom: isSmallMobile ? 0 : isTablet ? 4 : 0,
+                flexWrap: isSmallMobile ? "wrap" : isTablet ? "nowrap" : "wrap",
+                overflowX: isTablet ? "auto" : "visible",
+                paddingBottom: isTablet ? 4 : 0,
                 scrollbarWidth: "none",
               }}
             >
