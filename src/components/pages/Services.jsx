@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section } from "../shared";
@@ -7,8 +7,28 @@ import { SERVICES } from "../../constants/data/services";
 
 export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
-  const interactiveCardsEnabled = !isMobile;
+  const [hasHoverInput, setHasHoverInput] = useState(false);
+  const interactiveCardsEnabled = hasHoverInput;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const syncInteractionMode = () => {
+      setHasHoverInput(mediaQuery.matches);
+    };
+
+    syncInteractionMode();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", syncInteractionMode);
+      return () => mediaQuery.removeEventListener("change", syncInteractionMode);
+    }
+
+    mediaQuery.addListener(syncInteractionMode);
+    return () => mediaQuery.removeListener(syncInteractionMode);
+  }, []);
 
   const toggleCardForTouch = (index) => {
     if (interactiveCardsEnabled) return;
@@ -143,7 +163,19 @@ export function Services() {
                       setActiveCardIndex((current) => (current === index ? null : current));
                     }}
                     onClick={() => toggleCardForTouch(index)}
-                    tabIndex={interactiveCardsEnabled ? 0 : -1}
+                    onKeyDown={(event) => {
+                      if (event.key !== "Enter" && event.key !== " ") return;
+                      event.preventDefault();
+
+                      if (interactiveCardsEnabled) {
+                        setActiveCardIndex(index);
+                        return;
+                      }
+
+                      toggleCardForTouch(index);
+                    }}
+                    tabIndex={0}
+                    aria-pressed={isFlipped}
                     aria-label={`${card.name} service card`}
                     style={{
                       position: "relative",
