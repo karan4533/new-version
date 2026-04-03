@@ -91,13 +91,17 @@ const getTheme = (category) => THEME_BY_CATEGORY[category] || DEFAULT_THEME;
 export function CaseStudies({ onOpenCaseStudy }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
   const isIpadProViewport = width >= 1000 && width <= 1040;
-  const isTabletOnly = isTablet && !isMobile;
   const useSingleColumnCaseLayout = isTablet || isIpadProViewport;
-  const isTabWrapViewport = (width >= 640 && width <= 1024) || isIpadProViewport;
   const isNarrowTablet = isTablet && width <= 900;
   const showcaseCases = CASES;
+  const useScrollableTabRail = showcaseCases.length > 0;
+  const tabArrowSize = isSmallMobile ? 24 : 30;
+  const tabArrowFontSize = isSmallMobile ? 11 : 13;
   const [activeIndex, setActiveIndex] = useState(0);
   const [readyImages, setReadyImages] = useState({});
+  const [showTabArrows, setShowTabArrows] = useState(false);
+  const [canScrollTabsLeft, setCanScrollTabsLeft] = useState(false);
+  const [canScrollTabsRight, setCanScrollTabsRight] = useState(false);
   const tabRailRef = useRef(null);
   const tabRefs = useRef([]);
 
@@ -143,7 +147,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
   }, [preloadSources]);
 
   useEffect(() => {
-    if (isSmallMobile || isTabWrapViewport) return;
+    if (!useScrollableTabRail) return;
 
     const rail = tabRailRef.current;
     const activeTab = tabRefs.current[activeIndex];
@@ -160,7 +164,51 @@ export function CaseStudies({ onOpenCaseStudy }) {
     );
 
     rail.scrollTo({ left: targetLeft, behavior: "smooth" });
-  }, [activeIndex, isSmallMobile, isTablet, isTabletOnly, isTabWrapViewport]);
+  }, [activeIndex, isTablet, useScrollableTabRail]);
+
+  useEffect(() => {
+    const rail = tabRailRef.current;
+
+    if (!rail || !useScrollableTabRail) {
+      setShowTabArrows(false);
+      setCanScrollTabsLeft(false);
+      setCanScrollTabsRight(false);
+      return;
+    }
+
+    const syncArrowState = () => {
+      const maxScrollLeft = rail.scrollWidth - rail.clientWidth;
+      const hasOverflow = maxScrollLeft > 1;
+
+      setShowTabArrows(hasOverflow);
+
+      if (!hasOverflow) {
+        setCanScrollTabsLeft(false);
+        setCanScrollTabsRight(false);
+        return;
+      }
+
+      setCanScrollTabsLeft(rail.scrollLeft > 2);
+      setCanScrollTabsRight(rail.scrollLeft < maxScrollLeft - 2);
+    };
+
+    syncArrowState();
+    rail.addEventListener("scroll", syncArrowState, { passive: true });
+    window.addEventListener("resize", syncArrowState);
+
+    return () => {
+      rail.removeEventListener("scroll", syncArrowState);
+      window.removeEventListener("resize", syncArrowState);
+    };
+  }, [activeIndex, showcaseCases.length, useScrollableTabRail, width]);
+
+  const scrollTabRailBy = (direction) => {
+    const rail = tabRailRef.current;
+    if (!rail) return;
+
+    const scrollAmount = Math.max(rail.clientWidth * 0.56, 180);
+    rail.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+  };
 
   const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
   const activeTheme = getTheme(activeCase?.cat);
@@ -181,12 +229,12 @@ export function CaseStudies({ onOpenCaseStudy }) {
         : "clamp(52px, 4.8vw, 58px)";
 
   const cardMinHeight = isSmallMobile
-    ? "clamp(260px, 78vw, 320px)"
+    ? "clamp(248px, 74vw, 304px)"
     : isMobile
-      ? "clamp(320px, 76vw, 420px)"
+      ? "clamp(304px, 72vw, 396px)"
       : isTablet
-        ? "clamp(360px, 58vw, 460px)"
-        : "clamp(420px, 42vw, 500px)";
+        ? "clamp(344px, 54vw, 436px)"
+        : "clamp(400px, 39vw, 472px)";
 
   if (!activeCase) return null;
 
@@ -305,60 +353,127 @@ export function CaseStudies({ onOpenCaseStudy }) {
             }}
           >
             <div
-              ref={tabRailRef}
-              className="case-studies-tab-strip"
               style={{
-                display: "flex",
+                display: "grid",
+                gridTemplateColumns:
+                  useScrollableTabRail && showTabArrows
+                    ? "clamp(22px,5vw,32px) minmax(0,1fr) clamp(22px,5vw,32px)"
+                    : "minmax(0,1fr)",
                 alignItems: "center",
                 gap: isSmallMobile ? 6 : 8,
                 marginBottom: 12,
-                flexWrap: isSmallMobile || isTabWrapViewport ? "wrap" : "nowrap",
-                overflowX: isSmallMobile || isTabWrapViewport ? "visible" : "auto",
-                rowGap: isTabWrapViewport ? 8 : 0,
-                paddingBottom: isSmallMobile ? 0 : 4,
-                paddingRight: isSmallMobile || isTabWrapViewport ? 0 : 8,
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-                WebkitOverflowScrolling: "touch",
-                scrollSnapType: isSmallMobile || isTabWrapViewport ? "none" : "x proximity",
-                scrollBehavior: "smooth",
-                overscrollBehaviorX: "contain",
                 width: "100%",
               }}
             >
-              {showcaseCases.map((caseItem, index) => {
-                const isActive = index === activeIndex;
-                const tabText = toTabLabel(caseItem.tabLabel || caseItem.cat);
+              {useScrollableTabRail && showTabArrows && (
+                <button
+                  type="button"
+                  onClick={() => scrollTabRailBy(-1)}
+                  aria-label="Scroll tabs left"
+                  disabled={!canScrollTabsLeft}
+                  style={{
+                    border: `1px solid ${T.ink12}`,
+                    borderRadius: 999,
+                    background: canScrollTabsLeft ? "rgba(255,255,255,.72)" : "rgba(255,255,255,.4)",
+                    color: canScrollTabsLeft ? T.ink : T.ink40,
+                    width: tabArrowSize,
+                    height: tabArrowSize,
+                    padding: 0,
+                    fontFamily: font.sans,
+                    fontSize: tabArrowFontSize,
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    cursor: canScrollTabsLeft ? "pointer" : "not-allowed",
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  {"<"}
+                </button>
+              )}
 
-                return (
-                  <button
-                    key={caseItem.title}
-                    ref={(element) => {
-                      tabRefs.current[index] = element;
-                    }}
-                    type="button"
-                    onClick={() => setActiveIndex(index)}
-                    style={{
-                      border: `1px solid ${isActive ? "transparent" : T.ink12}`,
-                      borderRadius: 999,
-                      background: isActive ? T.ink : "rgba(255,255,255,.56)",
-                      color: isActive ? T.w : T.ink40,
-                      padding: isSmallMobile ? "6px 10px" : isNarrowTablet ? "6px 10px" : "7px 13px",
-                      fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 9 : isNarrowTablet ? 9 : 10,
-                      fontWeight: 700,
-                      letterSpacing: isSmallMobile ? ".05em" : isNarrowTablet ? ".06em" : ".07em",
-                      textTransform: "uppercase",
-                      whiteSpace: "nowrap",
-                      cursor: "pointer",
-                      flexShrink: 0,
-                      scrollSnapAlign: isSmallMobile || isTabWrapViewport ? "none" : "start",
-                    }}
-                  >
-                    {tabText}
-                  </button>
-                );
-              })}
+              <div
+                ref={tabRailRef}
+                className="case-studies-tab-strip"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: isSmallMobile ? 6 : 8,
+                  flexWrap: "nowrap",
+                  overflowX: "auto",
+                  rowGap: 0,
+                  paddingBottom: isSmallMobile ? 0 : 4,
+                  paddingRight: 8,
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                  WebkitOverflowScrolling: "touch",
+                  scrollSnapType: "x proximity",
+                  scrollBehavior: "smooth",
+                  overscrollBehaviorX: "contain",
+                  width: "100%",
+                }}
+              >
+                {showcaseCases.map((caseItem, index) => {
+                  const isActive = index === activeIndex;
+                  const tabText = toTabLabel(caseItem.tabLabel || caseItem.cat);
+
+                  return (
+                    <button
+                      key={caseItem.title}
+                      ref={(element) => {
+                        tabRefs.current[index] = element;
+                      }}
+                      type="button"
+                      onClick={() => setActiveIndex(index)}
+                      style={{
+                        border: `1px solid ${isActive ? "transparent" : T.ink12}`,
+                        borderRadius: 999,
+                        background: isActive ? T.ink : "rgba(255,255,255,.56)",
+                        color: isActive ? T.w : T.ink40,
+                        padding: isSmallMobile ? "6px 10px" : isNarrowTablet ? "6px 10px" : "7px 13px",
+                        fontFamily: font.sans,
+                        fontSize: isSmallMobile ? 9 : isNarrowTablet ? 9 : 10,
+                        fontWeight: 700,
+                        letterSpacing: isSmallMobile ? ".05em" : isNarrowTablet ? ".06em" : ".07em",
+                        textTransform: "uppercase",
+                        whiteSpace: "nowrap",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                        scrollSnapAlign: "start",
+                      }}
+                    >
+                      {tabText}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {useScrollableTabRail && showTabArrows && (
+                <button
+                  type="button"
+                  onClick={() => scrollTabRailBy(1)}
+                  aria-label="Scroll tabs right"
+                  disabled={!canScrollTabsRight}
+                  style={{
+                    border: `1px solid ${T.ink12}`,
+                    borderRadius: 999,
+                    background: canScrollTabsRight ? "rgba(255,255,255,.72)" : "rgba(255,255,255,.4)",
+                    color: canScrollTabsRight ? T.ink : T.ink40,
+                    width: tabArrowSize,
+                    height: tabArrowSize,
+                    padding: 0,
+                    fontFamily: font.sans,
+                    fontSize: tabArrowFontSize,
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    cursor: canScrollTabsRight ? "pointer" : "not-allowed",
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  {">"}
+                </button>
+              )}
             </div>
 
             <article
