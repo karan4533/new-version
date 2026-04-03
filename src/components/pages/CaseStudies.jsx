@@ -90,8 +90,10 @@ const getTheme = (category) => THEME_BY_CATEGORY[category] || DEFAULT_THEME;
 
 export function CaseStudies({ onOpenCaseStudy }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
+  const isIpadProViewport = width >= 1000 && width <= 1040;
   const isTabletOnly = isTablet && !isMobile;
-  const isTabWrapViewport = width >= 640 && width <= 1024;
+  const useSingleColumnCaseLayout = isTablet || isIpadProViewport;
+  const isTabWrapViewport = (width >= 640 && width <= 1024) || isIpadProViewport;
   const isNarrowTablet = isTablet && width <= 900;
   const showcaseCases = CASES;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -228,8 +230,10 @@ export function CaseStudies({ onOpenCaseStudy }) {
           maxWidth: 1200,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: isTablet ? "1fr" : "minmax(0,.35fr) minmax(0,.65fr)",
-          gap: isSmallMobile ? 18 : isTablet ? 24 : 30,
+          gridTemplateColumns: useSingleColumnCaseLayout
+            ? "1fr"
+            : "minmax(0,.35fr) minmax(0,.65fr)",
+          gap: isSmallMobile ? 18 : useSingleColumnCaseLayout ? 24 : 30,
           alignItems: "start",
           width: "100%",
           overflowX: "clip",
@@ -293,8 +297,11 @@ export function CaseStudies({ onOpenCaseStudy }) {
         <Reveal delay={0.06} distance={20} blurFrom={10}>
           <div
             style={{
-              marginTop: isTablet ? 0 : -36,
+              marginTop: useSingleColumnCaseLayout ? 0 : -36,
               minWidth: 0,
+              width: "100%",
+              maxWidth: "100%",
+              overflowX: "hidden",
             }}
           >
             <div
@@ -344,7 +351,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       textTransform: "uppercase",
                       whiteSpace: "nowrap",
                       cursor: "pointer",
-                      flexShrink: isTabWrapViewport ? 1 : 0,
+                      flexShrink: 0,
                       scrollSnapAlign: isSmallMobile || isTabWrapViewport ? "none" : "start",
                     }}
                   >
