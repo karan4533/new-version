@@ -266,6 +266,7 @@ export function Services() {
                           style={{
                             display: "grid",
                             gap: 5,
+                            marginTop: isSmallMobile ? 6 : 8,
                           }}
                         >
                           {!!technicalTagLine && (
@@ -340,7 +341,7 @@ export function Services() {
                         borderRadius: 14,
                         padding: isSmallMobile ? "13px" : "15px 15px 13px",
                         display: "grid",
-                        alignContent: "start",
+                        alignContent: "center",
                         gap: 9,
                         transform: "rotateY(180deg)",
                         backfaceVisibility: "hidden",
@@ -351,6 +352,7 @@ export function Services() {
                         style={{
                           display: "inline-block",
                           width: "fit-content",
+                          justifySelf: "center",
                           padding: "2px 6px",
                           borderRadius: 4,
                           background: "rgba(176,120,69,.14)",
