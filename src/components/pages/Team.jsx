@@ -3,12 +3,14 @@ import { useViewport } from "../../hooks/useViewport";
 import { Section } from "../shared";
 import { Reveal } from "../shared";
 import { TEAM } from "../../constants/data/team";
+import { FaLinkedinIn } from "react-icons/fa";
 
 export function Team() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const leadershipTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
 
   return (
-    <Section id="team">
+    <Section id="team" paddingTop={leadershipTopPadding}>
       <Reveal distance={12} blurFrom={7}>
         <p
           style={{
@@ -199,7 +201,19 @@ export function Team() {
                     }}
                   >
                     LinkedIn
-                    <span aria-hidden="true">↗</span>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: 16,
+                        height: 16,
+                        border: "1px solid rgba(255,255,255,.56)",
+                        borderRadius: 4,
+                        display: "inline-grid",
+                        placeItems: "center",
+                      }}
+                    >
+                      <FaLinkedinIn aria-hidden="true" size={9} />
+                    </span>
                   </a>
                 )}
               </div>

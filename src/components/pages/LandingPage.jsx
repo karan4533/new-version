@@ -61,7 +61,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               ? "calc(100dvh - 86px)"
               : "calc(100dvh - 96px)"
             : "calc(100dvh - 104px)"
-          : "clamp(520px, 64vh, 640px)",
+          : "calc(100dvh - 64px)",
         display: isTablet ? "flex" : "block",
         alignItems: isTablet ? "center" : undefined,
         justifyContent: isTablet ? "center" : undefined,
@@ -144,18 +144,21 @@ export function LandingPage({ onCaseStudies, onContact }) {
             style={{
               margin: "14px auto 0",
               maxWidth: 860,
+              width: "min(100%, 860px)",
               display: "inline-flex",
+              flexWrap: isTablet ? "wrap" : "nowrap",
               alignItems: "baseline",
               justifyContent: "center",
               gap: isSmallMobile ? 4 : 6,
+              rowGap: 2,
               fontFamily: font.sans,
               fontSize: isSmallMobile ? 12 : isTablet ? 13 : 14,
               lineHeight: 1.6,
               color: T.ink60,
-              whiteSpace: isMobile ? "normal" : "nowrap",
+              whiteSpace: isTablet ? "normal" : "nowrap",
             }}
           >
-            <span style={{ flexShrink: 0 }}>Enterprises engage us for</span>
+            <span style={{ flexShrink: isTablet ? 1 : 0 }}>Enterprises engage us for</span>
             <span
               className="hero-use-case-shell"
               style={{ width: "auto", minWidth: 0 }}

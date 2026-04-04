@@ -4,7 +4,7 @@ const buildViewportState = (width) => ({
   width,
   isSmallMobile: width < 480,
   isMobile: width < 768,
-  isTablet: width < 1024,
+  isTablet: width <= 1024,
 });
 
 const getViewportWidth = () => {

@@ -90,6 +90,7 @@ const getTheme = (category) => THEME_BY_CATEGORY[category] || DEFAULT_THEME;
 
 export function CaseStudies({ onOpenCaseStudy }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
+  const caseStudiesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
   const isIpadProViewport = width >= 1000 && width <= 1040;
   const useSingleColumnCaseLayout = isTablet || isIpadProViewport;
   const isNarrowTablet = isTablet && width <= 900;
@@ -252,7 +253,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
       : activeCase.metrics?.map((metric) => metric.label)) || [];
 
   return (
-    <Section id="case-studies">
+    <Section id="case-studies" paddingTop={caseStudiesTopPadding}>
       <Reveal distance={14} blurFrom={8}>
         <p
           style={{

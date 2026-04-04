@@ -4,10 +4,19 @@ import { CALENDLY_DISCOVERY_CALL_URL } from "../../constants/links";
 import { useViewport } from "../../hooks/useViewport";
 import companyLogo from "../../assets/logo (1).png";
 
-export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
-  const { isTablet, isSmallMobile } = useViewport();
+export function Nav({
+  onLogoClick,
+  onHomeClick,
+  onAboutClick,
+  onServicesClick,
+  onCaseStudiesClick,
+  onLeadershipClick,
+  onContactClick,
+}) {
+  const { width, isTablet, isSmallMobile } = useViewport();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isDesktop = !isTablet;
+  const isCompactDesktop = isDesktop && width < 1260;
 
   useEffect(() => {
     if (isDesktop && mobileMenuOpen) {
@@ -31,9 +40,10 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
 
   const links = [
     { label: "Home", onClick: onHomeClick },
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Case Studies", href: "#case-studies", hasCaret: true },
+    { label: "About", href: "#about", onClick: onAboutClick },
+    { label: "Services", href: "#services", onClick: onServicesClick },
+    { label: "Case Studies", href: "#case-studies", onClick: onCaseStudiesClick },
+    { label: "Leadership", href: "#team", onClick: onLeadershipClick },
     { label: "Contact", onClick: onContactClick },
     { label: "Book a Discovery Call", href: CALENDLY_DISCOVERY_CALL_URL, isCta: true, isExternal: true },
   ];
@@ -52,7 +62,11 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
           columnGap: isDesktop ? undefined : isSmallMobile ? 8 : 12,
           flexWrap: "nowrap",
           rowGap: 0,
-          width: isDesktop ? "min(1240px, calc(100% - 44px))" : "calc(100% - 14px)",
+          width: isDesktop
+            ? isCompactDesktop
+              ? "min(1240px, calc(100% - 24px))"
+              : "min(1240px, calc(100% - 44px))"
+            : "calc(100% - 14px)",
           margin: "0 auto",
           marginTop: isDesktop ? 0 : isSmallMobile ? 8 : 10,
           border: isDesktop ? "1px solid rgba(30,26,16,.07)" : "1px solid rgba(30,26,16,.14)",
@@ -65,8 +79,14 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
             : "0 8px 16px rgba(22,17,10,.06)",
           isolation: "isolate",
           overflow: "visible",
-          height: isDesktop ? 74 : "auto",
-          padding: isDesktop ? "0 26px" : isSmallMobile ? "8px 14px" : "12px 18px",
+          height: isDesktop ? (isCompactDesktop ? 70 : 74) : "auto",
+          padding: isDesktop
+            ? isCompactDesktop
+              ? "0 16px"
+              : "0 26px"
+            : isSmallMobile
+              ? "8px 14px"
+              : "12px 18px",
           fontFamily: font.sans,
           transition:
             "padding 0.25s, height 0.25s, background 0.25s, box-shadow 0.25s, border-color 0.25s",
@@ -80,7 +100,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
             background: "transparent",
             display: "inline-flex",
             alignItems: "center",
-            gap: isDesktop ? 10 : isSmallMobile ? 9 : 13,
+            gap: isDesktop ? (isCompactDesktop ? 8 : 10) : isSmallMobile ? 9 : 13,
             cursor: "pointer",
             color: T.ink,
             padding: isDesktop ? "7px 10px" : 0,
@@ -112,14 +132,14 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
           <span
             style={{
               fontFamily: font.serif,
-              fontSize: isDesktop ? 19 : isSmallMobile ? 16 : 18,
+              fontSize: isDesktop ? (isCompactDesktop ? 17 : 19) : isSmallMobile ? 16 : 18,
               fontWeight: 700,
               color: T.ink,
               letterSpacing: "0em",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              maxWidth: isDesktop ? "none" : isSmallMobile ? 178 : 220,
+              maxWidth: isDesktop ? (isCompactDesktop ? 184 : "none") : isSmallMobile ? 178 : 220,
               lineHeight: 1,
               transition: "letter-spacing 0.2s",
             }}
@@ -133,7 +153,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 30,
+              gap: isCompactDesktop ? 16 : 30,
               listStyle: "none",
               margin: "0 0 0 auto",
               padding: 0,
@@ -151,13 +171,19 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
                       background: link.isCta ? T.ink : "transparent",
                       color: link.isCta ? T.w : "rgba(30,26,16,.74)",
                       fontFamily: font.sans,
-                      fontSize: 14,
+                      fontSize: isCompactDesktop ? 13 : 14,
                       fontWeight: link.isCta ? 700 : 600,
                       letterSpacing: ".015em",
                       textDecoration: "none",
                       cursor: "pointer",
                       borderRadius: link.isCta ? 999 : 10,
-                      padding: link.isCta ? "8px 14px" : "6px 4px",
+                      padding: link.isCta
+                        ? isCompactDesktop
+                          ? "7px 11px"
+                          : "8px 14px"
+                        : isCompactDesktop
+                          ? "6px 2px"
+                          : "6px 4px",
                       whiteSpace: "nowrap",
                       transition: "color 0.2s, background 0.2s",
                       display: "inline-flex",
@@ -193,11 +219,17 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
                       color: link.isCta ? T.w : "rgba(30,26,16,.74)",
                       textDecoration: "none",
                       fontFamily: font.sans,
-                      fontSize: 14,
+                      fontSize: isCompactDesktop ? 13 : 14,
                       fontWeight: link.isCta ? 700 : 600,
                       letterSpacing: ".015em",
                       borderRadius: link.isCta ? 999 : 10,
-                      padding: link.isCta ? "8px 14px" : "6px 4px",
+                      padding: link.isCta
+                        ? isCompactDesktop
+                          ? "7px 11px"
+                          : "8px 14px"
+                        : isCompactDesktop
+                          ? "6px 2px"
+                          : "6px 4px",
                       whiteSpace: "nowrap",
                       transition: "color 0.2s, background 0.2s",
                       display: "inline-flex",

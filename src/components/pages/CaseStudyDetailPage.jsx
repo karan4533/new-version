@@ -249,6 +249,8 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                       fontSize: isSmallMobile ? 12 : 13,
                       color: T.ink60,
                       lineHeight: 1.4,
+                      minWidth: 0,
+                      overflowWrap: "anywhere",
                     }}
                   >
                     {metric.label}

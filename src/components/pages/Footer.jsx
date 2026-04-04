@@ -2,7 +2,8 @@ import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 
 export function Footer() {
-  const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const { width, isMobile, isTablet, isSmallMobile } = useViewport();
+  const useNarrowTabletGrid = isTablet && !isMobile && width < 900;
 
   const serviceLinks = [
     ["Custom AI Solutions", "#services"],
@@ -71,6 +72,8 @@ export function Footer() {
             display: "grid",
             gridTemplateColumns: isMobile
               ? "1fr"
+              : useNarrowTabletGrid
+                ? "repeat(2,minmax(0,1fr))"
               : isTablet
                 ? "1.35fr 1fr 1fr"
                 : "1.6fr 1fr 1fr 1fr",
@@ -168,7 +171,7 @@ export function Footer() {
           }}
         >
           <span>© 2026 Heuristic Labs. All rights reserved.</span>
-          <span>Headquarters: Chennai, India</span>
+    
         </div>
       </div>
     </footer>

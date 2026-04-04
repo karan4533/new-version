@@ -13,6 +13,9 @@ import { Contact } from "./components/pages/Contact";
 import { Footer } from "./components/pages/Footer";
 import { CASES } from "./constants/data/cases";
 
+// Toggle this to true when you want to show the "Our AI Operating Engine" section again.
+const SHOW_AI_OPERATING_ENGINE_SECTION = false;
+
 const toCaseSlug = (value) =>
   value
     .toLowerCase()
@@ -54,6 +57,29 @@ export default function App() {
   const [selectedCaseIndex, setSelectedCaseIndex] = useState(null);
   const pushedCaseStateRef = useRef(false);
 
+  const getStickyNavOffset = () => {
+    const navElement = document.querySelector("nav");
+    if (!navElement) return 104;
+
+    const { top } = navElement.getBoundingClientRect();
+    const topInset = Math.max(0, Math.round(top));
+    const navHeight = Math.round(navElement.getBoundingClientRect().height || navElement.offsetHeight || 0);
+
+    return topInset + navHeight + 12;
+  };
+
+  const scrollToSectionWithOffset = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (!element) return;
+
+    const targetTop = Math.max(
+      0,
+      Math.round(element.getBoundingClientRect().top + window.scrollY - getStickyNavOffset()),
+    );
+
+    window.scrollTo({ top: targetTop, behavior: "smooth" });
+  };
+
   useEffect(() => {
     const syncFromUrl = () => {
       setSelectedCaseIndex(getCaseIndexFromUrl());
@@ -66,9 +92,7 @@ export default function App() {
 
   const scrollToSection = (sectionId) => {
     const doScroll = () => {
-      const element = document.getElementById(sectionId);
-      if (!element) return;
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToSectionWithOffset(sectionId);
     };
 
     if (selectedCaseIndex !== null) {
@@ -116,6 +140,22 @@ export default function App() {
     scrollToSection("contact");
   };
 
+  const handleAboutClick = () => {
+    scrollToSection("about");
+  };
+
+  const handleServicesClick = () => {
+    scrollToSection("services");
+  };
+
+  const handleCaseStudiesClick = () => {
+    scrollToSection("case-studies");
+  };
+
+  const handleLeadershipClick = () => {
+    scrollToSection("team");
+  };
+
   const handleExitLanding = () => {
     scrollToSection("about");
   };
@@ -147,9 +187,9 @@ export default function App() {
 
     setSelectedCaseIndex(null);
     window.requestAnimationFrame(() => {
-      const element = document.getElementById("case-studies");
-      if (!element) return;
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.requestAnimationFrame(() => {
+        scrollToSectionWithOffset("case-studies");
+      });
     });
   };
 
@@ -158,6 +198,10 @@ export default function App() {
       <Nav
         onLogoClick={handleLogoClick}
         onHomeClick={handleHomeClick}
+        onAboutClick={handleAboutClick}
+        onServicesClick={handleServicesClick}
+        onCaseStudiesClick={handleCaseStudiesClick}
+        onLeadershipClick={handleLeadershipClick}
         onContactClick={handleContactClick}
         isLanding={true}
       />
@@ -177,7 +221,7 @@ export default function App() {
           <CaseStudies onOpenCaseStudy={handleOpenCaseStudy} />
           <IndustryFootprint />
           <Team />
-          <ResearchUpdates />
+          {SHOW_AI_OPERATING_ENGINE_SECTION && <ResearchUpdates />}
           <Contact />
         </>
       ) : (

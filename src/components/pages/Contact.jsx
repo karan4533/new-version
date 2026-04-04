@@ -10,8 +10,8 @@ export function Contact() {
     display: "grid",
     gridTemplateColumns: isMobile ? "auto minmax(0,1fr)" : "auto minmax(0,1fr) auto",
     alignItems: isMobile ? "start" : "center",
-    gap: isMobile ? "10px 12px" : "6px 14px",
-    padding: isSmallMobile ? "16px 14px" : "20px 18px",
+    gap: isMobile ? "12px 14px" : "10px 18px",
+    padding: isSmallMobile ? "20px 16px" : "24px 22px",
     borderBottom: `1px solid ${T.ink12}`,
   };
 
@@ -20,22 +20,24 @@ export function Contact() {
     alignItems: "center",
     justifyContent: isMobile ? "space-between" : "center",
     gap: 12,
-    minWidth: isMobile ? 0 : 170,
+    minWidth: isMobile ? 0 : 188,
     width: isMobile ? "100%" : "auto",
-    padding: "10px 14px",
+    padding: "11px 16px",
     borderRadius: 9,
     textDecoration: "none",
     fontFamily: font.sans,
     fontSize: 13,
     fontWeight: 600,
     letterSpacing: ".01em",
-    whiteSpace: "nowrap",
+    lineHeight: 1.35,
+    whiteSpace: isMobile ? "normal" : "nowrap",
+    textAlign: isMobile ? "left" : "center",
   };
 
   const actionBtnPlacement = isMobile
     ? {
         gridColumn: "1 / -1",
-        marginTop: 2,
+        marginTop: 8,
       }
     : undefined;
 
@@ -44,14 +46,14 @@ export function Contact() {
       id="contact"
       style={{
         background: T.bg2,
-        padding: isSmallMobile ? "36px 0" : isMobile ? "50px 0" : "64px 0",
+        padding: isSmallMobile ? "52px 0" : isMobile ? "64px 0" : isTablet ? "76px 0" : "88px 0",
       }}
     >
       <div
         style={{
-          maxWidth: 1040,
+          maxWidth: 1120,
           margin: "0 auto",
-          padding: `0 ${isSmallMobile ? 16 : isMobile ? 24 : isTablet ? 32 : 48}px`,
+          padding: `0 ${isSmallMobile ? 18 : isMobile ? 28 : isTablet ? 40 : 56}px`,
         }}
       >
         <Reveal distance={12} blurFrom={7}>
@@ -78,7 +80,7 @@ export function Contact() {
           style={{
             display: "grid",
             gridTemplateColumns: isTablet ? "1fr" : "minmax(0,0.86fr) minmax(0,1.14fr)",
-            gap: isSmallMobile ? 16 : isMobile ? 20 : 28,
+            gap: isSmallMobile ? 24 : isMobile ? 30 : 40,
             alignItems: "start",
           }}
         >
@@ -86,7 +88,7 @@ export function Contact() {
             <div>
               <h2
                 style={{
-                  margin: "0 0 18px",
+                  margin: "0 0 22px",
                   fontFamily: font.serif,
                   fontWeight: 700,
                   fontSize: isSmallMobile ? 42 : isMobile ? 52 : 64,
@@ -102,7 +104,7 @@ export function Contact() {
 
               <p
                 style={{
-                  margin: "0 0 10px",
+                  margin: "0 0 16px",
                   maxWidth: 460,
                   fontFamily: font.sans,
                   fontSize: isSmallMobile ? 13 : 14,
@@ -119,9 +121,9 @@ export function Contact() {
                   display: "grid",
                   gridTemplateColumns: "auto minmax(0,1fr)",
                   alignItems: "start",
-                  gap: "10px 12px",
+                  gap: "14px 14px",
                   maxWidth: 420,
-                  padding: isSmallMobile ? "14px 0 0" : "8px 0 0",
+                  padding: isSmallMobile ? "18px 0 0" : "14px 0 0",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 24, height: 24 }}>
@@ -231,7 +233,7 @@ export function Contact() {
             <div
               style={{
                 border: `1px solid ${T.ink12}`,
-                borderRadius: 16,
+                borderRadius: 18,
                 background: "rgba(232,227,217,.76)",
                 boxShadow: "0 14px 30px rgba(30,26,16,.08)",
                 overflow: "hidden",

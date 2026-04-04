@@ -7,6 +7,7 @@ import { SERVICES } from "../../constants/data/services";
 
 export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const servicesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
   const [hasHoverInput, setHasHoverInput] = useState(false);
   const interactiveCardsEnabled = hasHoverInput;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
@@ -36,7 +37,7 @@ export function Services() {
   };
 
   return (
-    <Section id="services">
+    <Section id="services" paddingTop={servicesTopPadding}>
       <div
         style={{
           display: "grid",

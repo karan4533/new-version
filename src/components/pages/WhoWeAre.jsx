@@ -5,6 +5,7 @@ import { Reveal } from "../shared";
 
 export function WhoWeAre() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const aboutTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
 
   const notes = [
     "Is your data architecture ready to support real LLM reasoning, not just retrieval?",
@@ -20,7 +21,7 @@ export function WhoWeAre() {
   ];
 
   return (
-    <Section id="about">
+    <Section id="about" paddingTop={aboutTopPadding}>
       <div
         style={{
           display: "grid",
