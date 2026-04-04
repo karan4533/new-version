@@ -111,12 +111,10 @@ export function Services() {
               }}
             >
               Most enterprises have a strategy. Few have systems that run in production.
-              We bridge that gap as your on-demand Applied AI Lab. Every engagement starts
-              with business outcomes, not technology.
+              We bridge that gap as your on-demand Applied AI Lab. 
               <br />
               <br />
-              We scope, validate, build, and ship, typically in 4 to 16 weeks depending on
-              complexity. No hand-waving. No slide decks that never ship.
+            
             </p>
           </div>
         </Reveal>

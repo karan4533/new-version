@@ -254,23 +254,33 @@ export function LandingPage({ onCaseStudies, onContact }) {
         }}
       >
         <Reveal delay={0.04} distance={14} blurFrom={10}>
-          <p
+          <span
             style={{
-              margin: 0,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: isSmallMobile ? "7px 14px" : "8px 16px",
+              borderRadius: 999,
+              border: `1px solid ${T.ink12}`,
+              background: "rgba(255,255,255,.72)",
+              backdropFilter: "blur(2px)",
+              WebkitBackdropFilter: "blur(2px)",
               fontFamily: font.sans,
               fontSize: isSmallMobile ? 11 : 12,
-              letterSpacing: ".09em",
-              textTransform: "uppercase",
-              color: T.ink40,
+              fontWeight: 600,
+              letterSpacing: ".01em",
+              color: T.ink,
+              lineHeight: 1.2,
             }}
           >
-          </p>
+            Turn AI into real business outcomes
+          </span>
         </Reveal>
 
         <Reveal delay={0.12} distance={22} blurFrom={12}>
           <h1
             style={{
-              margin: isSmallMobile ? "16px 0 10px" : "20px 0 12px",
+              margin: isSmallMobile ? "24px 0 18px" : isMobile ? "30px 0 22px" : "28px 0 20px",
               fontFamily: font.serif,
               fontWeight: 600,
               letterSpacing: "-.02em",
@@ -321,13 +331,13 @@ export function LandingPage({ onCaseStudies, onContact }) {
               gap: isSmallMobile ? 4 : 6,
               rowGap: 2,
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 12 : isTablet ? 13 : 14,
+              fontSize: isSmallMobile ? 13 : isTablet ? 14 : 15,
               lineHeight: 1.6,
               color: T.ink60,
               whiteSpace: isTablet ? "normal" : "nowrap",
             }}
           >
-            <span style={{ flexShrink: isTablet ? 1 : 0 }}>Enterprises engage us for</span>
+            <span style={{ flexShrink: isTablet ? 1 : 0 }}>We design, deploy, and scale</span>
             <span
               className="hero-use-case-shell"
               style={{ width: "auto", minWidth: 0 }}
