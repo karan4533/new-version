@@ -11,6 +11,8 @@ import medicoLegalImage from "../../assets/medigo legal.png";
 import enterpriseSearchImage from "../../assets/enterprise search.png";
 import aiGovernanceImage from "../../assets/AI Governance.jpg";
 import automotiveImage from "../../assets/automotive .png";
+import translationImage from "../../assets/translation.png";
+import videoLocalizationImage from "../../assets/video localization.png";
 
 const THEME_BY_CATEGORY = {
   "Data analytics": {
@@ -88,6 +90,20 @@ const THEME_BY_TAB_LABEL = {
     tabletPosition: "center 42%",
     mobilePosition: "center 38%",
     overlay: "linear-gradient(180deg, rgba(12,18,26,.3) 0%, rgba(12,18,26,.76) 100%)",
+  },
+  Translation: {
+    image: translationImage,
+    position: "center 44%",
+    tabletPosition: "center 41%",
+    mobilePosition: "center 37%",
+    overlay: "linear-gradient(180deg, rgba(14,18,24,.3) 0%, rgba(14,18,24,.76) 100%)",
+  },
+  "Video Localization": {
+    image: videoLocalizationImage,
+    position: "center 44%",
+    tabletPosition: "center 41%",
+    mobilePosition: "center 37%",
+    overlay: "linear-gradient(180deg, rgba(14,18,24,.3) 0%, rgba(14,18,24,.76) 100%)",
   },
 };
 
