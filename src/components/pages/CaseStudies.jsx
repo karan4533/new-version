@@ -10,6 +10,7 @@ import d2cImage from "../../assets/D2C.png";
 import medicoLegalImage from "../../assets/medigo legal.png";
 import enterpriseSearchImage from "../../assets/enterprise search.png";
 import aiGovernanceImage from "../../assets/AI Governance.jpg";
+import automotiveImage from "../../assets/automotive .png";
 
 const THEME_BY_CATEGORY = {
   "Data analytics": {
@@ -64,6 +65,10 @@ const THEME_BY_CATEGORY = {
     overlay: "linear-gradient(180deg, rgba(16,20,24,.24) 0%, rgba(16,20,24,.7) 100%)",
   },
   Automotive: {
+    image: automotiveImage,
+    position: "center 44%",
+    tabletPosition: "center 40%",
+    mobilePosition: "center 36%",
     bg: "linear-gradient(135deg, #56606b 0%, #3d4751 48%, #2b333b 100%)",
     overlay: "linear-gradient(180deg, rgba(16,20,24,.22) 0%, rgba(16,20,24,.72) 100%)",
   },
