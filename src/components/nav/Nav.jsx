@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { T, font } from "../../constants/designTokens";
+import { CALENDLY_DISCOVERY_CALL_URL } from "../../constants/links";
 import { useViewport } from "../../hooks/useViewport";
 import companyLogo from "../../assets/logo (1).png";
 
@@ -34,7 +35,7 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
     { label: "Services", href: "#services" },
     { label: "Case Studies", href: "#case-studies", hasCaret: true },
     { label: "Contact", onClick: onContactClick },
-    { label: "Book a Discovery Call", onClick: onContactClick, isCta: true },
+    { label: "Book a Discovery Call", href: CALENDLY_DISCOVERY_CALL_URL, isCta: true, isExternal: true },
   ];
 
   return (
@@ -186,6 +187,8 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
                 ) : (
                   <a
                     href={link.href}
+                    target={link.isExternal ? "_blank" : undefined}
+                    rel={link.isExternal ? "noreferrer" : undefined}
                     style={{
                       color: link.isCta ? T.w : "rgba(30,26,16,.74)",
                       textDecoration: "none",
@@ -300,6 +303,8 @@ export function Nav({ onLogoClick, onHomeClick, onContactClick }) {
               <a
                 key={link.label}
                 href={link.href || "#home"}
+                target={link.isExternal ? "_blank" : undefined}
+                rel={link.isExternal ? "noreferrer" : undefined}
                 onClick={(event) => {
                   if (typeof link.onClick === "function") {
                     event.preventDefault();

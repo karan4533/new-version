@@ -1,4 +1,5 @@
 import { T, font } from "../../constants/designTokens";
+import { CALENDLY_DISCOVERY_CALL_URL } from "../../constants/links";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal } from "../shared";
 
@@ -250,7 +251,9 @@ export function Contact() {
                     </p>
                   </div>
                   <a
-                    href="#"
+                    href={CALENDLY_DISCOVERY_CALL_URL}
+                    target="_blank"
+                    rel="noreferrer"
                     style={{
                       ...actionBtnStyle,
                       ...actionBtnPlacement,
