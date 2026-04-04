@@ -13,6 +13,7 @@ import aiGovernanceImage from "../../assets/AI Governance.jpg";
 import automotiveImage from "../../assets/automotive .png";
 import translationImage from "../../assets/translation.png";
 import videoLocalizationImage from "../../assets/video localization.png";
+import salesCopilotImage from "../../assets/sales copilot.png";
 
 const THEME_BY_CATEGORY = {
   "Data analytics": {
@@ -100,6 +101,13 @@ const THEME_BY_TAB_LABEL = {
   },
   "Video Localization": {
     image: videoLocalizationImage,
+    position: "center 44%",
+    tabletPosition: "center 41%",
+    mobilePosition: "center 37%",
+    overlay: "linear-gradient(180deg, rgba(14,18,24,.3) 0%, rgba(14,18,24,.76) 100%)",
+  },
+  "Sales Copilot": {
+    image: salesCopilotImage,
     position: "center 44%",
     tabletPosition: "center 41%",
     mobilePosition: "center 37%",
