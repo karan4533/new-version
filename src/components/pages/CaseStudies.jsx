@@ -8,6 +8,8 @@ import legalImage from "../../assets/legal.png";
 import constructionImage from "../../assets/constuction.png";
 import d2cImage from "../../assets/D2C.png";
 import medicoLegalImage from "../../assets/medigo legal.png";
+import enterpriseSearchImage from "../../assets/enterprise search.png";
+import aiGovernanceImage from "../../assets/AI Governance.jpg";
 
 const THEME_BY_CATEGORY = {
   "Data analytics": {
@@ -67,6 +69,23 @@ const THEME_BY_CATEGORY = {
   },
 };
 
+const THEME_BY_TAB_LABEL = {
+  "Enterprise Search": {
+    image: enterpriseSearchImage,
+    position: "center 42%",
+    tabletPosition: "center 40%",
+    mobilePosition: "center 36%",
+    overlay: "linear-gradient(180deg, rgba(14,20,24,.3) 0%, rgba(14,20,24,.76) 100%)",
+  },
+  "AI Governance": {
+    image: aiGovernanceImage,
+    position: "center 44%",
+    tabletPosition: "center 42%",
+    mobilePosition: "center 38%",
+    overlay: "linear-gradient(180deg, rgba(12,18,26,.3) 0%, rgba(12,18,26,.76) 100%)",
+  },
+};
+
 const DEFAULT_THEME = {
   bg: "linear-gradient(135deg, #5d646d 0%, #424b54 48%, #2a3138 100%)",
   overlay: "linear-gradient(180deg, rgba(16,20,24,.24) 0%, rgba(16,20,24,.72) 100%)",
@@ -86,7 +105,15 @@ const toTabLabel = (value) =>
     .trim()
     .toUpperCase();
 
-const getTheme = (category) => THEME_BY_CATEGORY[category] || DEFAULT_THEME;
+const getTheme = (caseItem) => {
+  if (!caseItem) return DEFAULT_THEME;
+
+  return (
+    THEME_BY_TAB_LABEL[caseItem.tabLabel] ||
+    THEME_BY_CATEGORY[caseItem.cat] ||
+    DEFAULT_THEME
+  );
+};
 
 export function CaseStudies({ onOpenCaseStudy }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
@@ -110,7 +137,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
     const uniqueSources = new Set();
 
     showcaseCases.forEach((caseItem) => {
-      const source = getTheme(caseItem.cat)?.image;
+      const source = getTheme(caseItem)?.image;
       if (source) uniqueSources.add(source);
     });
 
@@ -212,7 +239,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
   };
 
   const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
-  const activeTheme = getTheme(activeCase?.cat);
+  const activeTheme = getTheme(activeCase);
   const activeImageSource = activeTheme?.image;
   const isActiveImageReady = activeImageSource ? Boolean(readyImages[activeImageSource]) : false;
   const activeImagePosition = isSmallMobile
