@@ -211,22 +211,6 @@ export function Services() {
                       >
                         {card.id || String(index + 1).padStart(2, "0")}
                       </span>
-                      <span
-                        style={{
-                          display: "inline-block",
-                          width: "fit-content",
-                          padding: "2px 5px",
-                          borderRadius: 3,
-                          background: "rgba(176,120,69,.09)",
-                          fontFamily: font.sans,
-                          fontSize: 9,
-                          letterSpacing: ".06em",
-                          textTransform: "uppercase",
-                          color: "rgba(30,26,16,.48)",
-                        }}
-                      >
-                        {`Timeline: ${card.timeline}`}
-                      </span>
                       <h3
                         style={{
                           margin: 0,
