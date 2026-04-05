@@ -5,6 +5,7 @@ export const T = {
   bg2:      "#DDD8CE",
   bg3:      "#D4CEC4",
   ink:      "#1E1A10",
+  ink50:    "rgba(30,26,16,.50)",
   ink60:    "rgba(30,26,16,.60)",
   ink40:    "rgba(30,26,16,.40)",
   ink12:    "rgba(30,26,16,.12)",

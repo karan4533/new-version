@@ -8,9 +8,10 @@ export function WhoWeAre() {
   const aboutTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
 
   const notes = [
-    "Is your data architecture ready to support real LLM reasoning, not just retrieval?",
-    "Are your agents autonomous, or just scripted loops dressed up as AI?",
-    "Where is token waste bleeding your margins?",
+    "Is your data ready for real AI reasoning, or just basic retrieval?",
+    "Are your agents truly autonomous, or just scripted workflows?",
+    "Where is AI cost quietly eating into your margins?",
+    "Is your AI production-ready from a governance and reliability standpoint?",
   ];
 
   const stats = [
@@ -22,131 +23,30 @@ export function WhoWeAre() {
 
   return (
     <Section id="about" paddingTop={aboutTopPadding}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: isTablet ? "1fr" : "minmax(0,1fr) minmax(0,1fr)",
-          gap: isSmallMobile ? 16 : isTablet ? 24 : 34,
-          alignItems: "start",
-        }}
-      >
-        <Reveal distance={18} blurFrom={10}>
-          <div style={{ paddingRight: isTablet ? 0 : 10 }}>
-            <p
-              style={{
-                margin: "0 0 16px",
-                fontFamily: font.sans,
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: ".08em",
-                textTransform: "uppercase",
-                display: "inline-block",
-                padding: "6px 12px",
-                borderRadius: 100,
-                background: T.ink07,
-                color: "#B07845",
-              }}
-            >
-              The Mission
-            </p>
-            <h2
-              style={{
-                margin: 0,
-                marginTop: isTablet ? 0 : 14,
-                fontFamily: font.serif,
-                fontSize: isSmallMobile ? 34 : isMobile ? 42 : 50,
-                fontWeight: 500,
-                lineHeight: 1.04,
-                letterSpacing: "-.02em",
-                color: T.ink,
-                maxWidth: isSmallMobile ? 520 : 700,
-              }}
-            >
-              <span
-                style={{
-                  display: "block",
-                  whiteSpace: isTablet ? "normal" : "nowrap",
-                }}
-              >
-                We build the intelligence
-              </span>
-              <span
-                style={{
-                  display: "block",
-                  whiteSpace: isTablet ? "normal" : "nowrap",
-                }}
-              >
-                that scales your edge.
-              </span>
-            </h2>
-            <p
-              style={{
-                margin: "16px 0 0",
-                maxWidth: 520,
-                fontFamily: font.sans,
-                fontSize: isSmallMobile ? 13 : 14,
-                lineHeight: 1.66,
-                color: T.ink60,
-              }}
-            >
-              Heuristic Labs operates at the intersection of academic rigor and startup
-              velocity. We don't just consult - we embed into your product cycle to ship
-              production-ready AI that compounds directly into EBITDA.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.08} distance={18} blurFrom={8}>
-          <div
-            style={{
-              paddingLeft: isTablet ? 0 : 8,
-              paddingTop: isTablet ? 0 : 74,
-            }}
-          >
-            <p
-              style={{
-                margin: "0 0 14px",
-                fontFamily: font.sans,
-                fontSize: 10,
-                color: T.ink40,
-                letterSpacing: ".16em",
-                textTransform: "uppercase",
-              }}
-            >
-              The questions we answer before your competitors ask them:
-            </p>
-            <div style={{ display: "grid", gap: 0 }}>
-              {notes.map((item, idx) => (
-                <div
-                  key={item}
-                  style={{
-                    borderTop: idx === 0 ? `1px solid ${T.ink12}` : "none",
-                    borderBottom: `1px solid ${T.ink12}`,
-                    padding: "14px 0",
-                  }}
-                >
-                  <p
-                    style={{
-                      margin: 0,
-                      fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 12 : 13,
-                      lineHeight: 1.55,
-                      color: T.ink,
-                    }}
-                  >
-                    {item}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-      </div>
+      <Reveal delay={0.06} distance={14} blurFrom={8}>
+        <p
+          style={{
+            margin: isSmallMobile ? "22px auto 10px" : isMobile ? "32px auto 12px" : "40px auto 14px",
+            width: "fit-content",
+            fontFamily: font.sans,
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: ".08em",
+            textTransform: "uppercase",
+            padding: "6px 12px",
+            borderRadius: 100,
+            background: T.ink07,
+            color: T.amber,
+          }}
+        >
+          The Mission
+        </p>
+      </Reveal>
 
       <Reveal delay={0.12} distance={16} blurFrom={8}>
         <h3
           style={{
-            margin: isSmallMobile ? "44px 0 18px" : isMobile ? "60px 0 22px" : "76px 0 26px",
+            margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 22px" : "0 0 26px",
             textAlign: "center",
             fontFamily: font.serif,
             fontWeight: 500,
@@ -172,9 +72,63 @@ export function WhoWeAre() {
             color: T.ink60,
           }}
         >
-          Heuristic Labs acts as your Applied AI Lab, turning AI ambition into secure,
-          scalable, production-ready systems.
+          We help you answer the questions that actually matter.
         </p>
+      </Reveal>
+
+      <Reveal delay={0.22} distance={18} blurFrom={8}>
+        <div
+          style={{
+            margin: isSmallMobile ? "18px auto 0" : isMobile ? "20px auto 0" : "24px auto 0",
+            maxWidth: 980,
+            width: "100%",
+          }}
+        >
+          <p
+            style={{
+              margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 20px" : "0 0 22px",
+              fontFamily: font.sans,
+              fontSize: 10,
+              color: T.ink50,
+              letterSpacing: ".16em",
+              textTransform: "uppercase",
+              textAlign: "center",
+            }}
+          >
+            The questions we answer before your competitors ask them:
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isTablet ? "1fr" : "repeat(2,minmax(0,1fr))",
+              gap: isSmallMobile ? 10 : 12,
+            }}
+          >
+            {notes.map((item) => (
+              <div
+                key={item}
+                style={{
+                  border: `1px solid ${T.ink12}`,
+                  borderRadius: 8,
+                  background: "rgba(255,255,255,.78)",
+                  padding: isSmallMobile ? "12px 12px" : "14px 14px",
+                }}
+              >
+                <p
+                  style={{
+                    margin: 0,
+                    fontFamily: font.sans,
+                    fontSize: isSmallMobile ? 12 : 13,
+                    lineHeight: 1.55,
+                    color: T.ink,
+                  }}
+                >
+                  {item}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </Reveal>
 
       <div
@@ -185,7 +139,7 @@ export function WhoWeAre() {
           overflow: "hidden",
           display: "grid",
           gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
-          marginTop: 14,
+          marginTop: isSmallMobile ? 28 : isMobile ? 32 : 36,
         }}
       >
         {stats.map((item, index) => (
@@ -222,7 +176,7 @@ export function WhoWeAre() {
                 style={{
                   fontFamily: font.sans,
                   fontSize: 10,
-                  color: T.ink40,
+                  color: T.ink60,
                   lineHeight: 1.5,
                   textTransform: "uppercase",
                   letterSpacing: ".08em",
