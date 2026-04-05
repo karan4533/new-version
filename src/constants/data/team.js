@@ -1,4 +1,4 @@
-const karthikPhoto = new URL("../../assets/karthik.jpeg", import.meta.url).href;
+const karthikPhoto = new URL("../../assets/karthik.png", import.meta.url).href;
 const sarathyPhoto = new URL("../../assets/sarathy.png", import.meta.url).href;
 const rohitPhoto = new URL("../../assets/Rohit.png", import.meta.url).href;
 
@@ -34,7 +34,7 @@ export const TEAM = [
     role: "Head of AI",
     bullets: [
       "Credential: PhD Researcher, Gen AI",
-      "Focus: agentic AI systems, fine-tuning pipelines, and multimodal intelligence across applied research",
+      "Focus: Agentic AI systems, fine-tuning pipelines, and multimodal intelligence. Leads the Applied Research Lab and oversees model benchmarking",
     ],
     linkedin: "https://www.linkedin.com/company/heuristic-labs-ai/",
     photo: rohitPhoto,

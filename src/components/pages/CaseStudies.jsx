@@ -468,7 +468,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 <div>
                   <p
                     style={{
-                      margin: "0 0 12px",
+                      margin: `0 0 ${isSmallMobile ? 14 : isMobile ? 16 : 18}px`,
                       maxWidth: isTablet ? 560 : 620,
                       fontFamily: font.sans,
                       fontSize: isSmallMobile ? 12 : isMobile ? 14 : 15,
