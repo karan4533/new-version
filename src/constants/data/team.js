@@ -1,5 +1,5 @@
 const karthikPhoto = new URL("../../assets/karthik.png", import.meta.url).href;
-const sarathyPhoto = new URL("../../assets/sarathy.png", import.meta.url).href;
+const sarathyPhoto = new URL("../../assets/sarathy1.png", import.meta.url).href;
 const rohitPhoto = new URL("../../assets/Rohit.png", import.meta.url).href;
 
 /* Team Data */
