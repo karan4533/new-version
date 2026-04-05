@@ -260,7 +260,7 @@ export function Services() {
                             flexWrap: "wrap",
                             alignItems: "center",
                             gap: isSmallMobile ? 6 : 7,
-                            marginTop: isSmallMobile ? 8 : 10,
+                            marginTop: "auto",
                             paddingTop: isSmallMobile ? 4 : 6,
                           }}
                         >

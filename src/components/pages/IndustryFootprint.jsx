@@ -5,27 +5,27 @@ import { Reveal } from "../shared";
 import {
   FaBalanceScale,
   FaBolt,
-  FaBuilding,
+  FaFlask,
   FaGraduationCap,
-  FaHardHat,
-  FaHandshake,
+  FaHome,
   FaIndustry,
   FaLandmark,
-  FaShoppingCart,
-  FaStore,
+  FaShieldAlt,
+  FaShoppingBag,
+  FaTruck,
 } from "react-icons/fa";
 
 const industryTiles = [
-  { label: "Manufacturing and Automotive", Icon: FaIndustry },
-  { label: "Retail", Icon: FaStore },
-  { label: "Legal Tech", Icon: FaBalanceScale },
-  { label: "E-Commerce", Icon: FaShoppingCart },
-  { label: "Services", Icon: FaHandshake },
-  { label: "Government and Public Sector", Icon: FaLandmark },
-  { label: "Energy and Utilities", Icon: FaBolt },
-  { label: "Education", Icon: FaGraduationCap },
-  { label: "Real Estate", Icon: FaBuilding },
-  { label: "Construction", Icon: FaHardHat },
+  { label: "Fintech", Icon: FaLandmark },
+  { label: "Healthcare", Icon: FaShieldAlt },
+  { label: "Manufacturing", Icon: FaIndustry },
+  { label: "Logistics", Icon: FaTruck },
+  { label: "Retail", Icon: FaShoppingBag },
+  { label: "Energy", Icon: FaBolt },
+  { label: "Legal", Icon: FaBalanceScale },
+  { label: "Edtech", Icon: FaGraduationCap },
+  { label: "Proptech", Icon: FaHome },
+  { label: "R&D", Icon: FaFlask },
 ];
 
 export function IndustryFootprint() {
@@ -109,24 +109,23 @@ export function IndustryFootprint() {
                     aria-hidden="true"
                     style={{
                       flex: "0 0 auto",
-                      width: isSmallMobile ? 30 : 34,
-                      height: isSmallMobile ? 30 : 34,
-                      borderRadius: 10,
-                      border: `1px solid ${T.ink12}`,
-                      background: "rgba(12,96,96,.1)",
-                      color: T.teal,
+                      width: isSmallMobile ? 24 : 28,
+                      height: isSmallMobile ? 24 : 28,
+                      color: T.amber,
                       display: "grid",
                       placeItems: "center",
                     }}
                   >
-                    <industry.Icon size={isSmallMobile ? 13 : 15} />
+                    <industry.Icon size={isSmallMobile ? 15 : 17} />
                   </div>
 
                   <span
                     style={{
                       fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 14 : 15,
-                      fontWeight: 600,
+                      fontSize: isSmallMobile ? 11 : 12,
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: ".08em",
                       lineHeight: 1.25,
                       color: T.ink,
                       overflowWrap: "anywhere",
