@@ -9,7 +9,7 @@ export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
   const servicesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
   const [hasHoverInput, setHasHoverInput] = useState(false);
-  const interactiveCardsEnabled = true;
+  const supportsHoverFlip = hasHoverInput;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function Services() {
   }, []);
 
   const toggleCardForTouch = (index) => {
-    if (hasHoverInput) return;
+    if (supportsHoverFlip) return;
     setActiveCardIndex((current) => (current === index ? null : index));
   };
 
@@ -133,47 +133,49 @@ export function Services() {
               const seoTagLine = (card.seoTags || []).join(" | ").toUpperCase();
 
               return (
-                <div style={{ perspective: "2200px", height: "100%" }}>
+                <div
+                  style={{
+                    perspective: "1800px",
+                    perspectiveOrigin: "50% 50%",
+                    transformStyle: "preserve-3d",
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
                   <article
                     onMouseEnter={() => {
-                      if (!interactiveCardsEnabled) return;
+                      if (!supportsHoverFlip) return;
                       setActiveCardIndex(index);
                     }}
                     onMouseLeave={() => {
-                      if (interactiveCardsEnabled) {
-                        setActiveCardIndex(null);
-                      }
+                      if (!supportsHoverFlip) return;
+                      setActiveCardIndex((current) => (current === index ? null : current));
                     }}
                     onFocus={() => {
-                      if (!interactiveCardsEnabled) return;
                       setActiveCardIndex(index);
                     }}
                     onBlur={() => {
-                      if (!interactiveCardsEnabled) return;
                       setActiveCardIndex((current) => (current === index ? null : current));
                     }}
                     onClick={() => toggleCardForTouch(index)}
                     onKeyDown={(event) => {
                       if (event.key !== "Enter" && event.key !== " ") return;
                       event.preventDefault();
-
-                      if (interactiveCardsEnabled) {
-                        setActiveCardIndex(index);
-                        return;
-                      }
-
-                      toggleCardForTouch(index);
+                      setActiveCardIndex((current) => (current === index ? null : index));
                     }}
                     tabIndex={0}
                     aria-pressed={isFlipped}
                     aria-label={`${card.name} service card`}
                     style={{
                       position: "relative",
+                      width: "100%",
                       minHeight: isSmallMobile ? 254 : 296,
                       height: "100%",
                       transformStyle: "preserve-3d",
+                      WebkitTransformStyle: "preserve-3d",
                       transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                      transition: "transform .34s ease",
+                      transition: "transform .46s ease-in-out",
                       transformOrigin: "center center",
                       outline: "none",
                       cursor: "pointer",
@@ -192,7 +194,9 @@ export function Services() {
                         display: "grid",
                         alignContent: "start",
                         gap: 8,
+                        transform: "rotateY(0deg) translateZ(1px)",
                         backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
                         boxShadow: "0 8px 18px rgba(30,26,16,.08)",
                       }}
                     >
@@ -332,8 +336,9 @@ export function Services() {
                         display: "grid",
                         alignContent: "center",
                         gap: 9,
-                        transform: "rotateY(180deg)",
+                        transform: "rotateY(180deg) translateZ(1px)",
                         backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
                         boxShadow: "0 10px 22px rgba(30,26,16,.1)",
                       }}
                     >
