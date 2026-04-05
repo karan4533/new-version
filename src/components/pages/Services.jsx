@@ -41,14 +41,14 @@ export function Services() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: isTablet ? "1fr" : "minmax(0,.9fr) minmax(0,1.1fr)",
-          gap: isSmallMobile ? 14 : isMobile ? 24 : isTablet ? 64 : 90,
+          gridTemplateColumns: "1fr",
+          gap: isSmallMobile ? 12 : isMobile ? 14 : 16,
           alignItems: "start",
           marginBottom: isSmallMobile ? 28 : isMobile ? 36 : 46,
         }}
       >
         <Reveal distance={18} blurFrom={10} style={{ minWidth: 0 }}>
-          <div style={{ minWidth: 0 }}>
+          <div style={{ minWidth: 0, textAlign: "center" }}>
             <p
               style={{
                 margin: "0 0 16px",
@@ -68,25 +68,18 @@ export function Services() {
             </p>
             <h2
               style={{
-                margin: 0,
+                margin: "0 auto",
                 fontFamily: font.serif,
                 fontWeight: 500,
-                lineHeight: 1.02,
+                lineHeight: 1.08,
                 letterSpacing: "-.02em",
                 color: T.ink,
-                fontSize: isSmallMobile ? 46 : isMobile ? 52 : 62,
-                maxWidth: 640,
+                fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 38 : 40,
+                whiteSpace: isTablet ? "normal" : "nowrap",
+                maxWidth: "100%",
               }}
             >
-              <span style={{ display: "block", whiteSpace: isTablet ? "normal" : "nowrap" }}>
-                Six ways we turn
-              </span>
-              <span style={{ display: "block", whiteSpace: isTablet ? "normal" : "nowrap" }}>
-                AI ambition into
-              </span>
-              <span style={{ display: "block", whiteSpace: isTablet ? "normal" : "nowrap" }}>
-                production reality.
-              </span>
+              Six ways we turn AI ambition into production reality.
             </h2>
           </div>
         </Reveal>
@@ -95,26 +88,24 @@ export function Services() {
           <div
             style={{
               minWidth: 0,
-              paddingLeft: isTablet ? 0 : 8,
-              paddingTop: isTablet ? 0 : 74,
+              paddingLeft: 0,
+              paddingTop: 0,
             }}
           >
             <p
               style={{
-                margin: 0,
+                margin: "0 auto",
                 maxWidth: 520,
                 fontFamily: font.sans,
                 fontSize: isSmallMobile ? 12 : 13,
                 lineHeight: 1.58,
                 color: T.ink60,
                 overflowWrap: "anywhere",
+                textAlign: "center",
               }}
             >
               Most enterprises have a strategy. Few have systems that run in production.
-              We bridge that gap as your on-demand Applied AI Lab. 
-              <br />
-              <br />
-            
+              We bridge that gap as your on-demand Applied AI Lab.
             </p>
           </div>
         </Reveal>
