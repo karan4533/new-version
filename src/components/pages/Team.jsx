@@ -53,20 +53,40 @@ export function Team() {
       </Reveal>
 
       <Reveal delay={0.12} distance={14} blurFrom={6}>
-        <p
-          style={{
-            margin: "0 auto 24px",
-            textAlign: "center",
-            maxWidth: 860,
-            fontFamily: font.sans,
-            fontSize: isSmallMobile ? 13 : isMobile ? 14 : 15,
-            lineHeight: 1.6,
-            color: T.ink60,
-          }}
-        >
-          Our leadership team brings 40+ years of combined experience in AI, ML, and
-          enterprise software from research labs to production systems.
-        </p>
+        <>
+          <p
+            style={{
+              margin: "0 auto 12px",
+              textAlign: "center",
+              maxWidth: 860,
+              fontFamily: font.sans,
+              fontSize: isSmallMobile ? 13 : isMobile ? 14 : 15,
+              lineHeight: 1.6,
+              color: T.ink60,
+            }}
+          >
+            Our leadership team brings 40+ years of combined experience in AI, ML, and
+            enterprise software from research labs to production systems.
+          </p>
+
+          <div
+            aria-hidden="true"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: `0 0 ${isSmallMobile ? 18 : 22}px`,
+            }}
+          >
+            <span
+              style={{
+                width: isSmallMobile ? 88 : 124,
+                height: 1,
+                background: T.ink12,
+              }}
+            />
+          </div>
+        </>
       </Reveal>
 
       <div

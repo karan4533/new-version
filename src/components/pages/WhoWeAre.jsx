@@ -61,19 +61,39 @@ export function WhoWeAre() {
       </Reveal>
 
       <Reveal delay={0.18} distance={14} blurFrom={6}>
-        <p
-          style={{
-            margin: "0 auto",
-            maxWidth: 860,
-            textAlign: "center",
-            fontFamily: font.sans,
-            fontSize: isSmallMobile ? 13 : 15,
-            lineHeight: 1.72,
-            color: T.ink60,
-          }}
-        >
-          We help you answer the questions that actually matter.
-        </p>
+        <>
+          <p
+            style={{
+              margin: "0 auto",
+              maxWidth: 860,
+              textAlign: "center",
+              fontFamily: font.sans,
+              fontSize: isSmallMobile ? 13 : 15,
+              lineHeight: 1.72,
+              color: T.ink60,
+            }}
+          >
+            We help you answer the questions that actually matter.
+          </p>
+
+          <div
+            aria-hidden="true"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: `${isSmallMobile ? 10 : 12}px 0 0`,
+            }}
+          >
+            <span
+              style={{
+                width: isSmallMobile ? 88 : 124,
+                height: 1,
+                background: T.ink12,
+              }}
+            />
+          </div>
+        </>
       </Reveal>
 
       <Reveal delay={0.22} distance={18} blurFrom={8}>

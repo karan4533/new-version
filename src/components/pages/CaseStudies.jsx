@@ -376,6 +376,25 @@ export function CaseStudies({ onOpenCaseStudy }) {
             </p>
 
             <div
+              aria-hidden="true"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 0 12px",
+                maxWidth: 460,
+              }}
+            >
+              <span
+                style={{
+                  width: isSmallMobile ? 88 : 124,
+                  height: 1,
+                  background: T.ink12,
+                }}
+              />
+            </div>
+
+            <div
               style={{
                 borderTop: `1px solid ${T.ink12}`,
                 borderBottom: `1px solid ${T.ink12}`,

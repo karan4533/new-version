@@ -107,6 +107,24 @@ export function Services() {
               Most enterprises have a strategy. Few have systems that run in production.
               We bridge that gap as your on-demand Applied AI Lab.
             </p>
+
+            <div
+              aria-hidden="true"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: `${isSmallMobile ? 10 : 12}px 0 0`,
+              }}
+            >
+              <span
+                style={{
+                  width: isSmallMobile ? 88 : 124,
+                  height: 1,
+                  background: T.ink12,
+                }}
+              />
+            </div>
           </div>
         </Reveal>
       </div>

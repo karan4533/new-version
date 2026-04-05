@@ -40,12 +40,31 @@ export function FAQ() {
                 fontSize: isSmallMobile ? 13 : 14,
                 lineHeight: 1.7,
                 color: T.ink60,
-                marginBottom: 32,
+                marginBottom: 12,
                 fontFamily: font.sans,
               }}
             >
               End-to-end LLM solutions from strategy to implementation
             </p>
+
+            <div
+              aria-hidden="true"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                margin: `0 0 ${isSmallMobile ? 22 : 26}px`,
+              }}
+            >
+              <span
+                style={{
+                  width: isSmallMobile ? 88 : 124,
+                  height: 1,
+                  background: T.ink12,
+                }}
+              />
+            </div>
+
             <Btn dark href="#contact">
               talk to us
             </Btn>
