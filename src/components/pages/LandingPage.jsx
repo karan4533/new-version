@@ -277,6 +277,47 @@ export function LandingPage({ onCaseStudies, onContact }) {
           </span>
         </Reveal>
 
+        <Reveal delay={0.08} distance={10} blurFrom={8}>
+          <div
+            style={{
+              marginTop: isSmallMobile ? 10 : 12,
+              marginBottom: isSmallMobile ? 4 : 6,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: isSmallMobile ? 8 : 10,
+            }}
+            aria-hidden="true"
+          >
+            <span
+              style={{
+                display: "block",
+                width: isSmallMobile ? 42 : 58,
+                height: 1,
+                background: T.ink12,
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 6,
+                height: 6,
+                border: `1px solid ${T.ink12}`,
+                background: T.ink07,
+                transform: "rotate(45deg)",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: isSmallMobile ? 42 : 58,
+                height: 1,
+                background: T.ink12,
+              }}
+            />
+          </div>
+        </Reveal>
+
         <Reveal delay={0.12} distance={22} blurFrom={12}>
           <h1
             style={{

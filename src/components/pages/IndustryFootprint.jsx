@@ -78,6 +78,24 @@ export function IndustryFootprint() {
           </p>
 
           <div
+            aria-hidden="true"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: `0 0 ${isSmallMobile ? 14 : 18}px`,
+            }}
+          >
+            <span
+              style={{
+                width: isSmallMobile ? 88 : 124,
+                height: 1,
+                background: T.ink12,
+              }}
+            />
+          </div>
+
+          <div
             role="list"
             aria-label="Industries we serve"
             style={{
