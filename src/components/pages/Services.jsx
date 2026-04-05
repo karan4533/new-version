@@ -9,7 +9,7 @@ export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
   const servicesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
   const [hasHoverInput, setHasHoverInput] = useState(false);
-  const interactiveCardsEnabled = hasHoverInput;
+  const interactiveCardsEnabled = true;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function Services() {
   }, []);
 
   const toggleCardForTouch = (index) => {
-    if (interactiveCardsEnabled) return;
+    if (hasHoverInput) return;
     setActiveCardIndex((current) => (current === index ? null : index));
   };
 
