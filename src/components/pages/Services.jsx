@@ -129,8 +129,12 @@ export function Services() {
             {(() => {
               const isFlipped = activeCardIndex === index;
               const highlights = (card.items || []).slice(0, 5);
-              const technicalTagLine = (card.technicalTags || []).join(" | ").toUpperCase();
-              const seoTagLine = (card.seoTags || []).join(" | ").toUpperCase();
+              const allowTwoLineTitle = card.name
+                .toLowerCase()
+                .startsWith("academic and industry partnership");
+              const technicalTags = (card.technicalTags || [])
+                .map((tag) => String(tag).trim())
+                .filter(Boolean);
 
               return (
                 <div
@@ -190,10 +194,11 @@ export function Services() {
                         background:
                           "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
                         borderRadius: 14,
-                        padding: isSmallMobile ? "13px" : "15px 15px 13px",
-                        display: "grid",
-                        alignContent: "start",
-                        gap: 8,
+                        padding: isSmallMobile ? "15px 14px" : "18px 17px 16px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: isSmallMobile ? 8 : 10,
                         transform: "rotateY(0deg) translateZ(1px)",
                         backfaceVisibility: "hidden",
                         WebkitBackfaceVisibility: "hidden",
@@ -218,9 +223,19 @@ export function Services() {
                           fontWeight: 600,
                           color: T.ink,
                           fontSize: isSmallMobile ? 19 : 21,
-                          lineHeight: 1.1,
+                          lineHeight: 1.14,
                           letterSpacing: "-.01em",
-                          maxWidth: 220,
+                          width: "100%",
+                          maxWidth: "100%",
+                          minHeight: allowTwoLineTitle
+                            ? (isSmallMobile ? 56 : 60)
+                            : (isSmallMobile ? 44 : 48),
+                          whiteSpace: allowTwoLineTitle ? "normal" : "nowrap",
+                          display: allowTwoLineTitle ? "-webkit-box" : "block",
+                          WebkitLineClamp: allowTwoLineTitle ? 2 : "unset",
+                          WebkitBoxOrient: allowTwoLineTitle ? "vertical" : "horizontal",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
                         }}
                       >
                         {card.name}
@@ -231,64 +246,42 @@ export function Services() {
                           fontFamily: font.sans,
                           color: T.ink60,
                           fontSize: isSmallMobile ? 12 : 13,
-                          lineHeight: 1.45,
-                          minHeight: isSmallMobile ? 54 : 58,
+                          lineHeight: 1.52,
+                          minHeight: isSmallMobile ? 64 : 68,
                         }}
                       >
                         {card.desc}
                       </p>
 
-                      {(technicalTagLine || seoTagLine) && (
+                      {technicalTags.length > 0 && (
                         <div
                           style={{
-                            display: "grid",
-                            gap: 5,
-                            marginTop: isSmallMobile ? 6 : 8,
+                            display: "flex",
+                            flexWrap: "wrap",
+                            alignItems: "center",
+                            gap: isSmallMobile ? 6 : 7,
+                            marginTop: isSmallMobile ? 8 : 10,
+                            paddingTop: isSmallMobile ? 4 : 6,
                           }}
                         >
-                          {!!technicalTagLine && (
-                            <span
-                              style={{
-                                display: "inline-block",
-                                width: "fit-content",
-                                maxWidth: "100%",
-                                border: "1px solid rgba(176,120,69,.34)",
-                                borderRadius: 6,
-                                padding: "3px 8px",
-                                fontFamily: font.sans,
-                                fontSize: isSmallMobile ? 7 : 8,
-                                fontWeight: 700,
-                                letterSpacing: ".06em",
-                                lineHeight: 1.4,
-                                textTransform: "uppercase",
-                                color: "rgba(30,26,16,.78)",
-                                background:
-                                  "linear-gradient(180deg, rgba(176,120,69,.15) 0%, rgba(176,120,69,.08) 100%)",
-                                boxShadow: "inset 0 1px 0 rgba(255,255,255,.45)",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                              title={technicalTagLine}
-                            >
-                              {technicalTagLine}
-                            </span>
-                          )}
+                          {technicalTags.map((tag, tagIndex) => {
+                            const normalizedTag = tag.toUpperCase();
 
-                          {!!seoTagLine && (
+                            return (
                             <span
+                              key={`${card.name}-${normalizedTag}-${tagIndex}`}
                               style={{
                                 display: "inline-block",
                                 width: "fit-content",
                                 maxWidth: "100%",
                                 border: "1px solid rgba(176,120,69,.34)",
                                 borderRadius: 6,
-                                padding: "3px 8px",
+                                padding: "4px 9px",
                                 fontFamily: font.sans,
                                 fontSize: isSmallMobile ? 7 : 8,
                                 fontWeight: 700,
                                 letterSpacing: ".06em",
-                                lineHeight: 1.4,
+                                lineHeight: 1.35,
                                 textTransform: "uppercase",
                                 color: "rgba(30,26,16,.78)",
                                 background:
@@ -298,11 +291,12 @@ export function Services() {
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                               }}
-                              title={seoTagLine}
+                              title={normalizedTag}
                             >
-                              {seoTagLine}
+                              {normalizedTag}
                             </span>
-                          )}
+                            );
+                          })}
                         </div>
                       )}
 
@@ -316,10 +310,10 @@ export function Services() {
                         background:
                           "linear-gradient(180deg, rgba(247,242,232,.98) 0%, rgba(239,231,216,.98) 100%)",
                         borderRadius: 14,
-                        padding: isSmallMobile ? "13px" : "15px 15px 13px",
+                        padding: isSmallMobile ? "15px 14px" : "18px 17px 16px",
                         display: "grid",
                         alignContent: "center",
-                        gap: 9,
+                        gap: isSmallMobile ? 10 : 11,
                         transform: "rotateY(180deg) translateZ(1px)",
                         backfaceVisibility: "hidden",
                         WebkitBackfaceVisibility: "hidden",
@@ -353,6 +347,15 @@ export function Services() {
                           fontSize: isSmallMobile ? 19 : 21,
                           lineHeight: 1.14,
                           letterSpacing: "-.01em",
+                          width: "100%",
+                          maxWidth: "100%",
+                          minHeight: allowTwoLineTitle ? (isSmallMobile ? 52 : 56) : "unset",
+                          whiteSpace: allowTwoLineTitle ? "normal" : "nowrap",
+                          display: allowTwoLineTitle ? "-webkit-box" : "block",
+                          WebkitLineClamp: allowTwoLineTitle ? 2 : "unset",
+                          WebkitBoxOrient: allowTwoLineTitle ? "vertical" : "horizontal",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
                         }}
                       >
                         {card.name}
@@ -364,7 +367,7 @@ export function Services() {
                           padding: 0,
                           listStyle: "none",
                           display: "grid",
-                          gap: 6,
+                          gap: 7,
                         }}
                       >
                         {highlights.map((item) => (
@@ -377,7 +380,7 @@ export function Services() {
                               color: T.ink60,
                               fontFamily: font.sans,
                               fontSize: 12,
-                              lineHeight: 1.4,
+                              lineHeight: 1.45,
                             }}
                           >
                             <span
