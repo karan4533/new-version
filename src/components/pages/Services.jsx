@@ -4,6 +4,7 @@ import { useViewport } from "../../hooks/useViewport";
 import { Section } from "../shared";
 import { Reveal } from "../shared";
 import { SERVICES } from "../../constants/data/services";
+import { RiLoginBoxLine } from "react-icons/ri";
 
 export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
@@ -34,6 +35,33 @@ export function Services() {
   const toggleCardForTouch = (index) => {
     if (supportsHoverFlip) return;
     setActiveCardIndex((current) => (current === index ? null : index));
+  };
+
+  const flipHintBaseStyle = {
+    position: "absolute",
+    right: isSmallMobile ? 10 : 12,
+    bottom: isSmallMobile ? 10 : 12,
+    width: isSmallMobile ? 22 : 24,
+    height: isSmallMobile ? 22 : 24,
+    borderRadius: 7,
+    display: "grid",
+    placeItems: "center",
+    pointerEvents: "none",
+  };
+
+  const flipHintFrontStyle = {
+    ...flipHintBaseStyle,
+    border: `1px solid ${T.ink12}`,
+    background: "rgba(255,255,255,.95)",
+    color: T.ink40,
+  };
+
+  const flipHintBackStyle = {
+    ...flipHintBaseStyle,
+    border: "1px solid rgba(176,120,69,.34)",
+    background: "linear-gradient(180deg, rgba(176,120,69,.14) 0%, rgba(176,120,69,.08) 100%)",
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,.45)",
+    color: T.amber,
   };
 
   return (
@@ -318,6 +346,10 @@ export function Services() {
                         </div>
                       )}
 
+                      <span aria-hidden="true" style={flipHintFrontStyle}>
+                        <RiLoginBoxLine size={isSmallMobile ? 10 : 11} />
+                      </span>
+
                     </div>
 
                     <div
@@ -411,6 +443,10 @@ export function Services() {
                           </li>
                         ))}
                       </ul>
+
+                      <span aria-hidden="true" style={flipHintBackStyle}>
+                        <RiLoginBoxLine size={isSmallMobile ? 10 : 11} />
+                      </span>
 
                     </div>
                   </article>
