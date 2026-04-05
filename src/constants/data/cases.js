@@ -1,27 +1,6 @@
 /* Case Studies Data */
 export const CASES = [
   {
-    cat: "E-Commerce",
-    weeks: "8 weeks",
-    shortTitle: "Product Taxonomy and Attribute Enrichment Engine",
-    title: "Product Taxonomy and Attribute Enrichment Engine",
-    body: "A large e-commerce operator managed 100,000+ SKUs across suppliers with inconsistent schemas.",
-    objective:
-      "A large e-commerce operator managed 100,000+ SKUs across suppliers with inconsistent schemas. Manual classification across 4,000+ taxonomy end nodes was taking 3 months per cycle, creating data backlogs, pricing errors, and delayed product listings.",
-    solution:
-      "Built a fully automated agentic enrichment pipeline using a fine-tuned Llama 3.2 model for multi-domain taxonomy classification. Deployed a Hybrid RAG system combining semantic vector search and keyword retrieval across all 4,000+ taxonomy endpoints. Added a multimodal LLM layer capable of reasoning over text, PDFs, product images, and supplier websites simultaneously. The system was schema-agnostic - new suppliers could be onboarded without code changes.",
-    outcome:
-      "Processing time for 100,000 SKUs reduced from 3 months to approximately 2 weeks. End-to-end automation rate of 92%. Significant reduction in manual classification effort and data normalisation cost.",
-    techTags: [
-      "Agentic AI Orchestration pipeline",
-      "Hybrid RAG 4,000+ taxonomy endpoints",
-    ],
-    metrics: [
-      { val: "92%", label: "end-to-end automation" },
-      { val: "3 mo to 2 wks", label: "processing time for 100K SKUs" },
-    ],
-  },
-  {
     cat: "Legal",
     weeks: "8 weeks",
     shortTitle: "Legal Contracts Assistant",

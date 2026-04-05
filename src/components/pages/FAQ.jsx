@@ -6,21 +6,23 @@ import { FAQS } from "../../constants/data/faqs";
 
 export function FAQ() {
   const { isMobile, isSmallMobile } = useViewport();
-  const [open, setOpen] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeItem = FAQS[activeIndex] || FAQS[0];
+
   return (
     <Section id="faq">
       <Reveal>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns:
-              isMobile ? "1fr" : "1fr 1fr",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
             gap: isSmallMobile ? 24 : isMobile ? 30 : 64,
             alignItems: "start",
           }}
         >
           <div>
             <Pill>FAQ</Pill>
+
             <div
               style={{
                 fontFamily: font.serif,
@@ -35,6 +37,7 @@ export function FAQ() {
               How We <br />
               <Em>Help.</Em>
             </div>
+
             <p
               style={{
                 fontSize: isSmallMobile ? 13 : 14,
@@ -53,7 +56,7 @@ export function FAQ() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                margin: `0 0 ${isSmallMobile ? 22 : 26}px`,
+                margin: `0 0 ${isSmallMobile ? 16 : 20}px`,
               }}
             >
               <span
@@ -65,78 +68,77 @@ export function FAQ() {
               />
             </div>
 
+            <div style={{ borderTop: `1px solid ${T.ink12}` }}>
+              {FAQS.map((item, index) => {
+                const isActive = index === activeIndex;
+
+                return (
+                  <button
+                    key={item.q}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    style={{
+                      width: "100%",
+                      background: "none",
+                      border: "none",
+                      borderBottom: `1px solid ${T.ink12}`,
+                      cursor: "pointer",
+                      padding: isSmallMobile ? "14px 0" : "16px 0",
+                      textAlign: "left",
+                      fontFamily: font.sans,
+                      fontSize: isSmallMobile ? 13 : 14,
+                      fontWeight: 500,
+                      lineHeight: 1.45,
+                      color: isActive ? T.ink : T.ink40,
+                      transition: "color .2s",
+                    }}
+                    aria-current={isActive ? "true" : undefined}
+                  >
+                    {item.q}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div
+            style={{
+              borderTop: `1px solid ${T.ink12}`,
+              borderBottom: `1px solid ${T.ink12}`,
+              padding: isSmallMobile ? "16px 0 20px" : isMobile ? "18px 0 22px" : "22px 0 26px",
+            }}
+          >
+            <h3
+              style={{
+                margin: "0 0 12px",
+                fontFamily: font.serif,
+                fontSize: isSmallMobile ? 26 : isMobile ? 30 : 34,
+                fontWeight: 600,
+                lineHeight: 1.14,
+                letterSpacing: "-.01em",
+                color: T.ink,
+              }}
+            >
+              {activeItem.q}
+            </h3>
+
+            <p
+              style={{
+                margin: 0,
+                padding: "0 0 18px",
+                fontSize: 14,
+                lineHeight: 1.7,
+                color: T.ink60,
+                fontFamily: font.sans,
+                maxWidth: 760,
+              }}
+            >
+              {activeItem.a}
+            </p>
+
             <Btn dark href="#contact">
               talk to us
             </Btn>
-          </div>
-          <div style={{ borderTop: `1px solid ${T.ink12}` }}>
-            {FAQS.map((f, i) => (
-              <div key={f.q} style={{ borderBottom: `1px solid ${T.ink12}` }}>
-                <button
-                  onClick={() =>
-                    setOpen(open === i ? null : i)
-                  }
-                  style={{
-                    width: "100%",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "18px 0",
-                    textAlign: "left",
-                    fontFamily: font.sans,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    color: T.ink,
-                  }}
-                >
-                  {f.q}
-                  <span
-                    style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: "50%",
-                      border: `1px solid ${T.ink12}`,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 14,
-                      color: T.ink60,
-                      flexShrink: 0,
-                      marginLeft: 16,
-                      transform:
-                        open === i
-                          ? "rotate(45deg)"
-                          : "none",
-                      transition: ".3s",
-                    }}
-                  >
-                    +
-                  </span>
-                </button>
-                <div
-                  style={{
-                    overflow: "hidden",
-                    maxHeight: open === i ? 200 : 0,
-                    transition: "max-height .4s ease",
-                  }}
-                >
-                  <p
-                    style={{
-                      padding: "0 0 18px",
-                      fontSize: 14,
-                      lineHeight: 1.7,
-                      color: T.ink60,
-                      fontFamily: font.sans,
-                    }}
-                  >
-                    {f.a}
-                  </p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </Reveal>

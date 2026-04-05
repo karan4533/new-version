@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal, Section } from "../shared";
@@ -128,12 +128,6 @@ const getCompactText = (value, maxChars) => {
   return `${cleaned.slice(0, maxChars - 1).trimEnd()}...`;
 };
 
-const toTabLabel = (value) =>
-  String(value)
-    .replace(/[^a-zA-Z0-9]+/g, " ")
-    .trim()
-    .toUpperCase();
-
 const getTheme = (caseItem) => {
   if (!caseItem) return DEFAULT_THEME;
 
@@ -151,16 +145,8 @@ export function CaseStudies({ onOpenCaseStudy }) {
   const useSingleColumnCaseLayout = isTablet || isIpadProViewport;
   const isNarrowTablet = isTablet && width <= 900;
   const showcaseCases = CASES;
-  const useScrollableTabRail = showcaseCases.length > 0;
-  const tabArrowSize = isSmallMobile ? 24 : 30;
-  const tabArrowFontSize = isSmallMobile ? 11 : 13;
   const [activeIndex, setActiveIndex] = useState(0);
   const [readyImages, setReadyImages] = useState({});
-  const [showTabArrows, setShowTabArrows] = useState(false);
-  const [canScrollTabsLeft, setCanScrollTabsLeft] = useState(false);
-  const [canScrollTabsRight, setCanScrollTabsRight] = useState(false);
-  const tabRailRef = useRef(null);
-  const tabRefs = useRef([]);
 
   const preloadSources = useMemo(() => {
     const uniqueSources = new Set();
@@ -203,70 +189,6 @@ export function CaseStudies({ onOpenCaseStudy }) {
     };
   }, [preloadSources]);
 
-  useEffect(() => {
-    if (!useScrollableTabRail) return;
-
-    const rail = tabRailRef.current;
-    const activeTab = tabRefs.current[activeIndex];
-    if (!rail || !activeTab) return;
-
-    // Keep the active tab near the left edge so upcoming tabs appear immediately.
-    const leftAnchor = isTablet ? 20 : 28;
-    const targetLeft = Math.max(
-      0,
-      Math.min(
-        activeTab.offsetLeft - leftAnchor,
-        rail.scrollWidth - rail.clientWidth,
-      ),
-    );
-
-    rail.scrollTo({ left: targetLeft, behavior: "smooth" });
-  }, [activeIndex, isTablet, useScrollableTabRail]);
-
-  useEffect(() => {
-    const rail = tabRailRef.current;
-
-    if (!rail || !useScrollableTabRail) {
-      setShowTabArrows(false);
-      setCanScrollTabsLeft(false);
-      setCanScrollTabsRight(false);
-      return;
-    }
-
-    const syncArrowState = () => {
-      const maxScrollLeft = rail.scrollWidth - rail.clientWidth;
-      const hasOverflow = maxScrollLeft > 1;
-
-      setShowTabArrows(hasOverflow);
-
-      if (!hasOverflow) {
-        setCanScrollTabsLeft(false);
-        setCanScrollTabsRight(false);
-        return;
-      }
-
-      setCanScrollTabsLeft(rail.scrollLeft > 2);
-      setCanScrollTabsRight(rail.scrollLeft < maxScrollLeft - 2);
-    };
-
-    syncArrowState();
-    rail.addEventListener("scroll", syncArrowState, { passive: true });
-    window.addEventListener("resize", syncArrowState);
-
-    return () => {
-      rail.removeEventListener("scroll", syncArrowState);
-      window.removeEventListener("resize", syncArrowState);
-    };
-  }, [activeIndex, showcaseCases.length, useScrollableTabRail, width]);
-
-  const scrollTabRailBy = (direction) => {
-    const rail = tabRailRef.current;
-    if (!rail) return;
-
-    const scrollAmount = Math.max(rail.clientWidth * 0.56, 180);
-    rail.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
-  };
-
   const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
   const activeTheme = getTheme(activeCase);
   const activeImageSource = activeTheme?.image;
@@ -283,15 +205,15 @@ export function CaseStudies({ onOpenCaseStudy }) {
       ? "clamp(34px, 8.2vw, 42px)"
       : isTablet
         ? "clamp(42px, 6vw, 52px)"
-        : "clamp(52px, 4.8vw, 58px)";
+        : "clamp(36px, 3vw, 44px)";
 
-  const cardMinHeight = isSmallMobile
-    ? "clamp(248px, 74vw, 304px)"
+  const previewImageHeight = isSmallMobile
+    ? 182
     : isMobile
-      ? "clamp(304px, 72vw, 396px)"
+      ? 228
       : isTablet
-        ? "clamp(344px, 54vw, 436px)"
-        : "clamp(400px, 39vw, 472px)";
+        ? 268
+        : 312;
 
   if (!activeCase) return null;
 
@@ -338,7 +260,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
           gridTemplateColumns: useSingleColumnCaseLayout
             ? "1fr"
             : "minmax(0,.35fr) minmax(0,.65fr)",
-          gap: isSmallMobile ? 18 : useSingleColumnCaseLayout ? 24 : 30,
+          gap: isSmallMobile ? 18 : useSingleColumnCaseLayout ? 24 : 56,
           alignItems: "start",
           width: "100%",
           overflowX: "clip",
@@ -359,40 +281,14 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 overflowWrap: "anywhere",
               }}
             >
-              We&apos;ve built systems for global enterprises
+              <span style={{ whiteSpace: isSmallMobile ? "normal" : "nowrap" }}>
+                We&apos;ve built systems
+              </span>
+              <br />
+              <span style={{ whiteSpace: isSmallMobile ? "normal" : "nowrap" }}>
+                for global enterprises
+              </span>
             </h2>
-
-            <p
-              style={{
-                margin: "0 0 12px",
-                maxWidth: 460,
-                fontFamily: font.sans,
-                fontSize: isSmallMobile ? 12 : 15,
-                lineHeight: 1.6,
-                color: T.ink60,
-              }}
-            >
-              Click a category tab to preview how we solve real production problems.
-            </p>
-
-            <div
-              aria-hidden="true"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "0 0 12px",
-                maxWidth: 460,
-              }}
-            >
-              <span
-                style={{
-                  width: isSmallMobile ? 88 : 124,
-                  height: 1,
-                  background: T.ink12,
-                }}
-              />
-            </div>
 
             <div
               style={{
@@ -415,207 +311,127 @@ export function CaseStudies({ onOpenCaseStudy }) {
               </p>
             </div>
 
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "repeat(2,minmax(0,1fr))",
+                columnGap: isMobile ? 0 : 16,
+                marginTop: isSmallMobile ? 4 : 6,
+                alignItems: "start",
+              }}
+            >
+              {showcaseCases.map((caseItem, index) => {
+                const isActive = index === activeIndex;
+
+                return (
+                  <button
+                    key={`${caseItem.title}-${index}`}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    style={{
+                      width: "100%",
+                      background: "none",
+                      border: "none",
+                      borderBottom: `1px solid ${T.ink12}`,
+                      cursor: "pointer",
+                      textAlign: "left",
+                      padding: isSmallMobile ? "11px 0" : "13px 0",
+                      fontFamily: font.sans,
+                      fontSize: isSmallMobile ? 12 : 14,
+                      fontWeight: isActive ? 600 : 500,
+                      lineHeight: 1.45,
+                      color: isActive ? T.ink : T.ink40,
+                      transition: "color .2s",
+                    }}
+                    aria-current={isActive ? "true" : undefined}
+                  >
+                    {caseItem.tabLabel || caseItem.cat}
+                  </button>
+                );
+              })}
+            </div>
+
           </div>
         </Reveal>
 
         <Reveal delay={0.06} distance={20} blurFrom={10}>
           <div
             style={{
-              marginTop: useSingleColumnCaseLayout ? 0 : -36,
+              marginTop: useSingleColumnCaseLayout ? 0 : 10,
               minWidth: 0,
-              width: "100%",
+              width: useSingleColumnCaseLayout ? "100%" : "96%",
               maxWidth: "100%",
+              justifySelf: useSingleColumnCaseLayout ? "stretch" : "end",
               overflowX: "hidden",
             }}
           >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns:
-                  useScrollableTabRail && showTabArrows
-                    ? "clamp(22px,5vw,32px) minmax(0,1fr) clamp(22px,5vw,32px)"
-                    : "minmax(0,1fr)",
-                alignItems: "center",
-                gap: isSmallMobile ? 6 : 8,
-                marginBottom: 12,
-                width: "100%",
-              }}
-            >
-              {useScrollableTabRail && showTabArrows && (
-                <button
-                  type="button"
-                  onClick={() => scrollTabRailBy(-1)}
-                  aria-label="Scroll tabs left"
-                  disabled={!canScrollTabsLeft}
-                  style={{
-                    border: `1px solid ${T.ink12}`,
-                    borderRadius: 999,
-                    background: canScrollTabsLeft ? "rgba(255,255,255,.72)" : "rgba(255,255,255,.4)",
-                    color: canScrollTabsLeft ? T.ink : T.ink40,
-                    width: tabArrowSize,
-                    height: tabArrowSize,
-                    padding: 0,
-                    fontFamily: font.sans,
-                    fontSize: tabArrowFontSize,
-                    fontWeight: 700,
-                    lineHeight: 1,
-                    cursor: canScrollTabsLeft ? "pointer" : "not-allowed",
-                    display: "grid",
-                    placeItems: "center",
-                  }}
-                >
-                  {"<"}
-                </button>
-              )}
-
-              <div
-                ref={tabRailRef}
-                className="case-studies-tab-strip"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: isSmallMobile ? 6 : 8,
-                  flexWrap: "nowrap",
-                  overflowX: "auto",
-                  rowGap: 0,
-                  paddingBottom: isSmallMobile ? 0 : 4,
-                  paddingRight: 8,
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                  WebkitOverflowScrolling: "touch",
-                  scrollSnapType: "x proximity",
-                  scrollBehavior: "smooth",
-                  overscrollBehaviorX: "contain",
-                  width: "100%",
-                }}
-              >
-                {showcaseCases.map((caseItem, index) => {
-                  const isActive = index === activeIndex;
-                  const tabText = toTabLabel(caseItem.tabLabel || caseItem.cat);
-
-                  return (
-                    <button
-                      key={caseItem.title}
-                      ref={(element) => {
-                        tabRefs.current[index] = element;
-                      }}
-                      type="button"
-                      onClick={() => setActiveIndex(index)}
-                      style={{
-                        border: `1px solid ${isActive ? "transparent" : T.ink12}`,
-                        borderRadius: 999,
-                        background: isActive ? T.ink : "rgba(255,255,255,.56)",
-                        color: isActive ? T.w : T.ink40,
-                        padding: isSmallMobile ? "6px 10px" : isNarrowTablet ? "6px 10px" : "7px 13px",
-                        fontFamily: font.sans,
-                        fontSize: isSmallMobile ? 9 : isNarrowTablet ? 9 : 10,
-                        fontWeight: 700,
-                        letterSpacing: isSmallMobile ? ".05em" : isNarrowTablet ? ".06em" : ".07em",
-                        textTransform: "uppercase",
-                        whiteSpace: "nowrap",
-                        cursor: "pointer",
-                        flexShrink: 0,
-                        scrollSnapAlign: "start",
-                      }}
-                    >
-                      {tabText}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {useScrollableTabRail && showTabArrows && (
-                <button
-                  type="button"
-                  onClick={() => scrollTabRailBy(1)}
-                  aria-label="Scroll tabs right"
-                  disabled={!canScrollTabsRight}
-                  style={{
-                    border: `1px solid ${T.ink12}`,
-                    borderRadius: 999,
-                    background: canScrollTabsRight ? "rgba(255,255,255,.72)" : "rgba(255,255,255,.4)",
-                    color: canScrollTabsRight ? T.ink : T.ink40,
-                    width: tabArrowSize,
-                    height: tabArrowSize,
-                    padding: 0,
-                    fontFamily: font.sans,
-                    fontSize: tabArrowFontSize,
-                    fontWeight: 700,
-                    lineHeight: 1,
-                    cursor: canScrollTabsRight ? "pointer" : "not-allowed",
-                    display: "grid",
-                    placeItems: "center",
-                  }}
-                >
-                  {">"}
-                </button>
-              )}
-            </div>
-
             <article
               style={{
                 borderRadius: 14,
                 overflow: "hidden",
                 border: `1px solid ${T.ink12}`,
-                background: activeTheme.bg || DEFAULT_THEME.bg,
-                minHeight: cardMinHeight,
+                background: "rgba(255,255,255,.72)",
                 position: "relative",
                 width: "100%",
                 maxWidth: "100%",
                 isolation: "isolate",
               }}
             >
-              {activeImageSource && (
-                <img
-                  src={activeImageSource}
-                  alt=""
-                  aria-hidden="true"
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    maxWidth: "100%",
-                    objectFit: "cover",
-                    objectPosition: activeImagePosition,
-                    transform: width < 420 ? "scale(1.08)" : isMobile ? "scale(1.05)" : "scale(1.02)",
-                    opacity: isActiveImageReady ? 1 : 0,
-                    transition: "opacity .34s ease",
-                  }}
-                />
-              )}
-
-              {activeImageSource && !isActiveImageReady && (
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(120deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.02) 38%, rgba(255,255,255,.08) 100%)",
-                  }}
-                />
-              )}
-
               <div
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: activeTheme.overlay,
+                  position: "relative",
+                  width: "100%",
+                  height: previewImageHeight,
+                  borderTopLeftRadius: 14,
+                  borderTopRightRadius: 14,
+                  overflow: "hidden",
+                  background: activeTheme.bg || DEFAULT_THEME.bg,
                 }}
-              />
+              >
+                {activeImageSource && (
+                  <img
+                    src={activeImageSource}
+                    alt=""
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      maxWidth: "100%",
+                      objectFit: "cover",
+                      objectPosition: activeImagePosition,
+                      transform: width < 420 ? "scale(1.04)" : isMobile ? "scale(1.02)" : "scale(1)",
+                      transformOrigin: "center top",
+                      opacity: isActiveImageReady ? 1 : 0,
+                      transition: "opacity .34s ease",
+                    }}
+                  />
+                )}
+
+                {activeImageSource && !isActiveImageReady && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(120deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.02) 38%, rgba(255,255,255,.08) 100%)",
+                    }}
+                  />
+                )}
+              </div>
 
               <div
                 style={{
                   position: "relative",
                   zIndex: 1,
-                  minHeight: cardMinHeight,
                   width: "100%",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "space-between",
                   gap: 14,
                   padding: isSmallMobile ? "18px 14px" : "22px 20px",
                   minWidth: 0,
+                  background: "rgba(255,255,255,.82)",
                 }}
               >
                 <div>
@@ -627,7 +443,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       fontWeight: 700,
                       letterSpacing: ".1em",
                       textTransform: "uppercase",
-                      color: "rgba(255,255,255,.88)",
+                      color: T.ink40,
                     }}
                   >
                     {`${activeCase.cat} | ${activeCase.weeks}`}
@@ -641,7 +457,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       fontWeight: 700,
                       lineHeight: 1.08,
                       letterSpacing: "-.02em",
-                      color: T.w,
+                      color: T.ink,
                       overflowWrap: "anywhere",
                     }}
                   >
@@ -657,7 +473,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       fontFamily: font.sans,
                       fontSize: isSmallMobile ? 12 : isMobile ? 14 : 15,
                       lineHeight: 1.6,
-                      color: "rgba(255,255,255,.88)",
+                      color: T.ink60,
                       overflowWrap: "anywhere",
                     }}
                   >
@@ -675,7 +491,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                           ? "1fr"
                           : isTablet
                           ? "repeat(2,minmax(0,1fr))"
-                          : "repeat(4,minmax(0,1fr))",
+                          : "repeat(2,minmax(0,1fr))",
                       gap: 8,
                     }}
                   >
@@ -683,15 +499,15 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       <div
                         key={`${activeCase.title}-${tag}`}
                         style={{
-                          border: "1px solid rgba(255,255,255,.22)",
+                          border: `1px solid ${T.ink12}`,
                           borderRadius: 8,
                           padding: "8px 10px",
-                          background: "rgba(20,20,20,.26)",
+                          background: "rgba(255,255,255,.62)",
                           fontFamily: font.sans,
                           fontSize: isSmallMobile ? 10 : 11,
                           fontWeight: 600,
                           lineHeight: 1.35,
-                          color: "rgba(255,255,255,.9)",
+                          color: T.ink,
                           minHeight: isSmallMobile ? 38 : 42,
                           display: "flex",
                           alignItems: "center",
