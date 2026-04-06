@@ -314,8 +314,9 @@ export function CaseStudies({ onOpenCaseStudy }) {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(2,minmax(0,1fr))",
-                columnGap: isMobile ? 0 : 16,
+                gridTemplateColumns: "repeat(2,minmax(0,1fr))",
+                columnGap: isMobile ? 10 : 16,
+                rowGap: isMobile ? 4 : 0,
                 marginTop: isSmallMobile ? 4 : 6,
                 alignItems: "start",
               }}
