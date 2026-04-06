@@ -236,6 +236,41 @@ export function LandingPage({ onCaseStudies, onContact }) {
               "radial-gradient(84% 72% at 50% 58%, rgba(232,227,217,.24) 0%, rgba(232,227,217,.04) 56%, rgba(232,227,217,0) 100%), linear-gradient(180deg, rgba(232,227,217,.98) 0%, rgba(232,227,217,.94) 44%, rgba(232,227,217,.72) 72%, rgba(232,227,217,.34) 100%)",
           }}
         />
+
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            opacity: isSmallMobile ? 0.34 : isMobile ? 0.38 : isTablet ? 0.42 : 0.46,
+          }}
+        >
+          <svg
+            viewBox="0 0 1000 600"
+            preserveAspectRatio="none"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <g
+              fill="none"
+              stroke="rgba(136,104,73,.58)"
+              strokeWidth={isSmallMobile ? 0.85 : 0.95}
+              strokeLinecap="butt"
+              strokeDasharray={isSmallMobile ? "4.5 10" : "5.5 11"}
+              shapeRendering="geometricPrecision"
+            >
+              <line x1="160" y1="-20" x2="160" y2="620" />
+              <line x1="840" y1="-20" x2="840" y2="620" />
+              <line x1="-20" y1="110" x2="1020" y2="110" />
+              <line x1="-20" y1="520" x2="1020" y2="520" />
+            </g>
+          </svg>
+        </div>
       </div>
 
       <div
