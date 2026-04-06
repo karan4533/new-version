@@ -16,8 +16,8 @@ export function Contact() {
         ? "auto minmax(0,1fr) auto"
         : "auto minmax(0,1fr)",
     alignItems: isMobile ? "start" : "center",
-    gap: isMobile ? "12px 14px" : "10px 18px",
-    padding: isSmallMobile ? "20px 16px" : "24px 22px",
+    gap: isMobile ? (isSmallMobile ? "14px 12px" : "14px 16px") : "10px 18px",
+    padding: isSmallMobile ? "24px 16px" : isMobile ? "26px 22px" : "24px 22px",
     borderBottom: isLast ? "none" : `1px solid ${T.ink12}`,
   });
 
@@ -28,14 +28,14 @@ export function Contact() {
     gap: 12,
     minWidth: isMobile ? 0 : 188,
     width: isMobile ? "100%" : "auto",
-    padding: "11px 16px",
+    padding: isSmallMobile ? "10px 14px" : "11px 16px",
     borderRadius: 9,
     textDecoration: "none",
     fontFamily: font.sans,
-    fontSize: 13,
+    fontSize: isSmallMobile ? 12 : 13,
     fontWeight: 600,
     letterSpacing: ".01em",
-    lineHeight: 1.35,
+    lineHeight: 1.4,
     whiteSpace: isMobile ? "normal" : "nowrap",
     textAlign: isMobile ? "left" : "center",
   };
@@ -43,7 +43,7 @@ export function Contact() {
   const actionBtnPlacement = isMobile
     ? {
         gridColumn: "1 / -1",
-        marginTop: 8,
+        marginTop: isSmallMobile ? 10 : 12,
       }
     : undefined;
 
@@ -51,27 +51,29 @@ export function Contact() {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: 36,
-    height: 36,
+    width: isMobile ? (isSmallMobile ? 30 : 34) : 36,
+    height: isMobile ? (isSmallMobile ? 30 : 34) : 36,
     color: T.teal,
-    fontSize: 18,
+    fontSize: isSmallMobile ? 16 : isMobile ? 17 : 18,
   };
 
   const rowTitleStyle = {
     margin: 0,
     fontFamily: font.serif,
     fontWeight: 600,
-    fontSize: 16,
+    fontSize: isSmallMobile ? 15 : 16,
     lineHeight: 1.2,
     color: T.ink,
+    overflowWrap: "anywhere",
   };
 
   const rowTextStyle = {
     margin: "6px 0 0",
     fontFamily: font.sans,
-    fontSize: 14,
-    lineHeight: 1.55,
+    fontSize: isSmallMobile ? 13 : 14,
+    lineHeight: isMobile ? 1.62 : 1.55,
     color: T.ink60,
+    overflowWrap: "anywhere",
   };
 
   const contactRows = [
@@ -140,7 +142,7 @@ export function Contact() {
         style={{
           maxWidth: 1120,
           margin: "0 auto",
-          padding: `0 ${isSmallMobile ? 18 : isMobile ? 28 : isTablet ? 40 : 56}px`,
+          padding: `0 ${isSmallMobile ? 18 : isMobile ? 24 : isTablet ? 40 : 56}px`,
         }}
       >
         <Reveal distance={12} blurFrom={7}>

@@ -145,6 +145,65 @@ section .card:hover {
   }
 }
 
+/* Ultra-narrow fallback (e.g., 150px) without affecting standard devices. */
+@media (max-width: 200px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  section,
+  nav,
+  footer,
+  main,
+  article,
+  aside,
+  header,
+  ul,
+  ol,
+  li,
+  button,
+  a {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  a,
+  button,
+  li {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  [style*="white-space: nowrap"] {
+    white-space: normal !important;
+  }
+}
+
 a:hover {
   opacity: 0.8;
 }

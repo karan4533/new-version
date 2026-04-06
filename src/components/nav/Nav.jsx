@@ -143,6 +143,7 @@ export function Nav({
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
+              minWidth: 0,
               maxWidth: isDesktop ? (isCompactDesktop ? 184 : "none") : isSmallMobile ? 178 : 220,
               lineHeight: 1,
               transition: "letter-spacing 0.2s",
