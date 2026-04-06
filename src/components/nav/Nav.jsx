@@ -121,10 +121,14 @@ export function Nav({
             alt="Heuristic Labs"
             style={{
               width: isDesktop ? 30 : isSmallMobile ? 26 : 30,
-              height: isDesktop ? 30 : isSmallMobile ? 26 : 30,
+              maxWidth: "100%",
+              height: "auto",
+              maxHeight: isDesktop ? 30 : isSmallMobile ? 26 : 30,
+              aspectRatio: "1 / 1",
               objectFit: "contain",
               filter: "brightness(0) saturate(100%)",
               flexShrink: 0,
+              display: "block",
               transform: "scale(1)",
               transition: "transform 0.2s",
             }}

@@ -115,7 +115,10 @@ export function Hero() {
                 position: "relative",
                 zIndex: 2,
                 width: "100%",
+                maxWidth: "100%",
                 height: "100%",
+                maxHeight: "100%",
+                display: "block",
                 objectFit: "contain",
                 animation: "floatBrain 7s ease-in-out infinite",
               }}

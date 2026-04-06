@@ -214,7 +214,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
             style={{
               width: "100%",
               maxWidth: "100%",
+              maxHeight: "100%",
               height: "auto",
+              display: "block",
               objectFit: "contain",
               filter: "saturate(.94)",
               mixBlendMode: "multiply",
@@ -442,7 +444,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
           style={{
             width: "100%",
             maxWidth: "100%",
+            maxHeight: "100%",
             height: "auto",
+            display: "block",
             objectFit: "contain",
             filter: "drop-shadow(0 18px 24px rgba(13,16,20,.14)) saturate(.96)",
             mixBlendMode: "multiply",

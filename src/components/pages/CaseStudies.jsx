@@ -400,6 +400,8 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       width: "100%",
                       height: "100%",
                       maxWidth: "100%",
+                      maxHeight: "100%",
+                      display: "block",
                       objectFit: "cover",
                       objectPosition: activeImagePosition,
                       transform: width < 420 ? "scale(1.04)" : isMobile ? "scale(1.02)" : "scale(1)",
