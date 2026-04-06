@@ -500,15 +500,17 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       <div
                         key={`${activeCase.title}-${tag}`}
                         style={{
-                          border: `1px solid ${T.ink12}`,
+                          border: "1px solid rgba(18, 18, 18, .34)",
                           borderRadius: 8,
                           padding: "8px 10px",
-                          background: "rgba(255,255,255,.62)",
+                          background:
+                            "linear-gradient(180deg, rgba(48,48,48,.9) 0%, rgba(34,34,34,.9) 100%)",
+                          boxShadow: "inset 0 1px 0 rgba(255,255,255,.12)",
                           fontFamily: font.sans,
                           fontSize: isSmallMobile ? 10 : 11,
                           fontWeight: 600,
                           lineHeight: 1.35,
-                          color: T.ink,
+                          color: "rgba(255,255,255,.92)",
                           minHeight: isSmallMobile ? 38 : 42,
                           display: "flex",
                           alignItems: "center",
