@@ -1,24 +1,24 @@
 /* Case Studies Data */
 export const CASES = [
   {
-    cat: "Legal",
-    weeks: "8 weeks",
-    shortTitle: "Legal Contracts Assistant",
-    title: "Legal Contracts Intelligence Assistant",
-    body: "A legal and business services organisation needed to make over 500,000 contracts searchable and conversational.",
+    cat: "D2C Brand",
+    weeks: "10 weeks",
+    shortTitle: "Customer Support Voice Agent",
+    title: "Customer Support Voice Agent",
+    body: "A fast-growing D2C brand was managing high-volume customer queries across orders, returns, payments, and product discovery.",
     objective:
-      "A legal and business services organisation needed to make over 500,000 contracts searchable and conversational. Legal teams were spending hours per query manually reviewing document stacks to find specific clauses, obligations, or counterparty terms - a process that was slow, inconsistent, and non-scalable.",
+      "A fast-growing D2C brand was managing high-volume customer queries across orders, returns, payments, and product discovery. Their support team was overwhelmed, first-contact resolution was low, and response times were degrading customer experience - especially during peak periods.",
     solution:
-      "Designed and deployed a domain-specific knowledge graph indexing 400,000+ legal contracts for high-accuracy semantic retrieval. Built a Hybrid RAG system layering semantic vector search with structured metadata filtering - enabling clause-level precision. The conversational interface generates grounded, human-readable responses with source citations pinned to specific contract pages. RBAC controls and a full audit log were embedded from day one.",
+      "Built a modular multi-agent framework with dedicated specialist agents for order management, payment queries, product search, and escalation routing. Hybrid RAG pipelines grounded all responses in real-time order data, return policies, and live product catalogs. Persistent memory and context management enabled multi-turn personalised conversations - the agent remembered prior context within and across sessions. Inference and orchestration layers were optimised to achieve approximately 800ms average end-to-end response latency for a voice-native experience.",
     outcome:
-      "Contract lookup time reduced from hours to seconds. Improved answer accuracy and consistency across legal and commercial teams. Enabled self-serve access to a 500,000+ document repository without requiring legal expertise to operate.",
+      "80% reduction in resolution time for common query types. Improved first-contact resolution through verified execution flows with no hallucinated responses. Scalable voice-based support deployed without increasing headcount.",
     techTags: [
-      "Agentic RAG Knowledge graph retrieval",
-      "Hybrid RAG Semantic + metadata search",
+      "Agentic AI Multi-agent orchestration",
+      "Hybrid RAG Real-time grounded responses",
     ],
     metrics: [
-      { val: "Hours to seconds", label: "contract lookup time" },
-      { val: "500,000+", label: "contracts indexed" },
+      { val: "80%", label: "resolution time reduction" },
+      { val: "800ms", label: "avg end-to-end voice latency" },
     ],
   },
   {
@@ -64,24 +64,24 @@ export const CASES = [
     ],
   },
   {
-    cat: "D2C Brand",
-    weeks: "10 weeks",
-    shortTitle: "Customer Support Voice Agent",
-    title: "Customer Support Voice Agent",
-    body: "A fast-growing D2C brand was managing high-volume customer queries across orders, returns, payments, and product discovery.",
+    cat: "Legal",
+    weeks: "8 weeks",
+    shortTitle: "Legal Contracts Assistant",
+    title: "Legal Contracts Intelligence Assistant",
+    body: "A legal and business services organisation needed to make over 500,000 contracts searchable and conversational.",
     objective:
-      "A fast-growing D2C brand was managing high-volume customer queries across orders, returns, payments, and product discovery. Their support team was overwhelmed, first-contact resolution was low, and response times were degrading customer experience - especially during peak periods.",
+      "A legal and business services organisation needed to make over 500,000 contracts searchable and conversational. Legal teams were spending hours per query manually reviewing document stacks to find specific clauses, obligations, or counterparty terms - a process that was slow, inconsistent, and non-scalable.",
     solution:
-      "Built a modular multi-agent framework with dedicated specialist agents for order management, payment queries, product search, and escalation routing. Hybrid RAG pipelines grounded all responses in real-time order data, return policies, and live product catalogs. Persistent memory and context management enabled multi-turn personalised conversations - the agent remembered prior context within and across sessions. Inference and orchestration layers were optimised to achieve approximately 800ms average end-to-end response latency for a voice-native experience.",
+      "Designed and deployed a domain-specific knowledge graph indexing 400,000+ legal contracts for high-accuracy semantic retrieval. Built a Hybrid RAG system layering semantic vector search with structured metadata filtering - enabling clause-level precision. The conversational interface generates grounded, human-readable responses with source citations pinned to specific contract pages. RBAC controls and a full audit log were embedded from day one.",
     outcome:
-      "80% reduction in resolution time for common query types. Improved first-contact resolution through verified execution flows with no hallucinated responses. Scalable voice-based support deployed without increasing headcount.",
+      "Contract lookup time reduced from hours to seconds. Improved answer accuracy and consistency across legal and commercial teams. Enabled self-serve access to a 500,000+ document repository without requiring legal expertise to operate.",
     techTags: [
-      "Agentic AI Multi-agent orchestration",
-      "Hybrid RAG Real-time grounded responses",
+      "Agentic RAG Knowledge graph retrieval",
+      "Hybrid RAG Semantic + metadata search",
     ],
     metrics: [
-      { val: "80%", label: "resolution time reduction" },
-      { val: "800ms", label: "avg end-to-end voice latency" },
+      { val: "Hours to seconds", label: "contract lookup time" },
+      { val: "500,000+", label: "contracts indexed" },
     ],
   },
   {
