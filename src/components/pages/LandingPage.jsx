@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { T, font } from "../../constants/designTokens";
-import { HERO_BRAIN_IMG } from "../../constants/assets";
+// import { HERO_BRAIN_IMG } from "../../constants/assets";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal } from "../shared";
 
@@ -44,12 +44,51 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
   const [useCaseIndex, setUseCaseIndex] = useState(0);
   const heroRef = useRef(null);
-  const backLayerRef = useRef(null);
-  const frontLayerRef = useRef(null);
+  // const backLayerRef = useRef(null);
+  // const frontLayerRef = useRef(null);
   const textLayerRef = useRef(null);
-  const useSingleParallaxLayer = isTablet || width < 1280;
+  // const useSingleParallaxLayer = isTablet || width < 1280;
   const heroViewportMinHeight = isSmallMobile ? "100dvh" : isMobile ? "100dvh" : isTablet ? "100dvh" : "96dvh";
-  const heroSceneHeight = isSmallMobile ? "178dvh" : isMobile ? "186dvh" : isTablet ? "190dvh" : "196dvh";
+  const heroSceneHeight = isSmallMobile ? "116dvh" : isMobile ? "120dvh" : isTablet ? "124dvh" : "130dvh";
+  const isMobileViewport = isSmallMobile || isMobile || isTablet;
+  const mobileCenterTuning = isSmallMobile ? 12 : isMobile ? 14 : 16;
+  const [mobileHeroCompensation, setMobileHeroCompensation] = useState(
+    isSmallMobile ? 76 : isMobile ? 80 : isTablet ? 88 : 0,
+  );
+  const heroTextLift = isMobileViewport
+    ? -Math.max(0, mobileHeroCompensation - mobileCenterTuning)
+    : -26;
+
+  useEffect(() => {
+    if (!isMobileViewport) {
+      setMobileHeroCompensation(0);
+      return;
+    }
+
+    const syncHeroCompensation = () => {
+      const navElement = document.querySelector("nav");
+
+      if (!navElement) {
+        const fallbackCompensation = isSmallMobile ? 76 : isMobile ? 80 : 88;
+        setMobileHeroCompensation((current) => (current === fallbackCompensation ? current : fallbackCompensation));
+        return;
+      }
+
+      const rect = navElement.getBoundingClientRect();
+      const nextCompensation = Math.max(0, Math.min(120, Math.round(rect.top + rect.height)));
+
+      setMobileHeroCompensation((current) => (current === nextCompensation ? current : nextCompensation));
+    };
+
+    syncHeroCompensation();
+    window.addEventListener("resize", syncHeroCompensation, { passive: true });
+    window.addEventListener("orientationchange", syncHeroCompensation, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", syncHeroCompensation);
+      window.removeEventListener("orientationchange", syncHeroCompensation);
+    };
+  }, [isMobileViewport, isSmallMobile, isMobile, isTablet]);
 
   useEffect(() => {
     const ticker = window.setInterval(() => {
@@ -59,93 +98,96 @@ export function LandingPage({ onCaseStudies, onContact }) {
     return () => window.clearInterval(ticker);
   }, []);
 
-  useEffect(() => {
-    const heroElement = heroRef.current;
-    const backLayerElement = backLayerRef.current;
-    const frontLayerElement = frontLayerRef.current;
-    const textLayerElement = textLayerRef.current;
+  /*
+   * Hero parallax + background image motion temporarily disabled.
+   * Keeping this block commented for easy reuse later.
+   */
+  // useEffect(() => {
+  //   const heroElement = heroRef.current;
+  //   const backLayerElement = backLayerRef.current;
+  //   const frontLayerElement = frontLayerRef.current;
+  //   const textLayerElement = textLayerRef.current;
 
-    if (!heroElement || !backLayerElement || !frontLayerElement || !textLayerElement) return;
+  //   if (!heroElement || !backLayerElement || !frontLayerElement || !textLayerElement) return;
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const shouldAnimate = !prefersReducedMotion;
+  //   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  //   const shouldAnimate = !prefersReducedMotion;
 
-    let rafId = 0;
+  //   let rafId = 0;
 
-    const paintParallax = () => {
-      rafId = 0;
+  //   const paintParallax = () => {
+  //     rafId = 0;
 
-      const rect = heroElement.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || 1;
-      const viewportWidth = window.innerWidth || 1;
-      const scrollSpan = Math.max(rect.height - viewportHeight, viewportHeight * (isMobile ? 0.58 : 0.42));
-      const progress = Math.max(0, Math.min(1, -rect.top / scrollSpan));
-      const eased = progress < 0.5
-        ? 2 * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-      const revealSpan = isSmallMobile ? 0.34 : isMobile ? 0.3 : 0.24;
-      const revealProgress = shouldAnimate
-        ? Math.max(0, Math.min(1, progress / revealSpan))
-        : 1;
+  //     const rect = heroElement.getBoundingClientRect();
+  //     const viewportHeight = window.innerHeight || 1;
+  //     const viewportWidth = window.innerWidth || 1;
+  //     const scrollSpan = Math.max(rect.height - viewportHeight, viewportHeight * (isMobile ? 0.58 : 0.42));
+  //     const progress = Math.max(0, Math.min(1, -rect.top / scrollSpan));
+  //     const eased = progress < 0.5
+  //       ? 2 * progress * progress
+  //       : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+  //     const revealSpan = isSmallMobile ? 0.34 : isMobile ? 0.3 : 0.24;
+  //     const revealProgress = shouldAnimate
+  //       ? Math.max(0, Math.min(1, progress / revealSpan))
+  //       : 1;
 
-      const viewportScale = Math.max(0.78, Math.min(1, viewportWidth / 1440));
-      const motionScale = (isSmallMobile ? 0.44 : isMobile ? 0.6 : isTablet ? 0.82 : 1) * viewportScale;
-      const backStartY = viewportHeight * (isMobile ? 0.024 : isTablet ? 0.03 : 0.042) * motionScale;
-      const backEndY = -viewportHeight * (isMobile ? 0.012 : isTablet ? 0.018 : 0.026) * motionScale;
-      const frontStartY = viewportHeight * (isSmallMobile ? 0.095 : isMobile ? 0.115 : isTablet ? 0.145 : 0.18) * motionScale;
-      const sideTravel = useSingleParallaxLayer
-        ? 0
-        : viewportWidth * (isTablet ? 0.006 : 0.01) * motionScale;
+  //     const viewportScale = Math.max(0.78, Math.min(1, viewportWidth / 1440));
+  //     const motionScale = (isSmallMobile ? 0.44 : isMobile ? 0.6 : isTablet ? 0.82 : 1) * viewportScale;
+  //     const backStartY = viewportHeight * (isMobile ? 0.024 : isTablet ? 0.03 : 0.042) * motionScale;
+  //     const backEndY = -viewportHeight * (isMobile ? 0.012 : isTablet ? 0.018 : 0.026) * motionScale;
+  //     const frontStartY = viewportHeight * (isSmallMobile ? 0.095 : isMobile ? 0.115 : isTablet ? 0.145 : 0.18) * motionScale;
+  //     const sideTravel = useSingleParallaxLayer
+  //       ? 0
+  //       : viewportWidth * (isTablet ? 0.006 : 0.01) * motionScale;
 
-      const backY = shouldAnimate ? Math.round(backStartY * (1 - eased) + backEndY * eased) : 0;
-      // The foreground brain rises from below and stops exactly at vertical center (translateY = 0).
-      const frontY = shouldAnimate ? Math.round(frontStartY * (1 - eased)) : frontStartY;
-      const frontX = shouldAnimate ? Math.round((1 - eased) * sideTravel) : 0;
-      const backScale = 1 + eased * (useSingleParallaxLayer ? 0.014 : 0.045) * motionScale;
-      const frontScale = 1 + eased * (useSingleParallaxLayer ? 0.072 : 0.11) * motionScale;
+  //     const backY = shouldAnimate ? Math.round(backStartY * (1 - eased) + backEndY * eased) : 0;
+  //     const frontY = shouldAnimate ? Math.round(frontStartY * (1 - eased)) : frontStartY;
+  //     const frontX = shouldAnimate ? Math.round((1 - eased) * sideTravel) : 0;
+  //     const backScale = 1 + eased * (useSingleParallaxLayer ? 0.014 : 0.045) * motionScale;
+  //     const frontScale = 1 + eased * (useSingleParallaxLayer ? 0.072 : 0.11) * motionScale;
 
-      const textCoverStart = isSmallMobile ? 0.44 : isMobile ? 0.41 : 0.38;
-      const textCoverSpan = isSmallMobile ? 0.46 : isMobile ? 0.5 : 0.52;
-      const textCoverProgress = Math.max(0, Math.min(1, (progress - textCoverStart) / textCoverSpan));
-      const textOpacity = shouldAnimate ? Math.max(0.04, 1 - textCoverProgress * 0.96) : 1;
-      const textShiftY = shouldAnimate ? Math.round(-textCoverProgress * viewportHeight * (isMobile ? 0.008 : 0.014)) : 0;
+  //     const textCoverStart = isSmallMobile ? 0.44 : isMobile ? 0.41 : 0.38;
+  //     const textCoverSpan = isSmallMobile ? 0.46 : isMobile ? 0.5 : 0.52;
+  //     const textCoverProgress = Math.max(0, Math.min(1, (progress - textCoverStart) / textCoverSpan));
+  //     const textOpacity = shouldAnimate ? Math.max(0.04, 1 - textCoverProgress * 0.96) : 1;
+  //     const textShiftY = shouldAnimate ? Math.round(-textCoverProgress * viewportHeight * (isMobile ? 0.008 : 0.014)) : 0;
 
-      backLayerElement.style.transform = `translate3d(calc(-50% + 0px), calc(-50% + ${backY}px), 0) scale(${backScale})`;
-      backLayerElement.style.opacity = useSingleParallaxLayer
-        ? "0"
-        : String(((isMobile ? 0.13 : 0.17) + eased * 0.06 * motionScale) * revealProgress);
-      backLayerElement.style.visibility = useSingleParallaxLayer ? "hidden" : "visible";
-      frontLayerElement.style.transform = `translate3d(calc(-50% + ${frontX}px), calc(-50% + ${frontY}px), 0) scale(${frontScale})`;
-      textLayerElement.style.transform = `translate3d(0, ${textShiftY}px, 0)`;
-      textLayerElement.style.opacity = String(textOpacity);
-      textLayerElement.style.pointerEvents = textOpacity < 0.08 ? "none" : "auto";
-      frontLayerElement.style.opacity = String(
-        ((useSingleParallaxLayer ? (isMobile ? 0.26 : 0.24) : isMobile ? 0.24 : 0.28)
-          + eased * (useSingleParallaxLayer ? 0.3 : 0.42) * motionScale)
-          * revealProgress,
-      );
-    };
+  //     backLayerElement.style.transform = `translate3d(calc(-50% + 0px), calc(-50% + ${backY}px), 0) scale(${backScale})`;
+  //     backLayerElement.style.opacity = useSingleParallaxLayer
+  //       ? "0"
+  //       : String(((isMobile ? 0.13 : 0.17) + eased * 0.06 * motionScale) * revealProgress);
+  //     backLayerElement.style.visibility = useSingleParallaxLayer ? "hidden" : "visible";
+  //     frontLayerElement.style.transform = `translate3d(calc(-50% + ${frontX}px), calc(-50% + ${frontY}px), 0) scale(${frontScale})`;
+  //     textLayerElement.style.transform = `translate3d(0, ${textShiftY}px, 0)`;
+  //     textLayerElement.style.opacity = String(textOpacity);
+  //     textLayerElement.style.pointerEvents = textOpacity < 0.08 ? "none" : "auto";
+  //     frontLayerElement.style.opacity = String(
+  //       ((useSingleParallaxLayer ? (isMobile ? 0.26 : 0.24) : isMobile ? 0.24 : 0.28)
+  //         + eased * (useSingleParallaxLayer ? 0.3 : 0.42) * motionScale)
+  //         * revealProgress,
+  //     );
+  //   };
 
-    const requestPaint = () => {
-      if (rafId !== 0) return;
-      rafId = window.requestAnimationFrame(paintParallax);
-    };
+  //   const requestPaint = () => {
+  //     if (rafId !== 0) return;
+  //     rafId = window.requestAnimationFrame(paintParallax);
+  //   };
 
-    requestPaint();
-    window.addEventListener("scroll", requestPaint, { passive: true });
-    window.addEventListener("resize", requestPaint, { passive: true });
-    window.addEventListener("orientationchange", requestPaint, { passive: true });
+  //   requestPaint();
+  //   window.addEventListener("scroll", requestPaint, { passive: true });
+  //   window.addEventListener("resize", requestPaint, { passive: true });
+  //   window.addEventListener("orientationchange", requestPaint, { passive: true });
 
-    return () => {
-      if (rafId !== 0) {
-        window.cancelAnimationFrame(rafId);
-      }
+  //   return () => {
+  //     if (rafId !== 0) {
+  //       window.cancelAnimationFrame(rafId);
+  //     }
 
-      window.removeEventListener("scroll", requestPaint);
-      window.removeEventListener("resize", requestPaint);
-      window.removeEventListener("orientationchange", requestPaint);
-    };
-  }, [isMobile, isTablet, isSmallMobile, useSingleParallaxLayer]);
+  //     window.removeEventListener("scroll", requestPaint);
+  //     window.removeEventListener("resize", requestPaint);
+  //     window.removeEventListener("orientationchange", requestPaint);
+  //   };
+  // }, [isMobile, isTablet, isSmallMobile, useSingleParallaxLayer]);
 
   return (
     <section
@@ -187,46 +229,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
           zIndex: 0,
         }}
       >
-        <div
-          ref={backLayerRef}
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            width: isMobile
-              ? isSmallMobile
-                ? "min(94vw, 66vh)"
-                : "min(88vw, 68vh)"
-              : isTablet
-                ? "min(76vw, 72vh)"
-                : "min(56vw, 78vh)",
-            opacity: 0,
-            visibility: useSingleParallaxLayer ? "hidden" : "visible",
-            transformOrigin: "50% 50%",
-            willChange: "transform",
-          }}
-        >
-          <img
-            src={HERO_BRAIN_IMG}
-            alt=""
-            aria-hidden="true"
-            draggable="false"
-            style={{
-              width: "100%",
-              maxWidth: "100%",
-              maxHeight: "100%",
-              height: "auto",
-              display: "block",
-              objectFit: "contain",
-              filter: "saturate(.94)",
-              mixBlendMode: "multiply",
-              WebkitMaskImage:
-                "radial-gradient(120% 120% at 50% 52%, rgba(0,0,0,1) 34%, rgba(0,0,0,.98) 52%, rgba(0,0,0,.9) 68%, rgba(0,0,0,.72) 82%, rgba(0,0,0,.34) 92%, rgba(0,0,0,0) 100%)",
-              maskImage:
-                "radial-gradient(120% 120% at 50% 52%, rgba(0,0,0,1) 34%, rgba(0,0,0,.98) 52%, rgba(0,0,0,.9) 68%, rgba(0,0,0,.72) 82%, rgba(0,0,0,.34) 92%, rgba(0,0,0,0) 100%)",
-            }}
-          />
-        </div>
+        {/*
+          Hero background image layer (back) temporarily disabled.
+          <div ref={backLayerRef}>...</div>
+        */}
 
         <div
           style={{
@@ -283,6 +289,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
           textAlign: "center",
           position: "relative",
           zIndex: 2,
+          transform: `translateY(${heroTextLift}px)`,
           willChange: "transform, opacity",
           display: "flex",
           flexDirection: "column",
@@ -444,54 +451,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
         </Reveal>
       </div>
 
-      <div
-        aria-hidden="true"
-        ref={frontLayerRef}
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          width: isMobile
-            ? isSmallMobile
-              ? "min(92vw, 62vh)"
-              : "min(84vw, 64vh)"
-            : isTablet
-              ? "min(72vw, 70vh)"
-              : "min(54vw, 76vh)",
-          zIndex: 3,
-          pointerEvents: "none",
-          opacity: 0,
-          transformOrigin: "50% 50%",
-          willChange: "transform, opacity",
-          WebkitMaskImage: useSingleParallaxLayer
-            ? "none"
-            : "linear-gradient(180deg, rgba(0,0,0,.36) 0%, rgba(0,0,0,.74) 42%, rgba(0,0,0,.96) 100%)",
-          maskImage: useSingleParallaxLayer
-            ? "none"
-            : "linear-gradient(180deg, rgba(0,0,0,.36) 0%, rgba(0,0,0,.74) 42%, rgba(0,0,0,.96) 100%)",
-        }}
-      >
-        <img
-          src={HERO_BRAIN_IMG}
-          alt=""
-          aria-hidden="true"
-          draggable="false"
-          style={{
-            width: "100%",
-            maxWidth: "100%",
-            maxHeight: "100%",
-            height: "auto",
-            display: "block",
-            objectFit: "contain",
-            filter: "drop-shadow(0 18px 24px rgba(13,16,20,.14)) saturate(.96)",
-            mixBlendMode: "multiply",
-            WebkitMaskImage:
-              "radial-gradient(120% 120% at 50% 52%, rgba(0,0,0,1) 34%, rgba(0,0,0,.98) 52%, rgba(0,0,0,.9) 68%, rgba(0,0,0,.72) 82%, rgba(0,0,0,.34) 92%, rgba(0,0,0,0) 100%)",
-            maskImage:
-              "radial-gradient(120% 120% at 50% 52%, rgba(0,0,0,1) 34%, rgba(0,0,0,.98) 52%, rgba(0,0,0,.9) 68%, rgba(0,0,0,.72) 82%, rgba(0,0,0,.34) 92%, rgba(0,0,0,0) 100%)",
-          }}
-        />
-      </div>
+      {/*
+        Hero background image layer (front) temporarily disabled.
+        <div ref={frontLayerRef}>...</div>
+      */}
       </div>
     </section>
   );
