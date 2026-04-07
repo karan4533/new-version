@@ -361,9 +361,11 @@ export function Services() {
                           "linear-gradient(180deg, rgba(247,242,232,.98) 0%, rgba(239,231,216,.98) 100%)",
                         borderRadius: 14,
                         padding: isSmallMobile ? "15px 14px" : "18px 17px 16px",
-                        display: "grid",
-                        alignContent: "center",
-                        gap: isSmallMobile ? 10 : 11,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        justifyContent: "flex-start",
+                        gap: isSmallMobile ? 8 : 10,
                         transform: "rotateY(180deg) translateZ(1px)",
                         backfaceVisibility: "hidden",
                         WebkitBackfaceVisibility: "hidden",
@@ -372,21 +374,14 @@ export function Services() {
                     >
                       <span
                         style={{
-                          display: "inline-block",
-                          width: "fit-content",
-                          justifySelf: "center",
-                          padding: "2px 6px",
-                          borderRadius: 4,
-                          background: "rgba(176,120,69,.14)",
-                          fontFamily: font.sans,
-                          fontSize: 9,
-                          fontWeight: 700,
-                          letterSpacing: ".08em",
-                          textTransform: "uppercase",
-                          color: T.amber,
+                          fontFamily: font.serif,
+                          fontSize: isSmallMobile ? 42 : 44,
+                          lineHeight: 1,
+                          color: "rgba(176,120,69,.24)",
+                          letterSpacing: "-.01em",
                         }}
                       >
-                        Key points
+                        {card.id || String(index + 1).padStart(2, "0")}
                       </span>
                       <h3
                         style={{
