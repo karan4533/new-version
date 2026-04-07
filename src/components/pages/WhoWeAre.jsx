@@ -123,7 +123,6 @@ export function WhoWeAre() {
               textAlign: "center",
             }}
           >
-            The questions we answer before your competitors ask them:
           </p>
           <div
             style={{

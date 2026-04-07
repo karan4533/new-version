@@ -51,13 +51,57 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroViewportMinHeight = isSmallMobile ? "100dvh" : isMobile ? "100dvh" : isTablet ? "100dvh" : "96dvh";
   const heroSceneHeight = isSmallMobile ? "116dvh" : isMobile ? "120dvh" : isTablet ? "124dvh" : "130dvh";
   const isMobileViewport = isSmallMobile || isMobile || isTablet;
+  const isPhoneViewport = isMobile;
   const mobileCenterTuning = isSmallMobile ? 12 : isMobile ? 14 : 16;
+  const heroSubheadingFontSize = isSmallMobile ? 14 : isTablet ? 15 : 16;
+  const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
+    isSmallMobile ? "220px" : isMobile ? "250px" : isTablet ? "280px" : "320px",
+  );
+  const [heroSubheadingNudgeX, setHeroSubheadingNudgeX] = useState(
+    isSmallMobile ? 10 : isMobile ? 14 : isTablet ? 18 : 24,
+  );
   const [mobileHeroCompensation, setMobileHeroCompensation] = useState(
     isSmallMobile ? 76 : isMobile ? 80 : isTablet ? 88 : 0,
   );
   const heroTextLift = isMobileViewport
     ? -Math.max(0, mobileHeroCompensation - mobileCenterTuning)
     : -26;
+
+  useEffect(() => {
+    const probe = document.createElement("span");
+    probe.style.position = "fixed";
+    probe.style.left = "-9999px";
+    probe.style.top = "-9999px";
+    probe.style.visibility = "hidden";
+    probe.style.pointerEvents = "none";
+    probe.style.whiteSpace = "nowrap";
+    probe.style.fontFamily = font.sans;
+    probe.style.fontSize = `${heroSubheadingFontSize}px`;
+    probe.style.fontWeight = "700";
+    probe.style.letterSpacing = "0.01em";
+    probe.style.lineHeight = "1.6";
+    document.body.appendChild(probe);
+
+    let maxWidth = 0;
+    let totalWidth = 0;
+
+    for (const phrase of HERO_USE_CASES) {
+      probe.textContent = phrase;
+      const measuredWidth = Math.ceil(probe.getBoundingClientRect().width);
+      maxWidth = Math.max(maxWidth, measuredWidth);
+      totalWidth += measuredWidth;
+    }
+
+    probe.remove();
+
+    const averageWidth = totalWidth / HERO_USE_CASES.length;
+    const nextSlotWidth = Math.max(1, Math.ceil(maxWidth + 2));
+    const nextNudge = Math.max(0, Math.round((nextSlotWidth - averageWidth) / 2));
+    const nextSlotWidthPx = `${nextSlotWidth}px`;
+
+    setHeroUseCaseSlotWidth((current) => (current === nextSlotWidthPx ? current : nextSlotWidthPx));
+    setHeroSubheadingNudgeX((current) => (current === nextNudge ? current : nextNudge));
+  }, [width, heroSubheadingFontSize]);
 
   useEffect(() => {
     if (!isMobileViewport) {
@@ -413,21 +457,22 @@ export function LandingPage({ onCaseStudies, onContact }) {
               flexWrap: isTablet ? "wrap" : "nowrap",
               alignItems: "baseline",
               justifyContent: "center",
-              gap: isSmallMobile ? 4 : 6,
-              rowGap: 2,
+              gap: isPhoneViewport ? 0 : isSmallMobile ? 2 : 4,
+              rowGap: isPhoneViewport ? 6 : 2,
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 13 : isTablet ? 14 : 15,
+              fontSize: heroSubheadingFontSize,
               lineHeight: 1.6,
               color: T.ink60,
               whiteSpace: isTablet ? "normal" : "nowrap",
+              transform: isPhoneViewport ? "translateX(0px)" : `translateX(${heroSubheadingNudgeX}px)`,
             }}
           >
-            <span style={{ flexShrink: isTablet ? 1 : 0 }}>We design, deploy, and scale</span>
+            <span style={{ flexShrink: 0 }}>We design, deploy, and scale</span>
             <span
               className="hero-use-case-shell"
-              style={{ width: "auto", minWidth: 0 }}
+              style={{ width: heroUseCaseSlotWidth, minWidth: heroUseCaseSlotWidth, textAlign: isPhoneViewport ? "center" : "left" }}
             >
-              <span key={useCaseIndex} className="hero-use-case-word">
+              <span className="hero-use-case-word" style={{ textAlign: isPhoneViewport ? "center" : "left" }}>
                 {HERO_USE_CASES[useCaseIndex]}
               </span>
             </span>
