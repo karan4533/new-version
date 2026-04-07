@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section } from "../shared";
@@ -5,14 +6,18 @@ import { Reveal } from "../shared";
 
 export function WhoWeAre() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
-  const aboutTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
+  const aboutSectionPaddingPx = isSmallMobile ? 12 : isMobile ? 16 : isTablet ? 20 : 24;
+  const aboutSectionPadding = `${aboutSectionPaddingPx}px`;
+  const [aboutNavOffset, setAboutNavOffset] = useState(
+    isSmallMobile ? 58 : isMobile ? 66 : isTablet ? 76 : 86,
+  );
+  const aboutContentMinHeight = `calc(100dvh - ${aboutNavOffset + aboutSectionPaddingPx * 2}px)`;
   const aboutBg = "#181A16";
   const aboutText = "rgba(255,255,255,.92)";
   const aboutTextMuted = "rgba(255,255,255,.72)";
   const aboutTextSoft = "rgba(255,255,255,.5)";
   const aboutRule = "rgba(255,255,255,.16)";
-  const aboutPanelBg = "rgba(25,28,23,.9)";
-  const aboutPanelBorder = "rgba(255,255,255,.14)";
+  const aboutDivider = "rgba(255,255,255,.1)";
   const aboutStatLabel = "rgba(255,255,255,.62)";
 
   const notes = [
@@ -29,118 +34,165 @@ export function WhoWeAre() {
     { value: "40+ yrs", label: "Leadership experience in AI" },
   ];
 
+  useEffect(() => {
+    const syncAboutNavOffset = () => {
+      const navElement = document.querySelector("nav");
+
+      if (!navElement) {
+        const fallbackOffset = isSmallMobile ? 58 : isMobile ? 66 : isTablet ? 76 : 86;
+        setAboutNavOffset((current) => (current === fallbackOffset ? current : fallbackOffset));
+        return;
+      }
+
+      const rect = navElement.getBoundingClientRect();
+      const nextOffset = Math.max(0, Math.min(160, Math.round(rect.top + rect.height)));
+      setAboutNavOffset((current) => (current === nextOffset ? current : nextOffset));
+    };
+
+    syncAboutNavOffset();
+    window.addEventListener("resize", syncAboutNavOffset, { passive: true });
+    window.addEventListener("orientationchange", syncAboutNavOffset, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", syncAboutNavOffset);
+      window.removeEventListener("orientationchange", syncAboutNavOffset);
+    };
+  }, [isSmallMobile, isMobile, isTablet]);
+
   return (
-    <Section id="about" paddingTop={aboutTopPadding} bg={aboutBg}>
-      <Reveal delay={0.06} distance={14} blurFrom={8}>
-        <p
+    <Section
+      id="about"
+      paddingTop={aboutSectionPadding}
+      paddingBottom={aboutSectionPadding}
+      bg={aboutBg}
+      minHeight="100dvh"
+    >
+      <div
+        style={{
+          minHeight: aboutContentMinHeight,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: isSmallMobile ? 14 : isMobile ? 18 : 22,
+        }}
+      >
+        <div
           style={{
-            margin: isSmallMobile ? "22px auto 10px" : isMobile ? "32px auto 12px" : "40px auto 14px",
-            width: "fit-content",
-            fontFamily: font.sans,
-            fontSize: 11,
-            fontWeight: 600,
-            letterSpacing: ".08em",
-            textTransform: "uppercase",
-            padding: "6px 12px",
-            borderRadius: 100,
-            background: T.ink07,
-            color: T.amber,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          The Mission
-        </p>
-      </Reveal>
-
-      <Reveal delay={0.12} distance={16} blurFrom={8}>
-        <h3
-          style={{
-            margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 22px" : "0 0 26px",
-            textAlign: "center",
-            fontFamily: font.serif,
-            fontWeight: 500,
-            color: aboutText,
-            fontSize: isSmallMobile ? 32 : isMobile ? 42 : 52,
-            lineHeight: 1.08,
-            letterSpacing: "-.02em",
-          }}
-        >
-          From AI confusion to <span style={{ color: T.amber, fontStyle: "italic" }}>clarity.</span>
-        </h3>
-      </Reveal>
-
-      <Reveal delay={0.18} distance={14} blurFrom={6}>
-        <>
-          <p
-            style={{
-              margin: "0 auto",
-              maxWidth: 860,
-              textAlign: "center",
-              fontFamily: font.sans,
-              fontSize: isSmallMobile ? 13 : 15,
-              lineHeight: 1.72,
-              color: aboutTextMuted,
-            }}
-          >
-            We help you answer the questions that actually matter.
-          </p>
-
-          <div
-            aria-hidden="true"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: `${isSmallMobile ? 10 : 12}px 0 0`,
-            }}
-          >
-            <span
+          <Reveal delay={0.06} distance={14} blurFrom={8}>
+            <p
               style={{
-                width: isSmallMobile ? 88 : 124,
-                height: 1,
-                background: aboutRule,
+                margin: isSmallMobile ? "0 auto 10px" : isMobile ? "0 auto 12px" : "0 auto 14px",
+                width: "fit-content",
+                fontFamily: font.sans,
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: ".08em",
+                textTransform: "uppercase",
+                padding: "6px 12px",
+                borderRadius: 100,
+                background: T.ink07,
+                color: T.amber,
               }}
-            />
-          </div>
-        </>
-      </Reveal>
+            >
+              The Mission
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.12} distance={16} blurFrom={8}>
+            <h3
+              style={{
+                margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 22px" : "0 0 26px",
+                textAlign: "center",
+                fontFamily: font.serif,
+                fontWeight: 500,
+                color: aboutText,
+                fontSize: isSmallMobile ? 32 : isMobile ? 42 : 52,
+                lineHeight: 1.08,
+                letterSpacing: "-.02em",
+              }}
+            >
+              From AI confusion to <span style={{ color: T.amber, fontStyle: "italic" }}>clarity.</span>
+            </h3>
+          </Reveal>
+
+          <Reveal delay={0.18} distance={14} blurFrom={6}>
+            <>
+              <p
+                style={{
+                  margin: "0 auto",
+                  maxWidth: 860,
+                  textAlign: "center",
+                  fontFamily: font.sans,
+                  fontSize: isSmallMobile ? 13 : 15,
+                  lineHeight: 1.72,
+                  color: aboutTextMuted,
+                }}
+              >
+                We help you answer the questions that actually matter.
+              </p>
+
+              <div
+                aria-hidden="true"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: `${isSmallMobile ? 10 : 12}px 0 0`,
+                }}
+              >
+                <span
+                  style={{
+                    width: isSmallMobile ? 88 : 124,
+                    height: 1,
+                    background: aboutRule,
+                  }}
+                />
+              </div>
+            </>
+          </Reveal>
+        </div>
 
       <Reveal delay={0.22} distance={18} blurFrom={8}>
         <div
           style={{
-            margin: isSmallMobile ? "18px auto 0" : isMobile ? "20px auto 0" : "24px auto 0",
+            margin: isSmallMobile ? "14px auto 0" : isMobile ? "16px auto 0" : "18px auto 0",
             maxWidth: 980,
             width: "100%",
           }}
         >
-          <p
-            style={{
-              margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 20px" : "0 0 22px",
-              fontFamily: font.sans,
-              fontSize: 10,
-              color: aboutTextSoft,
-              letterSpacing: ".16em",
-              textTransform: "uppercase",
-              textAlign: "center",
-            }}
-          >
-          </p>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isTablet ? "1fr" : "repeat(2,minmax(0,1fr))",
-              gap: isSmallMobile ? 10 : 12,
+              gridTemplateColumns: "repeat(2,minmax(0,1fr))",
+              gap: 0,
             }}
           >
-            {notes.map((item) => (
+            {notes.map((item, index) => (
               <div
                 key={item}
                 style={{
-                  border: `1px solid ${aboutPanelBorder}`,
-                  borderRadius: 8,
-                  background: aboutPanelBg,
-                  padding: isSmallMobile ? "12px 12px" : "14px 14px",
+                  padding: isSmallMobile ? "10px 10px 12px" : "12px 12px 14px",
+                  borderRight: index % 2 === 0 ? `1px solid ${aboutDivider}` : "none",
+                  borderBottom: index < 2 ? `1px solid ${aboutDivider}` : "none",
                 }}
               >
+                <span
+                  style={{
+                    display: "block",
+                    marginBottom: isSmallMobile ? 8 : 10,
+                    fontFamily: font.sans,
+                    fontSize: isSmallMobile ? 10 : 11,
+                    fontWeight: 600,
+                    letterSpacing: ".08em",
+                    color: aboutTextSoft,
+                  }}
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <p
                   style={{
                     margin: 0,
@@ -160,60 +212,82 @@ export function WhoWeAre() {
 
       <div
         style={{
-          border: `1px solid ${aboutPanelBorder}`,
-          background: aboutPanelBg,
-          borderRadius: 8,
-          overflow: "hidden",
-          display: "grid",
-          gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
-          marginTop: isSmallMobile ? 28 : isMobile ? 32 : 36,
+          marginTop: isSmallMobile ? 28 : isMobile ? 34 : 40,
         }}
       >
-        {stats.map((item, index) => (
-          <Reveal
-            key={`${item.value}-${item.label}`}
-            delay={0.16 + index * 0.06}
-            distance={14}
-            blurFrom={6}
-            style={{ height: "100%" }}
-          >
-            <div
-              style={{
-                padding: isSmallMobile ? "13px 10px" : "14px 12px",
-                borderRight:
-                  !isMobile && index < stats.length - 1 ? `1px solid ${aboutPanelBorder}` : "none",
-                borderBottom:
-                  isMobile && index < stats.length - 2 ? `1px solid ${aboutPanelBorder}` : "none",
-                textAlign: "center",
-                height: "100%",
-              }}
+        <div
+          aria-hidden="true"
+          style={{
+            margin: isSmallMobile ? "0 0 14px" : isMobile ? "0 0 16px" : "0 0 18px",
+          }}
+        >
+          <span
+            style={{
+              display: "block",
+              width: "100%",
+              height: 1,
+              background: aboutDivider,
+            }}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
+          }}
+        >
+          {stats.map((item, index) => (
+            <Reveal
+              key={`${item.value}-${item.label}`}
+              delay={0.16 + index * 0.06}
+              distance={14}
+              blurFrom={6}
+              style={{ height: "100%" }}
             >
               <div
                 style={{
-                  fontFamily: font.serif,
-                  fontSize: isSmallMobile ? 26 : 31,
-                  color: T.amber,
-                  lineHeight: 1.1,
-                  marginBottom: 3,
+                  padding: isSmallMobile ? "13px 10px" : "14px 12px",
+                  borderRight:
+                    !isMobile
+                      ? index < stats.length - 1
+                        ? `1px solid ${aboutDivider}`
+                        : "none"
+                      : index % 2 === 0
+                        ? `1px solid ${aboutDivider}`
+                        : "none",
+                  textAlign: "center",
+                  height: "100%",
                 }}
               >
-                {item.value}
+                <div
+                  style={{
+                    fontFamily: font.serif,
+                    fontSize: isSmallMobile ? 26 : 31,
+                    color: T.amber,
+                    lineHeight: 1.1,
+                    marginBottom: 3,
+                  }}
+                >
+                  {item.value}
+                </div>
+                <div
+                  style={{
+                    fontFamily: font.sans,
+                    fontSize: 10,
+                    color: aboutStatLabel,
+                    lineHeight: 1.5,
+                    textTransform: "uppercase",
+                    letterSpacing: ".08em",
+                  }}
+                >
+                  {item.label}
+                </div>
               </div>
-              <div
-                style={{
-                  fontFamily: font.sans,
-                  fontSize: 10,
-                  color: aboutStatLabel,
-                  lineHeight: 1.5,
-                  textTransform: "uppercase",
-                  letterSpacing: ".08em",
-                }}
-              >
-                {item.label}
-              </div>
-            </div>
-          </Reveal>
-        ))}
+            </Reveal>
+          ))}
+        </div>
+      </div>
       </div>
     </Section>
   );

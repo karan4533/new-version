@@ -57,7 +57,7 @@ export default function App() {
   const [selectedCaseIndex, setSelectedCaseIndex] = useState(null);
   const pushedCaseStateRef = useRef(false);
 
-  const getStickyNavOffset = () => {
+  const getStickyNavOffset = (extraGap = 12) => {
     const navElement = document.querySelector("nav");
     if (!navElement) return 104;
 
@@ -65,16 +65,16 @@ export default function App() {
     const topInset = Math.max(0, Math.round(top));
     const navHeight = Math.round(navElement.getBoundingClientRect().height || navElement.offsetHeight || 0);
 
-    return topInset + navHeight + 12;
+    return topInset + navHeight + extraGap;
   };
 
-  const scrollToSectionWithOffset = (sectionId) => {
+  const scrollToSectionWithOffset = (sectionId, extraGap = 12) => {
     const element = document.getElementById(sectionId);
     if (!element) return;
 
     const targetTop = Math.max(
       0,
-      Math.round(element.getBoundingClientRect().top + window.scrollY - getStickyNavOffset()),
+      Math.round(element.getBoundingClientRect().top + window.scrollY - getStickyNavOffset(extraGap)),
     );
 
     window.scrollTo({ top: targetTop, behavior: "smooth" });
@@ -90,9 +90,9 @@ export default function App() {
     return () => window.removeEventListener("popstate", syncFromUrl);
   }, []);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId, extraGap = 12) => {
     const doScroll = () => {
-      scrollToSectionWithOffset(sectionId);
+      scrollToSectionWithOffset(sectionId, extraGap);
     };
 
     if (selectedCaseIndex !== null) {
@@ -121,7 +121,7 @@ export default function App() {
   };
 
   const handleLandingAbout = () => {
-    scrollToSection("about");
+    scrollToSection("about", 0);
   };
 
   const handleLandingService = () => {
@@ -141,7 +141,7 @@ export default function App() {
   };
 
   const handleAboutClick = () => {
-    scrollToSection("about");
+    scrollToSection("about", 0);
   };
 
   const handleServicesClick = () => {
@@ -157,7 +157,7 @@ export default function App() {
   };
 
   const handleExitLanding = () => {
-    scrollToSection("about");
+    scrollToSection("about", 0);
   };
 
   const handleOpenCaseStudy = (index) => {

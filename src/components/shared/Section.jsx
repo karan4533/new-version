@@ -1,7 +1,7 @@
 import { T } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 
-export const Section = ({ children, bg, id, paddingTop, paddingBottom }) => {
+export const Section = ({ children, bg, id, paddingTop, paddingBottom, minHeight }) => {
   const { isSmallMobile, isMobile, isTablet } = useViewport();
   const defaultSectionPadding = isSmallMobile ? "40px" : isMobile ? "48px" : "56px";
 
@@ -12,6 +12,7 @@ export const Section = ({ children, bg, id, paddingTop, paddingBottom }) => {
         width: "100%",
         maxWidth: "100%",
         background: bg || T.bg,
+        minHeight: minHeight || "auto",
         scrollMarginTop: isSmallMobile ? 52 : isMobile ? 56 : 60,
         paddingTop: paddingTop || defaultSectionPadding,
         paddingBottom: paddingBottom || defaultSectionPadding,
