@@ -52,7 +52,7 @@ export function Services() {
   const flipHintFrontStyle = {
     ...flipHintBaseStyle,
     border: `1px solid ${T.ink12}`,
-    background: "rgba(255,255,255,.95)",
+    background: "linear-gradient(180deg, rgba(176,120,69,.14) 0%, rgba(176,120,69,.08) 100%)",
     color: T.ink40,
   };
 
