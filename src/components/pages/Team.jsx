@@ -189,19 +189,35 @@ export function Team() {
                     gap: 4,
                   }}
                 >
-                  {member.bullets.map((bullet) => (
-                    <li
-                      key={`${member.name}-${bullet}`}
-                      style={{
-                        fontFamily: font.sans,
-                        fontSize: isSmallMobile ? 11 : 12,
-                        color: "rgba(255,255,255,.56)",
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      • {bullet.trim()}
-                    </li>
-                  ))}
+                  {member.bullets.map((bullet) => {
+                    const text = bullet.trim();
+                    const separatorIndex = text.indexOf(":");
+                    const hasLabeledPrefix = separatorIndex > 0;
+                    const prefix = hasLabeledPrefix ? text.slice(0, separatorIndex).trim() : "";
+                    const suffix = hasLabeledPrefix ? text.slice(separatorIndex + 1).trim() : text;
+                    const shouldBoldPrefix = prefix === "Credential" || prefix === "Focus";
+
+                    return (
+                      <li
+                        key={`${member.name}-${bullet}`}
+                        style={{
+                          fontFamily: font.sans,
+                          fontSize: isSmallMobile ? 11 : 12,
+                          color: "rgba(255,255,255,.64)",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {hasLabeledPrefix ? (
+                          <>
+                            <span style={{ fontWeight: shouldBoldPrefix ? 700 : 500 }}>{prefix}:</span>{" "}
+                            <span>{suffix}</span>
+                          </>
+                        ) : (
+                          text
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
 
                 {!!member.linkedin && (
