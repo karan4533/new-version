@@ -323,7 +323,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 display: "grid",
                 gridTemplateColumns: "repeat(2,minmax(0,1fr))",
                 columnGap: isMobile ? 10 : 16,
-                rowGap: isMobile ? 4 : 0,
+                rowGap: isMobile ? 6 : 4,
                 marginTop: isSmallMobile ? 4 : 6,
                 alignItems: "start",
               }}
@@ -338,34 +338,20 @@ export function CaseStudies({ onOpenCaseStudy }) {
                     onClick={() => setActiveIndex(index)}
                     style={{
                       width: "100%",
-                      background: isActive
-                        ? "linear-gradient(180deg, rgba(34,53,72,.72) 0%, rgba(18,31,44,.82) 100%)"
-                        : "none",
-                      border: isActive
-                        ? "1px solid rgba(182,225,255,.78)"
-                        : "none",
-                      borderBottom: isActive
-                        ? "1px solid rgba(182,225,255,.78)"
-                        : `1px solid ${caseRule}`,
-                      borderRadius: isActive ? 12 : 0,
-                      boxShadow: isActive
-                        ? "0 0 0 1px rgba(168,220,255,.16), 0 0 20px rgba(100,178,234,.44), inset 0 1px 0 rgba(238,248,255,.26)"
-                        : "none",
+                      background: "none",
+                      border: "none",
                       cursor: "pointer",
                       textAlign: "left",
-                      padding: isActive
-                        ? isSmallMobile
-                          ? "11px 12px"
-                          : "13px 14px"
-                        : isSmallMobile
-                          ? "11px 0"
-                          : "13px 0",
+                      padding: isSmallMobile
+                        ? "11px 0"
+                        : "13px 0",
                       fontFamily: font.sans,
                       fontSize: isSmallMobile ? 12 : 14,
                       fontWeight: isActive ? 600 : 500,
                       lineHeight: 1.45,
-                      color: isActive ? caseText : caseTextSoft,
-                      transition: "color .2s, border-color .2s, box-shadow .25s, background .25s",
+                      color: isActive ? "rgba(182,225,255,.94)" : caseTextSoft,
+                      textShadow: isActive ? "0 0 8px rgba(110,190,245,.24)" : "none",
+                      transition: "color .2s, text-shadow .25s",
                     }}
                     aria-current={isActive ? "true" : undefined}
                   >
