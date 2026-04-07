@@ -12,7 +12,7 @@ export function WhoWeAre() {
     isSmallMobile ? 58 : isMobile ? 66 : isTablet ? 76 : 86,
   );
   const aboutContentMinHeight = `calc(100dvh - ${aboutNavOffset + aboutSectionPaddingPx * 2}px)`;
-  const aboutBg = "#181A16";
+  const aboutBg = T.footer;
   const aboutText = "rgba(255,255,255,.92)";
   const aboutTextMuted = "rgba(255,255,255,.72)";
   const aboutTextSoft = "rgba(255,255,255,.5)";

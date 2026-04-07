@@ -141,7 +141,7 @@ const getTheme = (caseItem) => {
 export function CaseStudies({ onOpenCaseStudy }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
   const caseStudiesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
-  const caseSectionBg = "#181A16";
+  const caseSectionBg = T.footer;
   const caseText = "rgba(255,255,255,.92)";
   const caseTextMuted = "rgba(255,255,255,.72)";
   const caseTextSoft = "rgba(255,255,255,.52)";
@@ -380,7 +380,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 borderRadius: 14,
                 overflow: "hidden",
                 border: "1px solid rgba(148,189,224,.38)",
-                background: "#181A16",
+                background: caseSectionBg,
                 position: "relative",
                 width: "100%",
                 maxWidth: "100%",
@@ -398,7 +398,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   borderRadius: isSmallMobile ? 10 : 12,
                   border: "1px solid rgba(184,219,246,.26)",
                   overflow: "hidden",
-                  background: "#181A16",
+                  background: caseSectionBg,
                 }}
               >
                 {activeImageSource && (
@@ -446,7 +446,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   gap: 14,
                   padding: isSmallMobile ? "18px 14px" : "22px 20px",
                   minWidth: 0,
-                  background: "#181A16",
+                  background: caseSectionBg,
                 }}
               >
                 <div>
