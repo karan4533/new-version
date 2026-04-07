@@ -6,6 +6,14 @@ import { Reveal } from "../shared";
 export function WhoWeAre() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
   const aboutTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
+  const aboutBg = "#181A16";
+  const aboutText = "rgba(255,255,255,.92)";
+  const aboutTextMuted = "rgba(255,255,255,.72)";
+  const aboutTextSoft = "rgba(255,255,255,.5)";
+  const aboutRule = "rgba(255,255,255,.16)";
+  const aboutPanelBg = "rgba(25,28,23,.9)";
+  const aboutPanelBorder = "rgba(255,255,255,.14)";
+  const aboutStatLabel = "rgba(255,255,255,.62)";
 
   const notes = [
     "Is your data ready for real AI reasoning, or just basic retrieval?",
@@ -22,7 +30,7 @@ export function WhoWeAre() {
   ];
 
   return (
-    <Section id="about" paddingTop={aboutTopPadding}>
+    <Section id="about" paddingTop={aboutTopPadding} bg={aboutBg}>
       <Reveal delay={0.06} distance={14} blurFrom={8}>
         <p
           style={{
@@ -50,7 +58,7 @@ export function WhoWeAre() {
             textAlign: "center",
             fontFamily: font.serif,
             fontWeight: 500,
-            color: T.ink,
+            color: aboutText,
             fontSize: isSmallMobile ? 32 : isMobile ? 42 : 52,
             lineHeight: 1.08,
             letterSpacing: "-.02em",
@@ -70,7 +78,7 @@ export function WhoWeAre() {
               fontFamily: font.sans,
               fontSize: isSmallMobile ? 13 : 15,
               lineHeight: 1.72,
-              color: T.ink60,
+              color: aboutTextMuted,
             }}
           >
             We help you answer the questions that actually matter.
@@ -89,7 +97,7 @@ export function WhoWeAre() {
               style={{
                 width: isSmallMobile ? 88 : 124,
                 height: 1,
-                background: T.ink12,
+                background: aboutRule,
               }}
             />
           </div>
@@ -109,7 +117,7 @@ export function WhoWeAre() {
               margin: isSmallMobile ? "0 0 18px" : isMobile ? "0 0 20px" : "0 0 22px",
               fontFamily: font.sans,
               fontSize: 10,
-              color: T.ink50,
+              color: aboutTextSoft,
               letterSpacing: ".16em",
               textTransform: "uppercase",
               textAlign: "center",
@@ -128,9 +136,9 @@ export function WhoWeAre() {
               <div
                 key={item}
                 style={{
-                  border: `1px solid ${T.ink12}`,
+                  border: `1px solid ${aboutPanelBorder}`,
                   borderRadius: 8,
-                  background: "rgba(255,255,255,.78)",
+                  background: aboutPanelBg,
                   padding: isSmallMobile ? "12px 12px" : "14px 14px",
                 }}
               >
@@ -140,7 +148,7 @@ export function WhoWeAre() {
                     fontFamily: font.sans,
                     fontSize: isSmallMobile ? 12 : 13,
                     lineHeight: 1.55,
-                    color: T.ink,
+                    color: aboutText,
                   }}
                 >
                   {item}
@@ -153,8 +161,8 @@ export function WhoWeAre() {
 
       <div
         style={{
-          border: `1px solid ${T.ink12}`,
-          background: "rgba(255,255,255,.78)",
+          border: `1px solid ${aboutPanelBorder}`,
+          background: aboutPanelBg,
           borderRadius: 8,
           overflow: "hidden",
           display: "grid",
@@ -174,9 +182,9 @@ export function WhoWeAre() {
               style={{
                 padding: isSmallMobile ? "13px 10px" : "14px 12px",
                 borderRight:
-                  !isMobile && index < stats.length - 1 ? `1px solid ${T.ink12}` : "none",
+                  !isMobile && index < stats.length - 1 ? `1px solid ${aboutPanelBorder}` : "none",
                 borderBottom:
-                  isMobile && index < stats.length - 2 ? `1px solid ${T.ink12}` : "none",
+                  isMobile && index < stats.length - 2 ? `1px solid ${aboutPanelBorder}` : "none",
                 textAlign: "center",
                 height: "100%",
               }}
@@ -196,7 +204,7 @@ export function WhoWeAre() {
                 style={{
                   fontFamily: font.sans,
                   fontSize: 10,
-                  color: T.ink60,
+                  color: aboutStatLabel,
                   lineHeight: 1.5,
                   textTransform: "uppercase",
                   letterSpacing: ".08em",

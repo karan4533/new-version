@@ -243,7 +243,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
             position: "absolute",
             inset: 0,
             pointerEvents: "none",
-            opacity: isSmallMobile ? 0.34 : isMobile ? 0.38 : isTablet ? 0.42 : 0.46,
+            opacity: isSmallMobile ? 0.56 : isMobile ? 0.52 : isTablet ? 0.42 : 0.46,
           }}
         >
           <svg
@@ -258,10 +258,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
           >
             <g
               fill="none"
-              stroke="rgba(136,104,73,.58)"
-              strokeWidth={isSmallMobile ? 0.85 : 0.95}
+              stroke={isMobile ? "rgba(136,104,73,.8)" : "rgba(136,104,73,.64)"}
+              strokeWidth={isSmallMobile ? 1.05 : isMobile ? 1 : 0.95}
               strokeLinecap="butt"
-              strokeDasharray={isSmallMobile ? "4.5 10" : "5.5 11"}
+              strokeDasharray={isSmallMobile ? "5 8" : isMobile ? "5.2 9" : "5.5 11"}
               shapeRendering="geometricPrecision"
             >
               <line x1="160" y1="-20" x2="160" y2="620" />

@@ -141,6 +141,12 @@ const getTheme = (caseItem) => {
 export function CaseStudies({ onOpenCaseStudy }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
   const caseStudiesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
+  const caseSectionBg = "#181A16";
+  const caseText = "rgba(255,255,255,.92)";
+  const caseTextMuted = "rgba(255,255,255,.72)";
+  const caseTextSoft = "rgba(255,255,255,.52)";
+  const caseRule = "rgba(255,255,255,.16)";
+  const casePillBg = "rgba(255,255,255,.08)";
   const isIpadProViewport = width >= 1000 && width <= 1040;
   const useSingleColumnCaseLayout = isTablet || isIpadProViewport;
   const isNarrowTablet = isTablet && width <= 900;
@@ -214,6 +220,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
       : isTablet
         ? 268
         : 312;
+  const previewInset = isSmallMobile ? 10 : 12;
 
   if (!activeCase) return null;
 
@@ -231,7 +238,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
       : activeCase.metrics?.map((metric) => metric.label)) || [];
 
   return (
-    <Section id="case-studies" paddingTop={caseStudiesTopPadding}>
+    <Section id="case-studies" paddingTop={caseStudiesTopPadding} bg={caseSectionBg}>
       <Reveal distance={14} blurFrom={8}>
         <p
           style={{
@@ -244,7 +251,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
             display: "inline-block",
             padding: "6px 12px",
             borderRadius: 100,
-            background: T.ink07,
+            background: casePillBg,
             color: T.amber,
           }}
         >
@@ -273,7 +280,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 margin: "0 0 12px",
                 fontFamily: font.serif,
                 fontWeight: 600,
-                color: T.ink,
+                color: caseText,
                 lineHeight: 1.06,
                 letterSpacing: "-.02em",
                 fontSize: headingSize,
@@ -292,8 +299,8 @@ export function CaseStudies({ onOpenCaseStudy }) {
 
             <div
               style={{
-                borderTop: `1px solid ${T.ink12}`,
-                borderBottom: `1px solid ${T.ink12}`,
+                borderTop: `1px solid ${caseRule}`,
+                borderBottom: `1px solid ${caseRule}`,
                 padding: "12px 0",
                 marginBottom: 14,
               }}
@@ -304,7 +311,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   fontFamily: font.sans,
                   fontSize: isSmallMobile ? 12 : 13,
                   lineHeight: 1.6,
-                  color: T.ink60,
+                  color: caseTextMuted,
                 }}
               >
                 {outcomePreview}
@@ -331,18 +338,34 @@ export function CaseStudies({ onOpenCaseStudy }) {
                     onClick={() => setActiveIndex(index)}
                     style={{
                       width: "100%",
-                      background: "none",
-                      border: "none",
-                      borderBottom: `1px solid ${T.ink12}`,
+                      background: isActive
+                        ? "linear-gradient(180deg, rgba(34,53,72,.72) 0%, rgba(18,31,44,.82) 100%)"
+                        : "none",
+                      border: isActive
+                        ? "1px solid rgba(182,225,255,.78)"
+                        : "none",
+                      borderBottom: isActive
+                        ? "1px solid rgba(182,225,255,.78)"
+                        : `1px solid ${caseRule}`,
+                      borderRadius: isActive ? 12 : 0,
+                      boxShadow: isActive
+                        ? "0 0 0 1px rgba(168,220,255,.16), 0 0 20px rgba(100,178,234,.44), inset 0 1px 0 rgba(238,248,255,.26)"
+                        : "none",
                       cursor: "pointer",
                       textAlign: "left",
-                      padding: isSmallMobile ? "11px 0" : "13px 0",
+                      padding: isActive
+                        ? isSmallMobile
+                          ? "11px 12px"
+                          : "13px 14px"
+                        : isSmallMobile
+                          ? "11px 0"
+                          : "13px 0",
                       fontFamily: font.sans,
                       fontSize: isSmallMobile ? 12 : 14,
                       fontWeight: isActive ? 600 : 500,
                       lineHeight: 1.45,
-                      color: isActive ? T.ink : T.ink40,
-                      transition: "color .2s",
+                      color: isActive ? caseText : caseTextSoft,
+                      transition: "color .2s, border-color .2s, box-shadow .25s, background .25s",
                     }}
                     aria-current={isActive ? "true" : undefined}
                   >
@@ -363,30 +386,33 @@ export function CaseStudies({ onOpenCaseStudy }) {
               width: useSingleColumnCaseLayout ? "100%" : "96%",
               maxWidth: "100%",
               justifySelf: useSingleColumnCaseLayout ? "stretch" : "end",
-              overflowX: "hidden",
+              overflow: "visible",
             }}
           >
             <article
               style={{
                 borderRadius: 14,
                 overflow: "hidden",
-                border: `1px solid ${T.ink12}`,
-                background: "rgba(255,255,255,.72)",
+                border: "1px solid rgba(148,189,224,.38)",
+                background: "#181A16",
                 position: "relative",
                 width: "100%",
                 maxWidth: "100%",
                 isolation: "isolate",
+                boxShadow:
+                  "0 0 0 1px rgba(165,206,241,.14), 0 18px 36px rgba(6,10,18,.4), 0 0 38px rgba(74,136,198,.18), inset 0 1px 0 rgba(228,244,255,.12)",
               }}
             >
               <div
                 style={{
                   position: "relative",
-                  width: "100%",
-                  height: previewImageHeight,
-                  borderTopLeftRadius: 14,
-                  borderTopRightRadius: 14,
+                  width: `calc(100% - ${previewInset * 2}px)`,
+                  height: previewImageHeight - previewInset,
+                  margin: `${previewInset}px auto 0`,
+                  borderRadius: isSmallMobile ? 10 : 12,
+                  border: "1px solid rgba(184,219,246,.26)",
                   overflow: "hidden",
-                  background: activeTheme.bg || DEFAULT_THEME.bg,
+                  background: "#181A16",
                 }}
               >
                 {activeImageSource && (
@@ -434,7 +460,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   gap: 14,
                   padding: isSmallMobile ? "18px 14px" : "22px 20px",
                   minWidth: 0,
-                  background: "rgba(255,255,255,.82)",
+                  background: "#181A16",
                 }}
               >
                 <div>
@@ -446,7 +472,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       fontWeight: 700,
                       letterSpacing: ".1em",
                       textTransform: "uppercase",
-                      color: T.ink40,
+                      color: "rgba(214,228,245,.58)",
                     }}
                   >
                     {`${activeCase.cat} | ${activeCase.weeks}`}
@@ -460,7 +486,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       fontWeight: 700,
                       lineHeight: 1.08,
                       letterSpacing: "-.02em",
-                      color: T.ink,
+                      color: "rgba(244,248,255,.96)",
                       overflowWrap: "anywhere",
                     }}
                   >
@@ -476,7 +502,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       fontFamily: font.sans,
                       fontSize: isSmallMobile ? 12 : isMobile ? 14 : 15,
                       lineHeight: 1.6,
-                      color: T.ink60,
+                      color: "rgba(220,231,244,.74)",
                       overflowWrap: "anywhere",
                     }}
                   >
@@ -502,12 +528,12 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       <div
                         key={`${activeCase.title}-${tag}`}
                         style={{
-                          border: "1px solid rgba(18, 18, 18, .34)",
+                          border: "1px solid rgba(190,220,248,.42)",
                           borderRadius: 8,
                           padding: "8px 10px",
                           background:
-                            "linear-gradient(180deg, rgba(48,48,48,.9) 0%, rgba(34,34,34,.9) 100%)",
-                          boxShadow: "inset 0 1px 0 rgba(255,255,255,.12)",
+                            "linear-gradient(180deg, rgba(33,45,60,.82) 0%, rgba(20,30,42,.88) 100%)",
+                          boxShadow: "inset 0 1px 0 rgba(232,244,255,.16)",
                           fontFamily: font.sans,
                           fontSize: isSmallMobile ? 10 : 11,
                           fontWeight: 600,
