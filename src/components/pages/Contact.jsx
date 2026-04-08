@@ -176,7 +176,7 @@ export function Contact() {
                 color: T.ink,
               }}
             >
-              Let&apos;s Work Togethe
+              Let&apos;s Work Together
             </h2>
 
             <div
