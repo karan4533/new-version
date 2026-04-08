@@ -88,7 +88,7 @@ export function Contact() {
             href="mailto:connect@heuristiclabs.ai"
             style={{ color: T.teal, textDecoration: "none", fontWeight: 700 }}
           >
-            connect@heuristiclabs.ai
+            connect@heuristiclabs.a
           </a>
         </>
       ),
