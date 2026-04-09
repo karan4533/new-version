@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { CALENDLY_DISCOVERY_CALL_URL } from "../../constants/links";
 import { useViewport } from "../../hooks/useViewport";
-import companyLogo from "../../assets/logo (1).png";
+import companyLogo from "../../assets/logo (1).webp";
 
 export function Nav({
   onLogoClick,

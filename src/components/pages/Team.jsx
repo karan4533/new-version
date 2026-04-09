@@ -123,6 +123,8 @@ export function Team() {
               <img
                 src={member.photo}
                 alt={member.name}
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: "100%",
                   height: "100%",

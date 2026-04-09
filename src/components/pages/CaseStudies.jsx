@@ -3,17 +3,17 @@ import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal, Section } from "../shared";
 import { CASES } from "../../constants/data/cases";
-import dataAnalyticsImage from "../../assets/data analytics.png";
-import legalImage from "../../assets/legal.png";
-import constructionImage from "../../assets/constuction.png";
-import d2cImage from "../../assets/D2C.png";
-import medicoLegalImage from "../../assets/medigo legal.png";
-import enterpriseSearchImage from "../../assets/enterprise search.png";
-import aiGovernanceImage from "../../assets/AI Governance.jpg";
-import automotiveImage from "../../assets/automotive .png";
-import translationImage from "../../assets/translation.png";
-import videoLocalizationImage from "../../assets/video localization.png";
-import salesCopilotImage from "../../assets/sales copilot.png";
+import dataAnalyticsImage from "../../assets/data analytics.webp";
+import legalImage from "../../assets/legal.webp";
+import constructionImage from "../../assets/constuction.webp";
+import d2cImage from "../../assets/D2C.webp";
+import medicoLegalImage from "../../assets/medigo legal.webp";
+import enterpriseSearchImage from "../../assets/enterprise search.webp";
+import aiGovernanceImage from "../../assets/AI Governance.webp";
+import automotiveImage from "../../assets/automotive .webp";
+import translationImage from "../../assets/translation.webp";
+import videoLocalizationImage from "../../assets/video localization.webp";
+import salesCopilotImage from "../../assets/sales copilot.webp";
 
 const THEME_BY_CATEGORY = {
   "Data analytics": {
@@ -165,39 +165,80 @@ export function CaseStudies({ onOpenCaseStudy }) {
     return Array.from(uniqueSources);
   }, [showcaseCases]);
 
+  const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
+  const activeTheme = getTheme(activeCase);
+  const activeImageSource = activeTheme?.image;
+
   useEffect(() => {
     let isCancelled = false;
 
-    preloadSources.forEach((source) => {
+    const markSourceReady = (source) => {
+      if (isCancelled) return;
+
+      setReadyImages((current) => {
+        if (current[source]) return current;
+        return { ...current, [source]: true };
+      });
+    };
+
+    const primeImage = (source) => {
+      if (!source) return;
+
       const image = new Image();
       image.decoding = "async";
       image.src = source;
 
-      const markReady = () => {
-        if (isCancelled) return;
-
-        setReadyImages((current) => {
-          if (current[source]) return current;
-          return { ...current, [source]: true };
-        });
-      };
-
       if (image.complete) {
-        markReady();
+        markSourceReady(source);
       } else {
-        image.onload = markReady;
-        image.onerror = markReady;
+        image.onload = () => markSourceReady(source);
+        image.onerror = () => markSourceReady(source);
       }
-    });
+    };
+
+    if (activeImageSource) {
+      primeImage(activeImageSource);
+    }
+
+    const remainingSources = preloadSources.filter((source) => source && source !== activeImageSource);
+
+    if (!remainingSources.length) {
+      return () => {
+        isCancelled = true;
+      };
+    }
+
+    const preloadRemaining = () => {
+      remainingSources.forEach((source) => {
+        primeImage(source);
+      });
+    };
+
+    let idleCallbackId;
+    let timeoutId;
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleCallbackId = window.requestIdleCallback(preloadRemaining, { timeout: 1500 });
+    } else {
+      timeoutId = window.setTimeout(preloadRemaining, 350);
+    }
 
     return () => {
       isCancelled = true;
-    };
-  }, [preloadSources]);
 
-  const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
-  const activeTheme = getTheme(activeCase);
-  const activeImageSource = activeTheme?.image;
+      if (
+        typeof idleCallbackId === "number" &&
+        typeof window !== "undefined" &&
+        "cancelIdleCallback" in window
+      ) {
+        window.cancelIdleCallback(idleCallbackId);
+      }
+
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, [preloadSources, activeImageSource]);
   const isActiveImageReady = activeImageSource ? Boolean(readyImages[activeImageSource]) : false;
   const activeImagePosition = isSmallMobile
     ? activeTheme?.mobilePosition || activeTheme?.tabletPosition || activeTheme?.position || "center center"
@@ -406,6 +447,8 @@ export function CaseStudies({ onOpenCaseStudy }) {
                     src={activeImageSource}
                     alt=""
                     aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       position: "absolute",
                       inset: 0,
