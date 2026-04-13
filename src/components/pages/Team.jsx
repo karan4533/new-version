@@ -117,7 +117,9 @@ export function Team() {
                 overflow: "hidden",
                 background: "rgba(255,255,255,.56)",
                 position: "relative",
-                aspectRatio: "3 / 4",
+                width: isMobile ? (isSmallMobile ? "min(100%, 290px)" : "min(100%, 320px)") : "100%",
+                margin: isMobile ? "0 auto" : 0,
+                aspectRatio: isSmallMobile ? "4 / 5" : "3 / 4",
               }}
             >
               <img
