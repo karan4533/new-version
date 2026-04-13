@@ -478,7 +478,12 @@ export function LandingPage({ onCaseStudies, onContact }) {
             <span style={{ flexShrink: 0 }}>We design, deploy, and scale</span>
             <span
               className="hero-use-case-shell"
-              style={{ width: heroUseCaseSlotWidth, minWidth: heroUseCaseSlotWidth, textAlign: isPhoneViewport ? "center" : "left" }}
+              style={{
+                width: heroUseCaseSlotWidth,
+                minWidth: heroUseCaseSlotWidth,
+                textAlign: isPhoneViewport ? "center" : "left",
+                justifyItems: isPhoneViewport ? "center" : "start",
+              }}
             >
               <span className="hero-use-case-word" style={{ textAlign: isPhoneViewport ? "center" : "left", fontSize: heroUseCaseFontSize }}>
                 {HERO_USE_CASES[useCaseIndex]}
