@@ -53,7 +53,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const isMobileViewport = isSmallMobile || isMobile || isTablet;
   const isPhoneViewport = isMobile;
   const mobileCenterTuning = isSmallMobile ? 12 : isMobile ? 14 : 16;
-  const heroSubheadingFontSize = isSmallMobile ? 14 : isTablet ? 15 : 16;
+  const heroSubheadingFontSize = isSmallMobile ? 16 : isTablet ? 17 : 18;
   const heroUseCaseFontSize = heroSubheadingFontSize + 1;
   const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
     isSmallMobile ? "220px" : isMobile ? "250px" : isTablet ? "280px" : "320px",
