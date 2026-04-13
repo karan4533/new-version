@@ -490,7 +490,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.34} distance={16} blurFrom={6}>
           <div
             style={{
-              marginTop: 22,
+              marginTop: isTablet ? 100 : 58,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

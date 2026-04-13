@@ -18,16 +18,22 @@ import salesCopilotImage from "../../assets/sales copilot.webp";
 const THEME_BY_CATEGORY = {
   "Data analytics": {
     image: dataAnalyticsImage,
-    position: "center 42%",
-    tabletPosition: "center 38%",
-    mobilePosition: "center 34%",
+    position: "42% 36%",
+    tabletPosition: "42% 34%",
+    mobilePosition: "42% 30%",
+    desktopScale: 1.08,
+    tabletScale: 1.1,
+    mobileScale: 1.12,
     overlay: "linear-gradient(180deg, rgba(12,18,26,.32) 0%, rgba(12,18,26,.78) 100%)",
   },
   "E-Commerce": {
     image: dataAnalyticsImage,
-    position: "center 44%",
-    tabletPosition: "center 40%",
-    mobilePosition: "center 36%",
+    position: "42% 36%",
+    tabletPosition: "42% 34%",
+    mobilePosition: "42% 30%",
+    desktopScale: 1.08,
+    tabletScale: 1.1,
+    mobileScale: 1.12,
     bg: "linear-gradient(135deg, #4f6679 0%, #2f4252 48%, #1f2b36 100%)",
     overlay: "linear-gradient(180deg, rgba(17,20,24,.28) 0%, rgba(17,20,24,.74) 100%)",
   },
@@ -245,6 +251,12 @@ export function CaseStudies({ onOpenCaseStudy }) {
     : isTablet
       ? activeTheme?.tabletPosition || activeTheme?.position || "center center"
       : activeTheme?.position || "center center";
+  const fallbackImageScale = width < 420 ? 1.04 : isMobile ? 1.02 : 1;
+  const activeImageScale = isSmallMobile
+    ? activeTheme?.mobileScale || fallbackImageScale
+    : isTablet
+      ? activeTheme?.tabletScale || fallbackImageScale
+      : activeTheme?.desktopScale || fallbackImageScale;
 
   const headingSize = isSmallMobile
     ? "clamp(28px, 10.2vw, 34px)"
@@ -453,7 +465,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       display: "block",
                       objectFit: "cover",
                       objectPosition: activeImagePosition,
-                      transform: width < 420 ? "scale(1.04)" : isMobile ? "scale(1.02)" : "scale(1)",
+                      transform: `scale(${activeImageScale})`,
                       transformOrigin: "center top",
                       opacity: isActiveImageReady ? 1 : 0,
                       transition: "opacity .34s ease",
