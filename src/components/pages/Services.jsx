@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section, Reveal } from "../shared";
@@ -22,6 +22,7 @@ export function Services() {
   const [hasHoverInput, setHasHoverInput] = useState(false);
   const supportsHoverFlip = hasHoverInput;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
+  const lastPointerTypeRef = useRef("mouse");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -42,8 +43,10 @@ export function Services() {
     return () => mediaQuery.removeListener(syncInteractionMode);
   }, []);
 
-  const toggleCardForTouch = (index) => {
-    if (supportsHoverFlip) return;
+  const isTouchLikePointer = (pointerType) => pointerType === "touch" || pointerType === "pen";
+
+  const toggleCardForTouch = (index, forceToggle = false) => {
+    if (supportsHoverFlip && !forceToggle) return;
     setActiveCardIndex((current) => (current === index ? null : index));
   };
 
@@ -199,6 +202,9 @@ export function Services() {
                 }}
               >
                 <article
+                  onPointerDown={(event) => {
+                    lastPointerTypeRef.current = event.pointerType || "mouse";
+                  }}
                   onMouseEnter={() => {
                     if (!supportsHoverFlip) return;
                     setActiveCardIndex(index);
@@ -208,15 +214,21 @@ export function Services() {
                     setActiveCardIndex((current) => (current === index ? null : current));
                   }}
                   onFocus={() => {
+                    if (!supportsHoverFlip || isTouchLikePointer(lastPointerTypeRef.current)) return;
                     setActiveCardIndex(index);
                   }}
                   onBlur={() => {
+                    if (!supportsHoverFlip || isTouchLikePointer(lastPointerTypeRef.current)) return;
                     setActiveCardIndex((current) => (current === index ? null : current));
                   }}
-                  onClick={() => toggleCardForTouch(index)}
+                  onClick={() => {
+                    const isTouchLikeInteraction = isTouchLikePointer(lastPointerTypeRef.current);
+                    toggleCardForTouch(index, isTouchLikeInteraction);
+                  }}
                   onKeyDown={(event) => {
                     if (event.key !== "Enter" && event.key !== " ") return;
                     event.preventDefault();
+                    lastPointerTypeRef.current = "keyboard";
                     setActiveCardIndex((current) => (current === index ? null : index));
                   }}
                   tabIndex={0}

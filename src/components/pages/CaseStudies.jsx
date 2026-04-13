@@ -396,20 +396,24 @@ export function CaseStudies({ onOpenCaseStudy }) {
                     onClick={() => setActiveIndex(index)}
                     style={{
                       width: "100%",
-                      background: "none",
-                      border: "none",
+                      background: isActive ? "rgba(182,225,255,.08)" : "rgba(255,255,255,.015)",
+                      border: isActive ? "1px solid rgba(182,225,255,.26)" : "1px solid rgba(255,255,255,.08)",
+                      borderRadius: 10,
+                      boxShadow: isActive
+                        ? "0 4px 14px rgba(75,142,203,.2), inset 0 1px 0 rgba(255,255,255,.14)"
+                        : "0 2px 8px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06)",
                       cursor: "pointer",
                       textAlign: "left",
                       padding: isSmallMobile
-                        ? "11px 0"
-                        : "13px 0",
+                        ? "10px 8px"
+                        : "11px 10px",
                       fontFamily: font.sans,
                       fontSize: isSmallMobile ? 12 : 14,
                       fontWeight: isActive ? 600 : 500,
                       lineHeight: 1.45,
                       color: isActive ? "rgba(182,225,255,.94)" : caseTextSoft,
                       textShadow: isActive ? "0 0 8px rgba(110,190,245,.24)" : "none",
-                      transition: "color .2s, text-shadow .25s",
+                      transition: "color .2s, text-shadow .25s, box-shadow .25s, border-color .25s, background-color .25s",
                     }}
                     aria-current={isActive ? "true" : undefined}
                   >
