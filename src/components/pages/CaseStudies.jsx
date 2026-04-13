@@ -14,6 +14,7 @@ import automotiveImage from "../../assets/automotive .webp";
 import translationImage from "../../assets/translation.webp";
 import videoLocalizationImage from "../../assets/video localization.webp";
 import salesCopilotImage from "../../assets/sales copilot.webp";
+import fintechImage from "../../assets/fintech.png";
 
 const THEME_BY_CATEGORY = {
   "Data analytics": {
@@ -64,6 +65,16 @@ const THEME_BY_CATEGORY = {
     tabletPosition: "center 36%",
     mobilePosition: "center 30%",
     overlay: "linear-gradient(180deg, rgba(24,18,16,.28) 0%, rgba(24,18,16,.74) 100%)",
+  },
+  Fintech: {
+    image: fintechImage,
+    position: "22% 44%",
+    tabletPosition: "20% 42%",
+    mobilePosition: "22% 44%",
+    desktopScale: 1.02,
+    tabletScale: 1.04,
+    mobileScale: 1.06,
+    overlay: "linear-gradient(180deg, rgba(12,16,24,.26) 0%, rgba(12,16,24,.74) 100%)",
   },
   "Sales Tech": {
     bg: "linear-gradient(135deg, #34536d 0%, #24425b 48%, #1b2f43 100%)",
