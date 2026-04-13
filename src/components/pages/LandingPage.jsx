@@ -54,6 +54,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const isPhoneViewport = isMobile;
   const mobileCenterTuning = isSmallMobile ? 12 : isMobile ? 14 : 16;
   const heroSubheadingFontSize = isSmallMobile ? 14 : isTablet ? 15 : 16;
+  const heroUseCaseFontSize = heroSubheadingFontSize + 1;
   const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
     isSmallMobile ? "220px" : isMobile ? "250px" : isTablet ? "280px" : "320px",
   );
@@ -66,6 +67,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTextLift = isMobileViewport
     ? -Math.max(0, mobileHeroCompensation - mobileCenterTuning)
     : -26;
+  const heroLiftNudge = -20;
+  const heroContentOffsetY = heroTextLift + heroLiftNudge;
+  const heroTextOnlyNudge = -6;
+  const heroTopGuideLineY = isSmallMobile ? 60 : isMobile ? 64 : isTablet ? 70 : 76;
 
   useEffect(() => {
     const probe = document.createElement("span");
@@ -76,7 +81,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
     probe.style.pointerEvents = "none";
     probe.style.whiteSpace = "nowrap";
     probe.style.fontFamily = font.sans;
-    probe.style.fontSize = `${heroSubheadingFontSize}px`;
+    probe.style.fontSize = `${heroUseCaseFontSize}px`;
     probe.style.fontWeight = "700";
     probe.style.letterSpacing = "0.01em";
     probe.style.lineHeight = "1.6";
@@ -101,7 +106,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
 
     setHeroUseCaseSlotWidth((current) => (current === nextSlotWidthPx ? current : nextSlotWidthPx));
     setHeroSubheadingNudgeX((current) => (current === nextNudge ? current : nextNudge));
-  }, [width, heroSubheadingFontSize]);
+  }, [width, heroUseCaseFontSize]);
 
   useEffect(() => {
     if (!isMobileViewport) {
@@ -294,6 +299,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
             inset: 0,
             pointerEvents: "none",
             opacity: isSmallMobile ? 0.56 : isMobile ? 0.52 : isTablet ? 0.42 : 0.46,
+            transform: `translateY(${heroContentOffsetY}px)`,
           }}
         >
           <svg
@@ -316,7 +322,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
             >
               <line x1="160" y1="-20" x2="160" y2="620" />
               <line x1="840" y1="-20" x2="840" y2="620" />
-              <line x1="-20" y1="110" x2="1020" y2="110" />
+              <line x1="-20" y1={heroTopGuideLineY} x2="1020" y2={heroTopGuideLineY} />
               <line x1="-20" y1="520" x2="1020" y2="520" />
             </g>
           </svg>
@@ -333,7 +339,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
           textAlign: "center",
           position: "relative",
           zIndex: 2,
-          transform: `translateY(${heroTextLift}px)`,
+          transform: `translateY(${heroContentOffsetY + heroTextOnlyNudge}px)`,
           willChange: "transform, opacity",
           display: "flex",
           flexDirection: "column",
@@ -351,17 +357,19 @@ export function LandingPage({ onCaseStudies, onContact }) {
               borderRadius: 999,
               border: `1px solid ${T.ink12}`,
               background: "rgba(255,255,255,.72)",
+              position: "relative",
+              zIndex: 3,
               backdropFilter: "blur(2px)",
               WebkitBackdropFilter: "blur(2px)",
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 11 : 12,
+              fontSize: isSmallMobile ? 12 : 13,
               fontWeight: 600,
               letterSpacing: ".01em",
               color: T.ink,
               lineHeight: 1.2,
             }}
           >
-            Turn AI into real business outcomes
+            Your on-demand Applied AI Lab.
           </span>
         </Reveal>
 
@@ -418,7 +426,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               fontSize: isMobile ? "clamp(38px, 12vw, 58px)" : "clamp(60px, 6.9vw, 98px)",
             }}
           >
-            Your on-demand
+            Turn AI into real
             <span
               style={{
                 display: "block",
@@ -427,7 +435,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                 fontWeight: 700,
               }}
             >
-              Applied AI Lab.
+              business outcomes
             </span>
           </h1>
         </Reveal>
@@ -472,7 +480,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               className="hero-use-case-shell"
               style={{ width: heroUseCaseSlotWidth, minWidth: heroUseCaseSlotWidth, textAlign: isPhoneViewport ? "center" : "left" }}
             >
-              <span className="hero-use-case-word" style={{ textAlign: isPhoneViewport ? "center" : "left" }}>
+              <span className="hero-use-case-word" style={{ textAlign: isPhoneViewport ? "center" : "left", fontSize: heroUseCaseFontSize }}>
                 {HERO_USE_CASES[useCaseIndex]}
               </span>
             </span>

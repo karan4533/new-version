@@ -5,10 +5,19 @@ import { Section } from "../shared";
 import { Reveal } from "../shared";
 import { SERVICES } from "../../constants/data/services";
 import { RiLoginBoxLine } from "react-icons/ri";
+import { FiActivity, FiCompass, FiCpu, FiSettings, FiShield, FiUsers } from "react-icons/fi";
 
 export function Services() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
   const servicesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
+  const serviceIconById = {
+    "01": FiCpu,
+    "02": FiSettings,
+    "03": FiShield,
+    "04": FiCompass,
+    "05": FiActivity,
+    "06": FiUsers,
+  };
   const [hasHoverInput, setHasHoverInput] = useState(false);
   const supportsHoverFlip = hasHoverInput;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
@@ -66,20 +75,107 @@ export function Services() {
 
   return (
     <Section id="services" paddingTop={servicesTopPadding}>
+      <style>{`
+        #services .services-split-layout {
+          display: grid !important;
+          grid-template-columns: 30% 70% !important;
+          align-items: stretch !important;
+          gap: 20px !important;
+        }
+
+        #services .services-left-panel,
+        #services .services-right-panel,
+        #services .services-card-slot {
+          min-width: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+        }
+
+        #services .services-left-panel {
+          display: flex !important;
+        }
+
+        #services .services-cards-grid {
+          display: grid !important;
+          grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+          grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+          gap: 12px !important;
+          align-items: stretch !important;
+        }
+
+        #services .services-card-shell {
+          width: 100% !important;
+          position: relative !important;
+          transform: none !important;
+          float: none !important;
+          border-radius: 14px !important;
+          overflow: hidden !important;
+          display: block !important;
+        }
+
+        #services .services-card-face {
+          position: static !important;
+          transform: none !important;
+          float: none !important;
+          height: 100% !important;
+          box-sizing: border-box !important;
+          border-radius: 14px !important;
+        }
+
+        @media (max-width: 1024px) {
+          #services .services-split-layout {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
+
+          #services .services-cards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+          }
+        }
+
+        @media (max-width: 767px) {
+          #services .services-cards-grid {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: none !important;
+            gap: 10px !important;
+          }
+        }
+      `}</style>
+
       <div
+        className="services-split-layout"
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: isSmallMobile ? 12 : isMobile ? 14 : 16,
-          alignItems: "start",
-          marginBottom: isSmallMobile ? 28 : isMobile ? 36 : 46,
+          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "minmax(220px,30%) minmax(0,1fr)",
+          gap: isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 18 : 20,
+          alignItems: "stretch",
         }}
       >
-        <Reveal distance={18} blurFrom={10} style={{ minWidth: 0 }}>
-          <div style={{ minWidth: 0, textAlign: "center" }}>
+        <div className="services-left-panel">
+          <Reveal distance={18} blurFrom={10} style={{ minWidth: 0, height: "100%" }}>
+            <div
+            style={{
+              minWidth: 0,
+              border: `1px solid rgba(30,26,16,.14)`,
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
+              borderRadius: 14,
+              boxShadow: "0 8px 18px rgba(30,26,16,.08)",
+              padding: isSmallMobile ? "18px 16px" : isMobile ? "20px 18px" : "24px 22px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              justifyContent: isMobile || isTablet ? "flex-start" : "center",
+              gap: isSmallMobile ? 10 : 12,
+              minHeight: isMobile || isTablet ? "auto" : 284,
+              height: isMobile || isTablet ? "auto" : "100%",
+            }}
+          >
             <p
               style={{
-                margin: "0 0 16px",
+                margin: 0,
                 fontFamily: font.sans,
                 fontSize: 11,
                 fontWeight: 600,
@@ -96,40 +192,29 @@ export function Services() {
             </p>
             <h2
               style={{
-                margin: "0 auto",
+                margin: 0,
                 fontFamily: font.serif,
                 fontWeight: 500,
                 lineHeight: 1.08,
                 letterSpacing: "-.02em",
                 color: T.ink,
                 fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 38 : 40,
-                whiteSpace: isTablet ? "normal" : "nowrap",
+                whiteSpace: "normal",
                 maxWidth: "100%",
               }}
             >
               Six ways we turn AI ambition into production reality.
             </h2>
-          </div>
-        </Reveal>
 
-        <Reveal delay={0.08} distance={16} blurFrom={8} style={{ minWidth: 0 }}>
-          <div
-            style={{
-              minWidth: 0,
-              paddingLeft: 0,
-              paddingTop: 0,
-            }}
-          >
             <p
               style={{
-                margin: "0 auto",
-                maxWidth: 520,
+                margin: 0,
                 fontFamily: font.sans,
                 fontSize: isSmallMobile ? 12 : 13,
                 lineHeight: 1.58,
                 color: T.ink60,
                 overflowWrap: "anywhere",
-                textAlign: "center",
+                maxWidth: isMobile || isTablet ? 520 : "100%",
               }}
             >
               Most enterprises have a strategy. Few have systems that run in production.
@@ -142,7 +227,8 @@ export function Services() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: `${isSmallMobile ? 10 : 12}px 0 0`,
+                width: "100%",
+                marginTop: isSmallMobile ? 2 : 4,
               }}
             >
               <span
@@ -153,28 +239,32 @@ export function Services() {
                 }}
               />
             </div>
-          </div>
-        </Reveal>
-      </div>
+            </div>
+          </Reveal>
+        </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2,minmax(0,1fr))" : "repeat(3,minmax(0,1fr))",
-          gap: isSmallMobile ? 10 : 12,
-        }}
-      >
-        {SERVICES.map((card, index) => (
-          <Reveal
-            key={card.name}
-            delay={0.08 + index * 0.05}
-            distance={16}
-            blurFrom={7}
-            style={{ height: "100%" }}
+        <div className="services-right-panel" style={{ minWidth: 0 }}>
+          <div
+            className="services-cards-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2,minmax(0,1fr))" : "repeat(3,minmax(0,1fr))",
+              gap: isSmallMobile ? 10 : 12,
+            }}
           >
+            {SERVICES.map((card, index) => (
+              <div key={card.name} className="services-card-slot">
+              <Reveal
+                delay={0.08 + index * 0.05}
+                distance={0}
+                scaleFrom={1}
+                blurFrom={0}
+                style={{ height: "100%" }}
+              >
             {(() => {
               const isFlipped = activeCardIndex === index;
               const highlights = (card.items || []).slice(0, 5);
+              const ServiceTopicIcon = serviceIconById[card.id] || FiCpu;
               const allowTwoLineTitle = card.name
                 .toLowerCase()
                 .startsWith("academic and industry partnership");
@@ -184,16 +274,15 @@ export function Services() {
 
               return (
                 <div
+                  className="services-card-wrap"
                   style={{
-                    perspective: "1800px",
-                    perspectiveOrigin: "50% 50%",
-                    transformStyle: "preserve-3d",
                     position: "relative",
                     width: "100%",
                     height: "100%",
                   }}
                 >
                   <article
+                    className="services-card-shell"
                     onMouseEnter={() => {
                       if (!supportsHoverFlip) return;
                       setActiveCardIndex(index);
@@ -220,47 +309,38 @@ export function Services() {
                     style={{
                       position: "relative",
                       width: "100%",
-                      minHeight: isSmallMobile ? 254 : 296,
-                      height: "100%",
-                      transformStyle: "preserve-3d",
-                      WebkitTransformStyle: "preserve-3d",
-                      transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                      transition: "transform .46s ease-in-out",
-                      transformOrigin: "center center",
+                      height: isSmallMobile ? 246 : 284,
+                      overflow: "hidden",
                       outline: "none",
                       cursor: "pointer",
-                      willChange: "transform",
                     }}
                   >
                     <div
+                      className="services-card-face services-card-face-front"
                       style={{
-                        position: "absolute",
-                        inset: 0,
                         border: `1px solid rgba(30,26,16,.14)`,
                         background:
                           "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
                         borderRadius: 14,
-                        padding: isSmallMobile ? "15px 14px" : "18px 17px 16px",
-                        display: "flex",
+                        padding: isSmallMobile ? "14px 13px" : "17px 15px 14px",
+                        display: isFlipped ? "none" : "flex",
                         flexDirection: "column",
                         alignItems: "flex-start",
                         gap: isSmallMobile ? 8 : 10,
-                        transform: "rotateY(0deg) translateZ(1px)",
-                        backfaceVisibility: "hidden",
-                        WebkitBackfaceVisibility: "hidden",
                         boxShadow: "0 8px 18px rgba(30,26,16,.08)",
                       }}
                     >
                       <span
                         style={{
-                          fontFamily: font.serif,
-                          fontSize: isSmallMobile ? 42 : 44,
-                          lineHeight: 1,
-                          color: "rgba(176,120,69,.24)",
-                          letterSpacing: "-.01em",
+                          width: isSmallMobile ? 40 : 44,
+                          height: isSmallMobile ? 40 : 44,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: T.amber,
                         }}
                       >
-                        {card.id || String(index + 1).padStart(2, "0")}
+                        <ServiceTopicIcon size={isSmallMobile ? 24 : 26} />
                       </span>
                       <h3
                         style={{
@@ -353,35 +433,32 @@ export function Services() {
                     </div>
 
                     <div
+                      className="services-card-face services-card-face-back"
                       style={{
-                        position: "absolute",
-                        inset: 0,
                         border: "1px solid rgba(30,26,16,.16)",
                         background:
                           "linear-gradient(180deg, rgba(247,242,232,.98) 0%, rgba(239,231,216,.98) 100%)",
                         borderRadius: 14,
-                        padding: isSmallMobile ? "15px 14px" : "18px 17px 16px",
-                        display: "flex",
+                        padding: isSmallMobile ? "14px 13px" : "17px 15px 14px",
+                        display: isFlipped ? "flex" : "none",
                         flexDirection: "column",
                         alignItems: "flex-start",
                         justifyContent: "flex-start",
                         gap: isSmallMobile ? 8 : 10,
-                        transform: "rotateY(180deg) translateZ(1px)",
-                        backfaceVisibility: "hidden",
-                        WebkitBackfaceVisibility: "hidden",
                         boxShadow: "0 10px 22px rgba(30,26,16,.1)",
                       }}
                     >
                       <span
                         style={{
-                          fontFamily: font.serif,
-                          fontSize: isSmallMobile ? 42 : 44,
-                          lineHeight: 1,
-                          color: "rgba(176,120,69,.24)",
-                          letterSpacing: "-.01em",
+                          width: isSmallMobile ? 40 : 44,
+                          height: isSmallMobile ? 40 : 44,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: T.amber,
                         }}
                       >
-                        {card.id || String(index + 1).padStart(2, "0")}
+                        <ServiceTopicIcon size={isSmallMobile ? 24 : 26} />
                       </span>
                       <h3
                         style={{
@@ -448,8 +525,11 @@ export function Services() {
                 </div>
               );
             })()}
-          </Reveal>
-        ))}
+              </Reveal>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </Section>
   );

@@ -197,7 +197,7 @@ export function WhoWeAre() {
                   style={{
                     margin: 0,
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 12 : 13,
+                    fontSize: isSmallMobile ? 13 : 14,
                     lineHeight: 1.55,
                     color: aboutText,
                   }}
@@ -212,80 +212,81 @@ export function WhoWeAre() {
 
       <div
         style={{
-          marginTop: isSmallMobile ? 28 : isMobile ? 34 : 40,
+          marginTop: isSmallMobile ? 54 : isMobile ? 62 : 74,
         }}
       >
         <div
-          aria-hidden="true"
           style={{
-            margin: isSmallMobile ? "0 0 14px" : isMobile ? "0 0 16px" : "0 0 18px",
+            maxWidth: 980,
+            width: "100%",
+            margin: "0 auto",
+            background: "linear-gradient(180deg, rgba(7,5,2,.56) 0%, rgba(7,5,2,.44) 100%)",
+            border: `1px solid ${aboutRule}`,
+            borderRadius: isSmallMobile ? 16 : 20,
+            padding: isSmallMobile ? "8px 6px" : isMobile ? "10px 8px" : "12px 10px",
+            position: "relative",
+            zIndex: 1,
+            overflow: "hidden",
+            boxShadow: "0 12px 26px rgba(0,0,0,.2)",
           }}
         >
-          <span
+          <div
             style={{
-              display: "block",
-              width: "100%",
-              height: 1,
-              background: aboutDivider,
+              display: "grid",
+              gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
             }}
-          />
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
-          }}
-        >
-          {stats.map((item, index) => (
-            <Reveal
-              key={`${item.value}-${item.label}`}
-              delay={0.16 + index * 0.06}
-              distance={14}
-              blurFrom={6}
-              style={{ height: "100%" }}
-            >
-              <div
-                style={{
-                  padding: isSmallMobile ? "13px 10px" : "14px 12px",
-                  borderRight:
-                    !isMobile
-                      ? index < stats.length - 1
-                        ? `1px solid ${aboutDivider}`
-                        : "none"
-                      : index % 2 === 0
-                        ? `1px solid ${aboutDivider}`
-                        : "none",
-                  textAlign: "center",
-                  height: "100%",
-                }}
+          >
+            {stats.map((item, index) => (
+              <Reveal
+                key={`${item.value}-${item.label}`}
+                delay={0.16 + index * 0.06}
+                distance={14}
+                blurFrom={6}
+                style={{ height: "100%" }}
               >
                 <div
                   style={{
-                    fontFamily: font.serif,
-                    fontSize: isSmallMobile ? 26 : 31,
-                    color: T.amber,
-                    lineHeight: 1.1,
-                    marginBottom: 3,
+                    padding: isSmallMobile ? "16px 10px" : isMobile ? "18px 12px" : "20px 14px",
+                    borderRight:
+                      !isMobile
+                        ? index < stats.length - 1
+                          ? `1px solid ${aboutDivider}`
+                          : "none"
+                        : index % 2 === 0
+                          ? `1px solid ${aboutDivider}`
+                          : "none",
+                    borderBottom: isMobile && index < 2 ? `1px solid ${aboutDivider}` : "none",
+                    textAlign: "center",
+                    height: "100%",
                   }}
                 >
-                  {item.value}
+                  <div
+                    style={{
+                      fontFamily: font.serif,
+                      fontSize: isSmallMobile ? 26 : 31,
+                      color: T.amber,
+                      lineHeight: 1.1,
+                      marginBottom: 3,
+                    }}
+                  >
+                    {item.value}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: font.sans,
+                      fontSize: 10,
+                      color: aboutStatLabel,
+                      lineHeight: 1.5,
+                      textTransform: "capitalize",
+                      letterSpacing: ".08em",
+                    }}
+                  >
+                    {item.label}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    fontFamily: font.sans,
-                    fontSize: 10,
-                    color: aboutStatLabel,
-                    lineHeight: 1.5,
-                    textTransform: "uppercase",
-                    letterSpacing: ".08em",
-                  }}
-                >
-                  {item.label}
-                </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
       </div>

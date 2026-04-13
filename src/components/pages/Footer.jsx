@@ -1,5 +1,6 @@
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
+import companyLogo from "../../assets/logo (1).webp";
 
 export function Footer() {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
@@ -27,6 +28,11 @@ export function Footer() {
     ["E-Commerce", "#industry-footprint"],
     ["Enterprise", "#industry-footprint"],
   ];
+
+  const officeAddress =
+    "Elnet Software City, TS 140 Block 2 & 9, Rajiv Gandhi Salai, Tharamani, Chennai, TN-600113";
+  const officeMapLink =
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`;
 
   const columnHeading = {
     margin: "0 0 14px",
@@ -86,14 +92,34 @@ export function Footer() {
             <div
               style={{
                 margin: "0 0 10px",
-                fontFamily: font.serif,
-                fontSize: isSmallMobile ? 20 : 22,
-                fontWeight: 600,
-                color: T.w,
-                letterSpacing: ".01em",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: isSmallMobile ? 8 : 10,
               }}
             >
-              Heuristic Labs
+              <img
+                src={companyLogo}
+                alt="Heuristic Labs logo"
+                style={{
+                  width: isSmallMobile ? 34 : 40,
+                  height: isSmallMobile ? 34 : 40,
+                  objectFit: "contain",
+                  filter: "brightness(0.78)",
+                  display: "block",
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: font.serif,
+                  fontSize: isSmallMobile ? 20 : 22,
+                  fontWeight: 600,
+                  color: T.w,
+                  letterSpacing: ".01em",
+                }}
+              >
+                Heuristic Labs
+              </span>
             </div>
             <p
               style={{
@@ -111,10 +137,39 @@ export function Footer() {
             <p style={{ margin: "0 0 4px", fontSize: 13, color: "rgba(255,255,255,.56)" }}>
               +91 97399 86763
             </p>
-            <p style={{ margin: "0 0 4px", fontSize: 13, color: "rgba(255,255,255,.56)" }}>
+            <p style={{ margin: "0 0 12px", fontSize: 13, color: "rgba(255,255,255,.56)" }}>
               www.HeuristicLabs.ai
             </p>
-            <p style={{ margin: 0, fontSize: 13, color: "rgba(255,255,255,.56)" }}>
+            <a
+              href={officeMapLink}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open office location in Google Maps"
+              style={{
+                margin: "0 0 4px",
+                fontSize: 13,
+                lineHeight: 1.5,
+                color: "rgba(255,255,255,.56)",
+                maxWidth: 300,
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 6,
+                textDecoration: "none",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{ display: "inline-flex", marginTop: 2, flexShrink: 0 }}
+              >
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                  <path d="M12 2a7 7 0 0 0-7 7c0 5.3 5.9 11.7 6.2 12a1 1 0 0 0 1.5 0c.3-.3 6.3-6.7 6.3-12a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z" />
+                </svg>
+              </span>
+              <span>
+                {officeAddress}
+              </span>
+            </a>
+            <p style={{ margin: 0, marginLeft: 18, fontSize: 13, color: "rgba(255,255,255,.56)" }}>
               Chennai, India
             </p>
           </div>

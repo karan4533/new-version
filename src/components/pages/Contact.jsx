@@ -7,6 +7,10 @@ import { FaCalendarAlt, FaEnvelope, FaLinkedinIn, FaMapMarkerAlt } from "react-i
 export function Contact() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
   const LINKEDIN_URL = "https://www.linkedin.com/company/heuristic-labs-ai/";
+  const OFFICE_ADDRESS =
+    "Elnet Software City, TS 140 Block 2 & 9, Rajiv Gandhi Salai, Tharamani, Chennai, TN-600113";
+  const OFFICE_MAP_LINK =
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(OFFICE_ADDRESS)}`;
 
   const getRowStyle = ({ hasAction, isLast }) => ({
     display: "grid",
@@ -126,7 +130,16 @@ export function Contact() {
       key: "location",
       icon: <FaMapMarkerAlt aria-hidden="true" />,
       title: "Visit us",
-      text: "Elnet Software City, TS 140 Block 2 & 9, Rajiv Gandhi Salai, Tharamani, Chennai, TN-600113",
+      text: (
+        <a
+          href={OFFICE_MAP_LINK}
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: "inherit", textDecoration: "none" }}
+        >
+          {OFFICE_ADDRESS}
+        </a>
+      ),
     },
   ];
 

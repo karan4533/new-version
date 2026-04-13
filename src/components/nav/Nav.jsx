@@ -120,10 +120,10 @@ export function Nav({
             src={companyLogo}
             alt="Heuristic Labs"
             style={{
-              width: isDesktop ? 30 : isSmallMobile ? 26 : 30,
+              width: isSmallMobile ? 32 : 38,
               maxWidth: "100%",
               height: "auto",
-              maxHeight: isDesktop ? 30 : isSmallMobile ? 26 : 30,
+              maxHeight: isSmallMobile ? 32 : 38,
               aspectRatio: "1 / 1",
               objectFit: "contain",
               filter: "brightness(0) saturate(100%)",
@@ -136,7 +136,7 @@ export function Nav({
           <span
             style={{
               fontFamily: font.serif,
-              fontSize: isDesktop ? (isCompactDesktop ? 17 : 19) : isSmallMobile ? 16 : 18,
+              fontSize: isDesktop ? (isCompactDesktop ? 18 : 21) : isSmallMobile ? 17 : 19,
               fontWeight: 700,
               color: T.ink,
               letterSpacing: "0em",
