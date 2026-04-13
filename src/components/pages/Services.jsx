@@ -78,7 +78,7 @@ export function Services() {
       <style>{`
         #services .services-split-layout {
           display: grid !important;
-          grid-template-columns: 30% 70% !important;
+          grid-template-columns: 28% 72% !important;
           align-items: stretch !important;
           gap: 20px !important;
         }
@@ -88,19 +88,20 @@ export function Services() {
         #services .services-card-slot {
           min-width: 0 !important;
           width: 100% !important;
-          height: 100% !important;
         }
 
         #services .services-left-panel {
           display: flex !important;
+          height: 100% !important;
         }
 
         #services .services-cards-grid {
           display: grid !important;
           grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-          grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+          grid-template-rows: repeat(2, auto) !important;
           gap: 12px !important;
           align-items: stretch !important;
+          align-content: start !important;
         }
 
         #services .services-card-shell {
@@ -130,7 +131,7 @@ export function Services() {
 
           #services .services-cards-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+            grid-template-rows: repeat(3, auto) !important;
           }
         }
 
@@ -147,7 +148,7 @@ export function Services() {
         className="services-split-layout"
         style={{
           display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "minmax(220px,30%) minmax(0,1fr)",
+          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr" : "minmax(200px,28%) minmax(0,1fr)",
           gap: isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 18 : 20,
           alignItems: "stretch",
         }}
@@ -162,12 +163,12 @@ export function Services() {
                 "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
               borderRadius: 14,
               boxShadow: "0 8px 18px rgba(30,26,16,.08)",
-              padding: isSmallMobile ? "18px 16px" : isMobile ? "20px 18px" : "24px 22px",
+                padding: isSmallMobile ? "16px 14px" : isMobile ? "18px 16px" : isTablet ? "20px 18px" : "24px 22px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               textAlign: "center",
-              justifyContent: isMobile || isTablet ? "flex-start" : "center",
+              justifyContent: "center",
               gap: isSmallMobile ? 10 : 12,
               minHeight: isMobile || isTablet ? "auto" : 284,
               height: isMobile || isTablet ? "auto" : "100%",
@@ -198,7 +199,7 @@ export function Services() {
                 lineHeight: 1.08,
                 letterSpacing: "-.02em",
                 color: T.ink,
-                fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 38 : 40,
+                  fontSize: isSmallMobile ? 24 : isMobile ? 29 : isTablet ? 34 : 40,
                 whiteSpace: "normal",
                 maxWidth: "100%",
               }}
@@ -309,7 +310,8 @@ export function Services() {
                     style={{
                       position: "relative",
                       width: "100%",
-                      height: isSmallMobile ? 246 : 284,
+                        minHeight: isSmallMobile ? 220 : isMobile ? 236 : isTablet ? 258 : 308,
+                      height: "100%",
                       overflow: "hidden",
                       outline: "none",
                       cursor: "pointer",
@@ -322,72 +324,65 @@ export function Services() {
                         background:
                           "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
                         borderRadius: 14,
-                        padding: isSmallMobile ? "14px 13px" : "17px 15px 14px",
+                          padding: isSmallMobile ? "12px 12px" : isMobile ? "13px 12px" : isTablet ? "14px 13px" : "17px 15px 14px",
                         display: isFlipped ? "none" : "flex",
                         flexDirection: "column",
                         alignItems: "flex-start",
-                        gap: isSmallMobile ? 8 : 10,
+                          gap: isSmallMobile ? 6 : isMobile ? 7 : isTablet ? 8 : 10,
                         boxShadow: "0 8px 18px rgba(30,26,16,.08)",
                       }}
                     >
-                      <span
+                      <div
                         style={{
-                          width: isSmallMobile ? 40 : 44,
-                          height: isSmallMobile ? 40 : 44,
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          color: T.amber,
-                        }}
-                      >
-                        <ServiceTopicIcon size={isSmallMobile ? 24 : 26} />
-                      </span>
-                      <h3
-                        style={{
-                          margin: 0,
-                          fontFamily: font.serif,
-                          fontWeight: 600,
-                          color: T.ink,
-                          fontSize: isSmallMobile ? 19 : 21,
-                          lineHeight: 1.14,
-                          letterSpacing: "-.01em",
                           width: "100%",
-                          maxWidth: "100%",
-                          minHeight: allowTwoLineTitle
-                            ? (isSmallMobile ? 56 : 60)
-                            : (isSmallMobile ? 44 : 48),
-                          whiteSpace: allowTwoLineTitle ? "normal" : "nowrap",
-                          display: allowTwoLineTitle ? "-webkit-box" : "block",
-                          WebkitLineClamp: allowTwoLineTitle ? 2 : "unset",
-                          WebkitBoxOrient: allowTwoLineTitle ? "vertical" : "horizontal",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
+                          display: "grid",
+                            gap: isSmallMobile ? 6 : isMobile ? 7 : 8,
                         }}
                       >
-                        {card.name}
-                      </h3>
-                      <p
-                        style={{
-                          margin: 0,
-                          fontFamily: font.sans,
-                          color: T.ink60,
-                          fontSize: isSmallMobile ? 12 : 13,
-                          lineHeight: 1.52,
-                          minHeight: isSmallMobile ? 64 : 68,
-                        }}
-                      >
-                        {card.desc}
-                      </p>
+                        <span
+                          style={{
+                              width: isSmallMobile ? 36 : isMobile ? 38 : isTablet ? 40 : 46,
+                              height: isSmallMobile ? 36 : isMobile ? 38 : isTablet ? 40 : 46,
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: T.amber,
+                          }}
+                        >
+                            <ServiceTopicIcon size={isSmallMobile ? 21 : isMobile ? 22 : isTablet ? 24 : 27} />
+                        </span>
+                        <h3
+                          style={{
+                            margin: 0,
+                            fontFamily: font.serif,
+                            fontWeight: 600,
+                            color: T.ink,
+                              fontSize: isSmallMobile ? 18 : isMobile ? 19 : isTablet ? 20 : 22,
+                            lineHeight: 1.12,
+                            letterSpacing: "-.01em",
+                            width: "100%",
+                            maxWidth: "100%",
+                            minHeight: allowTwoLineTitle
+                                ? (isSmallMobile ? 46 : isMobile ? 50 : isTablet ? 54 : 58)
+                                : (isSmallMobile ? 34 : isMobile ? 38 : isTablet ? 40 : 46),
+                            whiteSpace: "normal",
+                            display: "block",
+                            overflowWrap: "anywhere",
+                          }}
+                        >
+                          {card.name}
+                        </h3>
+                      </div>
 
                       {technicalTags.length > 0 && (
                         <div
                           style={{
                             display: "flex",
                             flexWrap: "wrap",
-                            alignItems: "center",
-                            gap: isSmallMobile ? 6 : 7,
-                            marginTop: isSmallMobile ? 8 : 10,
-                            paddingTop: isSmallMobile ? 4 : 6,
+                            alignItems: "flex-start",
+                              gap: isSmallMobile ? 5 : 6,
+                            marginTop: isSmallMobile ? 4 : 6,
+                            paddingTop: 0,
                           }}
                         >
                           {technicalTags.map((tag, tagIndex) => {
@@ -439,26 +434,26 @@ export function Services() {
                         background:
                           "linear-gradient(180deg, rgba(247,242,232,.98) 0%, rgba(239,231,216,.98) 100%)",
                         borderRadius: 14,
-                        padding: isSmallMobile ? "14px 13px" : "17px 15px 14px",
+                          padding: isSmallMobile ? "12px 12px" : isMobile ? "13px 12px" : isTablet ? "14px 13px" : "17px 15px 14px",
                         display: isFlipped ? "flex" : "none",
                         flexDirection: "column",
                         alignItems: "flex-start",
                         justifyContent: "flex-start",
-                        gap: isSmallMobile ? 8 : 10,
+                          gap: isSmallMobile ? 6 : isMobile ? 7 : isTablet ? 8 : 10,
                         boxShadow: "0 10px 22px rgba(30,26,16,.1)",
                       }}
                     >
                       <span
                         style={{
-                          width: isSmallMobile ? 40 : 44,
-                          height: isSmallMobile ? 40 : 44,
+                            width: isSmallMobile ? 36 : isMobile ? 38 : isTablet ? 40 : 46,
+                            height: isSmallMobile ? 36 : isMobile ? 38 : isTablet ? 40 : 46,
                           display: "inline-flex",
                           alignItems: "center",
                           justifyContent: "center",
                           color: T.amber,
                         }}
                       >
-                        <ServiceTopicIcon size={isSmallMobile ? 24 : 26} />
+                          <ServiceTopicIcon size={isSmallMobile ? 21 : isMobile ? 22 : isTablet ? 24 : 27} />
                       </span>
                       <h3
                         style={{
@@ -466,18 +461,17 @@ export function Services() {
                           fontFamily: font.serif,
                           fontWeight: 600,
                           color: T.ink,
-                          fontSize: isSmallMobile ? 19 : 21,
-                          lineHeight: 1.14,
+                            fontSize: isSmallMobile ? 18 : isMobile ? 19 : isTablet ? 20 : 22,
+                          lineHeight: 1.12,
                           letterSpacing: "-.01em",
                           width: "100%",
                           maxWidth: "100%",
-                          minHeight: allowTwoLineTitle ? (isSmallMobile ? 52 : 56) : "unset",
-                          whiteSpace: allowTwoLineTitle ? "normal" : "nowrap",
-                          display: allowTwoLineTitle ? "-webkit-box" : "block",
-                          WebkitLineClamp: allowTwoLineTitle ? 2 : "unset",
-                          WebkitBoxOrient: allowTwoLineTitle ? "vertical" : "horizontal",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
+                            minHeight: allowTwoLineTitle
+                              ? (isSmallMobile ? 46 : isMobile ? 50 : isTablet ? 54 : 58)
+                              : "unset",
+                          whiteSpace: "normal",
+                          display: "block",
+                          overflowWrap: "anywhere",
                         }}
                       >
                         {card.name}

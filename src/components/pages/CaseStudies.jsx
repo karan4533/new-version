@@ -255,28 +255,22 @@ export function CaseStudies({ onOpenCaseStudy }) {
         : "clamp(36px, 3vw, 44px)";
 
   const previewImageHeight = isSmallMobile
-    ? 182
+    ? 190
     : isMobile
-      ? 228
+      ? 236
       : isTablet
-        ? 268
-        : 312;
+        ? 276
+        : 324;
   const previewInset = isSmallMobile ? 10 : 12;
 
   if (!activeCase) return null;
 
-  const objectivePreview = getCompactText(
-    activeCase.objective || activeCase.body,
+  const casePreviewSummary = activeCase.body || getCompactText(
+    activeCase.objective || activeCase.outcome || "",
     isSmallMobile ? 120 : isMobile ? 140 : isTablet ? 160 : 180,
   );
-  const outcomePreview = getCompactText(
-    activeCase.outcome || activeCase.body,
-    isSmallMobile ? 120 : isMobile ? 140 : 160,
-  );
-  const tags =
-    (activeCase.techTags?.length
-      ? activeCase.techTags
-      : activeCase.metrics?.map((metric) => metric.label)) || [];
+  const stableCaseSummary =
+    "Explore practical AI implementations across industries, with each case capturing the challenge, approach, and measurable business impact.";
 
   return (
     <Section id="case-studies" paddingTop={caseStudiesTopPadding} bg={caseSectionBg}>
@@ -355,7 +349,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                   color: caseTextMuted,
                 }}
               >
-                {outcomePreview}
+                {stableCaseSummary}
               </p>
             </div>
 
@@ -410,7 +404,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
             style={{
               marginTop: useSingleColumnCaseLayout ? 0 : 10,
               minWidth: 0,
-              width: useSingleColumnCaseLayout ? "100%" : "96%",
+              width: useSingleColumnCaseLayout ? "100%" : "98%",
               maxWidth: "100%",
               justifySelf: useSingleColumnCaseLayout ? "stretch" : "end",
               overflow: "visible",
@@ -535,51 +529,36 @@ export function CaseStudies({ onOpenCaseStudy }) {
                       overflowWrap: "anywhere",
                     }}
                   >
-                    {objectivePreview}
+                    {casePreviewSummary}
                   </p>
 
-                  <div
-                    style={{
-                      width: "100%",
-                      maxWidth: "100%",
-                      display: "grid",
-                      gridTemplateColumns: isSmallMobile
-                        ? "1fr"
-                        : isMobile || isNarrowTablet
-                          ? "1fr"
-                          : isTablet
-                          ? "repeat(2,minmax(0,1fr))"
-                          : "repeat(2,minmax(0,1fr))",
-                      gap: 8,
-                    }}
-                  >
-                    {tags.slice(0, 4).map((tag) => (
-                      <div
-                        key={`${activeCase.title}-${tag}`}
-                        style={{
-                          border: "1px solid rgba(190,220,248,.42)",
-                          borderRadius: 8,
-                          padding: "8px 10px",
-                          background:
-                            "linear-gradient(180deg, rgba(33,45,60,.82) 0%, rgba(20,30,42,.88) 100%)",
-                          boxShadow: "inset 0 1px 0 rgba(232,244,255,.16)",
-                          fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 10 : 11,
-                          fontWeight: 600,
-                          lineHeight: 1.35,
-                          color: "rgba(255,255,255,.92)",
-                          minHeight: isSmallMobile ? 38 : 42,
-                          display: "flex",
-                          alignItems: "center",
-                          minWidth: 0,
-                          width: "100%",
-                          maxWidth: "100%",
-                          overflowWrap: "anywhere",
-                        }}
-                      >
-                        {tag}
-                      </div>
-                    ))}
+                  <div style={{ width: "100%", maxWidth: "100%" }}>
+                    <button
+                      type="button"
+                      onClick={() => onOpenCaseStudy?.(activeIndex)}
+                      style={{
+                        border: "1px solid rgba(190,220,248,.42)",
+                        borderRadius: 8,
+                        padding: isSmallMobile ? "9px 12px" : "10px 14px",
+                        background:
+                          "linear-gradient(180deg, rgba(33,45,60,.82) 0%, rgba(20,30,42,.88) 100%)",
+                        boxShadow: "inset 0 1px 0 rgba(232,244,255,.16)",
+                        fontFamily: font.sans,
+                        fontSize: isSmallMobile ? 11 : 12,
+                        fontWeight: 700,
+                        letterSpacing: ".04em",
+                        lineHeight: 1.2,
+                        textTransform: "uppercase",
+                        color: "rgba(255,255,255,.94)",
+                        minHeight: isSmallMobile ? 38 : 42,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Explore
+                    </button>
                   </div>
                 </div>
               </div>

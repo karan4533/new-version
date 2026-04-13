@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/global.css";
 import { Nav } from "./components/nav";
 import { LandingPage } from "./components/pages/LandingPage";
@@ -55,7 +55,6 @@ const buildCaseUrl = (caseIndex) => {
 
 export default function App() {
   const [selectedCaseIndex, setSelectedCaseIndex] = useState(null);
-  const pushedCaseStateRef = useRef(false);
 
   const getStickyNavOffset = (extraGap = 12) => {
     const navElement = document.querySelector("nav");
@@ -166,7 +165,6 @@ export default function App() {
 
     if (nextUrl !== currentUrl) {
       window.history.pushState({ caseIndex: index }, "", nextUrl);
-      pushedCaseStateRef.current = true;
     }
 
     setSelectedCaseIndex(index);
@@ -174,15 +172,11 @@ export default function App() {
   };
 
   const handleCloseCaseStudy = () => {
-    const hasCaseInUrl = new URLSearchParams(window.location.search).has("case");
+    const cleanUrl = buildCaseUrl(null);
+    const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
 
-    if (hasCaseInUrl && pushedCaseStateRef.current) {
-      window.history.back();
-      return;
-    }
-
-    if (hasCaseInUrl) {
-      window.history.replaceState({}, "", buildCaseUrl(null));
+    if (cleanUrl !== currentUrl) {
+      window.history.replaceState({}, "", cleanUrl);
     }
 
     setSelectedCaseIndex(null);
