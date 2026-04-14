@@ -469,6 +469,31 @@
     margin-bottom: 28px;
   }
 
+  .case-home-nav-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .case-home-nav-item {
+    padding: 10px 10px;
+    gap: 8px;
+  }
+
+  .case-home-nav-num {
+    min-width: 14px;
+    font-size: 0.52rem;
+  }
+
+  .case-home-nav-title {
+    font-size: 0.72rem;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .case-home-nav-sub {
+    display: none;
+  }
+
   .case-home-preview-media {
     height: 260px;
   }
@@ -502,7 +527,21 @@
 
 @media (max-width: 480px) {
   .case-home-nav-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .case-home-nav-item {
+    padding: 9px 9px;
+  }
+
+  .case-home-nav-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .case-home-nav-arrow {
+    display: none;
   }
 
   .case-home-preview-media {
