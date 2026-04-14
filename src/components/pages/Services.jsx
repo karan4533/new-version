@@ -171,9 +171,6 @@ export function Services() {
           const allowTwoLineTitle = card.name
             .toLowerCase()
             .startsWith("academic and industry partnership");
-          const technicalTags = (card.technicalTags || [])
-            .map((tag) => String(tag).trim())
-            .filter(Boolean);
           const highlights = (card.items || []).slice(0, 5);
 
           return (
@@ -231,7 +228,7 @@ export function Services() {
                   style={{
                     position: "relative",
                     width: "100%",
-                    minHeight: isSmallMobile ? 262 : isMobile ? 252 : isTablet ? 266 : 288,
+                    minHeight: isSmallMobile ? 238 : isMobile ? 232 : isTablet ? 248 : 268,
                     height: "100%",
                     transformStyle: "preserve-3d",
                     WebkitTransformStyle: "preserve-3d",
@@ -251,11 +248,11 @@ export function Services() {
                       background:
                         "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
                       borderRadius: 14,
-                      padding: isSmallMobile ? "15px 13px 40px" : isMobile ? "14px 13px 36px" : "17px 15px 38px",
+                      padding: isSmallMobile ? "16px 14px 42px" : isMobile ? "16px 14px 40px" : "18px 16px 42px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: isSmallMobile ? 10 : 10,
+                      gap: isSmallMobile ? 11 : 12,
                       transform: "rotateY(0deg) translateZ(1px)",
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
@@ -264,16 +261,16 @@ export function Services() {
                   >
                     <span
                       style={{
-                        width: isSmallMobile ? 38 : isMobile ? 38 : isTablet ? 42 : 46,
-                        height: isSmallMobile ? 38 : isMobile ? 38 : isTablet ? 42 : 46,
+                        width: isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 52 : 56,
+                        height: isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 52 : 56,
                         display: "inline-flex",
                         alignItems: "center",
                         justifyContent: "center",
                         color: T.amber,
-                        marginBottom: isSmallMobile ? 2 : 2,
+                        marginBottom: isSmallMobile ? 1 : 2,
                       }}
                     >
-                      <ServiceTopicIcon size={isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 24 : 26} />
+                      <ServiceTopicIcon size={isSmallMobile ? 28 : isMobile ? 28 : isTablet ? 31 : 34} />
                     </span>
 
                     <h3
@@ -288,8 +285,8 @@ export function Services() {
                         width: "100%",
                         maxWidth: "100%",
                         minHeight: allowTwoLineTitle
-                          ? (isSmallMobile ? 44 : isMobile ? 44 : isTablet ? 46 : 50)
-                          : (isSmallMobile ? 36 : isMobile ? 34 : isTablet ? 36 : 40),
+                          ? (isSmallMobile ? 48 : isMobile ? 48 : isTablet ? 50 : 54)
+                          : (isSmallMobile ? 40 : isMobile ? 38 : isTablet ? 40 : 44),
                         whiteSpace: "normal",
                         display: "block",
                         overflowWrap: "anywhere",
@@ -309,66 +306,13 @@ export function Services() {
                           lineHeight: 1.5,
                           letterSpacing: "0.01em",
                           color: "rgba(30,26,16,.82)",
-                          minHeight: isSmallMobile ? 64 : isMobile ? 58 : 62,
+                          minHeight: isSmallMobile ? 72 : isMobile ? 68 : 72,
                           overflowWrap: "anywhere",
+                          marginTop: 2,
                         }}
                       >
                         {card.desc}
                       </p>
-                    )}
-
-                    {technicalTags.length > 0 && (
-                      <div
-                        style={{
-                          display: "grid",
-                          gridTemplateColumns: isSmallMobile
-                            ? "repeat(2,minmax(0,1fr))"
-                            : "repeat(3,minmax(0,1fr))",
-                          alignItems: "center",
-                          gap: isSmallMobile ? 6 : 6,
-                          marginTop: "auto",
-                          paddingTop: isSmallMobile ? 8 : 8,
-                          paddingBottom: isSmallMobile ? 22 : 22,
-                          width: "100%",
-                        }}
-                      >
-                        {technicalTags.map((tag, tagIndex) => {
-                          const normalizedTag = tag.toUpperCase();
-
-                          return (
-                            <span
-                              key={`${card.name}-${normalizedTag}-${tagIndex}`}
-                              style={{
-                                display: "inline-flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                width: "100%",
-                                border: "1px solid rgba(176,120,69,.34)",
-                                borderRadius: 6,
-                                padding: isSmallMobile ? "5px 8px" : "4px 8px",
-                                fontFamily: font.sans,
-                                fontSize: isSmallMobile ? 9 : 8,
-                                fontWeight: 700,
-                                letterSpacing: isSmallMobile ? ".03em" : ".04em",
-                                lineHeight: 1.22,
-                                textTransform: "uppercase",
-                                color: "rgba(30,26,16,.94)",
-                                background:
-                                  "linear-gradient(180deg, rgba(176,120,69,.15) 0%, rgba(176,120,69,.08) 100%)",
-                                boxShadow: "inset 0 1px 0 rgba(255,255,255,.45)",
-                                minHeight: isSmallMobile ? 30 : 24,
-                                textAlign: "center",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                              title={normalizedTag}
-                            >
-                              {normalizedTag}
-                            </span>
-                          );
-                        })}
-                      </div>
                     )}
 
                     <button
@@ -417,11 +361,11 @@ export function Services() {
                       background:
                         "linear-gradient(180deg, rgba(247,242,232,.98) 0%, rgba(239,231,216,.98) 100%)",
                       borderRadius: 14,
-                      padding: isSmallMobile ? "13px 12px 34px" : isMobile ? "14px 13px 36px" : "17px 15px 38px",
+                      padding: isSmallMobile ? "15px 13px 36px" : isMobile ? "16px 14px 38px" : "18px 16px 40px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: isSmallMobile ? 6 : 8,
+                      gap: isSmallMobile ? 8 : 9,
                       transform: "rotateY(180deg)",
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
@@ -466,6 +410,7 @@ export function Services() {
                         listStyle: "none",
                         display: "grid",
                         gap: isSmallMobile ? 6 : 7,
+                        width: "100%",
                       }}
                     >
                       {highlights.map((item) => (
