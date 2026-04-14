@@ -185,10 +185,10 @@ export function WhoWeAre() {
                     display: "block",
                     marginBottom: isSmallMobile ? 8 : 10,
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 10 : 11,
+                    fontSize: isSmallMobile ? 11 : 12,
                     fontWeight: 600,
                     letterSpacing: ".08em",
-                    color: aboutTextSoft,
+                    color: "rgba(176,120,69,.9)",
                   }}
                 >
                   {String(index + 1).padStart(2, "0")}
@@ -197,9 +197,10 @@ export function WhoWeAre() {
                   style={{
                     margin: 0,
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 13 : 14,
+                    fontSize: isSmallMobile ? 15 : 16,
                     lineHeight: 1.55,
                     color: aboutText,
+                    textAlign: index === 0 || index === 2 ? "right" : "left",
                   }}
                 >
                   {item}

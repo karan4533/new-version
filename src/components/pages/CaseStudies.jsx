@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-import { T, font } from "../../constants/designTokens";
+import { useState } from "react";
+import "./CaseStudies.css";
+import { T } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal, Section } from "../shared";
 import { CASES } from "../../constants/data/cases";
@@ -16,580 +17,509 @@ import videoLocalizationImage from "../../assets/video localization.webp";
 import salesCopilotImage from "../../assets/sales copilot.webp";
 import fintechImage from "../../assets/fintech.png";
 
-const THEME_BY_CATEGORY = {
-  "Data analytics": {
-    image: dataAnalyticsImage,
-    position: "42% 36%",
-    tabletPosition: "42% 34%",
-    mobilePosition: "42% 30%",
-    desktopScale: 1.08,
-    tabletScale: 1.1,
-    mobileScale: 1.12,
-    overlay: "linear-gradient(180deg, rgba(12,18,26,.32) 0%, rgba(12,18,26,.78) 100%)",
-  },
-  "E-Commerce": {
-    image: dataAnalyticsImage,
-    position: "42% 36%",
-    tabletPosition: "42% 34%",
-    mobilePosition: "42% 30%",
-    desktopScale: 1.08,
-    tabletScale: 1.1,
-    mobileScale: 1.12,
-    bg: "linear-gradient(135deg, #4f6679 0%, #2f4252 48%, #1f2b36 100%)",
-    overlay: "linear-gradient(180deg, rgba(17,20,24,.28) 0%, rgba(17,20,24,.74) 100%)",
-  },
-  Legal: {
-    image: legalImage,
-    position: "center 40%",
-    tabletPosition: "center 36%",
-    mobilePosition: "center 30%",
-    overlay: "linear-gradient(180deg, rgba(12,16,22,.34) 0%, rgba(12,16,22,.78) 100%)",
+const CASE_GRADIENTS_BY_KEY = {
+  Construction: "linear-gradient(135deg, #0d2133 0%, #1a3a4a 40%, #0a1a20 100%)",
+  "E-Commerce": "linear-gradient(135deg, #1a1020 0%, #2d1a3a 40%, #0f0a18 100%)",
+  "D2C Brand": "linear-gradient(135deg, #0f1a10 0%, #1a2e1a 40%, #0a150a 100%)",
+  "Enterprise Search": "linear-gradient(135deg, #12100a 0%, #2a2010 40%, #181408 100%)",
+  Legal: "linear-gradient(135deg, #0a0a14 0%, #14142a 40%, #080810 100%)",
+  Fintech: "linear-gradient(135deg, #0a1210 0%, #102018 40%, #080e0c 100%)",
+  "AI Governance": "linear-gradient(135deg, #0a0e14 0%, #10182a 40%, #080c10 100%)",
+  Automotive: "linear-gradient(135deg, #14100a 0%, #2a1e08 40%, #100c06 100%)",
+  "Sales Copilot": "linear-gradient(135deg, #112036 0%, #18314d 42%, #0c1622 100%)",
+  Translation: "linear-gradient(135deg, #131916 0%, #1f2f29 42%, #0e1412 100%)",
+  "Video Localization": "linear-gradient(135deg, #17131c 0%, #241b2e 42%, #0f0b14 100%)",
+  Enterprise: "linear-gradient(135deg, #15120e 0%, #252019 42%, #0d0b09 100%)",
+  "Medico-Legal": "linear-gradient(135deg, #101822 0%, #1a2c3a 42%, #0a1218 100%)",
+};
+
+const DEFAULT_CASE_GRADIENT = "linear-gradient(135deg, #15120e 0%, #252019 42%, #0d0b09 100%)";
+
+const CASE_IMAGES_BY_KEY = {
+  Construction: { src: constructionImage, position: "center 44%" },
+  "E-Commerce": { src: dataAnalyticsImage, position: "42% 36%" },
+  "D2C Brand": { src: d2cImage, position: "center 40%" },
+  "Enterprise Search": { src: enterpriseSearchImage, position: "center 42%" },
+  Legal: { src: legalImage, position: "center 40%" },
+  Fintech: { src: fintechImage, position: "22% 44%" },
+  "AI Governance": { src: aiGovernanceImage, position: "center 44%" },
+  Automotive: { src: automotiveImage, position: "center 44%" },
+  "Sales Copilot": { src: salesCopilotImage, position: "center 44%" },
+  Translation: { src: translationImage, position: "center 44%" },
+  "Video Localization": { src: videoLocalizationImage, position: "center 44%" },
+  "Medico-Legal": { src: medicoLegalImage, position: "center 42%" },
+  Enterprise: { src: enterpriseSearchImage, position: "center 42%" },
+  "Sales Tech": { src: salesCopilotImage, position: "center 44%" },
+};
+
+const CASE_PREVIEW_CONTENT_BY_KEY = {
+  "Video Localization": {
+    title: "Voice-to-Voice Video Localization",
+    industry: "Enterprise",
+    duration: "8 weeks",
+    oneLiner:
+      "ASR + LLM + TTS pipeline that localizes training and compliance videos into multiple languages without manual dubbing",
+    stats: [
+      { val: "70-80%", label: "Faster localization" },
+      { val: "Significant", label: "Cost reduction" },
+      { val: "Automated", label: "Audio-video sync" },
+    ],
   },
   Construction: {
-    image: constructionImage,
-    position: "center 44%",
-    tabletPosition: "center 40%",
-    mobilePosition: "center 34%",
-    overlay: "linear-gradient(180deg, rgba(14,20,20,.28) 0%, rgba(14,20,20,.76) 100%)",
-  },
-  "Medico-Legal": {
-    image: medicoLegalImage,
-    position: "center 42%",
-    tabletPosition: "center 38%",
-    mobilePosition: "center 34%",
-    overlay: "linear-gradient(180deg, rgba(16,18,24,.3) 0%, rgba(16,18,24,.76) 100%)",
+    title: "Real-Time Safety Monitoring",
+    industry: "Construction",
+    duration: "12 weeks",
+    oneLiner:
+      "Edge-deployed vision AI that monitors 40+ camera feeds and flags PPE violations in under a second",
+    stats: [
+      { val: "60%", label: "Violation reduction" },
+      { val: "<1s", label: "Alert latency" },
+      { val: "40+", label: "Cameras monitored" },
+    ],
   },
   "D2C Brand": {
-    image: d2cImage,
-    position: "center 40%",
-    tabletPosition: "center 36%",
-    mobilePosition: "center 30%",
-    overlay: "linear-gradient(180deg, rgba(24,18,16,.28) 0%, rgba(24,18,16,.74) 100%)",
-  },
-  Fintech: {
-    image: fintechImage,
-    position: "22% 44%",
-    tabletPosition: "20% 42%",
-    mobilePosition: "22% 44%",
-    desktopScale: 1.02,
-    tabletScale: 1.04,
-    mobileScale: 1.06,
-    overlay: "linear-gradient(180deg, rgba(12,16,24,.26) 0%, rgba(12,16,24,.74) 100%)",
-  },
-  "Sales Tech": {
-    bg: "linear-gradient(135deg, #34536d 0%, #24425b 48%, #1b2f43 100%)",
-    overlay: "linear-gradient(180deg, rgba(12,18,24,.26) 0%, rgba(12,18,24,.74) 100%)",
-  },
-  Enterprise: {
-    bg: "linear-gradient(135deg, #4a5c66 0%, #33444d 48%, #232f36 100%)",
-    overlay: "linear-gradient(180deg, rgba(16,20,24,.24) 0%, rgba(16,20,24,.7) 100%)",
-  },
-  Automotive: {
-    image: automotiveImage,
-    position: "center 44%",
-    tabletPosition: "center 40%",
-    mobilePosition: "center 36%",
-    bg: "linear-gradient(135deg, #56606b 0%, #3d4751 48%, #2b333b 100%)",
-    overlay: "linear-gradient(180deg, rgba(16,20,24,.22) 0%, rgba(16,20,24,.72) 100%)",
-  },
-};
-
-const THEME_BY_TAB_LABEL = {
-  "Enterprise Search": {
-    image: enterpriseSearchImage,
-    position: "center 42%",
-    tabletPosition: "center 40%",
-    mobilePosition: "center 36%",
-    overlay: "linear-gradient(180deg, rgba(14,20,24,.3) 0%, rgba(14,20,24,.76) 100%)",
-  },
-  "AI Governance": {
-    image: aiGovernanceImage,
-    position: "center 44%",
-    tabletPosition: "center 42%",
-    mobilePosition: "center 38%",
-    overlay: "linear-gradient(180deg, rgba(12,18,26,.3) 0%, rgba(12,18,26,.76) 100%)",
-  },
-  Translation: {
-    image: translationImage,
-    position: "center 44%",
-    tabletPosition: "center 41%",
-    mobilePosition: "center 37%",
-    overlay: "linear-gradient(180deg, rgba(14,18,24,.3) 0%, rgba(14,18,24,.76) 100%)",
-  },
-  "Video Localization": {
-    image: videoLocalizationImage,
-    position: "center 44%",
-    tabletPosition: "center 41%",
-    mobilePosition: "center 37%",
-    overlay: "linear-gradient(180deg, rgba(14,18,24,.3) 0%, rgba(14,18,24,.76) 100%)",
+    title: "Customer Support Voice Agent",
+    industry: "D2C Brand",
+    duration: "10 weeks",
+    oneLiner:
+      "Multi-agent voice system handling orders, returns, and product queries with 800ms response latency at any scale",
+    stats: [
+      { val: "80%", label: "Faster resolution" },
+      { val: "800ms", label: "Avg response" },
+      { val: "100%", label: "First-contact on verified flows" },
+    ],
   },
   "Sales Copilot": {
-    image: salesCopilotImage,
-    position: "center 44%",
-    tabletPosition: "center 41%",
-    mobilePosition: "center 37%",
-    overlay: "linear-gradient(180deg, rgba(14,18,24,.3) 0%, rgba(14,18,24,.76) 100%)",
+    title: "Conversational BI Copilot",
+    industry: "Sales Tech",
+    duration: "8 weeks",
+    oneLiner:
+      "Natural language interface that queries structured and unstructured data and generates charts, tables, and insights on demand",
+    stats: [
+      { val: "Zero", label: "Manual reporting" },
+      { val: "<15s", label: "Result time" },
+      { val: "Multi-source", label: "Synthesis" },
+    ],
+  },
+  "Enterprise Search": {
+    title: "Hybrid Enterprise Search",
+    industry: "Enterprise",
+    duration: "10 weeks",
+    oneLiner:
+      "On-prem agentic RAG with BM25 + semantic search, RBAC, and citation-only responses for regulated environments",
+    stats: [
+      { val: "70-85%", label: "Search time reduction" },
+      { val: "~0", label: "Hallucinations" },
+      { val: "100%", label: "On-prem" },
+    ],
+  },
+  Legal: {
+    title: "Legal Contracts Assistant",
+    industry: "Legal",
+    duration: "8 weeks",
+    oneLiner:
+      "Knowledge graph + RAG system making 500,000+ contracts searchable with citations",
+    stats: [
+      { val: "Hours -> seconds", label: "Lookup time" },
+      { val: "400,000+", label: "Contracts indexed" },
+      { val: "RBAC", label: "Enforced access" },
+    ],
+  },
+  "AI Governance": {
+    title: "AI Governance & Model Risk Framework",
+    industry: "Enterprise",
+    duration: "8 weeks",
+    oneLiner:
+      "Centralized governance layer with model registry, hallucination detection, and audit logs",
+    stats: [
+      { val: "Enterprise-wide", label: "Policy enforcement" },
+      { val: "Automated", label: "Audit trails" },
+      { val: "Full", label: "Prompt + response traceability" },
+    ],
+  },
+  Automotive: {
+    title: "Vision Inspection: Assembly Line QC",
+    industry: "Automotive",
+    duration: "16 weeks",
+    oneLiner:
+      "CNN models synced with PLC logic to detect defects in real time",
+    stats: [
+      { val: "95%", label: "Precision" },
+      { val: "Early", label: "Defect detection" },
+      { val: "Improved", label: "Line throughput" },
+    ],
+  },
+  Translation: {
+    title: "Vernacular-First Machine Translation",
+    industry: "Enterprise",
+    duration: "6 weeks",
+    oneLiner:
+      "Domain-adapted translation engine for manuals and SOPs with consistent terminology",
+    stats: [
+      { val: "60-70%", label: "Faster turnaround" },
+      { val: "40-50%", label: "Cost saving" },
+      { val: "Single source", label: "Of truth" },
+    ],
+  },
+  "E-Commerce": {
+    title: "Product Taxonomy & Attribute Enrichment",
+    industry: "E-Commerce",
+    duration: "8 weeks",
+    oneLiner:
+      "LLM + agentic RAG pipelines classifying 100,000 SKUs across 4,000+ taxonomy nodes",
+    stats: [
+      { val: "92%", label: "Automation" },
+      { val: "3 months -> 2 weeks", label: "Cycle time" },
+      { val: "4,000+", label: "Taxonomy endpoints" },
+    ],
+  },
+  "Medico-Legal": {
+    title: "Multimodal Clinical Document Intelligence",
+    industry: "Medico-Legal",
+    duration: "4 weeks",
+    oneLiner:
+      "Multimodal LLMs extracting and summarizing 10,000+ pages of medical records",
+    stats: [
+      { val: "97%", label: "Extraction accuracy" },
+      { val: "Days -> minutes", label: "Review time" },
+      { val: "Full", label: "Audit trail" },
+    ],
+  },
+  Fintech: {
+    title: "Automated Loan Disbursement",
+    industry: "Fintech",
+    duration: "8 weeks",
+    oneLiner:
+      "VLM-powered validation comparing site images with checklists for loan release",
+    stats: [
+      { val: "AI-validated", label: "Approvals" },
+      { val: "Zero", label: "Manual site visits" },
+      { val: "Faster", label: "Disbursement cycles" },
+    ],
   },
 };
 
-const DEFAULT_THEME = {
-  bg: "linear-gradient(135deg, #5d646d 0%, #424b54 48%, #2a3138 100%)",
-  overlay: "linear-gradient(180deg, rgba(16,20,24,.24) 0%, rgba(16,20,24,.72) 100%)",
+const getCaseLabel = (caseItem) => caseItem?.tabLabel || caseItem?.cat || "Case Study";
+
+const getCaseSubLabel = (caseItem) => caseItem?.shortTitle || caseItem?.title || "";
+
+const getCaseGradient = (caseItem) => {
+  const byLabel = CASE_GRADIENTS_BY_KEY[getCaseLabel(caseItem)];
+  if (byLabel) return byLabel;
+
+  const byCategory = CASE_GRADIENTS_BY_KEY[caseItem?.cat];
+  if (byCategory) return byCategory;
+
+  return DEFAULT_CASE_GRADIENT;
 };
 
-const getCompactText = (value, maxChars) => {
-  if (!value) return "";
+const getCaseImage = (caseItem) => {
+  const byLabel = CASE_IMAGES_BY_KEY[getCaseLabel(caseItem)];
+  if (byLabel) return byLabel;
 
-  const cleaned = String(value).replace(/\s+/g, " ").trim();
-  if (cleaned.length <= maxChars) return cleaned;
-  return `${cleaned.slice(0, maxChars - 1).trimEnd()}...`;
+  const byCategory = CASE_IMAGES_BY_KEY[caseItem?.cat];
+  if (byCategory) return byCategory;
+
+  return null;
 };
 
-const getTheme = (caseItem) => {
-  if (!caseItem) return DEFAULT_THEME;
+const getCasePreviewContent = (caseItem) => {
+  const byLabel = CASE_PREVIEW_CONTENT_BY_KEY[getCaseLabel(caseItem)];
+  if (byLabel) return byLabel;
 
-  return (
-    THEME_BY_TAB_LABEL[caseItem.tabLabel] ||
-    THEME_BY_CATEGORY[caseItem.cat] ||
-    DEFAULT_THEME
-  );
+  const byCategory = CASE_PREVIEW_CONTENT_BY_KEY[caseItem?.cat];
+  if (byCategory) return byCategory;
+
+  return null;
+};
+
+const getCaseStats = (caseItem) => {
+  if (Array.isArray(caseItem?.metrics) && caseItem.metrics.length) {
+    return caseItem.metrics.slice(0, 3).map((metric, index) => ({
+      val: metric?.val || "",
+      label: metric?.label || `Outcome ${index + 1}`,
+    }));
+  }
+
+  return String(caseItem?.outcome || "")
+    .split("|")
+    .map((chunk) => chunk.trim())
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((value, index) => ({ val: value, label: `Outcome ${index + 1}` }));
+};
+
+const renderNavIcon = (caseItem) => {
+  const iconKey = getCaseLabel(caseItem);
+
+  switch (iconKey) {
+    case "Construction":
+      return (
+        <>
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </>
+      );
+
+    case "E-Commerce":
+      return (
+        <>
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </>
+      );
+
+    case "D2C Brand":
+      return (
+        <>
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+          <line x1="12" y1="19" x2="12" y2="23" />
+          <line x1="8" y1="23" x2="16" y2="23" />
+        </>
+      );
+
+    case "Enterprise Search":
+      return (
+        <>
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </>
+      );
+
+    case "Legal":
+      return (
+        <>
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <line x1="16" y1="13" x2="8" y2="13" />
+          <line x1="16" y1="17" x2="8" y2="17" />
+        </>
+      );
+
+    case "Fintech":
+      return (
+        <>
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+          <line x1="1" y1="10" x2="23" y2="10" />
+        </>
+      );
+
+    case "AI Governance":
+      return <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />;
+
+    case "Automotive":
+      return (
+        <>
+          <path d="M3 13l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5" />
+          <path d="M5 13h14v5a1 1 0 0 1-1 1h-1" />
+          <path d="M5 13v5a1 1 0 0 0 1 1h1" />
+          <circle cx="7.5" cy="16.5" r="1.3" />
+          <circle cx="16.5" cy="16.5" r="1.3" />
+        </>
+      );
+
+    case "Sales Copilot":
+      return (
+        <>
+          <path d="M4 20h16" />
+          <rect x="6" y="11" width="3" height="6" rx="1" />
+          <rect x="11" y="8" width="3" height="9" rx="1" />
+          <rect x="16" y="5" width="3" height="12" rx="1" />
+        </>
+      );
+
+    case "Translation":
+      return (
+        <>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a14 14 0 0 1 0 18" />
+          <path d="M12 3a14 14 0 0 0 0 18" />
+        </>
+      );
+
+    case "Video Localization":
+      return (
+        <>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <polygon points="10 9 16 12 10 15" />
+        </>
+      );
+
+    case "Medico-Legal":
+      return (
+        <>
+          <rect x="4" y="3" width="16" height="18" rx="2" />
+          <path d="M9 3v3h6V3" />
+          <path d="M9 13h6" />
+          <path d="M12 10v6" />
+        </>
+      );
+
+    default:
+      return (
+        <>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8v8" />
+          <path d="M8 12h8" />
+        </>
+      );
+  }
 };
 
 export function CaseStudies({ onOpenCaseStudy }) {
-  const { width, isMobile, isTablet, isSmallMobile } = useViewport();
+  const { isMobile, isSmallMobile } = useViewport();
   const caseStudiesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
-  const caseSectionBg = T.footer;
-  const caseText = "rgba(255,255,255,.92)";
-  const caseTextMuted = "rgba(255,255,255,.72)";
-  const caseTextSoft = "rgba(255,255,255,.52)";
-  const caseRule = "rgba(255,255,255,.16)";
-  const casePillBg = "rgba(255,255,255,.08)";
-  const isIpadProViewport = width >= 1000 && width <= 1040;
-  const useSingleColumnCaseLayout = isTablet || isIpadProViewport;
-  const isNarrowTablet = isTablet && width <= 900;
   const showcaseCases = CASES;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [readyImages, setReadyImages] = useState({});
-
-  const preloadSources = useMemo(() => {
-    const uniqueSources = new Set();
-
-    showcaseCases.forEach((caseItem) => {
-      const source = getTheme(caseItem)?.image;
-      if (source) uniqueSources.add(source);
-    });
-
-    return Array.from(uniqueSources);
-  }, [showcaseCases]);
 
   const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
-  const activeTheme = getTheme(activeCase);
-  const activeImageSource = activeTheme?.image;
-
-  useEffect(() => {
-    let isCancelled = false;
-
-    const markSourceReady = (source) => {
-      if (isCancelled) return;
-
-      setReadyImages((current) => {
-        if (current[source]) return current;
-        return { ...current, [source]: true };
-      });
-    };
-
-    const primeImage = (source) => {
-      if (!source) return;
-
-      const image = new Image();
-      image.decoding = "async";
-      image.src = source;
-
-      if (image.complete) {
-        markSourceReady(source);
-      } else {
-        image.onload = () => markSourceReady(source);
-        image.onerror = () => markSourceReady(source);
-      }
-    };
-
-    if (activeImageSource) {
-      primeImage(activeImageSource);
-    }
-
-    const remainingSources = preloadSources.filter((source) => source && source !== activeImageSource);
-
-    if (!remainingSources.length) {
-      return () => {
-        isCancelled = true;
-      };
-    }
-
-    const preloadRemaining = () => {
-      remainingSources.forEach((source) => {
-        primeImage(source);
-      });
-    };
-
-    let idleCallbackId;
-    let timeoutId;
-
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      idleCallbackId = window.requestIdleCallback(preloadRemaining, { timeout: 1500 });
-    } else {
-      timeoutId = window.setTimeout(preloadRemaining, 350);
-    }
-
-    return () => {
-      isCancelled = true;
-
-      if (
-        typeof idleCallbackId === "number" &&
-        typeof window !== "undefined" &&
-        "cancelIdleCallback" in window
-      ) {
-        window.cancelIdleCallback(idleCallbackId);
-      }
-
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
-      }
-    };
-  }, [preloadSources, activeImageSource]);
-  const isActiveImageReady = activeImageSource ? Boolean(readyImages[activeImageSource]) : false;
-  const activeImagePosition = isSmallMobile
-    ? activeTheme?.mobilePosition || activeTheme?.tabletPosition || activeTheme?.position || "center center"
-    : isTablet
-      ? activeTheme?.tabletPosition || activeTheme?.position || "center center"
-      : activeTheme?.position || "center center";
-  const fallbackImageScale = width < 420 ? 1.04 : isMobile ? 1.02 : 1;
-  const activeImageScale = isSmallMobile
-    ? activeTheme?.mobileScale || fallbackImageScale
-    : isTablet
-      ? activeTheme?.tabletScale || fallbackImageScale
-      : activeTheme?.desktopScale || fallbackImageScale;
-
-  const headingSize = isSmallMobile
-    ? "clamp(28px, 10.2vw, 34px)"
-    : isMobile
-      ? "clamp(34px, 8.2vw, 42px)"
-      : isTablet
-        ? "clamp(42px, 6vw, 52px)"
-        : "clamp(36px, 3vw, 44px)";
-
-  const previewImageHeight = isSmallMobile
-    ? 190
-    : isMobile
-      ? 236
-      : isTablet
-        ? 276
-        : 324;
-  const previewInset = isSmallMobile ? 10 : 12;
 
   if (!activeCase) return null;
 
-  const casePreviewSummary = activeCase.body || getCompactText(
-    activeCase.objective || activeCase.outcome || "",
-    isSmallMobile ? 120 : isMobile ? 140 : isTablet ? 160 : 180,
-  );
+  const activePreviewContent = getCasePreviewContent(activeCase);
+  const casePreviewSummary =
+    activePreviewContent?.oneLiner ||
+    activeCase.body ||
+    activeCase.objective ||
+    activeCase.outcome ||
+    "";
+  const casePreviewStats = activePreviewContent?.stats || getCaseStats(activeCase);
+  const casePreviewTitle = activePreviewContent?.title || activeCase.shortTitle || activeCase.title;
+  const casePreviewIndustry = activePreviewContent?.industry || activeCase.cat;
+  const casePreviewDuration = activePreviewContent?.duration || activeCase.weeks;
+  const casePreviewImage = getCaseImage(activeCase);
   const stableCaseSummary =
     "Explore practical AI implementations across industries, with each case capturing the challenge, approach, and measurable business impact.";
 
   return (
-    <Section id="case-studies" paddingTop={caseStudiesTopPadding} bg={caseSectionBg}>
-      <Reveal distance={14} blurFrom={8}>
-        <p
-          style={{
-            margin: "0 0 16px",
-            fontFamily: font.sans,
-            fontSize: 11,
-            fontWeight: 600,
-            letterSpacing: ".08em",
-            textTransform: "uppercase",
-            display: "inline-block",
-            padding: "6px 12px",
-            borderRadius: 100,
-            background: casePillBg,
-            color: T.amber,
-          }}
-        >
-          Case studies
-        </p>
-      </Reveal>
-
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: useSingleColumnCaseLayout
-            ? "1fr"
-            : "minmax(0,.35fr) minmax(0,.65fr)",
-          gap: isSmallMobile ? 18 : useSingleColumnCaseLayout ? 24 : 56,
-          alignItems: "start",
-          width: "100%",
-          overflowX: "clip",
-        }}
-      >
-        <Reveal distance={16} blurFrom={8}>
-          <div>
-            <h2
-              style={{
-                margin: "0 0 12px",
-                fontFamily: font.serif,
-                fontWeight: 600,
-                color: caseText,
-                lineHeight: 1.06,
-                letterSpacing: "-.02em",
-                fontSize: headingSize,
-                maxWidth: isMobile ? "100%" : 520,
-                overflowWrap: "anywhere",
-              }}
-            >
-              <span style={{ whiteSpace: isSmallMobile ? "normal" : "nowrap" }}>
+    <Section id="case-studies" paddingTop={caseStudiesTopPadding} bg={T.footer}>
+      <div className="case-home-shell">
+        <Reveal distance={14} blurFrom={8}>
+          <div className="case-home-section-header">
+            <div className="case-home-header-left">
+              <span className="case-home-eyebrow">Case studies</span>
+              <h2 className="case-home-headline">
                 We&apos;ve built systems
-              </span>
-              <br />
-              <span style={{ whiteSpace: isSmallMobile ? "normal" : "nowrap" }}>
-                for global enterprises
-              </span>
-            </h2>
-
-            <div
-              style={{
-                borderTop: `1px solid ${caseRule}`,
-                borderBottom: `1px solid ${caseRule}`,
-                padding: "12px 0",
-                marginBottom: 14,
-              }}
-            >
-              <p
-                style={{
-                  margin: 0,
-                  fontFamily: font.sans,
-                  fontSize: isSmallMobile ? 12 : 13,
-                  lineHeight: 1.6,
-                  color: caseTextMuted,
-                }}
-              >
-                {stableCaseSummary}
-              </p>
+                <br />
+                for <em>global enterprises</em>
+              </h2>
+              <p className="case-home-subhead">{stableCaseSummary}</p>
             </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2,minmax(0,1fr))",
-                columnGap: isMobile ? 10 : 16,
-                rowGap: isMobile ? 6 : 4,
-                marginTop: isSmallMobile ? 4 : 6,
-                alignItems: "start",
-              }}
-            >
-              {showcaseCases.map((caseItem, index) => {
-                const isActive = index === activeIndex;
-
-                return (
-                  <button
-                    key={`${caseItem.title}-${index}`}
-                    type="button"
-                    onClick={() => setActiveIndex(index)}
-                    style={{
-                      width: "100%",
-                      background: isActive ? "rgba(182,225,255,.08)" : "rgba(255,255,255,.015)",
-                      border: isActive ? "1px solid rgba(182,225,255,.26)" : "1px solid rgba(255,255,255,.08)",
-                      borderRadius: 10,
-                      boxShadow: isActive
-                        ? "0 4px 14px rgba(75,142,203,.2), inset 0 1px 0 rgba(255,255,255,.14)"
-                        : "0 2px 8px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06)",
-                      cursor: "pointer",
-                      textAlign: "left",
-                      padding: isSmallMobile
-                        ? "10px 8px"
-                        : "11px 10px",
-                      fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 12 : 14,
-                      fontWeight: isActive ? 600 : 500,
-                      lineHeight: 1.45,
-                      color: isActive ? "rgba(182,225,255,.94)" : caseTextSoft,
-                      textShadow: isActive ? "0 0 8px rgba(110,190,245,.24)" : "none",
-                      transition: "color .2s, text-shadow .25s, box-shadow .25s, border-color .25s, background-color .25s",
-                    }}
-                    aria-current={isActive ? "true" : undefined}
-                  >
-                    {caseItem.tabLabel || caseItem.cat}
-                  </button>
-                );
-              })}
-            </div>
-
           </div>
         </Reveal>
 
-        <Reveal delay={0.06} distance={20} blurFrom={10}>
-          <div
-            style={{
-              marginTop: useSingleColumnCaseLayout ? 0 : 10,
-              minWidth: 0,
-              width: useSingleColumnCaseLayout ? "100%" : "98%",
-              maxWidth: "100%",
-              justifySelf: useSingleColumnCaseLayout ? "stretch" : "end",
-              overflow: "visible",
-            }}
-          >
-            <article
-              style={{
-                borderRadius: 14,
-                overflow: "hidden",
-                border: "1px solid rgba(148,189,224,.38)",
-                background: caseSectionBg,
-                position: "relative",
-                width: "100%",
-                maxWidth: "100%",
-                isolation: "isolate",
-                boxShadow:
-                  "0 0 0 1px rgba(165,206,241,.14), 0 18px 36px rgba(6,10,18,.4), 0 0 38px rgba(74,136,198,.18), inset 0 1px 0 rgba(228,244,255,.12)",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: `calc(100% - ${previewInset * 2}px)`,
-                  height: previewImageHeight - previewInset,
-                  margin: `${previewInset}px auto 0`,
-                  borderRadius: isSmallMobile ? 10 : 12,
-                  border: "1px solid rgba(184,219,246,.26)",
-                  overflow: "hidden",
-                  background: caseSectionBg,
-                }}
-              >
-                {activeImageSource && (
-                  <img
-                    src={activeImageSource}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    decoding="async"
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      maxWidth: "100%",
-                      maxHeight: "100%",
-                      display: "block",
-                      objectFit: "cover",
-                      objectPosition: activeImagePosition,
-                      transform: `scale(${activeImageScale})`,
-                      transformOrigin: "center top",
-                      opacity: isActiveImageReady ? 1 : 0,
-                      transition: "opacity .34s ease",
-                    }}
-                  />
-                )}
+        <Reveal delay={0.04} distance={20} blurFrom={10}>
+          <div className="case-home-layout">
+            <nav className="case-home-nav-panel" aria-label="Case studies navigation">
+              <div className="case-home-nav-list">
+                {showcaseCases.map((caseItem, index) => {
+                  const isActive = index === activeIndex;
 
-                {activeImageSource && !isActiveImageReady && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(120deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.02) 38%, rgba(255,255,255,.08) 100%)",
-                    }}
-                  />
-                )}
-              </div>
-
-              <div
-                style={{
-                  position: "relative",
-                  zIndex: 1,
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 14,
-                  padding: isSmallMobile ? "18px 14px" : "22px 20px",
-                  minWidth: 0,
-                  background: caseSectionBg,
-                }}
-              >
-                <div>
-                  <p
-                    style={{
-                      margin: "0 0 8px",
-                      fontFamily: font.sans,
-                      fontSize: 10,
-                      fontWeight: 700,
-                      letterSpacing: ".1em",
-                      textTransform: "uppercase",
-                      color: "rgba(214,228,245,.58)",
-                    }}
-                  >
-                    {`${activeCase.cat} | ${activeCase.weeks}`}
-                  </p>
-                  <h3
-                    style={{
-                      margin: 0,
-                      maxWidth: isTablet ? 560 : 620,
-                      fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 24 : isMobile ? 28 : isTablet ? 32 : 36,
-                      fontWeight: 700,
-                      lineHeight: 1.08,
-                      letterSpacing: "-.02em",
-                      color: "rgba(244,248,255,.96)",
-                      overflowWrap: "anywhere",
-                    }}
-                  >
-                    {activeCase.shortTitle || activeCase.title}
-                  </h3>
-                </div>
-
-                <div>
-                  <p
-                    style={{
-                      margin: `0 0 ${isSmallMobile ? 14 : isMobile ? 16 : 18}px`,
-                      maxWidth: isTablet ? 560 : 620,
-                      fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 12 : isMobile ? 14 : 15,
-                      lineHeight: 1.6,
-                      color: "rgba(220,231,244,.74)",
-                      overflowWrap: "anywhere",
-                    }}
-                  >
-                    {casePreviewSummary}
-                  </p>
-
-                  <div style={{ width: "100%", maxWidth: "100%" }}>
+                  return (
                     <button
+                      key={`${caseItem.title}-${index}`}
                       type="button"
-                      onClick={() => onOpenCaseStudy?.(activeIndex)}
-                      style={{
-                        border: "1px solid rgba(190,220,248,.42)",
-                        borderRadius: 8,
-                        padding: isSmallMobile ? "9px 12px" : "10px 14px",
-                        background:
-                          "linear-gradient(180deg, rgba(33,45,60,.82) 0%, rgba(20,30,42,.88) 100%)",
-                        boxShadow: "inset 0 1px 0 rgba(232,244,255,.16)",
-                        fontFamily: font.sans,
-                        fontSize: isSmallMobile ? 11 : 12,
-                        fontWeight: 700,
-                        letterSpacing: ".04em",
-                        lineHeight: 1.2,
-                        textTransform: "uppercase",
-                        color: "rgba(255,255,255,.94)",
-                        minHeight: isSmallMobile ? 38 : 42,
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        cursor: "pointer",
-                      }}
+                      className={`case-home-nav-item${isActive ? " active" : ""}`}
+                      onClick={() => setActiveIndex(index)}
+                      aria-current={isActive ? "true" : undefined}
                     >
-                      Explore
+                      <span className="case-home-nav-num">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="case-home-nav-icon" aria-hidden="true">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          {renderNavIcon(caseItem)}
+                        </svg>
+                      </span>
+                      <span className="case-home-nav-text">
+                        <span className="case-home-nav-title">{getCaseLabel(caseItem)}</span>
+                        <span className="case-home-nav-sub">{getCaseSubLabel(caseItem)}</span>
+                      </span>
+                      <span className="case-home-nav-arrow" aria-hidden="true">
+                        &gt;
+                      </span>
                     </button>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
-            </article>
+            </nav>
+
+            <div className="case-home-preview">
+              <div key={`preview-media-${activeIndex}`} className="case-home-preview-media case-home-fade-in">
+                <div className="case-home-preview-gradient" style={{ background: getCaseGradient(activeCase) }} />
+                {casePreviewImage?.src && (
+                  <>
+                    <img
+                      className="case-home-preview-image"
+                      src={casePreviewImage.src}
+                      alt={casePreviewTitle}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ objectPosition: casePreviewImage.position || "center center" }}
+                    />
+                    <div className="case-home-preview-image-overlay" />
+                  </>
+                )}
+
+                {!casePreviewImage?.src && (
+                  <div className="case-home-preview-media-label">
+                    <svg
+                      className="case-home-preview-media-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <span className="case-home-preview-media-text">{activeCase.cat}</span>
+                  </div>
+                )}
+              </div>
+
+              <div key={`preview-body-${activeIndex}`} className="case-home-preview-body case-home-fade-in">
+                <div className="case-home-preview-meta">
+                  <span className="case-home-meta-industry">{casePreviewIndustry}</span>
+                  <span className="case-home-meta-dot" />
+                  <span className="case-home-meta-duration">{casePreviewDuration}</span>
+                </div>
+
+                <h3 className="case-home-preview-title">{casePreviewTitle}</h3>
+                <p className="case-home-preview-desc">{casePreviewSummary}</p>
+
+                {casePreviewStats.length > 0 && (
+                  <div className="case-home-stats-row">
+                    {casePreviewStats.map((stat, statIndex) => (
+                      <div className="case-home-stat" key={`${stat.val}-${stat.label}-${statIndex}`}>
+                        <span className="case-home-stat-val">{stat.val}</span>
+                        <span className="case-home-stat-label">{stat.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <button
+                  type="button"
+                  className="case-home-preview-cta"
+                  onClick={() => onOpenCaseStudy?.(activeIndex)}
+                >
+                  Explore
+                  <span className="case-home-preview-cta-arrow" aria-hidden="true">
+                    &gt;
+                  </span>
+                </button>
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>

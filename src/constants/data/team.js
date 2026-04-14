@@ -10,7 +10,7 @@ export const TEAM = [
     role: "CEO and Founder",
     bullets: [
       "Credential: IIM Bangalore Alumni",
-      "Focus: AI implementation strategy, AI adoption, AI Architecture, client partnerships, and AI product commercialization",
+      "Focus: AI strategy, enterprise adoption, and product commercialisation",
     ],
     linkedin: "https://www.linkedin.com/company/heuristic-labs-ai/",
     photo: sarathyPhoto,
@@ -22,7 +22,7 @@ export const TEAM = [
     role: "CTO and Chief AI Officer (CAIO)",
     bullets: [
       "Credential: Doctorate in AI/ML",
-      "Focus: System architecture, model research, and applied AI leadership. Translates cutting-edge research into enterprise-grade production systems",
+      "Focus: Translates cutting-edge research into production-grade enterprise systems",
     ],
     linkedin: "https://www.linkedin.com/company/heuristic-labs-ai/",
     photo: karthikPhoto,
@@ -34,7 +34,7 @@ export const TEAM = [
     role: "Head of AI",
     bullets: [
       "Credential: PhD Researcher, Gen AI",
-      "Focus: Agentic AI systems, fine-tuning pipelines, and multimodal intelligence. Leads the Applied Research Lab and oversees model benchmarking",
+      "Focus: Leads agentic systems, fine-tuning pipelines, and the Applied Research Lab",
     ],
     linkedin: "https://www.linkedin.com/company/heuristic-labs-ai/",
     photo: rohitPhoto,

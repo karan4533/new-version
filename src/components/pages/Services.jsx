@@ -62,13 +62,6 @@ export function Services() {
     pointerEvents: "none",
   };
 
-  const flipHintFrontStyle = {
-    ...flipHintBaseStyle,
-    border: `1px solid ${T.ink12}`,
-    background: "linear-gradient(180deg, rgba(176,120,69,.14) 0%, rgba(176,120,69,.08) 100%)",
-    color: T.ink40,
-  };
-
   const flipHintBackStyle = {
     ...flipHintBaseStyle,
     border: "1px solid rgba(176,120,69,.34)",
@@ -226,6 +219,7 @@ export function Services() {
                     toggleCardForTouch(index, isTouchLikeInteraction);
                   }}
                   onKeyDown={(event) => {
+                    if (event.target !== event.currentTarget) return;
                     if (event.key !== "Enter" && event.key !== " ") return;
                     event.preventDefault();
                     lastPointerTypeRef.current = "keyboard";
@@ -237,7 +231,7 @@ export function Services() {
                   style={{
                     position: "relative",
                     width: "100%",
-                    minHeight: isSmallMobile ? 228 : isMobile ? 240 : isTablet ? 256 : 276,
+                    minHeight: isSmallMobile ? 244 : isMobile ? 258 : isTablet ? 274 : 296,
                     height: "100%",
                     transformStyle: "preserve-3d",
                     WebkitTransformStyle: "preserve-3d",
@@ -294,8 +288,8 @@ export function Services() {
                         width: "100%",
                         maxWidth: "100%",
                         minHeight: allowTwoLineTitle
-                          ? (isSmallMobile ? 46 : isMobile ? 50 : isTablet ? 54 : 58)
-                          : (isSmallMobile ? 34 : isMobile ? 38 : isTablet ? 40 : 46),
+                          ? (isSmallMobile ? 42 : isMobile ? 46 : isTablet ? 50 : 54)
+                          : (isSmallMobile ? 30 : isMobile ? 34 : isTablet ? 36 : 40),
                         whiteSpace: "normal",
                         display: "block",
                         overflowWrap: "anywhere",
@@ -304,15 +298,37 @@ export function Services() {
                       {card.name}
                     </h3>
 
+                    {card.desc && (
+                      <p
+                        style={{
+                          margin: 0,
+                          width: "100%",
+                          fontFamily: font.sans,
+                          fontSize: isSmallMobile ? 13 : isMobile ? 13.5 : 14,
+                          fontWeight: 500,
+                          lineHeight: 1.55,
+                          letterSpacing: "0.01em",
+                          color: "rgba(30,26,16,.82)",
+                          overflowWrap: "anywhere",
+                        }}
+                      >
+                        {card.desc}
+                      </p>
+                    )}
+
                     {technicalTags.length > 0 && (
                       <div
                         style={{
-                          display: "flex",
-                          flexWrap: "wrap",
-                          alignItems: "flex-start",
-                          gap: isSmallMobile ? 5 : 6,
+                          display: "grid",
+                          gridTemplateColumns: isSmallMobile
+                            ? "repeat(2,minmax(0,1fr))"
+                            : "repeat(3,minmax(0,1fr))",
+                          justifyItems: "start",
+                          gap: isSmallMobile ? 4 : 5,
                           marginTop: "auto",
                           paddingTop: isSmallMobile ? 6 : 8,
+                          paddingBottom: isSmallMobile ? 22 : 24,
+                          width: "100%",
                         }}
                       >
                         {technicalTags.map((tag, tagIndex) => {
@@ -322,25 +338,26 @@ export function Services() {
                             <span
                               key={`${card.name}-${normalizedTag}-${tagIndex}`}
                               style={{
-                                display: "inline-block",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                                 width: "fit-content",
                                 maxWidth: "100%",
                                 border: "1px solid rgba(176,120,69,.34)",
                                 borderRadius: 6,
-                                padding: "4px 9px",
+                                padding: isSmallMobile ? "3px 8px" : "4px 9px",
                                 fontFamily: font.sans,
                                 fontSize: isSmallMobile ? 8 : 9,
                                 fontWeight: 700,
-                                letterSpacing: ".06em",
-                                lineHeight: 1.35,
+                                letterSpacing: ".04em",
+                                lineHeight: 1.2,
                                 textTransform: "uppercase",
                                 color: "rgba(30,26,16,.94)",
                                 background:
                                   "linear-gradient(180deg, rgba(176,120,69,.15) 0%, rgba(176,120,69,.08) 100%)",
                                 boxShadow: "inset 0 1px 0 rgba(255,255,255,.45)",
+                                textAlign: "center",
                                 whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
                               }}
                               title={normalizedTag}
                             >
@@ -351,9 +368,42 @@ export function Services() {
                       </div>
                     )}
 
-                    <span aria-hidden="true" style={flipHintFrontStyle}>
-                      <RiLoginBoxLine size={isSmallMobile ? 10 : 11} />
-                    </span>
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setActiveCardIndex(index);
+                      }}
+                      onKeyDown={(event) => {
+                        event.stopPropagation();
+                      }}
+                      aria-label={`Learn more about ${card.name}`}
+                      style={{
+                        position: "absolute",
+                        right: isSmallMobile ? 10 : 12,
+                        bottom: isSmallMobile ? 10 : 12,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        padding: isSmallMobile ? "5px 10px" : "6px 11px",
+                        borderRadius: 999,
+                        border: "1px solid rgba(176,120,69,.36)",
+                        background: "linear-gradient(180deg, rgba(176,120,69,.14) 0%, rgba(176,120,69,.08) 100%)",
+                        color: "rgba(30,26,16,.86)",
+                        fontFamily: font.sans,
+                        fontSize: isSmallMobile ? 10 : 11,
+                        fontWeight: 700,
+                        letterSpacing: ".05em",
+                        textTransform: "uppercase",
+                        cursor: "pointer",
+                        zIndex: 2,
+                      }}
+                    >
+                      Learn more
+                      <span aria-hidden="true" style={{ fontSize: 11, lineHeight: 1 }}>
+                        ↗
+                      </span>
+                    </button>
                   </div>
 
                   <div
@@ -422,7 +472,7 @@ export function Services() {
                             display: "flex",
                             alignItems: "flex-start",
                             gap: 8,
-                            color: T.ink60,
+                            color: "rgba(30,26,16,.84)",
                             fontFamily: font.sans,
                             fontSize: isSmallMobile ? 11 : 12,
                             lineHeight: 1.45,

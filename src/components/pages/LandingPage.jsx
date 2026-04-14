@@ -16,6 +16,8 @@ const HERO_USE_CASES = [
   "Agentic Knowledge Search",
 ];
 
+const HERO_USE_CASE_CROSSFADE_MS = 560;
+
 function HeroBtn({ label, onClick, primary }) {
   return (
     <button
@@ -43,6 +45,9 @@ function HeroBtn({ label, onClick, primary }) {
 export function LandingPage({ onCaseStudies, onContact }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
   const [useCaseIndex, setUseCaseIndex] = useState(0);
+  const [previousUseCaseIndex, setPreviousUseCaseIndex] = useState(null);
+  const useCaseIndexRef = useRef(0);
+  const useCaseFadeTimeoutRef = useRef(null);
   const heroRef = useRef(null);
   // const backLayerRef = useRef(null);
   // const frontLayerRef = useRef(null);
@@ -73,6 +78,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTopGuideLineY = isSmallMobile ? 60 : isMobile ? 64 : isTablet ? 70 : 76;
 
   useEffect(() => {
+    useCaseIndexRef.current = useCaseIndex;
+  }, [useCaseIndex]);
+
+  useEffect(() => {
     const probe = document.createElement("span");
     probe.style.position = "fixed";
     probe.style.left = "-9999px";
@@ -80,11 +89,12 @@ export function LandingPage({ onCaseStudies, onContact }) {
     probe.style.visibility = "hidden";
     probe.style.pointerEvents = "none";
     probe.style.whiteSpace = "nowrap";
-    probe.style.fontFamily = font.sans;
+    probe.style.fontFamily = font.serif;
+    probe.style.fontStyle = "italic";
     probe.style.fontSize = `${heroUseCaseFontSize}px`;
     probe.style.fontWeight = "700";
     probe.style.letterSpacing = "0.01em";
-    probe.style.lineHeight = "1.6";
+    probe.style.lineHeight = "1.15";
     document.body.appendChild(probe);
 
     let maxWidth = 0;
@@ -100,13 +110,14 @@ export function LandingPage({ onCaseStudies, onContact }) {
     probe.remove();
 
     const averageWidth = totalWidth / HERO_USE_CASES.length;
-    const nextSlotWidth = Math.max(1, Math.ceil(maxWidth + 2));
+    const highlightHorizontalAllowance = isSmallMobile ? 24 : isMobile ? 26 : isTablet ? 28 : 30;
+    const nextSlotWidth = Math.max(1, Math.ceil(maxWidth + highlightHorizontalAllowance));
     const nextNudge = Math.max(0, Math.round((nextSlotWidth - averageWidth) / 2));
     const nextSlotWidthPx = `${nextSlotWidth}px`;
 
     setHeroUseCaseSlotWidth((current) => (current === nextSlotWidthPx ? current : nextSlotWidthPx));
     setHeroSubheadingNudgeX((current) => (current === nextNudge ? current : nextNudge));
-  }, [width, heroUseCaseFontSize]);
+  }, [width, heroUseCaseFontSize, isSmallMobile, isMobile, isTablet]);
 
   useEffect(() => {
     if (!isMobileViewport) {
@@ -141,10 +152,29 @@ export function LandingPage({ onCaseStudies, onContact }) {
 
   useEffect(() => {
     const ticker = window.setInterval(() => {
-      setUseCaseIndex((current) => (current + 1) % HERO_USE_CASES.length);
+      const current = useCaseIndexRef.current;
+      const next = (current + 1) % HERO_USE_CASES.length;
+
+      setPreviousUseCaseIndex(current);
+      setUseCaseIndex(next);
+      useCaseIndexRef.current = next;
+
+      if (useCaseFadeTimeoutRef.current) {
+        window.clearTimeout(useCaseFadeTimeoutRef.current);
+      }
+
+      useCaseFadeTimeoutRef.current = window.setTimeout(() => {
+        setPreviousUseCaseIndex(null);
+        useCaseFadeTimeoutRef.current = null;
+      }, HERO_USE_CASE_CROSSFADE_MS);
     }, 2000);
 
-    return () => window.clearInterval(ticker);
+    return () => {
+      window.clearInterval(ticker);
+      if (useCaseFadeTimeoutRef.current) {
+        window.clearTimeout(useCaseFadeTimeoutRef.current);
+      }
+    };
   }, []);
 
   /*
@@ -376,8 +406,8 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.08} distance={10} blurFrom={8}>
           <div
             style={{
-              marginTop: isSmallMobile ? 10 : 12,
-              marginBottom: isSmallMobile ? 4 : 6,
+              marginTop: isSmallMobile ? 12 : isMobile ? 14 : 14,
+              marginBottom: isSmallMobile ? 6 : isMobile ? 8 : 8,
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
@@ -417,7 +447,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.12} distance={22} blurFrom={12}>
           <h1
             style={{
-              margin: isSmallMobile ? "24px 0 18px" : isMobile ? "30px 0 22px" : "28px 0 20px",
+              margin: isSmallMobile ? "22px 0 20px" : isMobile ? "28px 0 24px" : "26px 0 22px",
               fontFamily: font.serif,
               fontWeight: 600,
               letterSpacing: "-.02em",
@@ -430,9 +460,11 @@ export function LandingPage({ onCaseStudies, onContact }) {
             <span
               style={{
                 display: "block",
-                color: T.amber,
+                color: "#000000",
                 fontStyle: "italic",
                 fontWeight: 700,
+                whiteSpace: "nowrap",
+                fontSize: isMobile ? "0.88em" : "1em",
               }}
             >
               business outcomes
@@ -458,12 +490,12 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.28} distance={16} blurFrom={6}>
           <p
             style={{
-              margin: "14px auto 0",
+              margin: isSmallMobile ? "14px auto 0" : isMobile ? "16px auto 0" : "16px auto 0",
               maxWidth: 860,
               width: "min(100%, 860px)",
               display: "inline-flex",
               flexWrap: isTablet ? "wrap" : "nowrap",
-              alignItems: "baseline",
+              alignItems: "center",
               justifyContent: "center",
               gap: isPhoneViewport ? 0 : isSmallMobile ? 2 : 4,
               rowGap: isPhoneViewport ? 6 : 2,
@@ -485,7 +517,19 @@ export function LandingPage({ onCaseStudies, onContact }) {
                 justifyItems: isPhoneViewport ? "center" : "start",
               }}
             >
-              <span className="hero-use-case-word" style={{ textAlign: isPhoneViewport ? "center" : "left", fontSize: heroUseCaseFontSize }}>
+              {previousUseCaseIndex !== null && (
+                <span
+                  className="hero-use-case-word hero-use-case-word-out"
+                  style={{ textAlign: isPhoneViewport ? "center" : "left", fontSize: heroUseCaseFontSize }}
+                >
+                  {HERO_USE_CASES[previousUseCaseIndex]}
+                </span>
+              )}
+              <span
+                key={useCaseIndex}
+                className="hero-use-case-word hero-use-case-word-in"
+                style={{ textAlign: isPhoneViewport ? "center" : "left", fontSize: heroUseCaseFontSize }}
+              >
                 {HERO_USE_CASES[useCaseIndex]}
               </span>
             </span>
