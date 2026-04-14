@@ -231,7 +231,7 @@ export function Services() {
                   style={{
                     position: "relative",
                     width: "100%",
-                    minHeight: isSmallMobile ? 244 : isMobile ? 258 : isTablet ? 274 : 296,
+                    minHeight: isSmallMobile ? 262 : isMobile ? 252 : isTablet ? 266 : 288,
                     height: "100%",
                     transformStyle: "preserve-3d",
                     WebkitTransformStyle: "preserve-3d",
@@ -251,11 +251,11 @@ export function Services() {
                       background:
                         "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
                       borderRadius: 14,
-                      padding: isSmallMobile ? "13px 12px 34px" : isMobile ? "14px 13px 36px" : "17px 15px 38px",
+                      padding: isSmallMobile ? "15px 13px 40px" : isMobile ? "14px 13px 36px" : "17px 15px 38px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: isSmallMobile ? 6 : 8,
+                      gap: isSmallMobile ? 10 : 10,
                       transform: "rotateY(0deg) translateZ(1px)",
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
@@ -264,16 +264,16 @@ export function Services() {
                   >
                     <span
                       style={{
-                        width: isSmallMobile ? 56 : isMobile ? 58 : isTablet ? 62 : 68,
-                        height: isSmallMobile ? 56 : isMobile ? 58 : isTablet ? 62 : 68,
+                        width: isSmallMobile ? 38 : isMobile ? 38 : isTablet ? 42 : 46,
+                        height: isSmallMobile ? 38 : isMobile ? 38 : isTablet ? 42 : 46,
                         display: "inline-flex",
                         alignItems: "center",
                         justifyContent: "center",
                         color: T.amber,
-                        marginBottom: isSmallMobile ? 2 : 4,
+                        marginBottom: isSmallMobile ? 2 : 2,
                       }}
                     >
-                      <ServiceTopicIcon size={isSmallMobile ? 36 : isMobile ? 37 : isTablet ? 40 : 44} />
+                      <ServiceTopicIcon size={isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 24 : 26} />
                     </span>
 
                     <h3
@@ -282,14 +282,14 @@ export function Services() {
                         fontFamily: font.serif,
                         fontWeight: 600,
                         color: T.ink,
-                        fontSize: isSmallMobile ? 18 : isMobile ? 19 : isTablet ? 20 : 22,
-                        lineHeight: 1.12,
+                        fontSize: isSmallMobile ? 19 : isMobile ? 18 : isTablet ? 19 : 20,
+                        lineHeight: 1.18,
                         letterSpacing: "-.01em",
                         width: "100%",
                         maxWidth: "100%",
                         minHeight: allowTwoLineTitle
-                          ? (isSmallMobile ? 42 : isMobile ? 46 : isTablet ? 50 : 54)
-                          : (isSmallMobile ? 30 : isMobile ? 34 : isTablet ? 36 : 40),
+                          ? (isSmallMobile ? 44 : isMobile ? 44 : isTablet ? 46 : 50)
+                          : (isSmallMobile ? 36 : isMobile ? 34 : isTablet ? 36 : 40),
                         whiteSpace: "normal",
                         display: "block",
                         overflowWrap: "anywhere",
@@ -304,11 +304,12 @@ export function Services() {
                           margin: 0,
                           width: "100%",
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 13 : isMobile ? 13.5 : 14,
+                          fontSize: isSmallMobile ? 13 : isMobile ? 12.5 : 13,
                           fontWeight: 500,
-                          lineHeight: 1.55,
+                          lineHeight: 1.5,
                           letterSpacing: "0.01em",
                           color: "rgba(30,26,16,.82)",
+                          minHeight: isSmallMobile ? 64 : isMobile ? 58 : 62,
                           overflowWrap: "anywhere",
                         }}
                       >
@@ -323,11 +324,11 @@ export function Services() {
                           gridTemplateColumns: isSmallMobile
                             ? "repeat(2,minmax(0,1fr))"
                             : "repeat(3,minmax(0,1fr))",
-                          justifyItems: "start",
-                          gap: isSmallMobile ? 4 : 5,
+                          alignItems: "center",
+                          gap: isSmallMobile ? 6 : 6,
                           marginTop: "auto",
-                          paddingTop: isSmallMobile ? 6 : 8,
-                          paddingBottom: isSmallMobile ? 22 : 24,
+                          paddingTop: isSmallMobile ? 8 : 8,
+                          paddingBottom: isSmallMobile ? 22 : 22,
                           width: "100%",
                         }}
                       >
@@ -341,23 +342,25 @@ export function Services() {
                                 display: "inline-flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                width: "fit-content",
-                                maxWidth: "100%",
+                                width: "100%",
                                 border: "1px solid rgba(176,120,69,.34)",
                                 borderRadius: 6,
-                                padding: isSmallMobile ? "3px 8px" : "4px 9px",
+                                padding: isSmallMobile ? "5px 8px" : "4px 8px",
                                 fontFamily: font.sans,
-                                fontSize: isSmallMobile ? 8 : 9,
+                                fontSize: isSmallMobile ? 9 : 8,
                                 fontWeight: 700,
-                                letterSpacing: ".04em",
-                                lineHeight: 1.2,
+                                letterSpacing: isSmallMobile ? ".03em" : ".04em",
+                                lineHeight: 1.22,
                                 textTransform: "uppercase",
                                 color: "rgba(30,26,16,.94)",
                                 background:
                                   "linear-gradient(180deg, rgba(176,120,69,.15) 0%, rgba(176,120,69,.08) 100%)",
                                 boxShadow: "inset 0 1px 0 rgba(255,255,255,.45)",
+                                minHeight: isSmallMobile ? 30 : 24,
                                 textAlign: "center",
                                 whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
                               }}
                               title={normalizedTag}
                             >
