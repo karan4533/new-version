@@ -17,6 +17,11 @@ import fintechImage from "../../assets/fintech.png";
 
 const normalizeLine = (value) => String(value || "").replace(/\s+/g, " ").trim();
 const toKey = (value) => normalizeLine(value).toLowerCase();
+const normalizeLookupKey = (value) =>
+  toKey(value)
+    .replace(/[^a-z0-9]+/g, "")
+    .replace(/localisation/g, "localization")
+    .replace(/colour/g, "color");
 
 const findLineIndex = (lines, target) =>
   lines.findIndex((line) => toKey(line) === toKey(target));
@@ -238,16 +243,37 @@ const parseWordCaseStudies = (raw) => {
 const WORD_CASE_STUDIES = parseWordCaseStudies(caseStudyDocumentRaw);
 
 const getWordCaseByIndexOrTitle = (caseStudy, caseIndex) => {
-  if (
-    Number.isInteger(caseIndex) &&
-    caseIndex >= 0 &&
-    caseIndex < WORD_CASE_STUDIES.length
-  ) {
+  const titleCandidates = [
+    caseStudy?.title,
+    caseStudy?.shortTitle,
+    caseStudy?.tabLabel,
+    caseStudy?.useCase,
+    caseStudy?.body,
+    caseStudy?.objective,
+    caseStudy?.cat,
+  ]
+    .map(normalizeLookupKey)
+    .filter(Boolean);
+
+  const titleMatch = WORD_CASE_STUDIES.find((entry) => {
+    const entryKey = normalizeLookupKey(entry.title);
+    return titleCandidates.some(
+      (candidate) =>
+        entryKey === candidate ||
+        entryKey.includes(candidate) ||
+        candidate.includes(entryKey),
+    );
+  });
+
+  if (titleMatch) {
+    return titleMatch;
+  }
+
+  if (Number.isInteger(caseIndex) && caseIndex >= 0 && caseIndex < WORD_CASE_STUDIES.length) {
     return WORD_CASE_STUDIES[caseIndex];
   }
 
-  const titleKey = toKey(caseStudy?.title);
-  return WORD_CASE_STUDIES.find((entry) => toKey(entry.title) === titleKey) || null;
+  return null;
 };
 
 const getFallbackBuildRows = (caseStudy) => {
@@ -329,7 +355,7 @@ const getDetailImageConfig = (caseStudy) => {
 };
 
 export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
-  const { isTablet, isSmallMobile } = useViewport();
+  const { isMobile, isTablet, isSmallMobile } = useViewport();
 
   if (!caseStudy) return null;
 
@@ -353,11 +379,19 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     color: T.amber,
   };
 
-  const detailCardStyle = {
+  const detailBodyTextStyle = {
+    margin: 0,
+    fontFamily: font.sans,
+    fontSize: isSmallMobile ? 13 : 14,
+    lineHeight: 1.7,
+    color: T.ink60,
+  };
+
+  const statCardStyle = {
     border: `1px solid ${T.ink12}`,
-    borderRadius: 12,
-    background: "rgba(255,255,255,.5)",
-    padding: isSmallMobile ? "12px 12px" : "14px 16px",
+    borderRadius: 10,
+    background: "rgba(255,255,255,.32)",
+    padding: isSmallMobile ? "12px 12px" : "14px 14px",
   };
 
   const titleText = detailCase.title || caseStudy.title;
@@ -405,12 +439,12 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: isTablet ? "1fr" : "minmax(0,1.06fr) minmax(0,.94fr)",
-                gap: isSmallMobile ? 18 : 30,
+                gridTemplateColumns: isMobile ? "1fr" : "minmax(0,1.04fr) minmax(0,.96fr)",
+                gap: isSmallMobile ? 18 : isTablet ? 22 : 30,
                 alignItems: "start",
               }}
             >
-              <div style={{ display: "grid", gap: isSmallMobile ? 12 : 14 }}>
+              <div style={{ display: "grid", gap: isSmallMobile ? 16 : 18 }}>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                   <span
                     style={{
@@ -450,11 +484,12 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     fontFamily: font.serif,
                     fontSize: isSmallMobile
                       ? "clamp(30px, 8.6vw, 40px)"
-                      : "clamp(38px, 5vw, 60px)",
+                      : "clamp(32px, 4.2vw, 50px)",
                     fontWeight: 700,
                     lineHeight: 1.08,
                     letterSpacing: "-.02em",
                     color: T.ink,
+                    whiteSpace: isMobile ? "normal" : "nowrap",
                   }}
                 >
                   {titleText}
@@ -474,44 +509,24 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   <span style={{ fontWeight: 700 }}>Duration:</span> {durationText}
                 </p>
 
-                <div style={{ ...detailCardStyle, borderLeft: `3px solid ${T.teal}` }}>
+                <div style={{ display: "grid", gap: 8 }}>
                   <p style={sectionLabelStyle}>Client overview</p>
-                  <p
-                    style={{
-                      margin: "8px 0 0",
-                      fontFamily: font.sans,
-                      fontSize: isSmallMobile ? 13 : 14,
-                      lineHeight: 1.7,
-                      color: T.ink60,
-                    }}
-                  >
+                  <p style={detailBodyTextStyle}>
                     {detailCase.challenge.context}
                   </p>
                 </div>
 
-                <div style={{ ...detailCardStyle, borderLeft: `3px solid ${T.teal}` }}>
+                <div style={{ display: "grid", gap: 8 }}>
                   <p style={sectionLabelStyle}>Challenge</p>
                   {detailCase.challenge.breakingPoint && (
-                    <p
-                      style={{
-                        margin: "8px 0 0",
-                        fontFamily: font.sans,
-                        fontSize: isSmallMobile ? 13 : 14,
-                        lineHeight: 1.7,
-                        color: T.ink60,
-                      }}
-                    >
+                    <p style={detailBodyTextStyle}>
                       {detailCase.challenge.breakingPoint}
                     </p>
                   )}
                   {detailCase.challenge.quote && (
                     <p
                       style={{
-                        margin: "8px 0 0",
-                        fontFamily: font.sans,
-                        fontSize: isSmallMobile ? 13 : 14,
-                        lineHeight: 1.7,
-                        color: T.ink60,
+                        ...detailBodyTextStyle,
                         fontStyle: "italic",
                       }}
                     >
@@ -520,11 +535,11 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   )}
                 </div>
 
-                <div style={{ ...detailCardStyle, borderLeft: `3px solid ${T.teal}` }}>
+                <div style={{ display: "grid", gap: 8 }}>
                   <p style={sectionLabelStyle}>Solution</p>
                   <ul
                     style={{
-                      margin: "8px 0 0",
+                      margin: 0,
                       padding: 0,
                       listStyle: "none",
                       display: "grid",
@@ -551,39 +566,65 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                 </div>
               </div>
 
-              <div style={{ display: "grid", alignItems: "start" }}>
+              <div style={{ display: "grid", alignItems: "start", minWidth: 0 }}>
                 <div
                   style={{
                     width: "100%",
-                    maxWidth: isTablet ? "100%" : 430,
-                    justifySelf: isTablet ? "stretch" : "end",
-                    aspectRatio: isSmallMobile ? "4 / 3" : "5 / 4",
-                    borderRadius: 14,
-                    overflow: "hidden",
-                    border: `1px solid ${T.ink12}`,
-                    boxShadow: "0 12px 30px rgba(30,26,16,.12)",
-                    background: "rgba(255,255,255,.35)",
+                    display: "grid",
+                    gap: isSmallMobile ? 12 : 16,
+                    justifyItems: isMobile ? "stretch" : "end",
+                    minWidth: 0,
+                    paddingLeft: isMobile ? 0 : isTablet ? 14 : 20,
                   }}
                 >
-                  {detailImage?.src && (
-                    <img
-                      src={detailImage.src}
-                      alt={titleText}
-                      loading="lazy"
-                      decoding="async"
+                  {!isMobile && (
+                    <div
+                      aria-hidden="true"
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        objectPosition: detailImage.position || "center center",
+                        width: isTablet ? "72%" : "78%",
+                        maxWidth: isTablet ? 300 : 342,
+                        justifySelf: "end",
+                        aspectRatio: "16 / 10",
+                        visibility: "hidden",
+                        pointerEvents: "none",
                       }}
                     />
                   )}
+
+                  <div
+                    style={{
+                      width: isMobile ? "100%" : "88%",
+                      maxWidth: isMobile ? "100%" : 430,
+                      justifySelf: isMobile ? "stretch" : "end",
+                      marginTop: isMobile ? 0 : isTablet ? 8 : 12,
+                      aspectRatio: isSmallMobile ? "4 / 3" : "5 / 4",
+                      borderRadius: 14,
+                      overflow: "hidden",
+                      border: `1px solid ${T.ink12}`,
+                      boxShadow: "0 14px 30px rgba(30,26,16,.12)",
+                      background: "rgba(255,255,255,.35)",
+                    }}
+                  >
+                    {detailImage?.src && (
+                      <img
+                        src={detailImage.src}
+                        alt={titleText}
+                        loading="lazy"
+                        decoding="async"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: detailImage.position || "center center",
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div style={{ display: "grid", gap: isSmallMobile ? 10 : 12 }}>
+            <div style={{ display: "grid", gap: isSmallMobile ? 14 : 16, marginTop: isSmallMobile ? 0 : 2 }}>
               {statsRows.length > 0 && (
                 <div
                   style={{
@@ -593,7 +634,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   }}
                 >
                   {statsRows.map((row, index) => (
-                    <div key={`${row.stat}-${index}`} style={detailCardStyle}>
+                    <div key={`${row.stat}-${index}`} style={statCardStyle}>
                       <p
                         style={{
                           margin: 0,
@@ -637,11 +678,11 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
               )}
 
               {(summaryTakeaways.length > 0 || techHighlights.length > 0) && (
-                <div style={detailCardStyle}>
+                <div style={{ display: "grid", gap: 8 }}>
                   <p style={sectionLabelStyle}>Key takeaways</p>
                   <ul
                     style={{
-                      margin: "8px 0 0",
+                      margin: 0,
                       padding: 0,
                       listStyle: "none",
                       display: "grid",
