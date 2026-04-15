@@ -432,6 +432,12 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   const industryText = detailCase.industry || caseStudy.cat;
   const durationText = detailCase.duration || caseStudy.weeks;
   const useCondensedTitle = !isMobile && titleText.length > 38;
+  const detailPrimaryGridGap = isSmallMobile ? 18 : isTablet ? 24 : 34;
+  const solutionConnectorExtension = isMobile
+    ? detailPrimaryGridGap
+    : isTablet
+      ? 180
+      : 210;
 
   return (
     <Section id="case-study-detail">
@@ -479,7 +485,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   : isTablet
                     ? "minmax(0,1fr) minmax(320px,0.9fr)"
                     : "minmax(0,1fr) minmax(380px,0.92fr)",
-                gap: isSmallMobile ? 18 : isTablet ? 24 : 34,
+                gap: detailPrimaryGridGap,
                 alignItems: "start",
               }}
             >
@@ -666,9 +672,22 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
               <div
                 style={{
                   gridColumn: isMobile ? "auto" : "1 / -1",
+                  position: "relative",
                   marginTop: isSmallMobile ? 4 : 8,
                 }}
               >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: isSmallMobile ? 14 : 16,
+                    top: -solutionConnectorExtension,
+                    width: 1,
+                    height: solutionConnectorExtension + (isSmallMobile ? 4 : 8),
+                    background: T.ink12,
+                    borderRadius: 999,
+                  }}
+                />
                 <div style={detailSectionsRailStyle}>
                   <span aria-hidden="true" style={sectionRailLineStyle} />
 
@@ -707,6 +726,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   </div>
                 </div>
               </div>
+
             </div>
 
             <div style={{ display: "grid", gap: isSmallMobile ? 14 : 16, marginTop: isSmallMobile ? 0 : 2 }}>
