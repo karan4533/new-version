@@ -377,20 +377,20 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
               padding: 0,
               margin: 0,
               fontFamily: font.sans,
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: 600,
               letterSpacing: ".08em",
               textTransform: "uppercase",
-              color: T.ink40,
+              color: T.ink60,
               cursor: "pointer",
               transition: "color .2s ease",
               marginBottom: isSmallMobile ? 14 : 18,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = T.ink60;
+              e.currentTarget.style.color = T.ink;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = T.ink40;
+              e.currentTarget.style.color = T.ink60;
             }}
           >
             ← Back to case studies
