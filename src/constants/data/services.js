@@ -91,8 +91,8 @@ export const SERVICES = [
     items: [
       "Build the CoE charter, roles, and operating model",
       "Define the AI use-case pipeline and prioritisation process",
-      "Establish governance, risk, and model review cadence",
-      "Run the first sprint end-to-end with your internal team",
+      "Set governance, risk, and model review",
+      "Run first sprint end-to-end with your team",
       "Hand over a self-sustaining CoE ready to scale",
     ],
   },

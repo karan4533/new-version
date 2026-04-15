@@ -3,7 +3,6 @@ import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section, Reveal } from "../shared";
 import { SERVICES } from "../../constants/data/services";
-import { RiLoginBoxLine } from "react-icons/ri";
 import { FiActivity, FiCompass, FiCpu, FiSettings, FiShield, FiUsers } from "react-icons/fi";
 
 export function Services() {
@@ -48,26 +47,6 @@ export function Services() {
   const toggleCardForTouch = (index, forceToggle = false) => {
     if (supportsHoverFlip && !forceToggle) return;
     setActiveCardIndex((current) => (current === index ? null : index));
-  };
-
-  const flipHintBaseStyle = {
-    position: "absolute",
-    right: isSmallMobile ? 10 : 12,
-    bottom: isSmallMobile ? 10 : 12,
-    width: isSmallMobile ? 22 : 24,
-    height: isSmallMobile ? 22 : 24,
-    borderRadius: 7,
-    display: "grid",
-    placeItems: "center",
-    pointerEvents: "none",
-  };
-
-  const flipHintBackStyle = {
-    ...flipHintBaseStyle,
-    border: "1px solid rgba(176,120,69,.34)",
-    background: "linear-gradient(180deg, rgba(176,120,69,.14) 0%, rgba(176,120,69,.08) 100%)",
-    boxShadow: "inset 0 1px 0 rgba(255,255,255,.45)",
-    color: T.amber,
   };
 
   return (
@@ -435,9 +414,6 @@ export function Services() {
                       ))}
                     </ul>
 
-                    <span aria-hidden="true" style={flipHintBackStyle}>
-                      <RiLoginBoxLine size={isSmallMobile ? 10 : 11} />
-                    </span>
                   </div>
                 </article>
               </div>

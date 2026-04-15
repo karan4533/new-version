@@ -130,16 +130,13 @@ export function Contact() {
       key: "location",
       icon: <FaMapMarkerAlt aria-hidden="true" />,
       title: "Visit us",
-      text: (
-        <a
-          href={OFFICE_MAP_LINK}
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "inherit", textDecoration: "none" }}
-        >
-          {OFFICE_ADDRESS}
-        </a>
-      ),
+      text: OFFICE_ADDRESS,
+      action: {
+        href: OFFICE_MAP_LINK,
+        label: "Open map",
+        primary: false,
+        external: true,
+      },
     },
   ];
 

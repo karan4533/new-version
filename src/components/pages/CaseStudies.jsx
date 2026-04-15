@@ -35,6 +35,21 @@ const CASE_GRADIENTS_BY_KEY = {
 
 const DEFAULT_CASE_GRADIENT = "linear-gradient(135deg, #15120e 0%, #252019 42%, #0d0b09 100%)";
 
+const CASE_DISPLAY_ORDER = [
+  "Video Localization",
+  "Construction",
+  "D2C Brand",
+  "Sales Copilot",
+  "Enterprise Search",
+  "Legal",
+  "AI Governance",
+  "Automotive",
+  "Translation",
+  "E-Commerce",
+  "Medico-Legal",
+  "Fintech",
+];
+
 const CASE_IMAGES_BY_KEY = {
   Construction: { src: constructionImage, position: "center 44%" },
   "E-Commerce": { src: dataAnalyticsImage, position: "42% 36%" },
@@ -372,7 +387,16 @@ const renderNavIcon = (caseItem) => {
 export function CaseStudies({ onOpenCaseStudy }) {
   const { isMobile, isSmallMobile } = useViewport();
   const caseStudiesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
-  const showcaseCases = CASES;
+  const orderIndexByKey = CASE_DISPLAY_ORDER.reduce((acc, key, index) => {
+    acc[key] = index;
+    return acc;
+  }, {});
+
+  const showcaseCases = [...CASES].sort((a, b) => {
+    const aIndex = orderIndexByKey[getCaseLabel(a)] ?? Number.MAX_SAFE_INTEGER;
+    const bIndex = orderIndexByKey[getCaseLabel(b)] ?? Number.MAX_SAFE_INTEGER;
+    return aIndex - bIndex;
+  });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];

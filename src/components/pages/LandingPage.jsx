@@ -58,7 +58,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const isMobileViewport = isSmallMobile || isMobile || isTablet;
   const isPhoneViewport = isMobile;
   const mobileCenterTuning = isSmallMobile ? 12 : isMobile ? 14 : 16;
-  const heroSubheadingFontSize = isSmallMobile ? 16 : isTablet ? 17 : 18;
+  const heroSubheadingFontSize = isSmallMobile ? 18 : isTablet ? 19 : 20;
   const heroUseCaseFontSize = heroSubheadingFontSize + 1;
   const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
     isSmallMobile ? "220px" : isMobile ? "250px" : isTablet ? "280px" : "320px",
@@ -453,18 +453,18 @@ export function LandingPage({ onCaseStudies, onContact }) {
               letterSpacing: "-.02em",
               color: T.ink,
               lineHeight: 1.05,
-              fontSize: isMobile ? "clamp(38px, 12vw, 58px)" : "clamp(60px, 6.9vw, 98px)",
+              fontSize: isMobile ? "clamp(38px, 12vw, 58px)" : "clamp(56px, 6.4vw, 92px)",
             }}
           >
             Turn AI into real
             <span
               style={{
                 display: "block",
-                color: "#000000",
-                fontStyle: "italic",
-                fontWeight: 700,
+                color: "inherit",
+                fontStyle: "normal",
+                fontWeight: "inherit",
                 whiteSpace: "nowrap",
-                fontSize: isMobile ? "0.88em" : "1em",
+                fontSize: isMobile ? "1em" : "1.14em",
               }}
             >
               business outcomes
