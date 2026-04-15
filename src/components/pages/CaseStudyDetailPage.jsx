@@ -387,6 +387,44 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     color: T.ink60,
   };
 
+  const detailSectionBlockStyle = {
+    display: "grid",
+    gap: 8,
+  };
+
+  const detailSectionsRailStyle = {
+    position: "relative",
+    display: "grid",
+    gap: isSmallMobile ? 12 : 14,
+    paddingLeft: isSmallMobile ? 14 : 16,
+  };
+
+  const sectionMarkerStyle = {
+    width: 3,
+    height: isSmallMobile ? 22 : 24,
+    borderRadius: 999,
+    background: T.teal,
+    flexShrink: 0,
+    marginTop: 1,
+    marginLeft: -1,
+  };
+
+  const sectionHeadingWrapStyle = {
+    display: "inline-flex",
+    alignItems: "flex-start",
+    gap: 10,
+  };
+
+  const sectionRailLineStyle = {
+    position: "absolute",
+    left: isSmallMobile ? 14 : 16,
+    top: 0,
+    bottom: 0,
+    width: 1,
+    background: T.ink12,
+    borderRadius: 999,
+  };
+
   const statCardStyle = {
     border: `1px solid ${T.ink12}`,
     borderRadius: 10,
@@ -509,60 +547,75 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   <span style={{ fontWeight: 700 }}>Duration:</span> {durationText}
                 </p>
 
-                <div style={{ display: "grid", gap: 8 }}>
-                  <p style={sectionLabelStyle}>Client overview</p>
-                  <p style={detailBodyTextStyle}>
-                    {detailCase.challenge.context}
-                  </p>
-                </div>
+                <div style={detailSectionsRailStyle}>
+                  <span aria-hidden="true" style={sectionRailLineStyle} />
 
-                <div style={{ display: "grid", gap: 8 }}>
-                  <p style={sectionLabelStyle}>Challenge</p>
-                  {detailCase.challenge.breakingPoint && (
-                    <p style={detailBodyTextStyle}>
-                      {detailCase.challenge.breakingPoint}
+                  <div style={detailSectionBlockStyle}>
+                    <div style={sectionHeadingWrapStyle}>
+                      <span aria-hidden="true" style={sectionMarkerStyle} />
+                      <p style={sectionLabelStyle}>Client overview</p>
+                    </div>
+                    <p style={{ ...detailBodyTextStyle, marginLeft: isSmallMobile ? 13 : 15 }}>
+                      {detailCase.challenge.context}
                     </p>
-                  )}
-                  {detailCase.challenge.quote && (
-                    <p
-                      style={{
-                        ...detailBodyTextStyle,
-                        fontStyle: "italic",
-                      }}
-                    >
-                      {detailCase.challenge.quote}
-                    </p>
-                  )}
-                </div>
+                  </div>
 
-                <div style={{ display: "grid", gap: 8 }}>
-                  <p style={sectionLabelStyle}>Solution</p>
-                  <ul
-                    style={{
-                      margin: 0,
-                      padding: 0,
-                      listStyle: "none",
-                      display: "grid",
-                      gap: 8,
-                    }}
-                  >
-                    {detailCase.buildRows.map((row, index) => (
-                      <li
-                        key={`${row.decision}-${index}`}
+                  <div style={{ ...detailSectionBlockStyle, marginTop: isSmallMobile ? 4 : 6 }}>
+                    <div style={sectionHeadingWrapStyle}>
+                      <span aria-hidden="true" style={sectionMarkerStyle} />
+                      <p style={sectionLabelStyle}>Challenge</p>
+                    </div>
+                    {detailCase.challenge.breakingPoint && (
+                      <p style={{ ...detailBodyTextStyle, marginLeft: isSmallMobile ? 13 : 15 }}>
+                        {detailCase.challenge.breakingPoint}
+                      </p>
+                    )}
+                    {detailCase.challenge.quote && (
+                      <p
                         style={{
-                          display: "grid",
-                          gap: row.why ? 2 : 0,
-                          fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 13 : 14,
-                          lineHeight: 1.6,
-                          color: T.ink60,
+                          ...detailBodyTextStyle,
+                          marginLeft: isSmallMobile ? 13 : 15,
+                          fontStyle: "italic",
                         }}
                       >
-                        <span style={{ color: T.ink, fontWeight: 600 }}>{row.decision}</span>
-                        {row.why && <span>{row.why}</span>}
-                      </li>
-                    ))}
-                  </ul>
+                        {detailCase.challenge.quote}
+                      </p>
+                    )}
+                  </div>
+
+                  <div style={{ ...detailSectionBlockStyle, marginTop: isSmallMobile ? 4 : 6 }}>
+                    <div style={sectionHeadingWrapStyle}>
+                      <span aria-hidden="true" style={sectionMarkerStyle} />
+                      <p style={sectionLabelStyle}>Solution</p>
+                    </div>
+                    <ul
+                      style={{
+                        margin: 0,
+                        marginLeft: isSmallMobile ? 13 : 15,
+                        padding: 0,
+                        listStyle: "none",
+                        display: "grid",
+                        gap: 8,
+                      }}
+                    >
+                      {detailCase.buildRows.map((row, index) => (
+                        <li
+                          key={`${row.decision}-${index}`}
+                          style={{
+                            display: "grid",
+                            gap: row.why ? 2 : 0,
+                            fontFamily: font.sans,
+                            fontSize: isSmallMobile ? 13 : 14,
+                            lineHeight: 1.6,
+                            color: T.ink60,
+                          }}
+                        >
+                          <span style={{ color: T.ink, fontWeight: 600 }}>{row.decision}</span>
+                          {row.why && <span>{row.why}</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
 
