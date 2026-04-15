@@ -175,9 +175,6 @@ export function WhoWeAre() {
               <div
                 key={item}
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: index === 0 || index === 2 ? "flex-end" : "flex-start",
                   padding: isSmallMobile ? "10px 10px 12px" : "12px 12px 14px",
                   borderRight: index % 2 === 0 ? `1px solid ${aboutDivider}` : "none",
                   borderBottom: index < 2 ? `1px solid ${aboutDivider}` : "none",
@@ -192,6 +189,7 @@ export function WhoWeAre() {
                     fontWeight: 600,
                     letterSpacing: ".08em",
                     color: "rgba(176,120,69,.9)",
+                    textAlign: index === 0 || index === 2 ? "right" : "left",
                   }}
                 >
                   {String(index + 1).padStart(2, "0")}
@@ -199,8 +197,8 @@ export function WhoWeAre() {
                 <p
                   style={{
                     margin: 0,
-                    width: "100%",
-                    maxWidth: isSmallMobile ? "100%" : "92%",
+                    maxWidth: index === 0 || index === 2 ? "92%" : "100%",
+                    marginLeft: index === 0 || index === 2 ? "auto" : 0,
                     fontFamily: font.sans,
                     fontSize: isSmallMobile ? 15 : 16,
                     lineHeight: 1.55,
