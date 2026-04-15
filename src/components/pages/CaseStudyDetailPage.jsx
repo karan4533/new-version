@@ -247,10 +247,6 @@ const getWordCaseByIndexOrTitle = (caseStudy, caseIndex) => {
     caseStudy?.title,
     caseStudy?.shortTitle,
     caseStudy?.tabLabel,
-    caseStudy?.useCase,
-    caseStudy?.body,
-    caseStudy?.objective,
-    caseStudy?.cat,
   ]
     .map(normalizeLookupKey)
     .filter(Boolean);
@@ -385,6 +381,8 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     fontSize: isSmallMobile ? 13 : 14,
     lineHeight: 1.7,
     color: T.ink60,
+    maxWidth: "100%",
+    overflowWrap: "anywhere",
   };
 
   const detailSectionBlockStyle = {
@@ -477,12 +475,16 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "minmax(0,1.04fr) minmax(0,.96fr)",
+                gridTemplateColumns: isMobile
+                  ? "1fr"
+                  : isTablet
+                    ? "minmax(0,1fr) minmax(280px,360px)"
+                    : "minmax(0,1fr) minmax(360px,430px)",
                 gap: isSmallMobile ? 18 : isTablet ? 22 : 30,
                 alignItems: "start",
               }}
             >
-              <div style={{ display: "grid", gap: isSmallMobile ? 16 : 18 }}>
+              <div style={{ display: "grid", gap: isSmallMobile ? 16 : 18, minWidth: 0 }}>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                   <span
                     style={{
@@ -528,6 +530,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     letterSpacing: "-.02em",
                     color: T.ink,
                     whiteSpace: isMobile ? "normal" : "nowrap",
+                    maxWidth: "100%",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
                   }}
                 >
                   {titleText}
@@ -540,12 +545,46 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     fontSize: 13,
                     lineHeight: 1.6,
                     color: T.ink60,
+                    maxWidth: "100%",
+                    overflowWrap: "anywhere",
                   }}
                 >
                   <span style={{ fontWeight: 700 }}>Industry:</span> {industryText}
                   <span style={{ margin: "0 8px", color: T.ink40 }}>|</span>
                   <span style={{ fontWeight: 700 }}>Duration:</span> {durationText}
                 </p>
+
+                {isMobile && (
+                  <div
+                    style={{
+                      width: "100%",
+                      maxWidth: "100%",
+                      justifySelf: "stretch",
+                      marginTop: 4,
+                      aspectRatio: isSmallMobile ? "4 / 3" : "5 / 4",
+                      borderRadius: 14,
+                      overflow: "hidden",
+                      border: `1px solid ${T.ink12}`,
+                      boxShadow: "0 14px 30px rgba(30,26,16,.12)",
+                      background: "rgba(255,255,255,.35)",
+                    }}
+                  >
+                    {detailImage?.src && (
+                      <img
+                        src={detailImage.src}
+                        alt={titleText}
+                        loading="lazy"
+                        decoding="async"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: detailImage.position || "center center",
+                        }}
+                      />
+                    )}
+                  </div>
+                )}
 
                 <div style={detailSectionsRailStyle}>
                   <span aria-hidden="true" style={sectionRailLineStyle} />
@@ -619,18 +658,18 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                 </div>
               </div>
 
-              <div style={{ display: "grid", alignItems: "start", minWidth: 0 }}>
-                <div
-                  style={{
-                    width: "100%",
-                    display: "grid",
-                    gap: isSmallMobile ? 12 : 16,
-                    justifyItems: isMobile ? "stretch" : "end",
-                    minWidth: 0,
-                    paddingLeft: isMobile ? 0 : isTablet ? 14 : 20,
-                  }}
-                >
-                  {!isMobile && (
+              {!isMobile && (
+                <div style={{ display: "grid", alignItems: "start", minWidth: 0 }}>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "grid",
+                      gap: isSmallMobile ? 12 : 16,
+                      justifyItems: "end",
+                      minWidth: 0,
+                      paddingLeft: isTablet ? 14 : 20,
+                    }}
+                  >
                     <div
                       aria-hidden="true"
                       style={{
@@ -642,39 +681,39 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                         pointerEvents: "none",
                       }}
                     />
-                  )}
 
-                  <div
-                    style={{
-                      width: isMobile ? "100%" : "88%",
-                      maxWidth: isMobile ? "100%" : 430,
-                      justifySelf: isMobile ? "stretch" : "end",
-                      marginTop: isMobile ? 0 : isTablet ? 8 : 12,
-                      aspectRatio: isSmallMobile ? "4 / 3" : "5 / 4",
-                      borderRadius: 14,
-                      overflow: "hidden",
-                      border: `1px solid ${T.ink12}`,
-                      boxShadow: "0 14px 30px rgba(30,26,16,.12)",
-                      background: "rgba(255,255,255,.35)",
-                    }}
-                  >
-                    {detailImage?.src && (
-                      <img
-                        src={detailImage.src}
-                        alt={titleText}
-                        loading="lazy"
-                        decoding="async"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          objectPosition: detailImage.position || "center center",
-                        }}
-                      />
-                    )}
+                    <div
+                      style={{
+                        width: "88%",
+                        maxWidth: 430,
+                        justifySelf: "end",
+                        marginTop: isTablet ? 8 : 12,
+                        aspectRatio: isSmallMobile ? "4 / 3" : "5 / 4",
+                        borderRadius: 14,
+                        overflow: "hidden",
+                        border: `1px solid ${T.ink12}`,
+                        boxShadow: "0 14px 30px rgba(30,26,16,.12)",
+                        background: "rgba(255,255,255,.35)",
+                      }}
+                    >
+                      {detailImage?.src && (
+                        <img
+                          src={detailImage.src}
+                          alt={titleText}
+                          loading="lazy"
+                          decoding="async"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            objectPosition: detailImage.position || "center center",
+                          }}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <div style={{ display: "grid", gap: isSmallMobile ? 14 : 16, marginTop: isSmallMobile ? 0 : 2 }}>
