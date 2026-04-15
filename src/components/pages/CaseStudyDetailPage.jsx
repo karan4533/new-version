@@ -617,40 +617,6 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                       </p>
                     )}
                   </div>
-
-                  <div style={{ ...detailSectionBlockStyle, marginTop: isSmallMobile ? 4 : 6 }}>
-                    <div style={sectionHeadingWrapStyle}>
-                      <span aria-hidden="true" style={sectionMarkerStyle} />
-                      <p style={sectionLabelStyle}>Solution</p>
-                    </div>
-                    <ul
-                      style={{
-                        margin: 0,
-                        marginLeft: isSmallMobile ? 13 : 15,
-                        padding: 0,
-                        listStyle: "none",
-                        display: "grid",
-                        gap: 8,
-                      }}
-                    >
-                      {detailCase.buildRows.map((row, index) => (
-                        <li
-                          key={`${row.decision}-${index}`}
-                          style={{
-                            display: "grid",
-                            gap: row.why ? 2 : 0,
-                            fontFamily: font.sans,
-                            fontSize: isSmallMobile ? 13 : 14,
-                            lineHeight: 1.6,
-                            color: T.ink60,
-                          }}
-                        >
-                          <span style={{ color: T.ink, fontWeight: 600 }}>{row.decision}</span>
-                          {row.why && <span>{row.why}</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </div>
               </div>
 
@@ -696,6 +662,51 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   </div>
                 </div>
               )}
+
+              <div
+                style={{
+                  gridColumn: isMobile ? "auto" : "1 / -1",
+                  marginTop: isSmallMobile ? 4 : 8,
+                }}
+              >
+                <div style={detailSectionsRailStyle}>
+                  <span aria-hidden="true" style={sectionRailLineStyle} />
+
+                  <div style={detailSectionBlockStyle}>
+                    <div style={sectionHeadingWrapStyle}>
+                      <span aria-hidden="true" style={sectionMarkerStyle} />
+                      <p style={sectionLabelStyle}>Solution</p>
+                    </div>
+                    <ul
+                      style={{
+                        margin: 0,
+                        marginLeft: isSmallMobile ? 13 : 15,
+                        padding: 0,
+                        listStyle: "none",
+                        display: "grid",
+                        gap: 8,
+                      }}
+                    >
+                      {detailCase.buildRows.map((row, index) => (
+                        <li
+                          key={`${row.decision}-${index}`}
+                          style={{
+                            display: "grid",
+                            gap: row.why ? 2 : 0,
+                            fontFamily: font.sans,
+                            fontSize: isSmallMobile ? 13 : 14,
+                            lineHeight: 1.6,
+                            color: T.ink60,
+                          }}
+                        >
+                          <span style={{ color: T.ink, fontWeight: 600 }}>{row.decision}</span>
+                          {row.why && <span>{row.why}</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div style={{ display: "grid", gap: isSmallMobile ? 14 : 16, marginTop: isSmallMobile ? 0 : 2 }}>
