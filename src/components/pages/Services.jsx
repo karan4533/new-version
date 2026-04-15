@@ -357,9 +357,9 @@ export function Services() {
                     style={{
                       position: "absolute",
                       inset: 0,
-                      border: "1px solid rgba(30,26,16,.16)",
+                      border: "1px solid rgba(30,26,16,.24)",
                       background:
-                        "linear-gradient(180deg, rgba(247,242,232,.98) 0%, rgba(239,231,216,.98) 100%)",
+                        "linear-gradient(180deg, rgba(30,26,16,.94) 0%, rgba(40,35,24,.92) 100%)",
                       borderRadius: 14,
                       padding: isSmallMobile ? "15px 13px 36px" : isMobile ? "16px 14px 38px" : "18px 16px 40px",
                       display: "flex",
@@ -369,7 +369,7 @@ export function Services() {
                       transform: "rotateY(180deg)",
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
-                      boxShadow: "0 10px 22px rgba(30,26,16,.1)",
+                      boxShadow: "0 10px 22px rgba(0,0,0,.3)",
                     }}
                   >
                     <span
@@ -398,6 +398,7 @@ export function Services() {
                         maxWidth: "100%",
                         whiteSpace: "normal",
                         overflowWrap: "anywhere",
+                        display: "none",
                       }}
                     >
                       {card.name}
@@ -420,13 +421,13 @@ export function Services() {
                             display: "flex",
                             alignItems: "flex-start",
                             gap: 8,
-                            color: "rgba(30,26,16,.84)",
+                            color: "rgba(255,255,255,.88)",
                             fontFamily: font.sans,
-                            fontSize: isSmallMobile ? 11 : 12,
-                            lineHeight: 1.45,
+                            fontSize: isSmallMobile ? 13 : 14,
+                            lineHeight: 1.52,
                           }}
                         >
-                          <span aria-hidden="true" style={{ color: T.amber, fontSize: 13 }}>
+                          <span aria-hidden="true" style={{ color: T.amber, fontSize: 14 }}>
                             •
                           </span>
                           <span>{item}</span>
