@@ -381,8 +381,6 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     fontSize: isSmallMobile ? 13 : 14,
     lineHeight: 1.7,
     color: T.ink60,
-    maxWidth: "100%",
-    overflowWrap: "anywhere",
   };
 
   const detailSectionBlockStyle = {
@@ -433,6 +431,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   const titleText = detailCase.title || caseStudy.title;
   const industryText = detailCase.industry || caseStudy.cat;
   const durationText = detailCase.duration || caseStudy.weeks;
+  const useCondensedTitle = !isMobile && titleText.length > 38;
 
   return (
     <Section id="case-study-detail">
@@ -478,9 +477,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                 gridTemplateColumns: isMobile
                   ? "1fr"
                   : isTablet
-                    ? "minmax(0,1fr) minmax(280px,360px)"
-                    : "minmax(0,1fr) minmax(360px,430px)",
-                gap: isSmallMobile ? 18 : isTablet ? 22 : 30,
+                    ? "minmax(0,1fr) minmax(320px,0.9fr)"
+                    : "minmax(0,1fr) minmax(380px,0.92fr)",
+                gap: isSmallMobile ? 18 : isTablet ? 24 : 34,
                 alignItems: "start",
               }}
             >
@@ -524,15 +523,15 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     fontFamily: font.serif,
                     fontSize: isSmallMobile
                       ? "clamp(30px, 8.6vw, 40px)"
-                      : "clamp(32px, 4.2vw, 50px)",
+                      : useCondensedTitle
+                        ? "clamp(18px, 1.9vw, 26px)"
+                        : "clamp(24px, 3vw, 38px)",
                     fontWeight: 700,
-                    lineHeight: 1.08,
+                    lineHeight: 1.12,
                     letterSpacing: "-.02em",
                     color: T.ink,
-                    whiteSpace: isMobile ? "normal" : "nowrap",
+                    whiteSpace: "normal",
                     maxWidth: "100%",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
                   }}
                 >
                   {titleText}
@@ -545,8 +544,6 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     fontSize: 13,
                     lineHeight: 1.6,
                     color: T.ink60,
-                    maxWidth: "100%",
-                    overflowWrap: "anywhere",
                   }}
                 >
                   <span style={{ fontWeight: 700 }}>Industry:</span> {industryText}
@@ -588,7 +585,6 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
 
                 <div style={detailSectionsRailStyle}>
                   <span aria-hidden="true" style={sectionRailLineStyle} />
-
                   <div style={detailSectionBlockStyle}>
                     <div style={sectionHeadingWrapStyle}>
                       <span aria-hidden="true" style={sectionMarkerStyle} />
@@ -664,30 +660,16 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     style={{
                       width: "100%",
                       display: "grid",
-                      gap: isSmallMobile ? 12 : 16,
                       justifyItems: "end",
                       minWidth: 0,
-                      paddingLeft: isTablet ? 14 : 20,
                     }}
                   >
                     <div
-                      aria-hidden="true"
                       style={{
-                        width: isTablet ? "72%" : "78%",
-                        maxWidth: isTablet ? 300 : 342,
+                        width: "100%",
+                        maxWidth: isTablet ? 420 : 460,
                         justifySelf: "end",
-                        aspectRatio: "16 / 10",
-                        visibility: "hidden",
-                        pointerEvents: "none",
-                      }}
-                    />
-
-                    <div
-                      style={{
-                        width: "88%",
-                        maxWidth: 430,
-                        justifySelf: "end",
-                        marginTop: isTablet ? 8 : 12,
+                        marginTop: isTablet ? 56 : 70,
                         aspectRatio: isSmallMobile ? "4 / 3" : "5 / 4",
                         borderRadius: 14,
                         overflow: "hidden",
