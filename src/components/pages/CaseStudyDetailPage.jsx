@@ -438,6 +438,8 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     : isTablet
       ? 120
       : 140;
+  const solutionSectionTopSpace = isSmallMobile ? 10 : isTablet ? 14 : 18;
+  const solutionRowGap = isSmallMobile ? 12 : 14;
 
   return (
     <Section id="case-study-detail">
@@ -673,7 +675,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                 style={{
                   gridColumn: isMobile ? "auto" : "1 / -1",
                   position: "relative",
-                  marginTop: isSmallMobile ? 4 : 8,
+                  marginTop: solutionSectionTopSpace,
                 }}
               >
                 <span
@@ -683,7 +685,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     left: isSmallMobile ? 14 : 16,
                     top: -solutionConnectorExtension,
                     width: 1,
-                    height: solutionConnectorExtension + (isSmallMobile ? 4 : 8),
+                    height: solutionConnectorExtension + solutionSectionTopSpace,
                     background: T.ink12,
                     borderRadius: 999,
                   }}
@@ -703,7 +705,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                         padding: 0,
                         listStyle: "none",
                         display: "grid",
-                        gap: 8,
+                        gap: solutionRowGap,
                       }}
                     >
                       {detailCase.buildRows.map((row, index) => (
