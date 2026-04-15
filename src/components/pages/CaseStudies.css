@@ -23,14 +23,16 @@
 .case-home-section-header {
   margin: 0 auto 56px;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   gap: 32px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .case-home-header-left {
-  max-width: 680px;
+  width: 100%;
+  text-align: center;
 }
 
 .case-home-eyebrow {
@@ -62,12 +64,13 @@
 }
 
 .case-home-subhead {
-  margin: 0;
+  margin: 0 auto;
   font-size: 0.92rem;
   font-weight: 300;
   color: var(--muted2);
   line-height: 1.75;
-  max-width: 460px;
+  max-width: 640px;
+  text-align: center;
 }
 
 .case-home-layout {
@@ -84,6 +87,7 @@
   position: sticky;
   top: 32px;
   align-self: stretch;
+  height: 100%;
   min-height: 0;
 }
 
@@ -91,6 +95,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
   height: 100%;
   min-height: 0;
   overflow-y: auto;
@@ -238,7 +243,7 @@
 
 .case-home-preview-media {
   width: 100%;
-  height: 300px;
+  height: clamp(260px, 30vw, 360px);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -256,6 +261,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+  transform: none;
 }
 
 .case-home-preview-image-overlay {
@@ -439,6 +446,33 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .case-home-preview-media {
+    height: 286px;
+  }
+
+  .case-home-preview-image {
+    object-position: center 38%;
+  }
+
+  .case-home-preview-body {
+    padding: 24px 24px 24px;
+  }
+
+  .case-home-preview-desc {
+    margin-bottom: 20px;
+  }
+
+  .case-home-stats-row {
+    margin-bottom: 16px;
+  }
+
+  .case-home-preview-cta {
+    margin-top: 0;
+    align-self: flex-start;
+  }
+}
+
 @media (max-width: 860px) {
   .case-home-layout {
     grid-template-columns: 1fr;
@@ -448,15 +482,17 @@
   .case-home-nav-panel {
     position: static;
     align-self: auto;
+    height: auto;
   }
 
   .case-home-nav-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-    height: auto;
-    overflow: visible;
-    padding-right: 0;
+    max-height: 310px;
+    overflow-y: auto;
+    padding-right: 4px;
+    align-content: start;
   }
 
   .case-home-preview {
@@ -495,7 +531,7 @@
   }
 
   .case-home-preview-media {
-    height: 260px;
+    height: 240px;
   }
 
   .case-home-preview-body {

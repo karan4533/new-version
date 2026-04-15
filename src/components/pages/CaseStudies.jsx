@@ -402,9 +402,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
             <div className="case-home-header-left">
               <span className="case-home-eyebrow">Case studies</span>
               <h2 className="case-home-headline">
-                We&apos;ve built systems
-                <br />
-                for <em>global enterprises</em>
+                We&apos;ve built systems for <em>global enterprises</em>
               </h2>
               <p className="case-home-subhead">{stableCaseSummary}</p>
             </div>
