@@ -9,7 +9,7 @@ export const TEAM = [
     name: "Gauthaam Sarathy",
     role: "CEO and Founder",
     bullets: [
-      "Credential: IIM Bangalore Alumni",
+      "IIM Bangalore Alumni",
       "Focus: AI strategy, enterprise adoption, and product commercialisation",
     ],
     linkedin: "https://www.linkedin.com/company/heuristic-labs-ai/",
@@ -21,7 +21,7 @@ export const TEAM = [
     name: "Dr. Karthikeyan Saminathan",
     role: "CTO and Chief AI Officer (CAIO)",
     bullets: [
-      "Credential: Doctorate in AI/ML",
+      "Doctorate in AI/ML",
       "Focus: Translates cutting-edge research into production-grade enterprise systems",
     ],
     linkedin: "https://www.linkedin.com/company/heuristic-labs-ai/",
@@ -33,7 +33,7 @@ export const TEAM = [
     name: "Rohit M",
     role: "Head of AI",
     bullets: [
-      "Credential: PhD Researcher, Gen AI",
+      "PhD Researcher, Gen AI",
       "Focus: Leads agentic systems, fine-tuning pipelines, and the Applied Research Lab",
     ],
     linkedin: "https://www.linkedin.com/company/heuristic-labs-ai/",
