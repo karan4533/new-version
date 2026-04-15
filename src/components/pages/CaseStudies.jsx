@@ -50,6 +50,8 @@ const CASE_DISPLAY_ORDER = [
   "Fintech",
 ];
 
+const normalizeCaseKey = (value) => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+
 const CASE_IMAGES_BY_KEY = {
   Construction: { src: constructionImage, position: "center 44%" },
   "E-Commerce": { src: dataAnalyticsImage, position: "42% 36%" },
@@ -388,18 +390,28 @@ export function CaseStudies({ onOpenCaseStudy }) {
   const { isMobile, isSmallMobile } = useViewport();
   const caseStudiesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
   const orderIndexByKey = CASE_DISPLAY_ORDER.reduce((acc, key, index) => {
-    acc[key] = index;
+    acc[normalizeCaseKey(key)] = index;
     return acc;
   }, {});
 
-  const showcaseCases = [...CASES].sort((a, b) => {
-    const aIndex = orderIndexByKey[getCaseLabel(a)] ?? Number.MAX_SAFE_INTEGER;
-    const bIndex = orderIndexByKey[getCaseLabel(b)] ?? Number.MAX_SAFE_INTEGER;
-    return aIndex - bIndex;
-  });
+  const showcaseCases = [...CASES]
+    .map((caseItem, originalIndex) => ({ caseItem, originalIndex }))
+    .sort((a, b) => {
+      const aIndex =
+        orderIndexByKey[
+          normalizeCaseKey(a.caseItem.tabLabel || a.caseItem.shortTitle || a.caseItem.title || a.caseItem.cat)
+        ] ?? Number.MAX_SAFE_INTEGER;
+      const bIndex =
+        orderIndexByKey[
+          normalizeCaseKey(b.caseItem.tabLabel || b.caseItem.shortTitle || b.caseItem.title || b.caseItem.cat)
+        ] ?? Number.MAX_SAFE_INTEGER;
+
+      return aIndex - bIndex;
+    });
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const activeCase = showcaseCases[activeIndex] ?? showcaseCases[0];
+  const activeEntry = showcaseCases[activeIndex] ?? showcaseCases[0];
+  const activeCase = activeEntry?.caseItem ?? activeEntry ?? null;
 
   if (!activeCase) return null;
 
@@ -437,12 +449,12 @@ export function CaseStudies({ onOpenCaseStudy }) {
           <div className="case-home-layout">
             <nav className="case-home-nav-panel" aria-label="Case studies navigation">
               <div className="case-home-nav-list">
-                {showcaseCases.map((caseItem, index) => {
+                {showcaseCases.map(({ caseItem, originalIndex }, index) => {
                   const isActive = index === activeIndex;
 
                   return (
                     <button
-                      key={`${caseItem.title}-${index}`}
+                      key={`${caseItem.title}-${originalIndex}`}
                       type="button"
                       className={`case-home-nav-item${isActive ? " active" : ""}`}
                       onClick={() => setActiveIndex(index)}
@@ -533,7 +545,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 <button
                   type="button"
                   className="case-home-preview-cta"
-                  onClick={() => onOpenCaseStudy?.(activeIndex)}
+                  onClick={() => onOpenCaseStudy?.(activeEntry?.originalIndex)}
                 >
                   Explore
                   <span className="case-home-preview-cta-arrow" aria-hidden="true">
