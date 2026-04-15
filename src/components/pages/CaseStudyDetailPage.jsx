@@ -436,8 +436,8 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   const solutionConnectorExtension = isMobile
     ? detailPrimaryGridGap
     : isTablet
-      ? 180
-      : 210;
+      ? 120
+      : 140;
 
   return (
     <Section id="case-study-detail">
@@ -641,7 +641,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                         width: "100%",
                         maxWidth: isTablet ? 420 : 460,
                         justifySelf: "end",
-                        marginTop: isTablet ? 56 : 70,
+                        marginTop: isTablet ? 24 : 30,
                         aspectRatio: isSmallMobile ? "4 / 3" : "5 / 4",
                         borderRadius: 14,
                         overflow: "hidden",
