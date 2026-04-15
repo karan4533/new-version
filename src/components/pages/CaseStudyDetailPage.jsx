@@ -439,7 +439,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
       ? 120
       : 140;
   const solutionSectionTopSpace = isSmallMobile ? 10 : isTablet ? 14 : 18;
-  const solutionRowGap = isSmallMobile ? 12 : 14;
+  const solutionRowGap = isSmallMobile ? 16 : 18;
 
   return (
     <Section id="case-study-detail">
@@ -713,7 +713,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           key={`${row.decision}-${index}`}
                           style={{
                             display: "grid",
-                            gap: row.why ? 2 : 0,
+                            gap: row.why ? 6 : 0,
                             fontFamily: font.sans,
                             fontSize: isSmallMobile ? 13 : 14,
                             lineHeight: 1.6,
