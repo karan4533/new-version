@@ -133,7 +133,7 @@ export function Contact() {
       text: OFFICE_ADDRESS,
       action: {
         href: OFFICE_MAP_LINK,
-        label: "Open map",
+        label: "Find us",
         primary: false,
         external: true,
       },
