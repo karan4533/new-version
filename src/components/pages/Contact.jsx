@@ -57,7 +57,7 @@ export function Contact() {
     justifyContent: "center",
     width: isMobile ? (isSmallMobile ? 30 : 34) : 36,
     height: isMobile ? (isSmallMobile ? 30 : 34) : 36,
-    color: T.teal,
+    color: T.amber,
     fontSize: isSmallMobile ? 16 : isMobile ? 17 : 18,
   };
 
@@ -90,7 +90,7 @@ export function Contact() {
           Send us a message at{" "}
           <a
             href="mailto:connect@heuristiclabs.ai"
-            style={{ color: T.teal, textDecoration: "none", fontWeight: 700 }}
+            style={{ color: T.amber, textDecoration: "none", fontWeight: 700 }}
           >
             connect@heuristiclabs.ai
           </a>
