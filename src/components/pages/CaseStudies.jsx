@@ -531,27 +531,29 @@ export function CaseStudies({ onOpenCaseStudy }) {
                 <h3 className="case-home-preview-title">{casePreviewTitle}</h3>
                 <p className="case-home-preview-desc">{casePreviewSummary}</p>
 
-                {casePreviewStats.length > 0 && (
-                  <div className="case-home-stats-row">
-                    {casePreviewStats.map((stat, statIndex) => (
-                      <div className="case-home-stat" key={`${stat.val}-${stat.label}-${statIndex}`}>
-                        <span className="case-home-stat-val">{stat.val}</span>
-                        <span className="case-home-stat-label">{stat.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <div className="case-home-preview-bottom">
+                  {casePreviewStats.length > 0 && (
+                    <div className="case-home-stats-row">
+                      {casePreviewStats.map((stat, statIndex) => (
+                        <div className="case-home-stat" key={`${stat.val}-${stat.label}-${statIndex}`}>
+                          <span className="case-home-stat-val">{stat.val}</span>
+                          <span className="case-home-stat-label">{stat.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
-                <button
-                  type="button"
-                  className="case-home-preview-cta"
-                  onClick={() => onOpenCaseStudy?.(activeEntry?.originalIndex)}
-                >
-                  Explore
-                  <span className="case-home-preview-cta-arrow" aria-hidden="true">
-                    &gt;
-                  </span>
-                </button>
+                  <button
+                    type="button"
+                    className="case-home-preview-cta"
+                    onClick={() => onOpenCaseStudy?.(activeEntry?.originalIndex)}
+                  >
+                    Explore
+                    <span className="case-home-preview-cta-arrow" aria-hidden="true">
+                      &gt;
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

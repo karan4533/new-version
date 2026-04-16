@@ -236,14 +236,14 @@
   border: 1px solid var(--border2);
   border-radius: 20px;
   overflow: hidden;
-  min-height: 560px;
+  min-height: 510px;
   display: flex;
   flex-direction: column;
 }
 
 .case-home-preview-media {
   width: 100%;
-  height: clamp(260px, 30vw, 360px);
+  height: clamp(234px, 27vw, 324px);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -295,7 +295,7 @@
 }
 
 .case-home-preview-body {
-  padding: 32px 36px 36px;
+  padding: 22px 26px 22px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -305,7 +305,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .case-home-meta-industry {
@@ -332,21 +332,23 @@
 }
 
 .case-home-preview-title {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   font-family: "Playfair Display", serif;
-  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-size: clamp(1.34rem, 2.6vw, 1.84rem);
   font-weight: 800;
   line-height: 1.2;
   color: var(--text);
+  overflow-wrap: anywhere;
 }
 
 .case-home-preview-desc {
-  margin: 0 0 28px;
-  font-size: 0.88rem;
+  margin: 0 0 14px;
+  font-size: 0.82rem;
   font-weight: 300;
   color: var(--muted2);
-  line-height: 1.75;
+  line-height: 1.62;
   max-width: 560px;
+  overflow-wrap: anywhere;
 }
 
 .case-home-stats-row {
@@ -355,12 +357,25 @@
   border: 1px solid var(--border2);
   border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 28px;
+  margin-bottom: 10px;
+}
+
+.case-home-preview-bottom {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.case-home-preview-bottom .case-home-stats-row {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
 }
 
 .case-home-stat {
   flex: 1;
-  padding: 16px 20px;
+  padding: 12px 14px;
   border-right: 1px solid var(--border2);
   text-align: center;
   min-width: 0;
@@ -372,21 +387,21 @@
 
 .case-home-stat-val {
   font-family: "DM Sans", sans-serif;
-  font-size: clamp(1.02rem, 1.9vw, 1.28rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.14rem);
   font-weight: 700;
   font-style: normal;
   color: var(--bronze);
   display: block;
   line-height: 1.2;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   overflow-wrap: anywhere;
 }
 
 .case-home-stat-label {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 500;
   color: var(--muted2);
-  line-height: 1.4;
+  line-height: 1.35;
   overflow-wrap: anywhere;
 }
 
@@ -394,17 +409,17 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  align-self: flex-start;
-  margin-top: auto;
+  align-self: flex-end;
+  margin-top: 0;
   border: none;
   border-radius: 8px;
   background: var(--bronze);
   color: #fff;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 14px 28px;
+  padding: 11px 22px;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease;
 }
@@ -428,6 +443,38 @@
   animation: caseHomeFadeSwitch 0.35s ease forwards;
 }
 
+@media (min-width: 1025px) {
+  .case-home-nav-list {
+    max-height: calc(100vh - 120px);
+  }
+
+  .case-home-preview-body {
+    min-height: 0;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1220px) {
+  .case-home-preview-bottom {
+    display: grid;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .case-home-preview-cta {
+    align-self: flex-start;
+  }
+}
+
+@media (min-width: 1221px) {
+  .case-home-preview-bottom {
+    align-items: center;
+  }
+
+  .case-home-preview-cta {
+    align-self: center;
+  }
+}
+
 @keyframes caseHomeFadeSwitch {
   from {
     opacity: 0;
@@ -442,7 +489,21 @@
 
 @media (max-width: 1024px) {
   .case-home-preview-body {
-    padding: 24px 24px 28px;
+    padding: 20px 20px 20px;
+  }
+
+  .case-home-preview-bottom {
+    display: grid;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .case-home-preview-bottom .case-home-stats-row {
+    width: 100%;
+  }
+
+  .case-home-preview-cta {
+    align-self: flex-start;
   }
 }
 
@@ -456,15 +517,15 @@
   }
 
   .case-home-preview-body {
-    padding: 24px 24px 24px;
+    padding: 20px 20px 20px;
   }
 
   .case-home-preview-desc {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
   }
 
   .case-home-stats-row {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .case-home-preview-cta {
@@ -473,7 +534,7 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .case-home-layout {
     grid-template-columns: 1fr;
     align-items: start;
@@ -489,14 +550,30 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-    max-height: 310px;
-    overflow-y: auto;
-    padding-right: 4px;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
     align-content: start;
   }
 
   .case-home-preview {
     min-height: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .case-home-stats-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .case-home-stat {
+    border-right: none;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .case-home-stat:last-child {
+    border-bottom: none;
   }
 }
 
@@ -538,10 +615,15 @@
     padding: 20px 18px 22px;
   }
 
+  .case-home-preview-bottom {
+    display: grid;
+    gap: 12px;
+  }
+
   .case-home-stats-row {
     display: grid;
     grid-template-columns: 1fr;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   .case-home-stat {
