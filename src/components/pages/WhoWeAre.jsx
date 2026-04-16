@@ -23,8 +23,8 @@ export function WhoWeAre() {
   const notes = [
     "Is your data ready for real AI reasoning, or just retrieval?",
     "Are your agents truly autonomous, or just scripted workflows?",
-    "Where is AI cost quietly eating into your margins?",
-    "Is your AI production-ready from a governance and reliability?",
+    "Where is AI cost quietly eating into your profit margins?",
+    "Is your AI production-ready on governance and reliability?",
   ];
 
   const stats = [
