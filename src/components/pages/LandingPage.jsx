@@ -53,8 +53,8 @@ export function LandingPage({ onCaseStudies, onContact }) {
   // const frontLayerRef = useRef(null);
   const textLayerRef = useRef(null);
   // const useSingleParallaxLayer = isTablet || width < 1280;
-  const heroViewportMinHeight = isSmallMobile ? "100dvh" : isMobile ? "100dvh" : isTablet ? "100dvh" : "96dvh";
-  const heroSceneHeight = isSmallMobile ? "116dvh" : isMobile ? "120dvh" : isTablet ? "124dvh" : "130dvh";
+  const heroViewportMinHeight = isSmallMobile ? "100svh" : isMobile ? "100svh" : isTablet ? "100svh" : "96dvh";
+  const heroSceneHeight = isSmallMobile ? "116svh" : isMobile ? "120svh" : isTablet ? "124svh" : "130dvh";
   const isMobileViewport = isSmallMobile || isMobile || isTablet;
   const isPhoneViewport = isMobile;
   const mobileCenterTuning = isSmallMobile ? 12 : isMobile ? 14 : 16;
@@ -278,6 +278,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         background: "var(--site-base-bg)",
         position: "relative",
         isolation: "isolate",
+        overflowAnchor: "none",
       }}
     >
       <div
@@ -297,6 +298,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                 : "38px 0",
           overflow: "hidden",
           isolation: "isolate",
+          overflowAnchor: "none",
         }}
       >
       <div

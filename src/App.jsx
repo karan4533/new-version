@@ -60,9 +60,13 @@ export default function App() {
     const navElement = document.querySelector("nav");
     if (!navElement) return 104;
 
-    const { top } = navElement.getBoundingClientRect();
-    const topInset = Math.max(0, Math.round(top));
-    const navHeight = Math.round(navElement.getBoundingClientRect().height || navElement.offsetHeight || 0);
+    const navRect = navElement.getBoundingClientRect();
+    const navHeight = Math.round(navRect.height || navElement.offsetHeight || 0);
+    const computedTop = window.getComputedStyle(navElement).top;
+    const parsedTop = Number.parseFloat(computedTop);
+    const topInset = Number.isFinite(parsedTop)
+      ? Math.max(0, Math.round(parsedTop))
+      : Math.max(0, Math.round(navRect.top));
 
     return topInset + navHeight + extraGap;
   };
