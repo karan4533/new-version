@@ -1,0 +1,257 @@
+import { useState, useEffect, useRef } from "react";
+
+const levers = [
+  { label: "Accuracy",    hl: 88, avg: 62, insight: "Precision-tuned per use case — not over-engineered globally." },
+  { label: "Latency",     hl: 83, avg: 48, insight: "Semantic caching + provider routing eliminates the speed tradeoff." },
+  { label: "Op. Cost",    hl: 76, avg: 35, insight: "Multi-provider orchestration cuts spend without risking reliability." },
+  { label: "Governance",  hl: 79, avg: 28, insight: "Guardrails built into the Skills layer — not bolted on after." },
+  { label: "Dev Time",    hl: 81, avg: 44, insight: "Skills architecture ships 2x faster without cutting corners." },
+];
+
+const N = levers.length;
+const CX = 160, CY = 165, R = 108;
+
+function polarToXY(angleIdx, r) {
+  const angle = ((360 / N) * angleIdx - 90) * (Math.PI / 180);
+  return { x: CX + r * Math.cos(angle), y: CY + r * Math.sin(angle) };
+}
+
+function buildPath(values, progress = 1) {
+  return values.map((v, i) => {
+    const { x, y } = polarToXY(i, (v / 100) * R * progress);
+    return `${i === 0 ? "M" : "L"}${x},${y}`;
+  }).join(" ") + " Z";
+}
+
+// find the lever with biggest gap
+const biggestGapIdx = levers.reduce((best, l, i) =>
+  (l.hl - l.avg) > (levers[best].hl - levers[best].avg) ? i : best, 0);
+
+export default function HLRadar() {
+  const [hovered, setHovered] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const rafRef = useRef();
+  const startRef = useRef();
+
+  useEffect(() => {
+    const duration = 1100;
+    const ease = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    const animate = (ts) => {
+      if (!startRef.current) startRef.current = ts;
+      const p = Math.min((ts - startRef.current) / duration, 1);
+      setProgress(ease(p));
+      if (p < 1) rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  const active = hovered !== null ? levers[hovered] : null;
+
+  return (
+    <div style={{
+      background: "#0f0e0c",
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontFamily: "Georgia, serif",
+      padding: 24,
+    }}>
+      <div style={{ maxWidth: 460, width: "100%", textAlign: "center" }}>
+
+        {/* Header */}
+        <div style={{ fontSize: 11, letterSpacing: "0.2em", color: "#C4883A", textTransform: "uppercase", fontFamily: "sans-serif", marginBottom: 10 }}>
+          The HL Approach
+        </div>
+        <h2 style={{ color: "#f0ece4", fontSize: "clamp(20px, 4vw, 30px)", fontWeight: 400, margin: "0 0 28px", lineHeight: 1.35 }}>
+          Every lever optimised.<br />
+          <em style={{ color: "#C4883A" }}>No tradeoffs left on the table.</em>
+        </h2>
+
+        {/* Chart */}
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <svg width="320" height="320" viewBox="0 0 320 330" style={{ overflow: "visible" }}>
+
+            {/* Grid rings */}
+            {[25, 50, 75, 100].map((pct, ri) => (
+              <polygon
+                key={pct}
+                points={levers.map((_, i) => {
+                  const { x, y } = polarToXY(i, (pct / 100) * R);
+                  return `${x},${y}`;
+                }).join(" ")}
+                fill="none"
+                stroke={pct === 100 ? "#2a2720" : "#181614"}
+                strokeWidth={pct === 100 ? 1.5 : 1}
+              />
+            ))}
+
+            {/* Ring labels */}
+            {[25, 50, 75].map(pct => {
+              const { x, y } = polarToXY(2, (pct / 100) * R);
+              return (
+                <text key={pct} x={x + 4} y={y} fill="#2a2720" fontSize={8} fontFamily="sans-serif">
+                  {pct}
+                </text>
+              );
+            })}
+
+            {/* Axis lines */}
+            {levers.map((_, i) => {
+              const { x, y } = polarToXY(i, R);
+              return <line key={i} x1={CX} y1={CY} x2={x} y2={y} stroke="#1e1c18" strokeWidth={1} />;
+            })}
+
+            {/* Industry avg fill */}
+            <path
+              d={buildPath(levers.map(l => l.avg), progress)}
+              fill="#6b5a3a"
+              fillOpacity={0.08}
+              stroke="#6b5a3a"
+              strokeOpacity={0.35}
+              strokeWidth={1.5}
+              strokeDasharray="4 3"
+            />
+
+            {/* HL fill */}
+            <path
+              d={buildPath(levers.map(l => l.hl), progress)}
+              fill="#C4883A"
+              fillOpacity={0.14}
+              stroke="#C4883A"
+              strokeWidth={2}
+            />
+
+            {/* Gap callout on biggest gap lever */}
+            {progress > 0.95 && (() => {
+              const l = levers[biggestGapIdx];
+              const midR = ((l.hl + l.avg) / 2 / 100) * R;
+              const { x, y } = polarToXY(biggestGapIdx, midR);
+              return (
+                <g style={{ opacity: progress > 0.98 ? 1 : 0, transition: "opacity 0.4s" }}>
+                  <circle cx={x} cy={y} r={9} fill="#C4883A" fillOpacity={0.12} stroke="#C4883A" strokeWidth={1} strokeOpacity={0.4} />
+                  <text x={x} y={y + 4} textAnchor="middle" fill="#C4883A" fontSize={8} fontFamily="sans-serif" fontWeight="bold">
+                    +{l.hl - l.avg}
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* HL dots */}
+            {levers.map((l, i) => {
+              const { x, y } = polarToXY(i, (l.hl / 100) * R * progress);
+              const isHovered = hovered === i;
+              return (
+                <g key={i}>
+                  {isHovered && (
+                    <circle cx={x} cy={y} r={14} fill="#C4883A" fillOpacity={0.1} stroke="none" />
+                  )}
+                  <circle
+                    cx={x} cy={y}
+                    r={isHovered ? 7 : 5}
+                    fill={isHovered ? "#C4883A" : "#161410"}
+                    stroke="#C4883A"
+                    strokeWidth={isHovered ? 0 : 2}
+                    style={{ cursor: "pointer", transition: "r 0.2s, fill 0.2s" }}
+                    onMouseEnter={() => setHovered(i)}
+                    onMouseLeave={() => setHovered(null)}
+                  />
+                </g>
+              );
+            })}
+
+            {/* Avg dots */}
+            {levers.map((l, i) => {
+              const { x, y } = polarToXY(i, (l.avg / 100) * R * progress);
+              return (
+                <circle
+                  key={i}
+                  cx={x} cy={y} r={3}
+                  fill="#2a2720"
+                  stroke="#6b5a3a"
+                  strokeWidth={1.5}
+                  style={{ pointerEvents: "none" }}
+                />
+              );
+            })}
+
+            {/* Axis labels */}
+            {levers.map((l, i) => {
+              const { x, y } = polarToXY(i, R + 24);
+              const anchor = x < CX - 8 ? "end" : x > CX + 8 ? "start" : "middle";
+              const isHovered = hovered === i;
+              return (
+                <text
+                  key={i}
+                  x={x} y={y + 4}
+                  textAnchor={anchor}
+                  fill={isHovered ? "#C4883A" : "#7a7060"}
+                  fontSize={11}
+                  fontFamily="sans-serif"
+                  fontWeight={isHovered ? "700" : "400"}
+                  style={{ cursor: "pointer", transition: "fill 0.15s" }}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  {l.label}
+                </text>
+              );
+            })}
+          </svg>
+        </div>
+
+        {/* Legend */}
+        <div style={{ display: "flex", gap: 20, justifyContent: "center", marginTop: 4, marginBottom: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <svg width="20" height="10">
+              <line x1="0" y1="5" x2="20" y2="5" stroke="#6b5a3a" strokeWidth="1.5" strokeDasharray="4 3" />
+            </svg>
+            <span style={{ fontSize: 11, color: "#4a4640", fontFamily: "sans-serif" }}>Industry avg</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <svg width="20" height="10">
+              <line x1="0" y1="5" x2="20" y2="5" stroke="#C4883A" strokeWidth="2" />
+            </svg>
+            <span style={{ fontSize: 11, color: "#C4883A", fontFamily: "sans-serif" }}>Heuristic Labs</span>
+          </div>
+        </div>
+
+        {/* Insight line */}
+        <div style={{
+          minHeight: 56,
+          background: "#111009",
+          border: `1px solid ${active ? "#C4883A" : "#1a1816"}`,
+          borderRadius: 8,
+          padding: "14px 20px",
+          transition: "border-color 0.25s",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          {active ? (
+            <p style={{ margin: 0, color: "#f0ece4", fontSize: 14, lineHeight: 1.65, textAlign: "left" }}>
+              <span style={{
+                color: "#C4883A",
+                fontFamily: "sans-serif",
+                fontSize: 10,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginRight: 10,
+                fontWeight: 700,
+              }}>
+                {active.label}
+              </span>
+              {active.insight}
+            </p>
+          ) : (
+            <p style={{ margin: 0, color: "#2e2b26", fontSize: 12, fontFamily: "sans-serif", letterSpacing: "0.06em" }}>
+              Hover a lever to see how we optimise it
+            </p>
+          )}
+        </div>
+
+      </div>
+    </div>
+  );
+}

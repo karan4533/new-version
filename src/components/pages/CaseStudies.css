@@ -460,8 +460,15 @@
     align-items: stretch;
   }
 
+  .case-home-preview-bottom .case-home-stats-row {
+    width: 100%;
+  }
+
   .case-home-preview-cta {
     align-self: flex-start;
+    display: inline-flex;
+    width: fit-content;
+    justify-self: start;
   }
 }
 
@@ -472,6 +479,7 @@
 
   .case-home-preview-cta {
     align-self: center;
+    width: fit-content;
   }
 }
 
@@ -484,53 +492,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media (max-width: 1024px) {
-  .case-home-preview-body {
-    padding: 20px 20px 20px;
-  }
-
-  .case-home-preview-bottom {
-    display: grid;
-    gap: 12px;
-    align-items: stretch;
-  }
-
-  .case-home-preview-bottom .case-home-stats-row {
-    width: 100%;
-  }
-
-  .case-home-preview-cta {
-    align-self: flex-start;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .case-home-preview-media {
-    height: 286px;
-  }
-
-  .case-home-preview-image {
-    object-position: center 38%;
-  }
-
-  .case-home-preview-body {
-    padding: 20px 20px 20px;
-  }
-
-  .case-home-preview-desc {
-    margin-bottom: 16px;
-  }
-
-  .case-home-stats-row {
-    margin-bottom: 12px;
-  }
-
-  .case-home-preview-cta {
-    margin-top: 0;
-    align-self: flex-start;
   }
 }
 
@@ -558,6 +519,44 @@
 
   .case-home-preview {
     min-height: 0;
+  }
+
+  .case-home-preview-body {
+    padding: 20px 20px 20px;
+  }
+
+  .case-home-preview-bottom {
+    display: grid;
+    gap: 12px;
+    justify-items: start;
+  }
+
+  .case-home-preview-bottom .case-home-stats-row {
+    width: 100%;
+  }
+
+  .case-home-preview-cta {
+    align-self: flex-start;
+    padding: 11px 22px;
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .case-home-preview-media {
+    height: 286px;
+  }
+
+  .case-home-preview-image {
+    object-position: center 38%;
+  }
+
+  .case-home-preview-desc {
+    margin-bottom: 16px;
+  }
+
+  .case-home-stats-row {
+    margin-bottom: 12px;
   }
 }
 
@@ -618,12 +617,14 @@
   .case-home-preview-bottom {
     display: grid;
     gap: 12px;
+    justify-items: start;
   }
 
   .case-home-stats-row {
     display: grid;
     grid-template-columns: 1fr;
     margin-bottom: 0;
+    width: 100%;
   }
 
   .case-home-stat {
@@ -637,9 +638,7 @@
   }
 
   .case-home-preview-cta {
-    width: 100%;
-    justify-content: center;
-    padding: 13px 16px;
+    padding: 11px 22px;
   }
 }
 
@@ -664,5 +663,17 @@
 
   .case-home-preview-media {
     height: 220px;
+  }
+
+  .case-home-preview-bottom {
+    display: grid;
+    gap: 12px;
+    justify-items: start;
+  }
+
+  .case-home-preview-cta {
+    align-self: flex-start;
+    padding: 11px 22px;
+    display: inline-flex;
   }
 }
