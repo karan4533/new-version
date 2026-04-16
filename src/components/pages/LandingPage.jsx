@@ -447,7 +447,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.12} distance={22} blurFrom={12}>
           <h1
             style={{
-              margin: isSmallMobile ? "22px 0 20px" : isMobile ? "28px 0 24px" : "26px 0 22px",
+              margin: isSmallMobile ? "22px 8px 20px" : isMobile ? "28px 10px 24px" : "26px 0 22px",
               fontFamily: font.serif,
               fontWeight: 600,
               letterSpacing: "-.02em",
@@ -461,7 +461,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               style={{
                 display: "block",
                 color: "inherit",
-                fontStyle: "normal",
+                fontStyle: "italic",
                 fontWeight: "inherit",
                 whiteSpace: "nowrap",
                 fontSize: isMobile ? "1em" : "1.14em",

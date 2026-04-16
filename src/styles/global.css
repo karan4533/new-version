@@ -131,7 +131,7 @@ section .card:hover {
   background: linear-gradient(180deg, rgba(234, 226, 214, 0.95) 0%, rgba(228, 218, 204, 0.94) 100%);
   box-shadow: inset 0 -1px 0 rgba(146, 94, 47, 0.6), 0 1px 0 rgba(255, 255, 255, 0.46);
   text-align: left;
-  color: #9F6A3A;
+  color: #5E3A1D;
   font-family: "Playfair Display", serif;
   font-style: italic;
   font-weight: 700;
