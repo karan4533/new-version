@@ -21,10 +21,10 @@ export function WhoWeAre() {
   const aboutStatLabel = "rgba(255,255,255,.62)";
 
   const notes = [
-    "Is your data ready for real AI reasoning, or just basic retrieval?",
+    "Is your data ready for real AI reasoning, or just retrieval?",
     "Are your agents truly autonomous, or just scripted workflows?",
-    "Where is AI cost quietly eating into your margins?",
-    "Is your AI production-ready from a governance and reliability standpoint?",
+    "Where is AI cost quietly eating into your profit margins?",
+    "Is your AI production-ready on governance and reliability?",
   ];
 
   const stats = [
@@ -200,7 +200,7 @@ export function WhoWeAre() {
                     maxWidth: "100%",
                     marginLeft: 0,
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 15 : 16,
+                    fontSize: isSmallMobile ? 16 : 17,
                     lineHeight: 1.55,
                     color: aboutText,
                     textAlign: "left",
