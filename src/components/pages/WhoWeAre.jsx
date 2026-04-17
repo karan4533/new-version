@@ -29,6 +29,8 @@ export function WhoWeAre() {
   function MissionMatrix() {
     const { isMobile: matrixIsMobile, isTablet: matrixIsTablet, isSmallMobile: matrixIsSmallMobile } = useViewport();
     const progress = 1;
+    const matrixUseDesktopLayout = !matrixIsTablet;
+    const matrixRightShift = matrixIsMobile ? 0 : 14;
 
     const levers = [
       { label: "Accuracy", hl: 88, avg: 62, insight: "Precision-tuned per use case — not over-engineered globally." },
@@ -66,21 +68,21 @@ export function WhoWeAre() {
         <div
           style={{
             width: "100%",
-            display: matrixIsMobile ? "flex" : "grid",
-            gridTemplateColumns: "minmax(220px, 260px) minmax(0, 1fr) minmax(220px, 260px)",
+            display: matrixUseDesktopLayout ? "grid" : "flex",
+            gridTemplateColumns: "minmax(240px, 300px) minmax(320px, 360px) minmax(120px, 180px)",
             alignItems: "center",
             justifyItems: "center",
             justifyContent: "center",
             gap: matrixIsSmallMobile ? 12 : matrixIsMobile ? 16 : 20,
-            flexDirection: matrixIsMobile ? "column" : "row",
+            flexDirection: matrixUseDesktopLayout ? "row" : "column",
           }}
         >
           <p
             style={{
               margin: 0,
-              maxWidth: matrixIsMobile ? "100%" : 260,
-              textAlign: matrixIsMobile ? "center" : "left",
-              justifySelf: matrixIsMobile ? "center" : "start",
+              maxWidth: matrixUseDesktopLayout ? 260 : "100%",
+              textAlign: matrixUseDesktopLayout ? "left" : "center",
+              justifySelf: matrixUseDesktopLayout ? "start" : "center",
               fontFamily: font.serif,
               fontSize: matrixIsSmallMobile ? 22 : matrixIsMobile ? 24 : 28,
               lineHeight: 1.2,
@@ -91,7 +93,7 @@ export function WhoWeAre() {
           >
             Every lever optimized—no trade-offs left on the table
           </p>
-          <svg width={matrixIsSmallMobile ? 286 : matrixIsMobile ? 304 : matrixIsTablet ? 320 : 320} height={matrixIsSmallMobile ? 294 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%", justifySelf: "center" }}>
+          <svg width={matrixIsSmallMobile ? 298 : matrixIsMobile ? 326 : matrixIsTablet ? 352 : 320} height={matrixIsSmallMobile ? 304 : matrixIsMobile ? 338 : matrixIsTablet ? 362 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%", justifySelf: "center" }}>
             {[25, 50, 75, 100].map((pct) => (
               <polygon
                 key={pct}
@@ -177,39 +179,41 @@ export function WhoWeAre() {
             })}
           </svg>
 
-          {!matrixIsMobile && <div aria-hidden="true" style={{ width: "100%" }} />}
+          {matrixUseDesktopLayout && <div aria-hidden="true" style={{ width: "100%" }} />}
         </div>
 
-        <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: 4 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-            <svg width="20" height="10">
-              <line x1="0" y1="5" x2="20" y2="5" stroke="#6b5a3a" strokeWidth="1.5" strokeDasharray="4 3" />
-            </svg>
-            <span style={{ fontSize: 11, color: "#4a4640", fontFamily: "sans-serif" }}>Industry avg</span>
+        <div style={{ width: "100%", paddingLeft: matrixRightShift, boxSizing: "border-box", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: 4 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+              <svg width="20" height="10">
+                <line x1="0" y1="5" x2="20" y2="5" stroke="#6b5a3a" strokeWidth="1.5" strokeDasharray="4 3" />
+              </svg>
+              <span style={{ fontSize: 11, color: "#4a4640", fontFamily: "sans-serif" }}>Industry avg</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+              <svg width="20" height="10">
+                <line x1="0" y1="5" x2="20" y2="5" stroke="#C4883A" strokeWidth="2" />
+              </svg>
+              <span style={{ fontSize: 11, color: "#C4883A", fontFamily: "sans-serif" }}>Heuristic Labs</span>
+            </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-            <svg width="20" height="10">
-              <line x1="0" y1="5" x2="20" y2="5" stroke="#C4883A" strokeWidth="2" />
-            </svg>
-            <span style={{ fontSize: 11, color: "#C4883A", fontFamily: "sans-serif" }}>Heuristic Labs</span>
-          </div>
-        </div>
 
-        <p
-          style={{
-            margin: 0,
-            textAlign: "center",
-            maxWidth: 460,
-            fontFamily: font.sans,
-            fontSize: matrixIsSmallMobile ? 13 : 14,
-            lineHeight: 1.6,
-            color: aboutTextMuted,
-          }}
-        >
-          Most AI vendors optimize one to one dimension.
-          <br />
-          We engineer across all five.
-        </p>
+          <p
+            style={{
+              margin: 0,
+              textAlign: "center",
+              maxWidth: 460,
+              fontFamily: font.sans,
+              fontSize: matrixIsSmallMobile ? 13 : 14,
+              lineHeight: 1.6,
+              color: aboutTextMuted,
+            }}
+          >
+            Most AI vendors optimize one dimension.
+            <br />
+            We engineer across all five.
+          </p>
+        </div>
 
       </div>
     );
