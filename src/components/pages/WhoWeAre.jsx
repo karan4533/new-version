@@ -18,7 +18,6 @@ export function WhoWeAre() {
   const aboutTextSoft = "rgba(255,255,255,.5)";
   const aboutRule = "rgba(255,255,255,.16)";
   const aboutDivider = "rgba(255,255,255,.1)";
-  const aboutStatLabel = "rgba(255,255,255,.62)";
 
   const notes = [
     "Is your data ready for real AI reasoning, or just retrieval?",
@@ -27,12 +26,154 @@ export function WhoWeAre() {
     "Is your AI production-ready on governance and reliability?",
   ];
 
-  const stats = [
-    { value: "50+", label: "AI engagements shipped" },
-    { value: "6-10 wks", label: "Typical production timeline" },
-    { value: "2x", label: "Faster than traditional AI delivery" },
-    { value: "40+ yrs", label: "Leadership experience in AI" },
-  ];
+  function MissionMatrix() {
+    const { isMobile: matrixIsMobile, isTablet: matrixIsTablet, isSmallMobile: matrixIsSmallMobile } = useViewport();
+    const progress = 1;
+
+    const levers = [
+      { label: "Accuracy", hl: 88, avg: 62, insight: "Precision-tuned per use case — not over-engineered globally." },
+      { label: "Latency", hl: 83, avg: 48, insight: "Semantic caching + provider routing eliminates the speed tradeoff." },
+      { label: "Op. Cost", hl: 76, avg: 35, insight: "Multi-provider orchestration cuts spend without risking reliability." },
+      { label: "Governance", hl: 79, avg: 28, insight: "Guardrails built into the Skills layer — not bolted on after." },
+      { label: "Dev Time", hl: 81, avg: 44, insight: "Skills architecture ships 2x faster without cutting corners." },
+    ];
+
+    const N = levers.length;
+    const CX = 160;
+    const CY = 165;
+    const R = 108;
+
+    const polarToXY = (angleIdx, radius) => {
+      const angle = ((360 / N) * angleIdx - 90) * (Math.PI / 180);
+      return { x: CX + radius * Math.cos(angle), y: CY + radius * Math.sin(angle) };
+    };
+
+    const buildPath = (values, amount = 1) =>
+      `${values
+        .map((value, index) => {
+          const { x, y } = polarToXY(index, (value / 100) * R * amount);
+          return `${index === 0 ? "M" : "L"}${x},${y}`;
+        })
+        .join(" ")} Z`;
+
+    const biggestGapIdx = levers.reduce(
+      (best, lever, index) => (lever.hl - lever.avg > levers[best].hl - levers[best].avg ? index : best),
+      0,
+    );
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: matrixIsSmallMobile ? 14 : 16 }}>
+        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <svg width={matrixIsSmallMobile ? 286 : matrixIsMobile ? 304 : matrixIsTablet ? 320 : 320} height={matrixIsSmallMobile ? 294 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%" }}>
+            {[25, 50, 75, 100].map((pct) => (
+              <polygon
+                key={pct}
+                points={levers
+                  .map((_, index) => {
+                    const { x, y } = polarToXY(index, (pct / 100) * R);
+                    return `${x},${y}`;
+                  })
+                  .join(" ")}
+                fill="none"
+                stroke={pct === 100 ? "#2a2720" : "#181614"}
+                strokeWidth={pct === 100 ? 1.5 : 1}
+              />
+            ))}
+
+            {[25, 50, 75].map((pct) => {
+              const { x, y } = polarToXY(2, (pct / 100) * R);
+              return (
+                <text key={pct} x={x + 4} y={y} fill="#2a2720" fontSize={8} fontFamily="sans-serif">
+                  {pct}
+                </text>
+              );
+            })}
+
+            {levers.map((_, index) => {
+              const { x, y } = polarToXY(index, R);
+              return <line key={index} x1={CX} y1={CY} x2={x} y2={y} stroke="#1e1c18" strokeWidth={1} />;
+            })}
+
+            <path d={buildPath(levers.map((lever) => lever.avg), progress)} fill="#6b5a3a" fillOpacity={0.08} stroke="#6b5a3a" strokeOpacity={0.35} strokeWidth={1.5} strokeDasharray="4 3" />
+            <path d={buildPath(levers.map((lever) => lever.hl), progress)} fill="#C4883A" fillOpacity={0.14} stroke="#C4883A" strokeWidth={2} />
+
+            {(() => {
+              const lever = levers[biggestGapIdx];
+              const middleRadius = ((lever.hl + lever.avg) / 2 / 100) * R;
+              const { x, y } = polarToXY(biggestGapIdx, middleRadius);
+
+              return (
+                <g>
+                  <circle cx={x} cy={y} r={9} fill="#C4883A" fillOpacity={0.12} stroke="#C4883A" strokeWidth={1} strokeOpacity={0.4} />
+                  <text x={x} y={y + 4} textAnchor="middle" fill="#C4883A" fontSize={8} fontFamily="sans-serif" fontWeight="bold">
+                    +{lever.hl - lever.avg}
+                  </text>
+                </g>
+              );
+            })()}
+
+            {levers.map((lever, index) => {
+              const { x, y } = polarToXY(index, (lever.hl / 100) * R * progress);
+
+              return (
+                <g key={lever.label}>
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={5}
+                    fill="#161410"
+                    stroke="#C4883A"
+                    strokeWidth={2}
+                  />
+                </g>
+              );
+            })}
+
+            {levers.map((lever, index) => {
+              const { x, y } = polarToXY(index, R + 24);
+              const anchor = x < CX - 8 ? "end" : x > CX + 8 ? "start" : "middle";
+
+              return (
+                <text
+                  key={lever.label}
+                  x={x}
+                  y={y + 4}
+                  textAnchor={anchor}
+                  fill="#7a7060"
+                  fontSize={11}
+                  fontFamily="sans-serif"
+                  fontWeight="400"
+                >
+                  {lever.label}
+                </text>
+              );
+            })}
+          </svg>
+        </div>
+
+        <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: 4 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <svg width="20" height="10">
+              <line x1="0" y1="5" x2="20" y2="5" stroke="#6b5a3a" strokeWidth="1.5" strokeDasharray="4 3" />
+            </svg>
+            <span style={{ fontSize: 11, color: "#4a4640", fontFamily: "sans-serif" }}>Industry avg</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <svg width="20" height="10">
+              <line x1="0" y1="5" x2="20" y2="5" stroke="#C4883A" strokeWidth="2" />
+            </svg>
+            <span style={{ fontSize: 11, color: "#C4883A", fontFamily: "sans-serif" }}>Heuristic Labs</span>
+          </div>
+        </div>
+
+        <div style={{ width: "100%", minHeight: 56, background: "#111009", border: "1px solid #1a1816", borderRadius: 8, padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <p style={{ margin: 0, color: "#2e2b26", fontSize: 12, fontFamily: "sans-serif", letterSpacing: "0.06em" }}>
+            Heuristic Labs Performance Matrix
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     const syncAboutNavOffset = () => {
@@ -239,63 +380,7 @@ export function WhoWeAre() {
             boxShadow: "0 12px 26px rgba(0,0,0,.2)",
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
-            }}
-          >
-            {stats.map((item, index) => (
-              <Reveal
-                key={`${item.value}-${item.label}`}
-                delay={0.16 + index * 0.06}
-                distance={14}
-                blurFrom={6}
-                style={{ height: "100%" }}
-              >
-                <div
-                  style={{
-                    padding: isSmallMobile ? "16px 10px" : isMobile ? "18px 12px" : "20px 14px",
-                    borderRight:
-                      !isMobile
-                        ? index < stats.length - 1
-                          ? `1px solid ${aboutDivider}`
-                          : "none"
-                        : index % 2 === 0
-                          ? `1px solid ${aboutDivider}`
-                          : "none",
-                    borderBottom: isMobile && index < 2 ? `1px solid ${aboutDivider}` : "none",
-                    textAlign: "center",
-                    height: "100%",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontFamily: font.serif,
-                      fontSize: isSmallMobile ? 26 : 31,
-                      color: T.amber,
-                      lineHeight: 1.1,
-                      marginBottom: 3,
-                    }}
-                  >
-                    {item.value}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: font.sans,
-                      fontSize: 10,
-                      color: aboutStatLabel,
-                      lineHeight: 1.5,
-                      textTransform: "capitalize",
-                      letterSpacing: ".08em",
-                    }}
-                  >
-                    {item.label}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <MissionMatrix />
         </div>
       </div>
       </div>

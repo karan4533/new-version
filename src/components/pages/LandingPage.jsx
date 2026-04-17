@@ -18,6 +18,13 @@ const HERO_USE_CASES = [
 
 const HERO_USE_CASE_CROSSFADE_MS = 560;
 
+const HERO_STATS = [
+  { value: "50+", label: "AI engagements shipped" },
+  { value: "6-10 wks", label: "Typical production timeline" },
+  { value: "2x", label: "Faster than traditional AI delivery" },
+  { value: "40+ yrs", label: "Leadership experience in AI" },
+];
+
 function HeroBtn({ label, onClick, primary }) {
   return (
     <button
@@ -53,11 +60,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   // const frontLayerRef = useRef(null);
   const textLayerRef = useRef(null);
   // const useSingleParallaxLayer = isTablet || width < 1280;
-  const heroViewportMinHeight = isSmallMobile ? "100svh" : isMobile ? "100svh" : isTablet ? "100svh" : "96dvh";
-  const heroSceneHeight = isSmallMobile ? "116svh" : isMobile ? "120svh" : isTablet ? "124svh" : "130dvh";
-  const isMobileViewport = isSmallMobile || isMobile || isTablet;
   const isPhoneViewport = isMobile;
-  const mobileCenterTuning = isSmallMobile ? 12 : isMobile ? 14 : 16;
   const heroSubheadingFontSize = isSmallMobile ? 18 : isTablet ? 19 : 20;
   const heroUseCaseFontSize = heroSubheadingFontSize + 1;
   const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
@@ -66,16 +69,15 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const [heroSubheadingNudgeX, setHeroSubheadingNudgeX] = useState(
     isSmallMobile ? 10 : isMobile ? 14 : isTablet ? 18 : 24,
   );
-  const [mobileHeroCompensation, setMobileHeroCompensation] = useState(
-    isSmallMobile ? 76 : isMobile ? 80 : isTablet ? 88 : 0,
-  );
-  const heroTextLift = isMobileViewport
-    ? -Math.max(0, mobileHeroCompensation - mobileCenterTuning)
-    : -26;
-  const heroLiftNudge = -20;
-  const heroContentOffsetY = heroTextLift + heroLiftNudge;
-  const heroTextOnlyNudge = -6;
   const heroTopGuideLineY = isSmallMobile ? 60 : isMobile ? 64 : isTablet ? 70 : 76;
+  const heroBottomGuideLineY = isSmallMobile ? 760 : isMobile ? 700 : isTablet ? 620 : 560;
+  const heroGuideLineTailY = heroBottomGuideLineY + (isSmallMobile ? 120 : 100);
+  const heroGridLeftX = isSmallMobile ? 70 : isMobile ? 84 : isTablet ? 104 : 124;
+  const heroGridRightX = 1000 - heroGridLeftX;
+  const heroContainerMaxWidth = 1160;
+  const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
+  const heroFlowGap = isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 18 : 20;
+  const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
 
   useEffect(() => {
     useCaseIndexRef.current = useCaseIndex;
@@ -118,37 +120,6 @@ export function LandingPage({ onCaseStudies, onContact }) {
     setHeroUseCaseSlotWidth((current) => (current === nextSlotWidthPx ? current : nextSlotWidthPx));
     setHeroSubheadingNudgeX((current) => (current === nextNudge ? current : nextNudge));
   }, [width, heroUseCaseFontSize, isSmallMobile, isMobile, isTablet]);
-
-  useEffect(() => {
-    if (!isMobileViewport) {
-      setMobileHeroCompensation(0);
-      return;
-    }
-
-    const syncHeroCompensation = () => {
-      const navElement = document.querySelector("nav");
-
-      if (!navElement) {
-        const fallbackCompensation = isSmallMobile ? 76 : isMobile ? 80 : 88;
-        setMobileHeroCompensation((current) => (current === fallbackCompensation ? current : fallbackCompensation));
-        return;
-      }
-
-      const rect = navElement.getBoundingClientRect();
-      const nextCompensation = Math.max(0, Math.min(120, Math.round(rect.top + rect.height)));
-
-      setMobileHeroCompensation((current) => (current === nextCompensation ? current : nextCompensation));
-    };
-
-    syncHeroCompensation();
-    window.addEventListener("resize", syncHeroCompensation, { passive: true });
-    window.addEventListener("orientationchange", syncHeroCompensation, { passive: true });
-
-    return () => {
-      window.removeEventListener("resize", syncHeroCompensation);
-      window.removeEventListener("orientationchange", syncHeroCompensation);
-    };
-  }, [isMobileViewport, isSmallMobile, isMobile, isTablet]);
 
   useEffect(() => {
     const ticker = window.setInterval(() => {
@@ -273,7 +244,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
       ref={heroRef}
       id="home"
       style={{
-        minHeight: heroSceneHeight,
+        minHeight: "100svh",
         scrollMarginTop: 84,
         background: "var(--site-base-bg)",
         position: "relative",
@@ -283,20 +254,20 @@ export function LandingPage({ onCaseStudies, onContact }) {
     >
       <div
         style={{
-          position: "sticky",
-          top: 0,
-          minHeight: heroViewportMinHeight,
+          position: "relative",
+          minHeight: "100svh",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           padding: isSmallMobile
-            ? "24px 0"
+            ? "18px 0 28px"
             : isMobile
-              ? "30px 0"
+              ? "22px 0 34px"
               : isTablet
-                ? "34px 0"
-                : "38px 0",
-          overflow: "hidden",
+                ? "26px 0 40px"
+                : "30px 0 44px",
+          overflowX: "hidden",
+          overflowY: "visible",
           isolation: "isolate",
           overflowAnchor: "none",
         }}
@@ -331,7 +302,6 @@ export function LandingPage({ onCaseStudies, onContact }) {
             inset: 0,
             pointerEvents: "none",
             opacity: isSmallMobile ? 0.56 : isMobile ? 0.52 : isTablet ? 0.42 : 0.46,
-            transform: `translateY(${heroContentOffsetY}px)`,
           }}
         >
           <svg
@@ -352,10 +322,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
               strokeDasharray={isSmallMobile ? "5 8" : isMobile ? "5.2 9" : "5.5 11"}
               shapeRendering="geometricPrecision"
             >
-              <line x1="160" y1="-20" x2="160" y2="620" />
-              <line x1="840" y1="-20" x2="840" y2="620" />
+              <line x1={heroGridLeftX} y1="-20" x2={heroGridLeftX} y2={heroGuideLineTailY} />
+              <line x1={heroGridRightX} y1="-20" x2={heroGridRightX} y2={heroGuideLineTailY} />
               <line x1="-20" y1={heroTopGuideLineY} x2="1020" y2={heroTopGuideLineY} />
-              <line x1="-20" y1="520" x2="1020" y2="520" />
+              <line x1="-20" y1={heroBottomGuideLineY} x2="1020" y2={heroBottomGuideLineY} />
             </g>
           </svg>
         </div>
@@ -365,18 +335,17 @@ export function LandingPage({ onCaseStudies, onContact }) {
         ref={textLayerRef}
         style={{
           width: "100%",
-          maxWidth: 1020,
+          maxWidth: heroContainerMaxWidth,
           margin: "0 auto",
-          padding: `0 ${isSmallMobile ? 14 : isMobile ? 20 : 44}px`,
+          padding: `0 ${heroSidePadding}px`,
           textAlign: "center",
           position: "relative",
           zIndex: 2,
-          transform: `translateY(${heroContentOffsetY + heroTextOnlyNudge}px)`,
-          willChange: "transform, opacity",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
+          gap: heroFlowGap,
         }}
       >
         <Reveal delay={0.04} distance={14} blurFrom={10}>
@@ -408,8 +377,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.08} distance={10} blurFrom={8}>
           <div
             style={{
-              marginTop: isSmallMobile ? 12 : isMobile ? 14 : 14,
-              marginBottom: isSmallMobile ? 6 : isMobile ? 8 : 8,
+              margin: 0,
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
@@ -449,7 +417,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.12} distance={22} blurFrom={12}>
           <h1
             style={{
-              margin: isSmallMobile ? "22px 8px 20px" : isMobile ? "28px 10px 24px" : "26px 0 22px",
+              margin: 0,
               fontFamily: font.serif,
               fontWeight: 600,
               letterSpacing: "-.02em",
@@ -492,7 +460,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.28} distance={16} blurFrom={6}>
           <p
             style={{
-              margin: isSmallMobile ? "14px auto 0" : isMobile ? "16px auto 0" : "16px auto 0",
+              margin: 0,
               maxWidth: 860,
               width: "min(100%, 860px)",
               display: "inline-flex",
@@ -541,7 +509,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.34} distance={16} blurFrom={6}>
           <div
             style={{
-              marginTop: isTablet ? 100 : 58,
+              marginTop: 0,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -553,6 +521,84 @@ export function LandingPage({ onCaseStudies, onContact }) {
             <HeroBtn label="Book a call" onClick={onContact} />
           </div>
         </Reveal>
+
+        <Reveal delay={0.42} distance={14} blurFrom={6}>
+          <div
+            style={{
+              width: "100%",
+              maxWidth: isTablet ? 760 : 960,
+              margin: "0 auto",
+            }}
+          >
+            <div
+              aria-hidden="true"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: isSmallMobile ? 10 : 12,
+              }}
+            >
+              <span
+                style={{
+                  width: 1,
+                  height: isSmallMobile ? 18 : isMobile ? 22 : 24,
+                  background: `repeating-linear-gradient(to bottom, ${T.ink12} 0, ${T.ink12} 4px, transparent 4px, transparent 8px)`,
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "repeat(2, minmax(0, 1fr))" : isTablet ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))",
+                gap: heroStatsGridGap,
+                alignItems: "stretch",
+              }}
+            >
+              {HERO_STATS.map((item) => (
+                <div
+                  key={item.label}
+                  style={{
+                    width: "100%",
+                    border: `1px dashed ${T.ink12}`,
+                    borderRadius: 14,
+                    padding: isSmallMobile ? "10px 12px" : "12px 14px",
+                    textAlign: "left",
+                    background: "rgba(255,255,255,.2)",
+                    minHeight: isSmallMobile ? 72 : 82,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: font.serif,
+                      fontSize: isSmallMobile ? 22 : isMobile ? 24 : 26,
+                      lineHeight: 1,
+                      color: T.ink,
+                      marginBottom: 5,
+                    }}
+                  >
+                    {item.value}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: font.sans,
+                      fontSize: 11,
+                      letterSpacing: ".02em",
+                      color: T.ink60,
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
       </div>
 
       {/*
