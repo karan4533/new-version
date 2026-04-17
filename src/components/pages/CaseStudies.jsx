@@ -548,7 +548,7 @@ export function CaseStudies({ onOpenCaseStudy }) {
                     className="case-home-preview-cta"
                     onClick={() => onOpenCaseStudy?.(activeEntry?.originalIndex)}
                   >
-                    Explore
+                    Learn more
                     <span className="case-home-preview-cta-arrow" aria-hidden="true">
                       &gt;
                     </span>
