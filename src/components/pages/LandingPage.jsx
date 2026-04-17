@@ -78,6 +78,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
   const heroFlowGap = isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 18 : 20;
   const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
+  const heroContentNudgeY = isSmallMobile ? -10 : isMobile ? -12 : isTablet ? -14 : -16;
 
   useEffect(() => {
     useCaseIndexRef.current = useCaseIndex;
@@ -258,7 +259,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
           minHeight: "100svh",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-start",
+          justifyContent: "center",
           padding: isSmallMobile
             ? "18px 0 28px"
             : isMobile
@@ -341,10 +342,11 @@ export function LandingPage({ onCaseStudies, onContact }) {
           textAlign: "center",
           position: "relative",
           zIndex: 2,
+          transform: `translateY(${heroContentNudgeY}px)`,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "flex-start",
+          justifyContent: "center",
           gap: heroFlowGap,
         }}
       >
