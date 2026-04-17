@@ -58,11 +58,6 @@ export function WhoWeAre() {
         })
         .join(" ")} Z`;
 
-    const biggestGapIdx = levers.reduce(
-      (best, lever, index) => (lever.hl - lever.avg > levers[best].hl - levers[best].avg ? index : best),
-      0,
-    );
-
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: matrixIsSmallMobile ? 14 : 16 }}>
         <div
@@ -91,7 +86,7 @@ export function WhoWeAre() {
               letterSpacing: "-.01em",
             }}
           >
-            Every lever optimized—no trade-offs left on the table
+            Every lever optimized—<span style={{ color: T.amber }}>no trade-offs left on the table</span>
           </p>
           <svg width={matrixIsSmallMobile ? 298 : matrixIsMobile ? 326 : matrixIsTablet ? 352 : 320} height={matrixIsSmallMobile ? 304 : matrixIsMobile ? 338 : matrixIsTablet ? 362 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%", justifySelf: "center" }}>
             {[25, 50, 75, 100].map((pct) => (
@@ -125,21 +120,6 @@ export function WhoWeAre() {
 
             <path d={buildPath(levers.map((lever) => lever.avg), progress)} fill="#6b5a3a" fillOpacity={0.08} stroke="#6b5a3a" strokeOpacity={0.35} strokeWidth={1.5} strokeDasharray="4 3" />
             <path d={buildPath(levers.map((lever) => lever.hl), progress)} fill="#C4883A" fillOpacity={0.14} stroke="#C4883A" strokeWidth={2} />
-
-            {(() => {
-              const lever = levers[biggestGapIdx];
-              const middleRadius = ((lever.hl + lever.avg) / 2 / 100) * R;
-              const { x, y } = polarToXY(biggestGapIdx, middleRadius);
-
-              return (
-                <g>
-                  <circle cx={x} cy={y} r={9} fill="#C4883A" fillOpacity={0.12} stroke="#C4883A" strokeWidth={1} strokeOpacity={0.4} />
-                  <text x={x} y={y + 4} textAnchor="middle" fill="#C4883A" fontSize={8} fontFamily="sans-serif" fontWeight="bold">
-                    +{lever.hl - lever.avg}
-                  </text>
-                </g>
-              );
-            })()}
 
             {levers.map((lever, index) => {
               const { x, y } = polarToXY(index, (lever.hl / 100) * R * progress);
