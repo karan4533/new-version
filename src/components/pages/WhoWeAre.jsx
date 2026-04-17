@@ -63,8 +63,35 @@ export function WhoWeAre() {
 
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: matrixIsSmallMobile ? 14 : 16 }}>
-        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-          <svg width={matrixIsSmallMobile ? 286 : matrixIsMobile ? 304 : matrixIsTablet ? 320 : 320} height={matrixIsSmallMobile ? 294 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%" }}>
+        <div
+          style={{
+            width: "100%",
+            display: matrixIsMobile ? "flex" : "grid",
+            gridTemplateColumns: "minmax(220px, 260px) minmax(0, 1fr) minmax(220px, 260px)",
+            alignItems: "center",
+            justifyItems: "center",
+            justifyContent: "center",
+            gap: matrixIsSmallMobile ? 12 : matrixIsMobile ? 16 : 20,
+            flexDirection: matrixIsMobile ? "column" : "row",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              maxWidth: matrixIsMobile ? "100%" : 260,
+              textAlign: matrixIsMobile ? "center" : "left",
+              justifySelf: matrixIsMobile ? "center" : "start",
+              fontFamily: font.serif,
+              fontSize: matrixIsSmallMobile ? 22 : matrixIsMobile ? 24 : 28,
+              lineHeight: 1.2,
+              fontWeight: 600,
+              color: aboutText,
+              letterSpacing: "-.01em",
+            }}
+          >
+            Every lever optimized—no trade-offs left on the table
+          </p>
+          <svg width={matrixIsSmallMobile ? 286 : matrixIsMobile ? 304 : matrixIsTablet ? 320 : 320} height={matrixIsSmallMobile ? 294 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%", justifySelf: "center" }}>
             {[25, 50, 75, 100].map((pct) => (
               <polygon
                 key={pct}
@@ -149,6 +176,8 @@ export function WhoWeAre() {
               );
             })}
           </svg>
+
+          {!matrixIsMobile && <div aria-hidden="true" style={{ width: "100%" }} />}
         </div>
 
         <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: 4 }}>
@@ -166,11 +195,22 @@ export function WhoWeAre() {
           </div>
         </div>
 
-        <div style={{ width: "100%", minHeight: 56, background: "#111009", border: "1px solid #1a1816", borderRadius: 8, padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <p style={{ margin: 0, color: "#2e2b26", fontSize: 12, fontFamily: "sans-serif", letterSpacing: "0.06em" }}>
-            Heuristic Labs Performance Matrix
-          </p>
-        </div>
+        <p
+          style={{
+            margin: 0,
+            textAlign: "center",
+            maxWidth: 460,
+            fontFamily: font.sans,
+            fontSize: matrixIsSmallMobile ? 13 : 14,
+            lineHeight: 1.6,
+            color: aboutTextMuted,
+          }}
+        >
+          Most AI vendors optimize one to one dimension.
+          <br />
+          We engineer across all five.
+        </p>
+
       </div>
     );
   }
@@ -370,14 +410,14 @@ export function WhoWeAre() {
             maxWidth: 980,
             width: "100%",
             margin: "0 auto",
-            background: "linear-gradient(180deg, rgba(7,5,2,.56) 0%, rgba(7,5,2,.44) 100%)",
-            border: `1px solid ${aboutRule}`,
+            background: "transparent",
+            border: "none",
             borderRadius: isSmallMobile ? 16 : 20,
             padding: isSmallMobile ? "8px 6px" : isMobile ? "10px 8px" : "12px 10px",
             position: "relative",
             zIndex: 1,
             overflow: "hidden",
-            boxShadow: "0 12px 26px rgba(0,0,0,.2)",
+            boxShadow: "none",
           }}
         >
           <MissionMatrix />
