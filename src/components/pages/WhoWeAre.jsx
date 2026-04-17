@@ -33,9 +33,9 @@ export function WhoWeAre() {
     const levers = [
       { label: "Accuracy", hl: 88, avg: 62, insight: "Precision-tuned per use case — not over-engineered globally." },
       { label: "Latency", hl: 83, avg: 48, insight: "Semantic caching + provider routing eliminates the speed tradeoff." },
-      { label: "Op. Cost", hl: 76, avg: 35, insight: "Multi-provider orchestration cuts spend without risking reliability." },
+      { label: "Operational Cost", hl: 76, avg: 35, insight: "Multi-provider orchestration cuts spend without risking reliability." },
       { label: "Governance", hl: 79, avg: 28, insight: "Guardrails built into the Skills layer — not bolted on after." },
-      { label: "Dev Time", hl: 81, avg: 44, insight: "Skills architecture ships 2x faster without cutting corners." },
+      { label: "Development Time", hl: 81, avg: 44, insight: "Skills architecture ships 2x faster without cutting corners." },
     ];
 
     const N = levers.length;
