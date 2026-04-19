@@ -69,11 +69,23 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const [heroSubheadingNudgeX, setHeroSubheadingNudgeX] = useState(
     isSmallMobile ? 10 : isMobile ? 14 : isTablet ? 18 : 24,
   );
+  const heroGuideViewBoxHeight = isSmallMobile ? 900 : isMobile ? 840 : isTablet ? 760 : 620;
   const heroTopGuideLineY = isSmallMobile ? 60 : isMobile ? 64 : isTablet ? 70 : 76;
-  const heroBottomGuideLineY = isSmallMobile ? 760 : isMobile ? 700 : isTablet ? 620 : 560;
-  const heroGuideLineTailY = heroBottomGuideLineY + (isSmallMobile ? 120 : 100);
+  const heroBottomGuideLineY = Math.round(
+    heroGuideViewBoxHeight * (isSmallMobile ? 0.92 : isMobile ? 0.92 : isTablet ? 0.91 : 0.9),
+  );
+  const heroGuideLineTailY = Math.min(
+    heroBottomGuideLineY + (isSmallMobile ? 120 : 100),
+    heroGuideViewBoxHeight - 8,
+  );
   const heroGridLeftX = isSmallMobile ? 70 : isMobile ? 84 : isTablet ? 104 : 124;
   const heroGridRightX = 1000 - heroGridLeftX;
+  const heroGuideLeftPct = `${(heroGridLeftX / 1000) * 100}%`;
+  const heroGuideRightPct = `${(heroGridRightX / 1000) * 100}%`;
+  const heroGuideStartYPct = `${(-20 / heroGuideViewBoxHeight) * 100}%`;
+  const heroGuideTopPct = `${(heroTopGuideLineY / heroGuideViewBoxHeight) * 100}%`;
+  const heroGuideBottomPct = `${(heroBottomGuideLineY / heroGuideViewBoxHeight) * 100}%`;
+  const heroGuideTailPct = `${(heroGuideLineTailY / heroGuideViewBoxHeight) * 100}%`;
   const heroContainerMaxWidth = 1160;
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
   const heroFlowGap = isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 18 : 20;
@@ -302,31 +314,31 @@ export function LandingPage({ onCaseStudies, onContact }) {
             position: "absolute",
             inset: 0,
             pointerEvents: "none",
-            opacity: isSmallMobile ? 0.56 : isMobile ? 0.52 : isTablet ? 0.42 : 0.46,
+            opacity: isSmallMobile ? 0.46 : isMobile ? 0.46 : isTablet ? 0.42 : 0.46,
           }}
         >
           <svg
-            viewBox="0 0 1000 600"
-            preserveAspectRatio="none"
             style={{
               position: "absolute",
               inset: 0,
               width: "100%",
               height: "100%",
+              overflow: "visible",
             }}
           >
             <g
               fill="none"
-              stroke={isMobile ? "rgba(136,104,73,.8)" : "rgba(136,104,73,.64)"}
+              stroke="rgba(136,104,73,.64)"
               strokeWidth={isSmallMobile ? 1.05 : isMobile ? 1 : 0.95}
               strokeLinecap="butt"
               strokeDasharray={isSmallMobile ? "5 8" : isMobile ? "5.2 9" : "5.5 11"}
               shapeRendering="geometricPrecision"
+              vectorEffect="non-scaling-stroke"
             >
-              <line x1={heroGridLeftX} y1="-20" x2={heroGridLeftX} y2={heroGuideLineTailY} />
-              <line x1={heroGridRightX} y1="-20" x2={heroGridRightX} y2={heroGuideLineTailY} />
-              <line x1="-20" y1={heroTopGuideLineY} x2="1020" y2={heroTopGuideLineY} />
-              <line x1="-20" y1={heroBottomGuideLineY} x2="1020" y2={heroBottomGuideLineY} />
+              <line x1={heroGuideLeftPct} y1={heroGuideStartYPct} x2={heroGuideLeftPct} y2={heroGuideTailPct} />
+              <line x1={heroGuideRightPct} y1={heroGuideStartYPct} x2={heroGuideRightPct} y2={heroGuideTailPct} />
+              <line x1="-2%" y1={heroGuideTopPct} x2="102%" y2={heroGuideTopPct} />
+              <line x1="-2%" y1={heroGuideBottomPct} x2="102%" y2={heroGuideBottomPct} />
             </g>
           </svg>
         </div>
