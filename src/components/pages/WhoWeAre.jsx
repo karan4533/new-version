@@ -139,17 +139,21 @@ export function WhoWeAre() {
             })}
 
             {levers.map((lever, index) => {
-              const { x, y } = polarToXY(index, R + 24);
+              const labelRadius = matrixIsSmallMobile ? R + 14 : matrixIsMobile ? R + 18 : R + 24;
+              const { x, y } = polarToXY(index, labelRadius);
               const anchor = x < CX - 8 ? "end" : x > CX + 8 ? "start" : "middle";
+              const labelX = matrixIsMobile && anchor === "end"
+                ? x + (matrixIsSmallMobile ? 18 : 14)
+                : x;
 
               return (
                 <text
                   key={lever.label}
-                  x={x}
+                  x={labelX}
                   y={y + 4}
                   textAnchor={anchor}
                   fill="#7a7060"
-                  fontSize={11}
+                  fontSize={matrixIsSmallMobile ? 10 : 11}
                   fontFamily="sans-serif"
                   fontWeight="400"
                 >
@@ -400,7 +404,7 @@ export function WhoWeAre() {
             padding: isSmallMobile ? "8px 6px" : isMobile ? "10px 8px" : "12px 10px",
             position: "relative",
             zIndex: 1,
-            overflow: "hidden",
+            overflow: isMobile ? "visible" : "hidden",
             boxShadow: "none",
           }}
         >
