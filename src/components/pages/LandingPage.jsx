@@ -88,9 +88,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroGuideTailPct = `${(heroGuideLineTailY / heroGuideViewBoxHeight) * 100}%`;
   const heroContainerMaxWidth = 1160;
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
-  const heroFlowGap = isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 18 : 20;
+  const heroFlowGap = isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 20 : 20;
   const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
-  const heroContentNudgeY = isSmallMobile ? -10 : isMobile ? -12 : isTablet ? -14 : -16;
+  const heroContentNudgeY = isSmallMobile ? -10 : isMobile ? -12 : isTablet ? -96 : -16;
 
   useEffect(() => {
     useCaseIndexRef.current = useCaseIndex;
@@ -277,7 +277,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
             : isMobile
               ? "22px 0 34px"
               : isTablet
-                ? "26px 0 40px"
+                ? "14px 0 22px"
                 : "30px 0 44px",
           overflowX: "hidden",
           overflowY: "visible",
