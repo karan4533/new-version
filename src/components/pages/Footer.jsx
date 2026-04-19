@@ -1,6 +1,6 @@
 import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
-import companyLogo from "../../assets/logo (1).webp";
+import companyLogo from "../../assets/logo-optimized.webp";
 
 export function Footer() {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
