@@ -13,7 +13,7 @@ import automotiveImage from "../../assets/automotive .webp";
 import translationImage from "../../assets/translation.webp";
 import videoLocalizationImage from "../../assets/video localization.webp";
 import salesCopilotImage from "../../assets/sales copilot.webp";
-import fintechImage from "../../assets/fintech.png";
+import fintechImage from "../../assets/fintech.webp";
 
 const normalizeLine = (value) => String(value || "").replace(/\s+/g, " ").trim();
 const toKey = (value) => normalizeLine(value).toLowerCase();

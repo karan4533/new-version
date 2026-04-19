@@ -15,7 +15,7 @@ import automotiveImage from "../../assets/automotive .webp";
 import translationImage from "../../assets/translation.webp";
 import videoLocalizationImage from "../../assets/video localization.webp";
 import salesCopilotImage from "../../assets/sales copilot.webp";
-import fintechImage from "../../assets/fintech.png";
+import fintechImage from "../../assets/fintech.webp";
 
 const CASE_GRADIENTS_BY_KEY = {
   Construction: "linear-gradient(135deg, #0d2133 0%, #1a3a4a 40%, #0a1a20 100%)",
