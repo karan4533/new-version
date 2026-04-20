@@ -102,7 +102,7 @@ export function WhoWeAre() {
                 letterSpacing: "-.01em",
               }}
             >
-              Every lever optimized<span style={{ color: "#9A6B38", fontWeight: 700 }}>—no trade-offs left on the table</span>
+              Every lever optimized<span style={{ color: "#9A6B38", fontWeight: 700 }}>  no trade-offs left on the table</span>
             </p>
 
             <p
