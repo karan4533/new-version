@@ -369,7 +369,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: isHeroMobileLayout ? "space-evenly" : "flex-start",
+          justifyContent: isSmallMobile ? "space-around" : isHeroMobileLayout ? "space-evenly" : "flex-start",
           gap: isHeroMobileLayout ? 0 : heroFlowGap,
         }}
       >
