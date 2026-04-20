@@ -93,7 +93,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroContainerMaxWidth = 1160;
   const heroSectionMinHeight = isHeroMobileLayout ? "100vh" : "100svh";
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
-  const heroTopPadding = isSmallMobile ? "16px" : isHeaderGuardMobileViewport ? "36px" : isHeroMobileLayout ? "26px" : isWideTabletGuardViewport ? "14px" : isTabletViewport ? "6px" : "clamp(10px, 2.8vh, 34px)";
+  const heroTopPadding = isSmallMobile ? "1px" : isHeaderGuardMobileViewport ? "36px" : isHeroMobileLayout ? "26px" : isWideTabletGuardViewport ? "14px" : isTabletViewport ? "6px" : "clamp(10px, 2.8vh, 34px)";
   const heroBottomPadding = isSmallMobile ? "16px" : isMobile ? "20px" : isWideTabletGuardViewport ? "18px" : isTabletViewport ? "14px" : "clamp(20px, 3.2vh, 38px)";
   const heroFlowGap = isSmallMobile ? 14 : isHeroMobileLayout ? 16 : isWideTabletGuardViewport ? 16 : isTabletViewport ? 14 : 20;
   const heroTopClusterGap = isSmallMobile ? 14 : isHeroMobileLayout ? 16 : heroFlowGap;
