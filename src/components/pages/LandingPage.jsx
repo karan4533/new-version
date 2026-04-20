@@ -18,13 +18,6 @@ const HERO_USE_CASES = [
 
 const HERO_USE_CASE_CROSSFADE_MS = 560;
 
-const HERO_STATS = [
-  { value: "50+", label: "AI engagements shipped" },
-  { value: "6-10 wks", label: "Typical production timeline" },
-  { value: "2x", label: "Faster than traditional AI delivery" },
-  { value: "40+ yrs", label: "Leadership experience in AI" },
-];
-
 function HeroBtn({ label, onClick, primary }) {
   return (
     <button
@@ -88,9 +81,11 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroGuideTailPct = `${(heroGuideLineTailY / heroGuideViewBoxHeight) * 100}%`;
   const heroContainerMaxWidth = 1160;
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
-  const heroFlowGap = isSmallMobile ? 14 : isMobile ? 16 : isTablet ? 20 : 20;
-  const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
-  const heroContentNudgeY = isSmallMobile ? -10 : isMobile ? -12 : isTablet ? -96 : -16;
+  const heroTopPadding = isSmallMobile ? "18px" : isMobile ? "22px" : isTablet ? "24px" : "clamp(34px, 7vh, 86px)";
+  const heroBottomPadding = isSmallMobile ? "24px" : isMobile ? "30px" : isTablet ? "30px" : "clamp(26px, 4vh, 54px)";
+  const heroFlowGap = isSmallMobile ? 16 : isMobile ? 18 : isTablet ? 22 : 24;
+  const heroCtaTopMargin = isSmallMobile ? 100 : isMobile ? 100 : isTablet ? 80 : 0;
+  const heroContentNudgeY = isSmallMobile ? -6 : isMobile ? -8 : isTablet ? -20 : 0;
 
   useEffect(() => {
     useCaseIndexRef.current = useCaseIndex;
@@ -271,14 +266,8 @@ export function LandingPage({ onCaseStudies, onContact }) {
           minHeight: "100svh",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          padding: isSmallMobile
-            ? "18px 0 28px"
-            : isMobile
-              ? "22px 0 34px"
-              : isTablet
-                ? "14px 0 22px"
-                : "30px 0 44px",
+          justifyContent: "flex-start",
+          padding: `${heroTopPadding} 0 ${heroBottomPadding}`,
           overflowX: "hidden",
           overflowY: "visible",
           isolation: "isolate",
@@ -358,7 +347,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           gap: heroFlowGap,
         }}
       >
@@ -523,7 +512,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         <Reveal delay={0.34} distance={16} blurFrom={6}>
           <div
             style={{
-              marginTop: 0,
+              marginTop: heroCtaTopMargin,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -533,83 +522,6 @@ export function LandingPage({ onCaseStudies, onContact }) {
           >
             <HeroBtn label="See our work" onClick={onCaseStudies} primary />
             <HeroBtn label="Book a call" onClick={onContact} />
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.42} distance={14} blurFrom={6}>
-          <div
-            style={{
-              width: "100%",
-              maxWidth: isTablet ? 760 : 960,
-              margin: "0 auto",
-            }}
-          >
-            <div
-              aria-hidden="true"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: isSmallMobile ? 10 : 12,
-              }}
-            >
-              <span
-                style={{
-                  width: 1,
-                  height: isSmallMobile ? 18 : isMobile ? 22 : 24,
-                  background: `repeating-linear-gradient(to bottom, ${T.ink12} 0, ${T.ink12} 4px, transparent 4px, transparent 8px)`,
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "repeat(2, minmax(0, 1fr))" : isTablet ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))",
-                gap: heroStatsGridGap,
-                alignItems: "stretch",
-              }}
-            >
-              {HERO_STATS.map((item) => (
-                <div
-                  key={item.label}
-                  style={{
-                    width: "100%",
-                    border: `1px dashed ${T.ink12}`,
-                    borderRadius: 14,
-                    padding: isSmallMobile ? "10px 12px" : "12px 14px",
-                    textAlign: "left",
-                    background: "rgba(255,255,255,.2)",
-                    minHeight: isSmallMobile ? 72 : 82,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontFamily: font.serif,
-                      fontSize: isSmallMobile ? 22 : isMobile ? 24 : 26,
-                      lineHeight: 1,
-                      color: T.ink,
-                      marginBottom: 5,
-                    }}
-                  >
-                    {item.value}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: font.sans,
-                      fontSize: 11,
-                      letterSpacing: ".02em",
-                      color: T.ink60,
-                    }}
-                  >
-                    {item.label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </Reveal>
 
