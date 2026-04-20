@@ -100,7 +100,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
     probe.style.pointerEvents = "none";
     probe.style.whiteSpace = "nowrap";
     probe.style.fontFamily = font.serif;
-    probe.style.fontStyle = "italic";
+    probe.style.fontStyle = "normal";
     probe.style.fontSize = `${heroUseCaseFontSize}px`;
     probe.style.fontWeight = "700";
     probe.style.letterSpacing = "0.01em";

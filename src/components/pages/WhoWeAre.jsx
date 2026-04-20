@@ -86,7 +86,7 @@ export function WhoWeAre() {
               letterSpacing: "-.01em",
             }}
           >
-            Every lever optimized—<span style={{ color: T.amber }}>no trade-offs left on the table</span>
+            Every lever optimized <span style={{ color: T.amber }}>no trade-offs left on the table</span>
           </p>
           <svg width={matrixIsSmallMobile ? 298 : matrixIsMobile ? 326 : matrixIsTablet ? 352 : 320} height={matrixIsSmallMobile ? 304 : matrixIsMobile ? 338 : matrixIsTablet ? 362 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%", justifySelf: "center" }}>
             {[25, 50, 75, 100].map((pct) => (

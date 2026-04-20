@@ -133,7 +133,7 @@ section .card:hover {
   text-align: left;
   color: #5E3A1D;
   font-family: "Playfair Display", serif;
-  font-style: italic;
+  font-style: normal;
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.15;
