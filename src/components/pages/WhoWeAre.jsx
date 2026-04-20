@@ -148,15 +148,6 @@ export function WhoWeAre() {
               />
             ))}
 
-            {[25, 50, 75].map((pct) => {
-              const { x, y } = polarToXY(2, (pct / 100) * R);
-              return (
-                <text key={pct} x={x + 4} y={y} fill="#8d7f6a" fontSize={8} fontFamily="sans-serif" fontWeight="600">
-                  {pct}
-                </text>
-              );
-            })}
-
             {levers.map((_, index) => {
               const { x, y } = polarToXY(index, R);
               return <line key={index} x1={CX} y1={CY} x2={x} y2={y} stroke="#1e1c18" strokeWidth={1} />;
@@ -310,7 +301,7 @@ export function WhoWeAre() {
                 letterSpacing: "-.02em",
               }}
             >
-              From AI confusion to <span style={{ color: T.amber, fontStyle: "italic" }}>clarity.</span>
+              From AI confusion to <span style={{ color: T.amber, fontStyle: "italic", fontWeight: 700 }}>clarity.</span>
             </h3>
           </Reveal>
 
