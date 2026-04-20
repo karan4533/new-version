@@ -97,8 +97,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroBottomPadding = isSmallMobile ? "16px" : isMobile ? "20px" : isWideTabletGuardViewport ? "18px" : isTabletViewport ? "14px" : "clamp(20px, 3.2vh, 38px)";
   const heroFlowGap = isSmallMobile ? 14 : isHeroMobileLayout ? 16 : isWideTabletGuardViewport ? 16 : isTabletViewport ? 14 : 20;
   const heroTopClusterGap = isSmallMobile ? 14 : isHeroMobileLayout ? 16 : heroFlowGap;
-  const heroTitleScrollerSpacing = isSmallMobile ? 15 : isHeroMobileLayout ? 16 : 0;
+  const heroTitleScrollerSpacing = isSmallMobile ? 24 : isHeroMobileLayout ? 20 : 0;
   const heroCtaTopSpacing = isSmallMobile ? 65 : isHeroMobileLayout ? 50 : 0;
+  const heroStatsNudgeY = isSmallMobile ? -18 : isHeroMobileLayout ? -14 : 0;
   const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
   const heroCtaTopMargin = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 14 : 0;
   const heroContentNudgeY = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? -16 : isTabletViewport ? -34 : -24;
@@ -568,6 +569,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               width: "100%",
               maxWidth: isTablet ? 760 : 960,
               margin: "0 auto",
+              transform: `translateY(${heroStatsNudgeY}px)`,
             }}
           >
             <div
