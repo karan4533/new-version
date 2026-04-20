@@ -99,7 +99,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTopClusterGap = isSmallMobile ? 14 : isHeroMobileLayout ? 16 : heroFlowGap;
   const heroTitleScrollerSpacing = isSmallMobile ? 24 : isHeroMobileLayout ? 20 : 0;
   const heroCtaTopSpacing = isSmallMobile ? 65 : isHeroMobileLayout ? 50 : 0;
-  const heroStatsNudgeY = isSmallMobile ? -18 : isHeroMobileLayout ? -14 : 0;
+  const heroStatsNudgeY = isSmallMobile ? -18 : isHeroMobileLayout ? -20 : 0;
   const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
   const heroCtaTopMargin = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 14 : 0;
   const heroContentNudgeY = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? -16 : isTabletViewport ? -34 : -24;
