@@ -87,15 +87,13 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroGuideBottomPct = `${(heroBottomGuideLineY / heroGuideViewBoxHeight) * 100}%`;
   const heroGuideTailPct = `${(heroGuideLineTailY / heroGuideViewBoxHeight) * 100}%`;
   const heroContainerMaxWidth = 1160;
-  const isCompactHeroViewport = isMobile || isTablet;
-  const heroSectionMinHeight = isCompactHeroViewport ? "auto" : "100svh";
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
-  const heroTopPadding = isSmallMobile ? "12px" : isMobile ? "16px" : isTablet ? "18px" : "clamp(34px, 7vh, 86px)";
-  const heroBottomPadding = isSmallMobile ? "16px" : isMobile ? "20px" : isTablet ? "20px" : "clamp(26px, 4vh, 54px)";
-  const heroFlowGap = isSmallMobile ? 12 : isMobile ? 14 : isTablet ? 16 : 24;
+  const heroTopPadding = isSmallMobile ? "18px" : isMobile ? "22px" : isTablet ? "24px" : "clamp(34px, 7vh, 86px)";
+  const heroBottomPadding = isSmallMobile ? "24px" : isMobile ? "30px" : isTablet ? "30px" : "clamp(26px, 4vh, 54px)";
+  const heroFlowGap = isSmallMobile ? 16 : isMobile ? 18 : isTablet ? 22 : 24;
   const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
-  const heroCtaTopMargin = isSmallMobile ? 24 : isMobile ? 30 : isTablet ? 26 : 0;
-  const heroContentNudgeY = 0;
+  const heroCtaTopMargin = isSmallMobile ? 5 : isMobile ? 80 : isTablet ? 70 : 0;
+  const heroContentNudgeY = isSmallMobile ? -6 : isMobile ? -8 : isTablet ? -20 : 0;
   const showHeroGuideLines = false;
 
   useEffect(() => {
@@ -263,7 +261,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
       ref={heroRef}
       id="home"
       style={{
-        minHeight: heroSectionMinHeight,
+        minHeight: "100svh",
         scrollMarginTop: 84,
         background: "var(--site-base-bg)",
         position: "relative",
@@ -274,9 +272,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
       <div
         style={{
           position: "relative",
-          minHeight: heroSectionMinHeight,
+          minHeight: "100svh",
           display: "flex",
-          alignItems: isCompactHeroViewport ? "flex-start" : "center",
+          alignItems: "center",
           justifyContent: "flex-start",
           padding: `${heroTopPadding} 0 ${heroBottomPadding}`,
           overflowX: "hidden",
@@ -456,6 +454,21 @@ export function LandingPage({ onCaseStudies, onContact }) {
               business outcomes
             </span>
           </h1>
+        </Reveal>
+
+        <Reveal delay={0.2} distance={18} blurFrom={8}>
+          <p
+            style={{
+              margin: "0 auto",
+              maxWidth: 720,
+              fontFamily: font.sans,
+              fontSize: isSmallMobile ? 13 : 14,
+              lineHeight: 1.75,
+              color: T.ink60,
+            }}
+          >
+           
+          </p>
         </Reveal>
 
         <Reveal delay={0.28} distance={16} blurFrom={6}>
