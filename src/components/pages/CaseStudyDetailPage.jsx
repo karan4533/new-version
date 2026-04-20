@@ -356,8 +356,11 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   if (!caseStudy) return null;
 
   const detailCase = buildDisplayCase(caseStudy, caseIndex);
+  const fallbackStatsRows = getFallbackResultRows(caseStudy);
   const detailImage = getDetailImageConfig(caseStudy);
-  const statsRows = detailCase.rows.slice(0, 3);
+  const statsRows = (fallbackStatsRows.length ? fallbackStatsRows : detailCase.rows)
+    .map((row) => ({ ...row, context: "" }))
+    .slice(0, 3);
   const summaryTakeaways = [detailCase.summary].filter(Boolean);
   const techHighlights = detailCase.techRows
     .map((row) => ({

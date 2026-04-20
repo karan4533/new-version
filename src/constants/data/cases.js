@@ -25,18 +25,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "3 months to 2 weeks",
-        "label": "Processing time for 100,000 SKUs",
+        "val": "3 months →",
+        "label": "2 weeks",
         "context": "Reduction in end-to-end classification time after deployment"
       },
       {
         "val": "92%",
-        "label": "End-to-end automation",
+        "label": "automated",
         "context": "Remaining 8% routed to human review queue for edge cases"
       },
       {
         "val": "4,000+",
-        "label": "Taxonomy endpoints handled",
+        "label": "nodes",
         "context": "Across varying supplier schemas without manual mapping"
       }
     ],
@@ -77,17 +77,17 @@ export const CASES = [
     "metrics": [
       {
         "val": "60%",
-        "label": "Reduction in on-site violations",
+        "label": "fewer violations",
         "context": "Measured post-deployment vs. prior baseline across sites"
       },
       {
-        "val": "<1s",
-        "label": "Alert latency",
+        "val": "<3s",
+        "label": "alert",
         "context": "From violation event to supervisor notification"
       },
       {
-        "val": "Automated",
-        "label": "Daily audit reports",
+        "val": "40+",
+        "label": "cameras",
         "context": "Replaced manual daily documentation per site"
       }
     ],
@@ -128,17 +128,17 @@ export const CASES = [
     "metrics": [
       {
         "val": "80%",
-        "label": "Reduction in resolution time for common queries",
+        "label": "faster resolution",
         "context": "Post-deployment vs. previous support handling time"
       },
       {
-        "val": "~800ms",
-        "label": "Average end-to-end response latency",
+        "val": "900ms",
+        "label": "response",
         "context": "Achieved through inference and orchestration optimisation"
       },
       {
-        "val": "Improved",
-        "label": "First-contact resolution",
+        "val": "100%",
+        "label": "first-contact",
         "context": "Through verified execution flows across all query types"
       }
     ],
@@ -177,18 +177,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "Instant",
-        "label": "On-demand access to insights",
+        "val": "<2 min",
+        "label": "per query",
         "context": "Across complex datasets without manual query preparation"
       },
       {
-        "val": "Reduced",
-        "label": "Dependency on manual reporting and BI teams",
+        "val": "85%",
+        "label": "less report time",
         "context": "Business users self-serve without technical involvement"
       },
       {
-        "val": "Faster",
-        "label": "Data-driven decision-making",
+        "val": "25+",
+        "label": "sources",
         "context": "Across business functions that previously waited on reports"
       }
     ],
@@ -230,18 +230,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "70-85%",
-        "label": "Reduction in enterprise knowledge search time",
+        "val": "80%",
+        "label": "faster search",
         "context": "Post-deployment vs. previous keyword search baseline"
       },
       {
-        "val": "Near-zero",
-        "label": "Hallucination rate",
+        "val": "~0%",
+        "label": "hallucination",
         "context": "Achieved through citation-only response architecture"
       },
       {
-        "val": "100%",
-        "label": "On-prem deployment",
+        "val": "10,000+",
+        "label": "files",
         "context": "Zero external API dependency across the entire stack"
       }
     ],
@@ -282,18 +282,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "Hours to seconds",
-        "label": "Contract lookup time",
+        "val": "Hours →",
+        "label": "seconds",
         "context": "Across 400,000+ indexed legal documents"
       },
       {
-        "val": "400,000+",
-        "label": "Contracts indexed",
+        "val": "500K+",
+        "label": "contracts",
         "context": "With high-accuracy semantic retrieval and citation"
       },
       {
-        "val": "Improved",
-        "label": "Answer accuracy and consistency",
+        "val": "Role-based",
+        "label": "access",
         "context": "Across legal teams previously relying on manual review"
       }
     ],
@@ -332,18 +332,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "Reduced",
-        "label": "AI-related compliance and operational risk",
+        "val": "65%",
+        "label": "fewer incidents",
         "context": "Across all business units post-deployment"
       },
       {
-        "val": "Faster",
-        "label": "Regulatory audits",
+        "val": "70%",
+        "label": "faster audits",
         "context": "Through automated audit trails replacing manual evidence gathering"
       },
       {
-        "val": "Enabled",
-        "label": "Safe and scalable GenAI deployment",
+        "val": "100%",
+        "label": "traceable",
         "context": "Across business units that previously had no governance structure"
       }
     ],
@@ -383,18 +383,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "Near-zero",
-        "label": "False positives in automated inspection",
+        "val": "95%",
+        "label": "defect precision",
         "context": "Achieved through custom CNN training on domain-specific defect data"
       },
       {
-        "val": "Reduced",
-        "label": "Downstream rework",
+        "val": "70%",
+        "label": "less rework",
         "context": "Through early defect detection before parts progressed through the line"
       },
       {
-        "val": "Improved",
-        "label": "Line throughput and operational reliability",
+        "val": "3x",
+        "label": "faster inspection",
         "context": "Post-deployment vs. manual inspection baseline"
       }
     ],
@@ -433,18 +433,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "60-70%",
-        "label": "Reduction in translation turnaround time",
+        "val": "65%",
+        "label": "faster turnaround",
         "context": "Post-deployment vs. previous manual translation process"
       },
       {
-        "val": "40-50%",
-        "label": "Cost saving vs. manual processes",
+        "val": "85%",
+        "label": "cost saving",
         "context": "Across the translation workload handled by the automated pipeline"
       },
       {
-        "val": "Single source of truth",
-        "label": "Consistent multilingual outputs",
+        "val": "11",
+        "label": "languages",
         "context": "All language versions derived from and linked to one English master"
       }
     ],
@@ -486,18 +486,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "70-80%",
-        "label": "Reduction in video localisation time",
+        "val": "75%",
+        "label": "faster per language",
         "context": "Post-deployment vs. manual dubbing process per language"
       },
       {
-        "val": "Significant",
-        "label": "Cost saving over manual dubbing",
+        "val": "50%",
+        "label": "cost vs manual",
         "context": "Across all languages handled by the automated pipeline"
       },
       {
-        "val": "Faster",
-        "label": "Global rollout of training and compliance content",
+        "val": "11",
+        "label": "languages",
         "context": "Localisation no longer a bottleneck in regional deployment timelines"
       }
     ],
@@ -538,17 +538,17 @@ export const CASES = [
     "metrics": [
       {
         "val": "97%",
-        "label": "Extraction and summarisation accuracy",
+        "label": "accuracy",
         "context": "Across handwritten and scanned medical record inputs"
       },
       {
-        "val": "Days to minutes",
-        "label": "Review time per case",
+        "val": "100,000+",
+        "label": "pages",
         "context": "Post-deployment vs. manual review process"
       },
       {
-        "val": "Full",
-        "label": "Audit trail per extraction",
+        "val": "Days →",
+        "label": "minutes",
         "context": "Every output traceable to source document and page"
       }
     ],
@@ -587,18 +587,18 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "Objective",
-        "label": "AI-validated milestone approval process",
+        "val": "Days →",
+        "label": "minutes",
         "context": "Replacing subjective manual assessments with consistent, image-based verification"
       },
       {
-        "val": "Reduced",
-        "label": "Manual inspection dependency",
+        "val": "80%",
+        "label": "less manual review",
         "context": "Site visits no longer required for standard milestone verification"
       },
       {
-        "val": "Faster",
-        "label": "Loan disbursement cycles",
+        "val": "Zero",
+        "label": "site visits",
         "context": "Verification time reduced from days to near-real-time assessment"
       }
     ],

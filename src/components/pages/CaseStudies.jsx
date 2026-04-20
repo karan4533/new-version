@@ -77,9 +77,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "ASR + LLM + TTS pipeline that localizes training and compliance videos into multiple languages without manual dubbing",
     stats: [
-      { val: "70-80%", label: "Faster localization" },
-      { val: "Significant", label: "Cost reduction" },
-      { val: "Automated", label: "Audio-video sync" },
+      { val: "75%", label: "faster per language" },
+      { val: "50%", label: "cost vs manual" },
+      { val: "11", label: "languages" },
     ],
   },
   Construction: {
@@ -89,9 +89,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "Edge-deployed vision AI that monitors 40+ camera feeds and flags PPE violations in under a second",
     stats: [
-      { val: "60%", label: "Violation reduction" },
-      { val: "<1s", label: "Alert latency" },
-      { val: "40+", label: "Cameras monitored" },
+      { val: "60%", label: "fewer violations" },
+      { val: "<3s", label: "alert" },
+      { val: "40+", label: "cameras" },
     ],
   },
   "D2C Brand": {
@@ -101,9 +101,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "Multi-agent voice system handling orders, returns, and product queries with 800ms response latency at any scale",
     stats: [
-      { val: "80%", label: "Faster resolution" },
-      { val: "800ms", label: "Avg response" },
-      { val: "100%", label: "First-contact on verified flows" },
+      { val: "80%", label: "faster resolution" },
+      { val: "900ms", label: "response" },
+      { val: "100%", label: "first-contact" },
     ],
   },
   "Sales Copilot": {
@@ -113,9 +113,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "Natural language interface that queries structured and unstructured data and generates charts, tables, and insights on demand",
     stats: [
-      { val: "Zero", label: "Manual reporting" },
-      { val: "<15s", label: "Result time" },
-      { val: "Multi-source", label: "Synthesis" },
+      { val: "<2 min", label: "per query" },
+      { val: "85%", label: "less report time" },
+      { val: "25+", label: "sources" },
     ],
   },
   "Enterprise Search": {
@@ -125,9 +125,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "On-prem agentic RAG with BM25 + semantic search, RBAC, and citation-only responses for regulated environments",
     stats: [
-      { val: "70-85%", label: "Search time reduction" },
-      { val: "~0", label: "Hallucinations" },
-      { val: "100%", label: "On-prem" },
+      { val: "80%", label: "faster search" },
+      { val: "~0%", label: "hallucination" },
+      { val: "10,000+", label: "files" },
     ],
   },
   Legal: {
@@ -137,9 +137,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "Knowledge graph + RAG system making 500,000+ contracts searchable with citations",
     stats: [
-      { val: "Hours -> seconds", label: "Lookup time" },
-      { val: "400,000+", label: "Contracts indexed" },
-      { val: "RBAC", label: "Enforced access" },
+      { val: "Hours →", label: "seconds" },
+      { val: "500K+", label: "contracts" },
+      { val: "Role-based", label: "access" },
     ],
   },
   "AI Governance": {
@@ -149,9 +149,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "Centralized governance layer with model registry, hallucination detection, and audit logs",
     stats: [
-      { val: "Enterprise-wide", label: "Policy enforcement" },
-      { val: "Automated", label: "Audit trails" },
-      { val: "Full", label: "Prompt + response traceability" },
+      { val: "65%", label: "fewer incidents" },
+      { val: "70%", label: "faster audits" },
+      { val: "100%", label: "traceable" },
     ],
   },
   Automotive: {
@@ -161,9 +161,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "CNN models synced with PLC logic to detect defects in real time",
     stats: [
-      { val: "95%", label: "Precision" },
-      { val: "Early", label: "Defect detection" },
-      { val: "Improved", label: "Line throughput" },
+      { val: "95%", label: "defect precision" },
+      { val: "70%", label: "less rework" },
+      { val: "3x", label: "faster inspection" },
     ],
   },
   Translation: {
@@ -173,9 +173,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "Domain-adapted translation engine for manuals and SOPs with consistent terminology",
     stats: [
-      { val: "60-70%", label: "Faster turnaround" },
-      { val: "40-50%", label: "Cost saving" },
-      { val: "Single source", label: "Of truth" },
+      { val: "65%", label: "faster turnaround" },
+      { val: "85%", label: "cost saving" },
+      { val: "11", label: "languages" },
     ],
   },
   "E-Commerce": {
@@ -185,9 +185,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "LLM + agentic RAG pipelines classifying 100,000 SKUs across 4,000+ taxonomy nodes",
     stats: [
-      { val: "92%", label: "Automation" },
-      { val: "3 months -> 2 weeks", label: "Cycle time" },
-      { val: "4,000+", label: "Taxonomy endpoints" },
+      { val: "3 months →", label: "2 weeks" },
+      { val: "92%", label: "automated" },
+      { val: "4,000+", label: "nodes" },
     ],
   },
   "Medico-Legal": {
@@ -197,9 +197,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "Multimodal LLMs extracting and summarizing 10,000+ pages of medical records",
     stats: [
-      { val: "97%", label: "Extraction accuracy" },
-      { val: "Days -> minutes", label: "Review time" },
-      { val: "Full", label: "Audit trail" },
+      { val: "97%", label: "accuracy" },
+      { val: "100,000+", label: "pages" },
+      { val: "Days →", label: "minutes" },
     ],
   },
   Fintech: {
@@ -209,9 +209,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     oneLiner:
       "VLM-powered validation comparing site images with checklists for loan release",
     stats: [
-      { val: "AI-validated", label: "Approvals" },
-      { val: "Zero", label: "Manual site visits" },
-      { val: "Faster", label: "Disbursement cycles" },
+      { val: "Days →", label: "minutes" },
+      { val: "80%", label: "less manual review" },
+      { val: "Zero", label: "site visits" },
     ],
   },
 };
@@ -399,11 +399,11 @@ export function CaseStudies({ onOpenCaseStudy }) {
     .sort((a, b) => {
       const aIndex =
         orderIndexByKey[
-          normalizeCaseKey(a.caseItem.tabLabel || a.caseItem.shortTitle || a.caseItem.title || a.caseItem.cat)
+          normalizeCaseKey(a.caseItem.tabLabel || a.caseItem.cat || a.caseItem.shortTitle || a.caseItem.title)
         ] ?? Number.MAX_SAFE_INTEGER;
       const bIndex =
         orderIndexByKey[
-          normalizeCaseKey(b.caseItem.tabLabel || b.caseItem.shortTitle || b.caseItem.title || b.caseItem.cat)
+          normalizeCaseKey(b.caseItem.tabLabel || b.caseItem.cat || b.caseItem.shortTitle || b.caseItem.title)
         ] ?? Number.MAX_SAFE_INTEGER;
 
       return aIndex - bIndex;
