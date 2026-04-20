@@ -27,10 +27,9 @@ export function WhoWeAre() {
   ];
 
   function MissionMatrix() {
-    const { isMobile: matrixIsMobile, isTablet: matrixIsTablet, isSmallMobile: matrixIsSmallMobile } = useViewport();
+    const { width, isMobile: matrixIsMobile, isTablet: matrixIsTablet, isSmallMobile: matrixIsSmallMobile } = useViewport();
     const progress = 1;
-    const matrixUseDesktopLayout = !matrixIsTablet;
-    const matrixRightShift = matrixIsMobile ? 0 : 14;
+    const matrixUseDesktopLayout = !matrixIsMobile && width >= 1180;
 
     const levers = [
       { label: "Accuracy", hl: 88, avg: 62, insight: "Precision-tuned per use case — not over-engineered globally." },
@@ -44,6 +43,12 @@ export function WhoWeAre() {
     const CX = 160;
     const CY = 165;
     const R = 108;
+    const matrixChartWidth = matrixIsSmallMobile ? 298 : matrixIsMobile ? 326 : matrixIsTablet ? 344 : 332;
+    const matrixChartHeight = matrixIsSmallMobile ? 304 : matrixIsMobile ? 338 : matrixIsTablet ? 352 : 338;
+    const matrixLabelFontSize = matrixIsSmallMobile ? 11 : 12;
+    const matrixLabelRadius = matrixIsSmallMobile ? R + 18 : matrixIsMobile ? R + 22 : R + 28;
+    const matrixChartNudgeX = matrixUseDesktopLayout ? -14 : 0;
+    const matrixLayoutMaxWidth = matrixUseDesktopLayout ? 940 : matrixIsTablet ? 720 : 560;
 
     const polarToXY = (angleIdx, radius) => {
       const angle = ((360 / N) * angleIdx - 90) * (Math.PI / 180);
@@ -59,36 +64,75 @@ export function WhoWeAre() {
         .join(" ")} Z`;
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: matrixIsSmallMobile ? 14 : 16 }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: matrixIsSmallMobile ? 12 : 14 }}>
         <div
           style={{
             width: "100%",
-            display: matrixUseDesktopLayout ? "grid" : "flex",
-            gridTemplateColumns: "minmax(240px, 300px) minmax(320px, 360px) minmax(120px, 180px)",
+            maxWidth: matrixLayoutMaxWidth,
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: matrixUseDesktopLayout ? "minmax(260px, 1fr) minmax(300px, 360px)" : "1fr",
             alignItems: "center",
             justifyItems: "center",
-            justifyContent: "center",
-            gap: matrixIsSmallMobile ? 12 : matrixIsMobile ? 16 : 20,
-            flexDirection: matrixUseDesktopLayout ? "row" : "column",
+            columnGap: matrixIsSmallMobile ? 12 : matrixIsTablet ? 16 : 20,
+            rowGap: matrixIsSmallMobile ? 12 : 14,
           }}
         >
-          <p
+          <div
             style={{
-              margin: 0,
-              maxWidth: matrixUseDesktopLayout ? 260 : "100%",
-              textAlign: matrixUseDesktopLayout ? "left" : "center",
+              width: "100%",
+              maxWidth: matrixUseDesktopLayout ? 360 : 560,
               justifySelf: matrixUseDesktopLayout ? "start" : "center",
-              fontFamily: font.serif,
-              fontSize: matrixIsSmallMobile ? 22 : matrixIsMobile ? 24 : 28,
-              lineHeight: 1.2,
-              fontWeight: 600,
-              color: aboutText,
-              letterSpacing: "-.01em",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: matrixUseDesktopLayout ? "flex-start" : "center",
+              gap: matrixIsSmallMobile ? 10 : 12,
             }}
           >
-            Every lever optimized <span style={{ color: "#9A6B38", fontWeight: 700 }}>no trade-offs left on the table</span>
-          </p>
-          <svg width={matrixIsSmallMobile ? 298 : matrixIsMobile ? 326 : matrixIsTablet ? 352 : 320} height={matrixIsSmallMobile ? 304 : matrixIsMobile ? 338 : matrixIsTablet ? 362 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%", justifySelf: "center" }}>
+            <p
+              style={{
+                margin: 0,
+                maxWidth: matrixUseDesktopLayout ? 340 : "100%",
+                textAlign: matrixUseDesktopLayout ? "left" : "center",
+                fontFamily: font.serif,
+                fontSize: matrixIsSmallMobile ? 22 : matrixIsMobile ? 24 : 28,
+                lineHeight: 1.2,
+                fontWeight: 600,
+                color: aboutText,
+                letterSpacing: "-.01em",
+              }}
+            >
+              Every lever optimized<span style={{ color: "#9A6B38", fontWeight: 700 }}>—no trade-offs left on the table</span>
+            </p>
+
+            <p
+              style={{
+                margin: 0,
+                textAlign: matrixUseDesktopLayout ? "left" : "center",
+                maxWidth: matrixUseDesktopLayout ? 340 : 460,
+                fontFamily: font.sans,
+                fontSize: matrixIsSmallMobile ? 13 : 14,
+                lineHeight: 1.6,
+                color: aboutTextMuted,
+              }}
+            >
+              Most AI vendors optimize one dimension.
+              <br />
+              We engineer across all five.
+            </p>
+          </div>
+
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              justifySelf: "center",
+              transform: `translateX(${matrixChartNudgeX}px)`,
+            }}
+          >
+            <svg width={matrixChartWidth} height={matrixChartHeight} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%" }}>
             {[25, 50, 75, 100].map((pct) => (
               <polygon
                 key={pct}
@@ -129,7 +173,7 @@ export function WhoWeAre() {
                   <circle
                     cx={x}
                     cy={y}
-                    r={5}
+                    r={matrixIsSmallMobile ? 5.5 : 6}
                     fill="#161410"
                     stroke="#C4883A"
                     strokeWidth={2}
@@ -139,21 +183,20 @@ export function WhoWeAre() {
             })}
 
             {levers.map((lever, index) => {
-              const labelRadius = matrixIsSmallMobile ? R + 14 : matrixIsMobile ? R + 18 : R + 24;
-              const { x, y } = polarToXY(index, labelRadius);
+              const { x, y } = polarToXY(index, matrixLabelRadius);
               const anchor = x < CX - 8 ? "end" : x > CX + 8 ? "start" : "middle";
               const labelX = matrixIsMobile && anchor === "end"
-                ? x + (matrixIsSmallMobile ? 18 : 14)
+                ? x + (matrixIsSmallMobile ? 20 : 16)
                 : x;
 
               return (
                 <text
                   key={lever.label}
                   x={labelX}
-                  y={y + 4}
+                  y={y + 5}
                   textAnchor={anchor}
                   fill="#9e8f78"
-                  fontSize={matrixIsSmallMobile ? 10 : 11}
+                  fontSize={matrixLabelFontSize}
                   fontFamily="sans-serif"
                   fontWeight="500"
                 >
@@ -161,13 +204,12 @@ export function WhoWeAre() {
                 </text>
               );
             })}
-          </svg>
-
-          {matrixUseDesktopLayout && <div aria-hidden="true" style={{ width: "100%" }} />}
+            </svg>
+          </div>
         </div>
 
-        <div style={{ width: "100%", paddingLeft: matrixRightShift, boxSizing: "border-box", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-          <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: 4 }}>
+        <div style={{ width: "100%", maxWidth: matrixLayoutMaxWidth, boxSizing: "border-box", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: matrixIsSmallMobile ? 2 : 4 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
               <svg width="20" height="10">
                 <line x1="0" y1="5" x2="20" y2="5" stroke="#8f6a3d" strokeWidth="1.8" strokeDasharray="4 3" />
@@ -181,22 +223,6 @@ export function WhoWeAre() {
               <span style={{ fontSize: 11, color: "#C4883A", fontFamily: "sans-serif", fontWeight: 600 }}>Heuristic Labs</span>
             </div>
           </div>
-
-          <p
-            style={{
-              margin: 0,
-              textAlign: "center",
-              maxWidth: 460,
-              fontFamily: font.sans,
-              fontSize: matrixIsSmallMobile ? 13 : 14,
-              lineHeight: 1.6,
-              color: aboutTextMuted,
-            }}
-          >
-            Most AI vendors optimize one dimension.
-            <br />
-            We engineer across all five.
-          </p>
         </div>
 
       </div>
@@ -336,7 +362,7 @@ export function WhoWeAre() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2,minmax(0,1fr))",
+              gridTemplateColumns: isSmallMobile ? "1fr" : "repeat(2,minmax(0,1fr))",
               gap: 0,
             }}
           >
@@ -345,8 +371,14 @@ export function WhoWeAre() {
                 key={item}
                 style={{
                   padding: isSmallMobile ? "10px 10px 12px" : "12px 12px 14px",
-                  borderRight: index % 2 === 0 ? `1px solid ${aboutDivider}` : "none",
-                  borderBottom: index < 2 ? `1px solid ${aboutDivider}` : "none",
+                  borderRight: isSmallMobile ? "none" : index % 2 === 0 ? `1px solid ${aboutDivider}` : "none",
+                  borderBottom: isSmallMobile
+                    ? index < notes.length - 1
+                      ? `1px solid ${aboutDivider}`
+                      : "none"
+                    : index < 2
+                      ? `1px solid ${aboutDivider}`
+                      : "none",
                 }}
               >
                 <span
@@ -390,7 +422,7 @@ export function WhoWeAre() {
 
       <div
         style={{
-          marginTop: isSmallMobile ? 54 : isMobile ? 62 : 74,
+          marginTop: isSmallMobile ? 28 : isMobile ? 34 : 44,
         }}
       >
         <div
@@ -401,7 +433,7 @@ export function WhoWeAre() {
             background: "transparent",
             border: "none",
             borderRadius: isSmallMobile ? 16 : 20,
-            padding: isSmallMobile ? "8px 6px" : isMobile ? "10px 8px" : "12px 10px",
+            padding: isSmallMobile ? "6px 4px" : isMobile ? "8px 6px" : "10px 8px",
             position: "relative",
             zIndex: 1,
             overflow: isMobile ? "visible" : "hidden",

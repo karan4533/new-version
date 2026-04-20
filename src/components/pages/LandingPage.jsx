@@ -51,6 +51,9 @@ function HeroBtn({ label, onClick, primary }) {
 
 export function LandingPage({ onCaseStudies, onContact }) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
+  const isTabletViewport = isTablet && !isMobile;
+  const isHeaderGuardMobileViewport = isMobile && width >= 500 && width <= 650;
+  const isWideTabletGuardViewport = isTabletViewport && width >= 900 && width <= 1030;
   const [useCaseIndex, setUseCaseIndex] = useState(0);
   const [previousUseCaseIndex, setPreviousUseCaseIndex] = useState(null);
   const useCaseIndexRef = useRef(0);
@@ -88,12 +91,12 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroGuideTailPct = `${(heroGuideLineTailY / heroGuideViewBoxHeight) * 100}%`;
   const heroContainerMaxWidth = 1160;
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
-  const heroTopPadding = isSmallMobile ? "18px" : isMobile ? "22px" : isTablet ? "24px" : "clamp(34px, 7vh, 86px)";
-  const heroBottomPadding = isSmallMobile ? "24px" : isMobile ? "30px" : isTablet ? "30px" : "clamp(26px, 4vh, 54px)";
-  const heroFlowGap = isSmallMobile ? 16 : isMobile ? 18 : isTablet ? 22 : 24;
+  const heroTopPadding = isSmallMobile ? "4px" : isHeaderGuardMobileViewport ? "16px" : isMobile ? "8px" : isWideTabletGuardViewport ? "14px" : isTabletViewport ? "6px" : "clamp(10px, 2.8vh, 34px)";
+  const heroBottomPadding = isSmallMobile ? "16px" : isMobile ? "20px" : isWideTabletGuardViewport ? "18px" : isTabletViewport ? "14px" : "clamp(20px, 3.2vh, 38px)";
+  const heroFlowGap = isSmallMobile ? 12 : isMobile ? 14 : isWideTabletGuardViewport ? 16 : isTabletViewport ? 14 : 20;
   const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
-  const heroCtaTopMargin = isSmallMobile ? 5 : isMobile ? 80 : isTablet ? 70 : 0;
-  const heroContentNudgeY = isSmallMobile ? -6 : isMobile ? -8 : isTablet ? -20 : 0;
+  const heroCtaTopMargin = isSmallMobile ? 4 : isMobile ? 28 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 14 : 0;
+  const heroContentNudgeY = isSmallMobile ? -22 : isHeaderGuardMobileViewport ? -10 : isMobile ? -30 : isWideTabletGuardViewport ? -16 : isTabletViewport ? -34 : -24;
   const showHeroGuideLines = false;
 
   useEffect(() => {
@@ -273,6 +276,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
         style={{
           position: "relative",
           minHeight: "100svh",
+          boxSizing: "border-box",
           display: "flex",
           alignItems: "center",
           justifyContent: "flex-start",
