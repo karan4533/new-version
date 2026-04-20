@@ -18,6 +18,13 @@ const HERO_USE_CASES = [
 
 const HERO_USE_CASE_CROSSFADE_MS = 560;
 
+const HERO_STATS = [
+  { value: "50+", label: "AI engagements shipped" },
+  { value: "6-10 weeks", label: "Typical production timeline" },
+  { value: "2x", label: "Faster than traditional AI delivery" },
+  { value: "40+ years", label: "Leadership experience in AI" },
+];
+
 function HeroBtn({ label, onClick, primary }) {
   return (
     <button
@@ -84,8 +91,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTopPadding = isSmallMobile ? "18px" : isMobile ? "22px" : isTablet ? "24px" : "clamp(34px, 7vh, 86px)";
   const heroBottomPadding = isSmallMobile ? "24px" : isMobile ? "30px" : isTablet ? "30px" : "clamp(26px, 4vh, 54px)";
   const heroFlowGap = isSmallMobile ? 16 : isMobile ? 18 : isTablet ? 22 : 24;
-  const heroCtaTopMargin = isSmallMobile ? 100 : isMobile ? 100 : isTablet ? 80 : 0;
+  const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
+  const heroCtaTopMargin = isSmallMobile ? 80 : isMobile ? 80 : isTablet ? 70 : 0;
   const heroContentNudgeY = isSmallMobile ? -6 : isMobile ? -8 : isTablet ? -20 : 0;
+  const showHeroGuideLines = false;
 
   useEffect(() => {
     useCaseIndexRef.current = useCaseIndex;
@@ -297,40 +306,42 @@ export function LandingPage({ onCaseStudies, onContact }) {
           }}
         />
 
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            opacity: isSmallMobile ? 0.46 : isMobile ? 0.46 : isTablet ? 0.42 : 0.46,
-          }}
-        >
-          <svg
+        {showHeroGuideLines && (
+          <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               inset: 0,
-              width: "100%",
-              height: "100%",
-              overflow: "visible",
+              pointerEvents: "none",
+              opacity: isSmallMobile ? 0.46 : isMobile ? 0.46 : isTablet ? 0.42 : 0.46,
             }}
           >
-            <g
-              fill="none"
-              stroke="rgba(136,104,73,.64)"
-              strokeWidth={isSmallMobile ? 1.05 : isMobile ? 1 : 0.95}
-              strokeLinecap="butt"
-              strokeDasharray={isSmallMobile ? "5 8" : isMobile ? "5.2 9" : "5.5 11"}
-              shapeRendering="geometricPrecision"
-              vectorEffect="non-scaling-stroke"
+            <svg
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                overflow: "visible",
+              }}
             >
-              <line x1={heroGuideLeftPct} y1={heroGuideStartYPct} x2={heroGuideLeftPct} y2={heroGuideTailPct} />
-              <line x1={heroGuideRightPct} y1={heroGuideStartYPct} x2={heroGuideRightPct} y2={heroGuideTailPct} />
-              <line x1="-2%" y1={heroGuideTopPct} x2="102%" y2={heroGuideTopPct} />
-              <line x1="-2%" y1={heroGuideBottomPct} x2="102%" y2={heroGuideBottomPct} />
-            </g>
-          </svg>
-        </div>
+              <g
+                fill="none"
+                stroke="rgba(136,104,73,.64)"
+                strokeWidth={isSmallMobile ? 1.05 : isMobile ? 1 : 0.95}
+                strokeLinecap="butt"
+                strokeDasharray={isSmallMobile ? "5 8" : isMobile ? "5.2 9" : "5.5 11"}
+                shapeRendering="geometricPrecision"
+                vectorEffect="non-scaling-stroke"
+              >
+                <line x1={heroGuideLeftPct} y1={heroGuideStartYPct} x2={heroGuideLeftPct} y2={heroGuideTailPct} />
+                <line x1={heroGuideRightPct} y1={heroGuideStartYPct} x2={heroGuideRightPct} y2={heroGuideTailPct} />
+                <line x1="-2%" y1={heroGuideTopPct} x2="102%" y2={heroGuideTopPct} />
+                <line x1="-2%" y1={heroGuideBottomPct} x2="102%" y2={heroGuideBottomPct} />
+              </g>
+            </svg>
+          </div>
+        )}
       </div>
 
       <div
@@ -522,6 +533,83 @@ export function LandingPage({ onCaseStudies, onContact }) {
           >
             <HeroBtn label="See our work" onClick={onCaseStudies} primary />
             <HeroBtn label="Book a call" onClick={onContact} />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.42} distance={14} blurFrom={6}>
+          <div
+            style={{
+              width: "100%",
+              maxWidth: isTablet ? 760 : 960,
+              margin: "0 auto",
+            }}
+          >
+            <div
+              aria-hidden="true"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: isSmallMobile ? 10 : 12,
+              }}
+            >
+              <span
+                style={{
+                  width: 1,
+                  height: isSmallMobile ? 18 : isMobile ? 22 : 24,
+                  background: `repeating-linear-gradient(to bottom, ${T.ink12} 0, ${T.ink12} 4px, transparent 4px, transparent 8px)`,
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "repeat(2, minmax(0, 1fr))" : isTablet ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))",
+                gap: heroStatsGridGap,
+                alignItems: "stretch",
+              }}
+            >
+              {HERO_STATS.map((item) => (
+                <div
+                  key={item.label}
+                  style={{
+                    width: "100%",
+                    border: `1px dashed ${T.ink12}`,
+                    borderRadius: 14,
+                    padding: isSmallMobile ? "10px 12px" : "12px 14px",
+                    textAlign: "left",
+                    background: "rgba(255,255,255,.2)",
+                    minHeight: isSmallMobile ? 72 : 82,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: font.serif,
+                      fontSize: isSmallMobile ? 22 : isMobile ? 24 : 26,
+                      lineHeight: 1,
+                      color: T.ink,
+                      marginBottom: 5,
+                    }}
+                  >
+                    {item.value}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: font.sans,
+                      fontSize: 11,
+                      letterSpacing: ".02em",
+                      color: T.ink60,
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
 
