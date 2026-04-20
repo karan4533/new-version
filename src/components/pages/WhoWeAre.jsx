@@ -86,7 +86,7 @@ export function WhoWeAre() {
               letterSpacing: "-.01em",
             }}
           >
-            Every lever optimized <span style={{ color: T.amber }}>no trade-offs left on the table</span>
+            Every lever optimized <span style={{ color: "#9A6B38", fontWeight: 700 }}>no trade-offs left on the table</span>
           </p>
           <svg width={matrixIsSmallMobile ? 298 : matrixIsMobile ? 326 : matrixIsTablet ? 352 : 320} height={matrixIsSmallMobile ? 304 : matrixIsMobile ? 338 : matrixIsTablet ? 362 : 330} viewBox="0 0 320 330" style={{ overflow: "visible", maxWidth: "100%", justifySelf: "center" }}>
             {[25, 50, 75, 100].map((pct) => (
@@ -107,7 +107,7 @@ export function WhoWeAre() {
             {[25, 50, 75].map((pct) => {
               const { x, y } = polarToXY(2, (pct / 100) * R);
               return (
-                <text key={pct} x={x + 4} y={y} fill="#2a2720" fontSize={8} fontFamily="sans-serif">
+                <text key={pct} x={x + 4} y={y} fill="#8d7f6a" fontSize={8} fontFamily="sans-serif" fontWeight="600">
                   {pct}
                 </text>
               );
@@ -118,7 +118,7 @@ export function WhoWeAre() {
               return <line key={index} x1={CX} y1={CY} x2={x} y2={y} stroke="#1e1c18" strokeWidth={1} />;
             })}
 
-            <path d={buildPath(levers.map((lever) => lever.avg), progress)} fill="#6b5a3a" fillOpacity={0.08} stroke="#6b5a3a" strokeOpacity={0.35} strokeWidth={1.5} strokeDasharray="4 3" />
+            <path d={buildPath(levers.map((lever) => lever.avg), progress)} fill="#8f6a3d" fillOpacity={0.12} stroke="#8f6a3d" strokeOpacity={0.7} strokeWidth={1.6} strokeDasharray="4 3" />
             <path d={buildPath(levers.map((lever) => lever.hl), progress)} fill="#C4883A" fillOpacity={0.14} stroke="#C4883A" strokeWidth={2} />
 
             {levers.map((lever, index) => {
@@ -152,10 +152,10 @@ export function WhoWeAre() {
                   x={labelX}
                   y={y + 4}
                   textAnchor={anchor}
-                  fill="#7a7060"
+                  fill="#9e8f78"
                   fontSize={matrixIsSmallMobile ? 10 : 11}
                   fontFamily="sans-serif"
-                  fontWeight="400"
+                  fontWeight="500"
                 >
                   {lever.label}
                 </text>
@@ -170,15 +170,15 @@ export function WhoWeAre() {
           <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: 4 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
               <svg width="20" height="10">
-                <line x1="0" y1="5" x2="20" y2="5" stroke="#6b5a3a" strokeWidth="1.5" strokeDasharray="4 3" />
+                <line x1="0" y1="5" x2="20" y2="5" stroke="#8f6a3d" strokeWidth="1.8" strokeDasharray="4 3" />
               </svg>
-              <span style={{ fontSize: 11, color: "#4a4640", fontFamily: "sans-serif" }}>Industry avg</span>
+              <span style={{ fontSize: 11, color: "#9e8f78", fontFamily: "sans-serif", fontWeight: 600 }}>Industry avg</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
               <svg width="20" height="10">
                 <line x1="0" y1="5" x2="20" y2="5" stroke="#C4883A" strokeWidth="2" />
               </svg>
-              <span style={{ fontSize: 11, color: "#C4883A", fontFamily: "sans-serif" }}>Heuristic Labs</span>
+              <span style={{ fontSize: 11, color: "#C4883A", fontFamily: "sans-serif", fontWeight: 600 }}>Heuristic Labs</span>
             </div>
           </div>
 
