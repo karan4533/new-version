@@ -543,16 +543,20 @@ export function CaseStudies({ onOpenCaseStudy }) {
                     </div>
                   )}
 
-                  <button
-                    type="button"
-                    className="case-home-preview-cta"
-                    onClick={() => onOpenCaseStudy?.(activeEntry?.originalIndex)}
+                  <a
+                    className="case-home-preview-cta case-home-preview-link"
+                    href="#case-studies"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onOpenCaseStudy?.(activeEntry?.originalIndex);
+                    }}
+                    aria-label={`Learn more about ${casePreviewTitle}`}
                   >
                     Learn more
                     <span className="case-home-preview-cta-arrow" aria-hidden="true">
                       &gt;
                     </span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

@@ -677,3 +677,21 @@
     display: inline-flex;
   }
 }
+
+.case-home-preview-link {
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: var(--bronze);
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.case-home-preview-link:hover,
+.case-home-preview-link:focus-visible {
+  background: none;
+  color: var(--bronze-lt);
+  opacity: 1;
+}
