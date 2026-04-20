@@ -372,7 +372,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   const sectionLabelStyle = {
     margin: 0,
     fontFamily: font.sans,
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 700,
     letterSpacing: ".02em",
     color: T.amber,
@@ -381,7 +381,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   const detailBodyTextStyle = {
     margin: 0,
     fontFamily: font.sans,
-    fontSize: isSmallMobile ? 13 : 14,
+    fontSize: isSmallMobile ? 14 : 15,
     lineHeight: 1.7,
     color: T.ink60,
   };
@@ -457,7 +457,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
               padding: 0,
               margin: 0,
               fontFamily: font.sans,
-              fontSize: 12,
+              fontSize: 13,
               fontWeight: 600,
               letterSpacing: ".08em",
               textTransform: "uppercase",
@@ -500,7 +500,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     style={{
                       display: "inline-block",
                       fontFamily: font.sans,
-                      fontSize: 10,
+                      fontSize: 11,
                       fontWeight: 600,
                       letterSpacing: ".1em",
                       textTransform: "uppercase",
@@ -517,7 +517,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     style={{
                       display: "inline-block",
                       fontFamily: font.sans,
-                      fontSize: 10,
+                      fontSize: 11,
                       fontWeight: 600,
                       letterSpacing: ".08em",
                       textTransform: "uppercase",
@@ -533,10 +533,10 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                     margin: 0,
                     fontFamily: font.serif,
                     fontSize: isSmallMobile
-                      ? "clamp(30px, 8.6vw, 40px)"
+                      ? "clamp(31px, 8.6vw, 41px)"
                       : useCondensedTitle
-                        ? "clamp(18px, 1.9vw, 26px)"
-                        : "clamp(24px, 3vw, 38px)",
+                        ? "clamp(19px, 1.9vw, 27px)"
+                        : "clamp(25px, 3vw, 39px)",
                     fontWeight: 700,
                     lineHeight: 1.12,
                     letterSpacing: "-.02em",
@@ -552,7 +552,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   style={{
                     margin: 0,
                     fontFamily: font.sans,
-                    fontSize: 13,
+                    fontSize: 14,
                     lineHeight: 1.6,
                     color: T.ink60,
                   }}
@@ -718,7 +718,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                             display: "grid",
                             gap: row.why ? 6 : 0,
                             fontFamily: font.sans,
-                            fontSize: isSmallMobile ? 13 : 14,
+                            fontSize: isSmallMobile ? 14 : 15,
                             lineHeight: 1.6,
                             color: T.ink60,
                           }}
@@ -749,7 +749,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                         style={{
                           margin: 0,
                           fontFamily: font.serif,
-                          fontSize: isSmallMobile ? 24 : 28,
+                          fontSize: isSmallMobile ? 25 : 29,
                           fontWeight: 700,
                           lineHeight: 1.1,
                           color: T.amber,
@@ -761,7 +761,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                         style={{
                           margin: "6px 0 0",
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 13 : 14,
+                          fontSize: isSmallMobile ? 14 : 15,
                           fontWeight: 600,
                           lineHeight: 1.45,
                           color: T.ink,
@@ -774,7 +774,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           style={{
                             margin: "6px 0 0",
                             fontFamily: font.sans,
-                            fontSize: 12,
+                            fontSize: 13,
                             lineHeight: 1.55,
                             color: T.ink60,
                           }}
@@ -807,7 +807,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           alignItems: "flex-start",
                           gap: 8,
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 13 : 14,
+                          fontSize: isSmallMobile ? 14 : 15,
                           lineHeight: 1.65,
                           color: T.ink60,
                         }}
@@ -825,7 +825,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           alignItems: "flex-start",
                           gap: 8,
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 13 : 14,
+                          fontSize: isSmallMobile ? 14 : 15,
                           lineHeight: 1.65,
                           color: T.ink60,
                         }}
@@ -839,7 +839,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                             background: "rgba(176,120,69,.16)",
                             border: `1px solid rgba(176,120,69,.28)`,
                             color: T.amber,
-                            fontSize: 10,
+                            fontSize: 11,
                             fontWeight: 700,
                             letterSpacing: ".04em",
                             textTransform: "uppercase",

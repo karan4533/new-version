@@ -75,7 +75,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "8 weeks",
     oneLiner:
-      "ASR + LLM + TTS pipeline that localizes training and compliance videos into multiple languages without manual dubbing",
+      "ASR + LLM + TTS pipeline that automates multilingual video localisation at scale. Eliminates manual dubbing delays while maintaining timing, sync, and terminology accuracy. Enables faster global rollout of training and compliance content",
     stats: [
       { val: "75%", label: "faster per language" },
       { val: "50%", label: "cost vs manual" },
@@ -87,7 +87,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Construction",
     duration: "12 weeks",
     oneLiner:
-      "Edge-deployed vision AI that monitors 40+ camera feeds and flags PPE violations in under a second",
+      "Large construction sites lacked real-time visibility across multiple camera feeds. Violations were identified only after incidents, increasing safety and compliance risks. The need was a proactive system for instant detection and alerts",
     stats: [
       { val: "60%", label: "fewer violations" },
       { val: "<3s", label: "alert" },
@@ -99,7 +99,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "D2C Brand",
     duration: "10 weeks",
     oneLiner:
-      "Multi-agent voice system handling orders, returns, and product queries with 800ms response latency at any scale",
+      "Handling high volumes of customer queries required instant, accurate, and contextual responses. Existing systems struggled to scale while maintaining consistency. The goal was to deliver reliable support without increasing operational load",
     stats: [
       { val: "80%", label: "faster resolution" },
       { val: "900ms", label: "response" },
@@ -111,7 +111,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Sales Tech",
     duration: "8 weeks",
     oneLiner:
-      "Natural language interface that queries structured and unstructured data and generates charts, tables, and insights on demand",
+      "Business teams depended on static dashboards and manual reporting workflows. Ad hoc queries caused delays and required technical intervention. A real-time, conversational interface was needed for instant data-driven insights",
     stats: [
       { val: "<2 min", label: "per query" },
       { val: "85%", label: "less report time" },
@@ -123,7 +123,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "10 weeks",
     oneLiner:
-      "On-prem agentic RAG with BM25 + semantic search, RBAC, and citation-only responses for regulated environments",
+      "Keyword-based search across large enterprise documents returned irrelevant results. Teams spent hours finding information that should take seconds. The requirement was a context-aware search system for accurate retrieval",
     stats: [
       { val: "80%", label: "faster search" },
       { val: "~0%", label: "hallucination" },
@@ -135,7 +135,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Legal",
     duration: "8 weeks",
     oneLiner:
-      "Knowledge graph + RAG system making 500,000+ contracts searchable with citations",
+      "Reviewing and searching across massive contract repositories was slow and error-prone. Critical clauses were often missed due to manual effort. The system needed to make legal knowledge instantly searchable and reliable",
     stats: [
       { val: "Hours →", label: "seconds" },
       { val: "500K+", label: "contracts" },
@@ -147,7 +147,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "8 weeks",
     oneLiner:
-      "Centralized governance layer with model registry, hallucination detection, and audit logs",
+      "Rapid AI adoption introduced risks around compliance, bias, and lack of visibility. Teams deployed models independently without oversight. A centralized governance layer was required to ensure control and traceability",
     stats: [
       { val: "65%", label: "fewer incidents" },
       { val: "70%", label: "faster audits" },
@@ -159,7 +159,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Automotive",
     duration: "16 weeks",
     oneLiner:
-      "CNN models synced with PLC logic to detect defects in real time",
+      "Manual inspection on high-speed assembly lines led to missed defects and inefficiencies. Human limitations couldn’t keep up with production speed. The need was a real-time, automated quality control system",
     stats: [
       { val: "95%", label: "defect precision" },
       { val: "70%", label: "less rework" },
@@ -171,7 +171,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "6 weeks",
     oneLiner:
-      "Domain-adapted translation engine for manuals and SOPs with consistent terminology",
+      "Multilingual operations required consistent and accurate translation of technical content. Generic tools produced inconsistent terminology across regions. A domain-aware system was needed for reliable communication",
     stats: [
       { val: "65%", label: "faster turnaround" },
       { val: "85%", label: "cost saving" },
@@ -183,7 +183,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "E-Commerce",
     duration: "8 weeks",
     oneLiner:
-      "LLM + agentic RAG pipelines classifying 100,000 SKUs across 4,000+ taxonomy nodes",
+      "Classifying products across thousands of categories with inconsistent supplier data was slow and error-prone. Manual extraction couldn’t scale with growing SKU volume. The goal was to automate and standardize classification at scale",
     stats: [
       { val: "3 months →", label: "2 weeks" },
       { val: "92%", label: "automated" },
@@ -195,7 +195,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Medico-Legal",
     duration: "4 weeks",
     oneLiner:
-      "Multimodal LLMs extracting and summarizing 10,000+ pages of medical records",
+      "Reviewing thousands of pages of medical records was time-consuming and prone to oversight. Critical insights were buried in handwritten and scanned documents. The system needed to extract and structure data efficiently",
     stats: [
       { val: "97%", label: "accuracy" },
       { val: "100,000+", label: "pages" },
@@ -207,7 +207,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Fintech",
     duration: "8 weeks",
     oneLiner:
-      "VLM-powered validation comparing site images with checklists for loan release",
+      "Loan approvals relied on slow and inconsistent manual verification processes. Site visits delayed decisions and introduced subjectivity. The need was an automated system for faster and reliable validation",
     stats: [
       { val: "Days →", label: "minutes" },
       { val: "80%", label: "less manual review" },
