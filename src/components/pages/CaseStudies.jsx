@@ -553,9 +553,6 @@ export function CaseStudies({ onOpenCaseStudy }) {
                     aria-label={`Learn more about ${casePreviewTitle}`}
                   >
                     Learn more
-                    <span className="case-home-preview-cta-arrow" aria-hidden="true">
-                      &gt;
-                    </span>
                   </a>
                 </div>
               </div>
