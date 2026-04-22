@@ -690,13 +690,13 @@ THE CHALLENGE
 
 Context
 
-An enterprise needed scalable multilingual video localisation for training and compliance content across regions.
+ASR + LLM + TTS pipeline that automates multilingual video localisation at scale.
 
 The breaking point
 
-Manual dubbing was slow, expensive, and introduced terminology inconsistencies and timeline misalignment between audio and video.
+Eliminates manual dubbing delays while maintaining timing, sync, and terminology accuracy.
 
-Manual dubbing meant weeks of delay per language. Global rollouts were bottlenecked by localisation, not content.
+Enables faster global rollout of training and compliance content.
 
 HOW WE BUILT IT
 
