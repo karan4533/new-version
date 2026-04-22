@@ -45,8 +45,8 @@ export function WhoWeAre() {
     const R = 108;
     const matrixChartWidth = matrixIsSmallMobile ? 298 : matrixIsMobile ? 326 : matrixIsTablet ? 344 : 332;
     const matrixChartHeight = matrixIsSmallMobile ? 304 : matrixIsMobile ? 338 : matrixIsTablet ? 352 : 338;
-    const matrixLabelFontSize = matrixIsSmallMobile ? 11 : 12;
-    const matrixLabelRadius = matrixIsSmallMobile ? R + 18 : matrixIsMobile ? R + 22 : R + 28;
+    const matrixLabelFontSize = matrixIsSmallMobile ? 12 : 13;
+    const matrixLabelRadius = matrixIsSmallMobile ? R + 20 : matrixIsMobile ? R + 24 : R + 30;
     const matrixChartNudgeX = matrixUseDesktopLayout ? -14 : 0;
     const matrixLayoutMaxWidth = matrixUseDesktopLayout ? 940 : matrixIsTablet ? 720 : 560;
 
@@ -177,7 +177,7 @@ export function WhoWeAre() {
               const { x, y } = polarToXY(index, matrixLabelRadius);
               const anchor = x < CX - 8 ? "end" : x > CX + 8 ? "start" : "middle";
               const labelX = matrixIsMobile && anchor === "end"
-                ? x + (matrixIsSmallMobile ? 20 : 16)
+                ? x + (matrixIsSmallMobile ? 22 : 18)
                 : x;
 
               return (
