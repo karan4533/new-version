@@ -321,6 +321,49 @@ const buildFallbackCase = (caseStudy, caseIndex) => ({
 const buildDisplayCase = (caseStudy, caseIndex) =>
   getWordCaseByIndexOrTitle(caseStudy, caseIndex) || buildFallbackCase(caseStudy, caseIndex);
 
+// Keep detail-page numbering aligned with the visible Case Studies sequence.
+const CASE_DISPLAY_SEQUENCE = [
+  "Video Localization",
+  "Construction",
+  "D2C Brand",
+  "Sales Copilot",
+  "Enterprise Search",
+  "Legal",
+  "AI Governance",
+  "Automotive",
+  "Translation",
+  "E-Commerce",
+  "Medico-Legal",
+  "Fintech",
+];
+
+const getDisplaySequenceNumber = (caseStudy, caseIndex) => {
+  const keyCandidates = [
+    caseStudy?.tabLabel,
+    caseStudy?.cat,
+    caseStudy?.shortTitle,
+    caseStudy?.title,
+  ]
+    .map(normalizeLookupKey)
+    .filter(Boolean);
+
+  const sequenceIndex = CASE_DISPLAY_SEQUENCE.findIndex((entry) => {
+    const entryKey = normalizeLookupKey(entry);
+    return keyCandidates.some(
+      (candidate) =>
+        candidate === entryKey ||
+        candidate.includes(entryKey) ||
+        entryKey.includes(candidate),
+    );
+  });
+
+  if (sequenceIndex !== -1) {
+    return sequenceIndex + 1;
+  }
+
+  return (Number.isInteger(caseIndex) && caseIndex >= 0 ? caseIndex : 0) + 1;
+};
+
 const DETAIL_IMAGE_BY_KEY = {
   Construction: { src: constructionImage, position: "center 44%" },
   "E-Commerce": { src: dataAnalyticsImage, position: "42% 36%" },
@@ -356,6 +399,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   if (!caseStudy) return null;
 
   const detailCase = buildDisplayCase(caseStudy, caseIndex);
+  const displayCaseNumber = getDisplaySequenceNumber(caseStudy, caseIndex);
   const fallbackStatsRows = getFallbackResultRows(caseStudy);
   const detailImage = getDetailImageConfig(caseStudy);
   const statsRows = (fallbackStatsRows.length ? fallbackStatsRows : detailCase.rows)
@@ -524,7 +568,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                       color: T.amber,
                     }}
                   >
-                    {detailCase.caseLabel}
+                    {`Case Study #${displayCaseNumber}`}
                   </span>
                 </div>
 
