@@ -99,8 +99,12 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTopClusterGap = isSmallMobile ? 14 : isHeroMobileLayout ? 16 : heroFlowGap;
   const heroTitleScrollerSpacing = isSmallMobile ? 24 : isHeroMobileLayout ? 20 : 0;
   const heroCtaTopSpacing = isSmallMobile ? 65 : isHeroMobileLayout ? 50 : 0;
-  const heroStatsNudgeY = isSmallMobile ? -48 : isHeroMobileLayout ? -26 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
-  const heroStatsGridGap = isSmallMobile ? 10 : isMobile ? 12 : 14;
+  const heroStatsNudgeY = isSmallMobile ? -56 : isMobile ? -34 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
+  const heroStatsGridGap = isSmallMobile ? 8 : isMobile ? 10 : 14;
+  const heroStatsCardPadding = isSmallMobile ? "8px 10px" : isMobile ? "10px 12px" : "12px 14px";
+  const heroStatsCardMinHeight = isSmallMobile ? 64 : isMobile ? 72 : 82;
+  const heroStatsValueFontSize = isSmallMobile ? 20 : isMobile ? 22 : 26;
+  const heroStatsLabelFontSize = isSmallMobile ? 10 : isMobile ? 10.5 : 11;
   const heroCtaTopMargin = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 14 : 0;
   const heroContentNudgeY = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? -8 : isTabletViewport ? -14 : -24;
   const showHeroGuideLines = false;
@@ -578,7 +582,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                marginBottom: isSmallMobile ? 10 : 12,
+                marginBottom: isSmallMobile ? 8 : isMobile ? 10 : 12,
               }}
             >
               <span
@@ -593,9 +597,10 @@ export function LandingPage({ onCaseStudies, onContact }) {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: isMobile ? "repeat(2, minmax(0, 1fr))" : isTablet ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))",
+                gridTemplateColumns: isMobile ? "repeat(2, minmax(132px, 1fr))" : isTablet ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))",
                 gap: heroStatsGridGap,
                 alignItems: "stretch",
+                overflow: isMobile ? "visible" : undefined,
               }}
             >
               {HERO_STATS.map((item) => (
@@ -605,22 +610,23 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     width: "100%",
                     border: `1px dashed ${T.ink12}`,
                     borderRadius: 14,
-                    padding: isSmallMobile ? "10px 12px" : "12px 14px",
+                    padding: heroStatsCardPadding,
                     textAlign: "left",
                     background: "rgba(255,255,255,.2)",
-                    minHeight: isSmallMobile ? 72 : 82,
+                    minHeight: heroStatsCardMinHeight,
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
+                    overflow: isMobile ? "visible" : undefined,
                   }}
                 >
                   <div
                     style={{
                       fontFamily: font.serif,
-                      fontSize: isSmallMobile ? 22 : isMobile ? 24 : 26,
+                      fontSize: heroStatsValueFontSize,
                       lineHeight: 1,
                       color: T.ink,
-                      marginBottom: 5,
+                      marginBottom: isMobile ? 4 : 5,
                     }}
                   >
                     {item.value}
@@ -628,7 +634,8 @@ export function LandingPage({ onCaseStudies, onContact }) {
                   <div
                     style={{
                       fontFamily: font.sans,
-                      fontSize: 11,
+                      fontSize: heroStatsLabelFontSize,
+                      lineHeight: 1.25,
                       letterSpacing: ".02em",
                       color: T.ink60,
                     }}
