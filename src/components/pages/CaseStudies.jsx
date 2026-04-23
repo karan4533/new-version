@@ -75,7 +75,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "8 weeks",
     oneLiner:
-      "ASR + LLM + TTS pipeline that automates multilingual video localisation at scale. Eliminates manual dubbing delays while maintaining timing, sync, and terminology accuracy. Enables faster global rollout of training and compliance content",
+      "An enterprise needed scalable multilingual localisation for training and compliance videos across regions. Manual dubbing was slow, expensive, and introduced terminology inconsistencies and audio-video misalignment.",
     stats: [
       { val: "75%", label: "faster per language" },
       { val: "50%", label: "cost vs manual" },
@@ -87,7 +87,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Construction",
     duration: "12 weeks",
     oneLiner:
-      "Large construction sites lacked real-time visibility across multiple camera feeds. Violations were identified only after incidents, increasing safety and compliance risks. The need was a proactive system for instant detection and alerts",
+      "Construction sites with 40+ camera feeds had no real-time PPE monitoring and supervisors could only cover a fraction of the site at any time. Violations were only discovered after an incident had already occurred.",
     stats: [
       { val: "60%", label: "fewer violations" },
       { val: "<3s", label: "alert" },
@@ -99,7 +99,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "D2C Brand",
     duration: "10 weeks",
     oneLiner:
-      "Handling high volumes of customer queries required instant, accurate, and contextual responses. Existing systems struggled to scale while maintaining consistency. The goal was to deliver reliable support without increasing operational load",
+      "A D2C brand needed to handle high volumes of customer queries across orders, returns, payments, and product discovery. Existing support could not maintain accuracy and personalisation across all query types at scale.",
     stats: [
       { val: "80%", label: "faster resolution" },
       { val: "900ms", label: "response" },
@@ -111,7 +111,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Sales Tech",
     duration: "8 weeks",
     oneLiner:
-      "Business teams depended on static dashboards and manual reporting workflows. Ad hoc queries caused delays and required technical intervention. A real-time, conversational interface was needed for instant data-driven insights",
+      "The organisation ran all data analysis through static dashboards and manual reporting workflows. Every ad hoc question needed a technical team and real-time decision-making was effectively impossible.",
     stats: [
       { val: "<2 min", label: "per query" },
       { val: "85%", label: "less report time" },
@@ -123,7 +123,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "10 weeks",
     oneLiner:
-      "Keyword-based search across large enterprise documents returned irrelevant results. Teams spent hours finding information that should take seconds. The requirement was a context-aware search system for accurate retrieval",
+      "Enterprises in regulated environments needed accurate search across millions of internal documents without sending data to the cloud. Existing keyword search returned irrelevant results and could not reason across documents.",
     stats: [
       { val: "80%", label: "faster search" },
       { val: "~0%", label: "hallucination" },
@@ -135,9 +135,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Legal",
     duration: "8 weeks",
     oneLiner:
-      "Reviewing and searching across massive contract repositories was slow and error-prone. Critical clauses were often missed due to manual effort. The system needed to make legal knowledge instantly searchable and reliable",
+      "Over 500,000 legal contracts needed to be searchable and conversational for legal and business teams. Retrieving precise answers required extensive manual review, creating serious time cost and risk of oversight.",
     stats: [
-      { val: "Hours →", label: "seconds" },
+      { val: "15s", label: "Latency" },
       { val: "500K+", label: "contracts" },
       { val: "Role-based", label: "access" },
     ],
@@ -147,7 +147,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "8 weeks",
     oneLiner:
-      "Rapid AI adoption introduced risks around compliance, bias, and lack of visibility. Teams deployed models independently without oversight. A centralized governance layer was required to ensure control and traceability",
+      "Rapid AI adoption across business functions created risks around hallucinations, bias, and regulatory non-compliance. Each unit was deploying independently with no oversight, no audit trail, and no way to detect failures.",
     stats: [
       { val: "65%", label: "fewer incidents" },
       { val: "70%", label: "faster audits" },
@@ -159,7 +159,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Automotive",
     duration: "16 weeks",
     oneLiner:
-      "Manual inspection on high-speed assembly lines led to missed defects and inefficiencies. Human limitations couldn’t keep up with production speed. The need was a real-time, automated quality control system",
+      "Manual inspection on high-speed automotive assembly lines was creating defect leakage and inconsistent quality control. Inspectors could not maintain accuracy at line speed and defects were reaching downstream stages before being caught.",
     stats: [
       { val: "95%", label: "defect precision" },
       { val: "70%", label: "less rework" },
@@ -171,7 +171,7 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Enterprise",
     duration: "6 weeks",
     oneLiner:
-      "Multilingual operations required consistent and accurate translation of technical content. Generic tools produced inconsistent terminology across regions. A domain-aware system was needed for reliable communication",
+      "Enterprises operating across multilingual regions needed accurate translation of manuals, SOPs, and policies with consistent technical terminology. Generic tools produced inconsistent outputs, creating compliance risk and contradictory instructions across regions.",
     stats: [
       { val: "65%", label: "faster turnaround" },
       { val: "85%", label: "cost saving" },
@@ -183,9 +183,9 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "E-Commerce",
     duration: "8 weeks",
     oneLiner:
-      "Classifying products across thousands of categories with inconsistent supplier data was slow and error-prone. Manual extraction couldn’t scale with growing SKU volume. The goal was to automate and standardize classification at scale",
+      "A large KPO was classifying products across 4,000+ taxonomy nodes manually from PDFs, images, and supplier blueprints. Every supplier sent data differently and the process was too slow and inconsistent to scale.",
     stats: [
-      { val: "3 months →", label: "2 weeks" },
+      { val: "10x faster", label: "processing time" },
       { val: "92%", label: "automated" },
       { val: "4,000+", label: "nodes" },
     ],
@@ -195,21 +195,21 @@ const CASE_PREVIEW_CONTENT_BY_KEY = {
     industry: "Medico-Legal",
     duration: "4 weeks",
     oneLiner:
-      "Reviewing thousands of pages of medical records was time-consuming and prone to oversight. Critical insights were buried in handwritten and scanned documents. The system needed to extract and structure data efficiently",
+      "Legal and healthcare teams were manually reviewing 10,000+ pages of handwritten and scanned medical records per case. Critical clinical details buried in handwritten notes were being missed during case preparation.",
     stats: [
       { val: "97%", label: "accuracy" },
       { val: "100,000+", label: "pages" },
-      { val: "Days →", label: "minutes" },
+      { val: "5x faster", label: "review" },
     ],
   },
   Fintech: {
-    title: "Automated Loan Disbursement",
+    title: "Automated Loan disbursement",
     industry: "Fintech",
     duration: "8 weeks",
     oneLiner:
-      "Loan approvals relied on slow and inconsistent manual verification processes. Site visits delayed decisions and introduced subjectivity. The need was an automated system for faster and reliable validation",
+      "Financing institutions were verifying construction milestones through manual site visits and image review. The process was slow, subjective, and inconsistent across reviewers, increasing financial and operational risk for lenders and borrowers alike.",
     stats: [
-      { val: "Days →", label: "minutes" },
+      { val: "95% faster", label: "approval" },
       { val: "80%", label: "less manual review" },
       { val: "Zero", label: "site visits" },
     ],

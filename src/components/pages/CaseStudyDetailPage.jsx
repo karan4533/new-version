@@ -399,6 +399,10 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   if (!caseStudy) return null;
 
   const detailCase = buildDisplayCase(caseStudy, caseIndex);
+  const clientOverview =
+    caseStudy?.objective ||
+    caseStudy?.body ||
+    detailCase.challenge.context;
   const displayCaseNumber = getDisplaySequenceNumber(caseStudy, caseIndex);
   const fallbackStatsRows = getFallbackResultRows(caseStudy);
   const detailImage = getDetailImageConfig(caseStudy);
@@ -646,7 +650,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                       <p style={sectionLabelStyle}>Client overview</p>
                     </div>
                     <p style={{ ...detailBodyTextStyle, marginLeft: isSmallMobile ? 13 : 15 }}>
-                      {detailCase.challenge.context}
+                      {clientOverview}
                     </p>
                   </div>
 

@@ -5,8 +5,8 @@ export const CASES = [
     "weeks": "8 weeks",
     "shortTitle": "Product Taxonomy & Attribute Enrichment",
     "title": "Product Taxonomy & Attribute Enrichment Engine",
-    "body": "Classify 100,000+ SKUs across 4,000+ taxonomy nodes from multi-format supplier data (PDFs, images, blueprints) — manually slow, inconsistent, and non-scalable.",
-    "objective": "Classify 100,000+ SKUs across 4,000+ taxonomy nodes from multi-format supplier data (PDFs, images, blueprints) — manually slow, inconsistent, and non-scalable.",
+    "body": "A large KPO was classifying products across 4,000+ taxonomy nodes manually from PDFs, images, and supplier blueprints. Every supplier sent data differently and the process was too slow and inconsistent to scale.",
+    "objective": "A large KPO was classifying products across 4,000+ taxonomy nodes manually from PDFs, images, and supplier blueprints. Every supplier sent data differently and the process was too slow and inconsistent to scale.",
     "solution": "Fine-tuned Llama 3.2 for multi-domain taxonomy classification Agentic RAG with hybrid search across 4,000+ taxonomy endpoints Multimodal LLM extracting data from text, PDFs, images & websites Schema-agnostic engine for plug-and-play supplier integration",
     "solutionPoints": [
       "Fine-tuned Llama 3.2 for multi-domain taxonomy classification",
@@ -14,7 +14,7 @@ export const CASES = [
       "Multimodal LLM extracting data from text, PDFs, images & websites",
       "Schema-agnostic engine for plug-and-play supplier integration"
     ],
-    "outcome": "3 months → 2 weeks | 92% Automation | ↓ Manual Effort",
+    "outcome": "10x faster processing time | 92% automated | 4,000+ nodes",
     "techTags": [
       "Llama 3.2",
       "Multimodal LLM",
@@ -25,22 +25,22 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "3 months →",
-        "label": "2 weeks",
-        "context": "Reduction in end-to-end classification time after deployment"
+        "val": "10x faster",
+        "label": "processing time",
+        "context": ""
       },
       {
         "val": "92%",
         "label": "automated",
-        "context": "Remaining 8% routed to human review queue for edge cases"
+        "context": ""
       },
       {
         "val": "4,000+",
         "label": "nodes",
-        "context": "Across varying supplier schemas without manual mapping"
+        "context": ""
       }
     ],
-    "useCase": "Classify 100,000+ SKUs across 4,000+ taxonomy nodes from multi-format supplier data (PDFs, images, blueprints) — manually slow, inconsistent, and non-scalable.",
+    "useCase": "A large KPO was classifying products across 4,000+ taxonomy nodes manually from PDFs, images, and supplier blueprints. Every supplier sent data differently and the process was too slow and inconsistent to scale.",
     "aiSolution": [
       "Fine-tuned Llama 3.2 for multi-domain taxonomy classification",
       "Agentic RAG with hybrid search across 4,000+ taxonomy endpoints",
@@ -48,9 +48,9 @@ export const CASES = [
       "Schema-agnostic engine for plug-and-play supplier integration"
     ],
     "impactRoi": [
-      "3 months → 2 weeks",
-      "92% Automation",
-      "↓ Manual Effort"
+      "10x faster processing time",
+      "92% automated",
+      "4,000+ nodes"
     ]
   },
   {
@@ -58,8 +58,8 @@ export const CASES = [
     "weeks": "12 weeks",
     "shortTitle": "Real-Time Safety Monitoring",
     "title": "Real-Time Safety Monitoring for Construction Sites",
-    "body": "Large construction sites lacked real-time PPE compliance monitoring — relying on manual supervision and post-incident reporting, creating safety gaps and regulatory risk.",
-    "objective": "Large construction sites lacked real-time PPE compliance monitoring — relying on manual supervision and post-incident reporting, creating safety gaps and regulatory risk.",
+    "body": "Construction sites with 40+ camera feeds had no real-time PPE monitoring and supervisors could only cover a fraction of the site at any time. Violations were only discovered after an incident had already occurred.",
+    "objective": "Construction sites with 40+ camera feeds had no real-time PPE monitoring and supervisors could only cover a fraction of the site at any time. Violations were only discovered after an incident had already occurred.",
     "solution": "Edge-deployed YOLOv8 models for PPE and boundary violation detection DeepSORT multi-object tracking for workers and vehicle movement Real-time event detection with a centralized alert dashboard Automated compliance logging and daily audit report generation",
     "solutionPoints": [
       "Edge-deployed YOLOv8 models for PPE and boundary violation detection",
@@ -91,7 +91,7 @@ export const CASES = [
         "context": "Replaced manual daily documentation per site"
       }
     ],
-    "useCase": "Large construction sites lacked real-time PPE compliance monitoring — relying on manual supervision and post-incident reporting, creating safety gaps and regulatory risk.",
+    "useCase": "Construction sites with 40+ camera feeds had no real-time PPE monitoring and supervisors could only cover a fraction of the site at any time. Violations were only discovered after an incident had already occurred.",
     "aiSolution": [
       "Edge-deployed YOLOv8 models for PPE and boundary violation detection",
       "DeepSORT multi-object tracking for workers and vehicle movement",
@@ -109,8 +109,8 @@ export const CASES = [
     "weeks": "10 weeks",
     "shortTitle": "Customer Support Voice Agent",
     "title": "Customer Support Voice Agent",
-    "body": "High-volume customer queries across orders, returns, payments, and product discovery required a scalable intelligent agent maintaining accuracy and personalization.",
-    "objective": "High-volume customer queries across orders, returns, payments, and product discovery required a scalable intelligent agent maintaining accuracy and personalization.",
+    "body": "A D2C brand needed to handle high volumes of customer queries across orders, returns, payments, and product discovery. Existing support could not maintain accuracy and personalisation across all query types at scale.",
+    "objective": "A D2C brand needed to handle high volumes of customer queries across orders, returns, payments, and product discovery. Existing support could not maintain accuracy and personalisation across all query types at scale.",
     "solution": "Modular multi-agent framework: orders, payments, product search & escalation RAG pipelines grounded in real-time order data, policies & product catalogs Persistent memory and context management for multi-turn conversations Optimised inference layer achieving ~800 ms end-to-end latency",
     "solutionPoints": [
       "Modular multi-agent framework: orders, payments, product search & escalation",
@@ -142,7 +142,7 @@ export const CASES = [
         "context": "Through verified execution flows across all query types"
       }
     ],
-    "useCase": "High-volume customer queries across orders, returns, payments, and product discovery required a scalable intelligent agent maintaining accuracy and personalization.",
+    "useCase": "A D2C brand needed to handle high volumes of customer queries across orders, returns, payments, and product discovery. Existing support could not maintain accuracy and personalisation across all query types at scale.",
     "aiSolution": [
       "Modular multi-agent framework: orders, payments, product search & escalation",
       "RAG pipelines grounded in real-time order data, policies & product catalogs",
@@ -160,8 +160,8 @@ export const CASES = [
     "weeks": "8 weeks",
     "shortTitle": "Conversational BI Copilot",
     "title": "Conversational Business Intelligence Copilot",
-    "body": "Static dashboards and manual reporting workflows limited real-time decision-making and required technical teams for every ad hoc analysis request.",
-    "objective": "Static dashboards and manual reporting workflows limited real-time decision-making and required technical teams for every ad hoc analysis request.",
+    "body": "The organisation ran all data analysis through static dashboards and manual reporting workflows. Every ad hoc question needed a technical team and real-time decision-making was effectively impossible.",
+    "objective": "The organisation ran all data analysis through static dashboards and manual reporting workflows. Every ad hoc question needed a technical team and real-time decision-making was effectively impossible.",
     "solution": "Conversational GenAI engine combining Hybrid RAG with Text-to-SQL Orchestration workflows querying across structured and unstructured sources Validation layer to verify SQL accuracy and prevent hallucinated outputs Automatic generation of charts, tables, and narrative insights",
     "solutionPoints": [
       "Conversational GenAI engine combining Hybrid RAG with Text-to-SQL",
@@ -193,7 +193,7 @@ export const CASES = [
       }
     ],
     "tabLabel": "Sales Copilot",
-    "useCase": "Static dashboards and manual reporting workflows limited real-time decision-making and required technical teams for every ad hoc analysis request.",
+    "useCase": "The organisation ran all data analysis through static dashboards and manual reporting workflows. Every ad hoc question needed a technical team and real-time decision-making was effectively impossible.",
     "aiSolution": [
       "Conversational GenAI engine combining Hybrid RAG with Text-to-SQL",
       "Orchestration workflows querying across structured and unstructured sources",
@@ -209,10 +209,10 @@ export const CASES = [
   {
     "cat": "Enterprise",
     "weeks": "10 weeks",
-    "shortTitle": "Hybrid Search for Enterprise",
-    "title": "Hybrid Search / OpenSearch for Enterprise",
-    "body": "Millions of internal documents needed contextual, accurate search inside air-gapped or regulated environments where cloud-based GenAI was not permitted.",
-    "objective": "Millions of internal documents needed contextual, accurate search inside air-gapped or regulated environments where cloud-based GenAI was not permitted.",
+    "shortTitle": "Hybrid Enterprise Search",
+    "title": "Hybrid Enterprise Search",
+    "body": "Enterprises in regulated environments needed accurate search across millions of internal documents without sending data to the cloud. Existing keyword search returned irrelevant results and could not reason across documents.",
+    "objective": "Enterprises in regulated environments needed accurate search across millions of internal documents without sending data to the cloud. Existing keyword search returned irrelevant results and could not reason across documents.",
     "solution": "Hybrid retrieval: BM25 keyword search + semantic vector search + metadata filtering Agentic RAG: query parsing, retrieval, reasoning, and response validation agents Fully on-premises LLM deployment — zero external API dependency RBAC-enforced access control with audit logging and cited responses",
     "solutionPoints": [
       "Hybrid retrieval: BM25 keyword search + semantic vector search + metadata filtering",
@@ -220,7 +220,7 @@ export const CASES = [
       "Fully on-premises LLM deployment — zero external API dependency",
       "RBAC-enforced access control with audit logging and cited responses"
     ],
-    "outcome": "70–85% ↓ Search Time | Near-Zero Hallucination | GenAI in Regulated Envs",
+    "outcome": "80% faster search | ~0% hallucination | 10,000+ files",
     "techTags": [
       "Hybrid Search",
       "Agentic RAG",
@@ -246,7 +246,7 @@ export const CASES = [
       }
     ],
     "tabLabel": "Enterprise Search",
-    "useCase": "Millions of internal documents needed contextual, accurate search inside air-gapped or regulated environments where cloud-based GenAI was not permitted.",
+    "useCase": "Enterprises in regulated environments needed accurate search across millions of internal documents without sending data to the cloud. Existing keyword search returned irrelevant results and could not reason across documents.",
     "aiSolution": [
       "Hybrid retrieval: BM25 keyword search + semantic vector search + metadata filtering",
       "Agentic RAG: query parsing, retrieval, reasoning, and response validation agents",
@@ -254,9 +254,9 @@ export const CASES = [
       "RBAC-enforced access control with audit logging and cited responses"
     ],
     "impactRoi": [
-      "70–85% ↓ Search Time",
-      "Near-Zero Hallucination",
-      "GenAI in Regulated Envs"
+      "80% faster search",
+      "~0% hallucination",
+      "10,000+ files"
     ]
   },
   {
@@ -264,8 +264,8 @@ export const CASES = [
     "weeks": "8 weeks",
     "shortTitle": "Legal Contracts Assistant",
     "title": "Legal Contracts Assistant",
-    "body": "Over 500,000 legal contracts needed to be searchable and conversational, enabling legal and business teams to get precise answers without manual document review.",
-    "objective": "Over 500,000 legal contracts needed to be searchable and conversational, enabling legal and business teams to get precise answers without manual document review.",
+    "body": "Over 500,000 legal contracts needed to be searchable and conversational for legal and business teams. Retrieving precise answers required extensive manual review, creating serious time cost and risk of oversight.",
+    "objective": "Over 500,000 legal contracts needed to be searchable and conversational for legal and business teams. Retrieving precise answers required extensive manual review, creating serious time cost and risk of oversight.",
     "solution": "Domain-specific knowledge graph indexing 400,000+ legal contracts RAG-based system generating grounded, human-readable answers with citations Advanced vector search combined with structured metadata filtering Secure chat interface with RBAC and full audit logging",
     "solutionPoints": [
       "Domain-specific knowledge graph indexing 400,000+ legal contracts",
@@ -273,7 +273,7 @@ export const CASES = [
       "Advanced vector search combined with structured metadata filtering",
       "Secure chat interface with RBAC and full audit logging"
     ],
-    "outcome": "Hours → Seconds | Improved Answer Accuracy | Conversational Legal Access",
+    "outcome": "15s Latency | 500K+ contracts | Role-based access",
     "techTags": [
       "Agentic RAG",
       "Knowledge Graph",
@@ -282,22 +282,22 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "Hours →",
-        "label": "seconds",
-        "context": "Across 400,000+ indexed legal documents"
+        "val": "15s",
+        "label": "Latency",
+        "context": ""
       },
       {
         "val": "500K+",
         "label": "contracts",
-        "context": "With high-accuracy semantic retrieval and citation"
+        "context": ""
       },
       {
         "val": "Role-based",
         "label": "access",
-        "context": "Across legal teams previously relying on manual review"
+        "context": ""
       }
     ],
-    "useCase": "Over 500,000 legal contracts needed to be searchable and conversational, enabling legal and business teams to get precise answers without manual document review.",
+    "useCase": "Over 500,000 legal contracts needed to be searchable and conversational for legal and business teams. Retrieving precise answers required extensive manual review, creating serious time cost and risk of oversight.",
     "aiSolution": [
       "Domain-specific knowledge graph indexing 400,000+ legal contracts",
       "RAG-based system generating grounded, human-readable answers with citations",
@@ -305,18 +305,18 @@ export const CASES = [
       "Secure chat interface with RBAC and full audit logging"
     ],
     "impactRoi": [
-      "Hours → Seconds",
-      "Improved Answer Accuracy",
-      "Conversational Legal Access"
+      "15s Latency",
+      "500K+ contracts",
+      "Role-based access"
     ]
   },
   {
     "cat": "Enterprise",
     "weeks": "8 weeks",
-    "shortTitle": "AI Governance and Model Risk",
+    "shortTitle": "AI Governance & Model Risk Framework",
     "title": "AI Governance & Model Risk Management Framework",
-    "body": "Rapid AI adoption created risks around hallucinations, bias, regulatory non-compliance, and lack of traceability across regulated business functions.",
-    "objective": "Rapid AI adoption created risks around hallucinations, bias, regulatory non-compliance, and lack of traceability across regulated business functions.",
+    "body": "Rapid AI adoption across business functions created risks around hallucinations, bias, and regulatory non-compliance. Each unit was deploying independently with no oversight, no audit trail, and no way to detect failures.",
+    "objective": "Rapid AI adoption across business functions created risks around hallucinations, bias, and regulatory non-compliance. Each unit was deploying independently with no oversight, no audit trail, and no way to detect failures.",
     "solution": "Centralized AI governance layer enforcing enterprise-wide usage policies Model registry with lifecycle management, approvals, and version control Agent-based validation for hallucination detection, bias monitoring & output verification Immutable audit logs with prompt and response traceability",
     "solutionPoints": [
       "Centralized AI governance layer enforcing enterprise-wide usage policies",
@@ -348,7 +348,7 @@ export const CASES = [
       }
     ],
     "tabLabel": "AI Governance",
-    "useCase": "Rapid AI adoption created risks around hallucinations, bias, regulatory non-compliance, and lack of traceability across regulated business functions.",
+    "useCase": "Rapid AI adoption across business functions created risks around hallucinations, bias, and regulatory non-compliance. Each unit was deploying independently with no oversight, no audit trail, and no way to detect failures.",
     "aiSolution": [
       "Centralized AI governance layer enforcing enterprise-wide usage policies",
       "Model registry with lifecycle management, approvals, and version control",
@@ -364,10 +364,10 @@ export const CASES = [
   {
     "cat": "Automotive",
     "weeks": "16 weeks",
-    "shortTitle": "Assembly Line Quality Control",
-    "title": "Vision Inspection System: Assembly Line Quality Control",
-    "body": "Manual inspection on high-speed automotive assembly lines caused defect leakage, bottlenecks, and inconsistent quality control across production.",
-    "objective": "Manual inspection on high-speed automotive assembly lines caused defect leakage, bottlenecks, and inconsistent quality control across production.",
+    "shortTitle": "Vision Inspection: Assembly Line QC",
+    "title": "Vision Inspection: Assembly Line QC",
+    "body": "Manual inspection on high-speed automotive assembly lines was creating defect leakage and inconsistent quality control. Inspectors could not maintain accuracy at line speed and defects were reaching downstream stages before being caught.",
+    "objective": "Manual inspection on high-speed automotive assembly lines was creating defect leakage and inconsistent quality control. Inspectors could not maintain accuracy at line speed and defects were reaching downstream stages before being caught.",
     "solution": "Multi-point high-resolution industrial camera image capture Custom CNN models for alignment, fixation, and surface defect detection Real-time inference synchronized with PLC control logic Centralized dashboard with anomaly flagging and automated corrective triggers",
     "solutionPoints": [
       "Multi-point high-resolution industrial camera image capture",
@@ -398,7 +398,7 @@ export const CASES = [
         "context": "Post-deployment vs. manual inspection baseline"
       }
     ],
-    "useCase": "Manual inspection on high-speed automotive assembly lines caused defect leakage, bottlenecks, and inconsistent quality control across production.",
+    "useCase": "Manual inspection on high-speed automotive assembly lines was creating defect leakage and inconsistent quality control. Inspectors could not maintain accuracy at line speed and defects were reaching downstream stages before being caught.",
     "aiSolution": [
       "Multi-point high-resolution industrial camera image capture",
       "Custom CNN models for alignment, fixation, and surface defect detection",
@@ -414,10 +414,10 @@ export const CASES = [
   {
     "cat": "Enterprise",
     "weeks": "6 weeks",
-    "shortTitle": "Vernacular-First Machine Translation Engine",
-    "title": "Machine Translation: Vernacular-First Enterprise Model",
-    "body": "Enterprises across multilingual regions required accurate translation of manuals, SOPs, and policies while maintaining consistent technical terminology at scale.",
-    "objective": "Enterprises across multilingual regions required accurate translation of manuals, SOPs, and policies while maintaining consistent technical terminology at scale.",
+    "shortTitle": "Vernacular-First Machine Translation",
+    "title": "Vernacular-First Machine Translation",
+    "body": "Enterprises operating across multilingual regions needed accurate translation of manuals, SOPs, and policies with consistent technical terminology. Generic tools produced inconsistent outputs, creating compliance risk and contradictory instructions across regions.",
+    "objective": "Enterprises operating across multilingual regions needed accurate translation of manuals, SOPs, and policies with consistent technical terminology. Generic tools produced inconsistent outputs, creating compliance risk and contradictory instructions across regions.",
     "solution": "Domain-adapted Neural Machine Translation trained on industry-specific corpora Terminology management layer ensuring consistent technical vocabulary XML-aware parsing preserving document structure and formatting Version-linked translation pipeline with human-in-the-loop validation",
     "solutionPoints": [
       "Domain-adapted Neural Machine Translation trained on industry-specific corpora",
@@ -449,7 +449,7 @@ export const CASES = [
       }
     ],
     "tabLabel": "Translation",
-    "useCase": "Enterprises across multilingual regions required accurate translation of manuals, SOPs, and policies while maintaining consistent technical terminology at scale.",
+    "useCase": "Enterprises operating across multilingual regions needed accurate translation of manuals, SOPs, and policies with consistent technical terminology. Generic tools produced inconsistent outputs, creating compliance risk and contradictory instructions across regions.",
     "aiSolution": [
       "Domain-adapted Neural Machine Translation trained on industry-specific corpora",
       "Terminology management layer ensuring consistent technical vocabulary",
@@ -465,10 +465,10 @@ export const CASES = [
   {
     "cat": "Enterprise",
     "weeks": "8 weeks",
-    "shortTitle": "Voice-to-Voice Multilingual Video Localisation",
-    "title": "Voice-to-Voice Multilingual Conversion: Video Localization",
-    "body": "Enterprise required scalable multilingual video localization for training and compliance content without manual dubbing delays, terminology loss, or timeline misalignment.",
-    "objective": "Enterprise required scalable multilingual video localization for training and compliance content without manual dubbing delays, terminology loss, or timeline misalignment.",
+    "shortTitle": "Voice-to-Voice Video Localization",
+    "title": "Voice-to-Voice Video Localization",
+    "body": "An enterprise needed scalable multilingual localisation for training and compliance videos across regions. Manual dubbing was slow, expensive, and introduced terminology inconsistencies and audio-video misalignment.",
+    "objective": "An enterprise needed scalable multilingual localisation for training and compliance videos across regions. Manual dubbing was slow, expensive, and introduced terminology inconsistencies and audio-video misalignment.",
     "solution": "Speech-to-text transcription with word-level timestamping using ASR (Whisper) LLM-driven multilingual translation with SSML-based prosody and timing control High-quality TTS synthesis with domain terminology preservation Automated audio alignment and synchronized video rendering pipeline",
     "solutionPoints": [
       "Speech-to-text transcription with word-level timestamping using ASR (Whisper)",
@@ -476,7 +476,7 @@ export const CASES = [
       "High-quality TTS synthesis with domain terminology preservation",
       "Automated audio alignment and synchronized video rendering pipeline"
     ],
-    "outcome": "70–80% ↓ Localization Time | ↓ Dubbing Costs | Faster Global Rollout",
+    "outcome": "75% faster | 50% cost vs manual | 11 languages",
     "techTags": [
       "ASR (Whisper)",
       "LLM Translation",
@@ -487,7 +487,7 @@ export const CASES = [
     "metrics": [
       {
         "val": "75%",
-        "label": "faster per language",
+        "label": "faster",
         "context": "Post-deployment vs. manual dubbing process per language"
       },
       {
@@ -502,7 +502,7 @@ export const CASES = [
       }
     ],
     "tabLabel": "Video Localization",
-    "useCase": "Enterprise required scalable multilingual video localization for training and compliance content without manual dubbing delays, terminology loss, or timeline misalignment.",
+    "useCase": "An enterprise needed scalable multilingual localisation for training and compliance videos across regions. Manual dubbing was slow, expensive, and introduced terminology inconsistencies and audio-video misalignment.",
     "aiSolution": [
       "Speech-to-text transcription with word-level timestamping using ASR (Whisper)",
       "LLM-driven multilingual translation with SSML-based prosody and timing control",
@@ -510,9 +510,9 @@ export const CASES = [
       "Automated audio alignment and synchronized video rendering pipeline"
     ],
     "impactRoi": [
-      "70–80% ↓ Localization Time",
-      "↓ Dubbing Costs",
-      "Faster Global Rollout"
+      "75% faster",
+      "50% cost vs manual",
+      "11 languages"
     ]
   },
   {
@@ -520,8 +520,8 @@ export const CASES = [
     "weeks": "4 weeks",
     "shortTitle": "Multimodal Clinical Document Intelligence",
     "title": "Multimodal Clinical Document Intelligence",
-    "body": "Legal and healthcare teams needed to review and summarize 10,000+ pages of handwritten and scanned medical records — manual, time-consuming, and error-prone.",
-    "objective": "Legal and healthcare teams needed to review and summarize 10,000+ pages of handwritten and scanned medical records — manual, time-consuming, and error-prone.",
+    "body": "Legal and healthcare teams were manually reviewing 10,000+ pages of handwritten and scanned medical records per case. Critical clinical details buried in handwritten notes were being missed during case preparation.",
+    "objective": "Legal and healthcare teams were manually reviewing 10,000+ pages of handwritten and scanned medical records per case. Critical clinical details buried in handwritten notes were being missed during case preparation.",
     "solution": "Multimodal LLMs optimized for OCR on handwritten and low-quality medical scans Document layout analysis to preserve clinical structure and context Structured, chronologically ordered medical timelines with source annotations Review workflow with full provenance capture and auditability",
     "solutionPoints": [
       "Multimodal LLMs optimized for OCR on handwritten and low-quality medical scans",
@@ -529,7 +529,7 @@ export const CASES = [
       "Structured, chronologically ordered medical timelines with source annotations",
       "Review workflow with full provenance capture and auditability"
     ],
-    "outcome": "Days → Minutes | 97% Accuracy | ↑ Case Preparation Speed",
+    "outcome": "97% accuracy | 100,000+ pages | 5x faster review",
     "techTags": [
       "Multimodal LLMs",
       "OCR Optimisation",
@@ -539,20 +539,20 @@ export const CASES = [
       {
         "val": "97%",
         "label": "accuracy",
-        "context": "Across handwritten and scanned medical record inputs"
+        "context": ""
       },
       {
         "val": "100,000+",
         "label": "pages",
-        "context": "Post-deployment vs. manual review process"
+        "context": ""
       },
       {
-        "val": "Days →",
-        "label": "minutes",
-        "context": "Every output traceable to source document and page"
+        "val": "5x faster",
+        "label": "review",
+        "context": ""
       }
     ],
-    "useCase": "Legal and healthcare teams needed to review and summarize 10,000+ pages of handwritten and scanned medical records — manual, time-consuming, and error-prone.",
+    "useCase": "Legal and healthcare teams were manually reviewing 10,000+ pages of handwritten and scanned medical records per case. Critical clinical details buried in handwritten notes were being missed during case preparation.",
     "aiSolution": [
       "Multimodal LLMs optimized for OCR on handwritten and low-quality medical scans",
       "Document layout analysis to preserve clinical structure and context",
@@ -560,18 +560,18 @@ export const CASES = [
       "Review workflow with full provenance capture and auditability"
     ],
     "impactRoi": [
-      "Days → Minutes",
-      "97% Accuracy",
-      "↑ Case Preparation Speed"
+      "97% accuracy",
+      "100,000+ pages",
+      "5x faster review"
     ]
   },
   {
     "cat": "Fintech",
     "weeks": "8 weeks",
-    "shortTitle": "Construction Progress Tracker",
-    "title": "Construction Progress Tracker: AI-Based Milestone Validation",
-    "body": "Financing institutions disbursing stage-based construction loans relied on slow, subjective manual site visits or image review — creating financial and operational risk.",
-    "objective": "Financing institutions disbursing stage-based construction loans relied on slow, subjective manual site visits or image review — creating financial and operational risk.",
+    "shortTitle": "Automated Loan disbursement",
+    "title": "Automated Loan disbursement",
+    "body": "Financing institutions were verifying construction milestones through manual site visits and image review. The process was slow, subjective, and inconsistent across reviewers, increasing financial and operational risk for lenders and borrowers alike.",
+    "objective": "Financing institutions were verifying construction milestones through manual site visits and image review. The process was slow, subjective, and inconsistent across reviewers, increasing financial and operational risk for lenders and borrowers alike.",
     "solution": "VLM engine compares current vs. historical site images to detect structural progress Milestone verification AI agent maps visual completion to construction checklists Automated rule engine validates milestone fulfillment before disbursement triggers Integrated workflow connected to loan management platforms for approvals",
     "solutionPoints": [
       "VLM engine compares current vs. historical site images to detect structural progress",
@@ -579,7 +579,7 @@ export const CASES = [
       "Automated rule engine validates milestone fulfillment before disbursement triggers",
       "Integrated workflow connected to loan management platforms for approvals"
     ],
-    "outcome": "Objective AI Validation | ↓ Manual Inspection | Faster Loan Disbursement",
+    "outcome": "95% faster approval | 80% less manual review | Zero site visits",
     "techTags": [
       "VLMs",
       "Agentic AI",
@@ -587,22 +587,22 @@ export const CASES = [
     ],
     "metrics": [
       {
-        "val": "Days →",
-        "label": "minutes",
-        "context": "Replacing subjective manual assessments with consistent, image-based verification"
+        "val": "95% faster",
+        "label": "approval",
+        "context": ""
       },
       {
         "val": "80%",
         "label": "less manual review",
-        "context": "Site visits no longer required for standard milestone verification"
+        "context": ""
       },
       {
         "val": "Zero",
         "label": "site visits",
-        "context": "Verification time reduced from days to near-real-time assessment"
+        "context": ""
       }
     ],
-    "useCase": "Financing institutions disbursing stage-based construction loans relied on slow, subjective manual site visits or image review — creating financial and operational risk.",
+    "useCase": "Financing institutions were verifying construction milestones through manual site visits and image review. The process was slow, subjective, and inconsistent across reviewers, increasing financial and operational risk for lenders and borrowers alike.",
     "aiSolution": [
       "VLM engine compares current vs. historical site images to detect structural progress",
       "Milestone verification AI agent maps visual completion to construction checklists",
@@ -610,9 +610,9 @@ export const CASES = [
       "Integrated workflow connected to loan management platforms for approvals"
     ],
     "impactRoi": [
-      "Objective AI Validation",
-      "↓ Manual Inspection",
-      "Faster Loan Disbursement"
+      "95% faster approval",
+      "80% less manual review",
+      "Zero site visits"
     ]
   }
 ];

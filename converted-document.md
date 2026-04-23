@@ -904,16 +904,100 @@ Techniques
 
 VLMs, Agentic AI, Reasoning Models
 
-Title	Stat1 	Stat2	Stat3	Description
-Voice-to-Voice Video Localization	75% faster	50% cost vs manual	11 languages	An enterprise needed scalable multilingual localisation for training and compliance videos across regions. Manual dubbing was slow, expensive, and introduced terminology inconsistencies and audio-video misalignment.
-Real-Time Safety Monitoring	60% fewer violations	<3s alert	40+ cameras	Construction sites with 40+ camera feeds had no real-time PPE monitoring and supervisors could only cover a fraction of the site at any time. Violations were only discovered after an incident had already occurred.
-Customer Support Voice Agent	80% faster resolution	900ms response	100% first-contact	A D2C brand needed to handle high volumes of customer queries across orders, returns, payments, and product discovery. Existing support could not maintain accuracy and personalisation across all query types at scale.
-Conversational BI Copilot	<2 min per query	85% less report time	25+ sources	The organisation ran all data analysis through static dashboards and manual reporting workflows. Every ad hoc question needed a technical team and real-time decision-making was effectively impossible.
-Hybrid Enterprise Search	80% faster search	~0% hallucination	10,000+ files	Enterprises in regulated environments needed accurate search across millions of internal documents without sending data to the cloud. Existing keyword search returned irrelevant results and could not reason across documents.
-Legal Contracts Assistant	15s Latency	500K+ contracts	Role-based access	Over 500,000 legal contracts needed to be searchable and conversational for legal and business teams. Retrieving precise answers required extensive manual review, creating serious time cost and risk of oversight.
-AI Governance & Model Risk Framework	65% fewer incidents	70% faster audits	100% traceable	Rapid AI adoption across business functions created risks around hallucinations, bias, and regulatory non-compliance. Each unit was deploying independently with no oversight, no audit trail, and no way to detect failures.
-Vision Inspection: Assembly Line QC	95% defect precision	70% less rework	3x faster inspection	Manual inspection on high-speed automotive assembly lines was creating defect leakage and inconsistent quality control. Inspectors could not maintain accuracy at line speed and defects were reaching downstream stages before being caught.
-Vernacular-First Machine Translation	65% faster turnaround	85% cost saving	11 languages	Enterprises operating across multilingual regions needed accurate translation of manuals, SOPs, and policies with consistent technical terminology. Generic tools produced inconsistent outputs, creating compliance risk and contradictory instructions across regions.
-Product Taxonomy & Attribute Enrichment	10x faster processing time	92% automated	4,000+ nodes	A large KPO was classifying products across 4,000+ taxonomy nodes manually from PDFs, images, and supplier blueprints. Every supplier sent data differently and the process was too slow and inconsistent to scale.
-Multimodal Clinical Document Intelligence	97% accuracy	100,000+ pages	5x faster review	Legal and healthcare teams were manually reviewing 10,000+ pages of handwritten and scanned medical records per case. Critical clinical details buried in handwritten notes were being missed during case preparation.
-Automated Loan disbursement	95% faster approval	80% less manual review	Zero site visits	Financing institutions were verifying construction milestones through manual site visits and image review. The process was slow, subjective, and inconsistent across reviewers, increasing financial and operational risk for lenders and borrowers alike.
+<table>
+  <thead>
+    <tr>
+      <th align="left">Title</th>
+      <th align="left">Stat1</th>
+      <th align="left">Stat2</th>
+      <th align="left">Stat3</th>
+      <th align="left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Voice-to-Voice Video Localization</td>
+      <td>75% faster</td>
+      <td>50% cost vs manual</td>
+      <td>11 languages</td>
+      <td style="white-space: normal;">An enterprise needed scalable multilingual localisation for training and compliance videos across regions. Manual dubbing was slow, expensive, and introduced terminology inconsistencies and audio-video misalignment.</td>
+    </tr>
+    <tr>
+      <td>Real-Time Safety Monitoring</td>
+      <td>60% fewer violations</td>
+      <td>&lt;3s alert</td>
+      <td>40+ cameras</td>
+      <td style="white-space: normal;">Construction sites with 40+ camera feeds had no real-time PPE monitoring and supervisors could only cover a fraction of the site at any time. Violations were only discovered after an incident had already occurred.</td>
+    </tr>
+    <tr>
+      <td>Customer Support Voice Agent</td>
+      <td>80% faster resolution</td>
+      <td>900ms response</td>
+      <td>100% first-contact</td>
+      <td style="white-space: normal;">A D2C brand needed to handle high volumes of customer queries across orders, returns, payments, and product discovery. Existing support could not maintain accuracy and personalisation across all query types at scale.</td>
+    </tr>
+    <tr>
+      <td>Conversational BI Copilot</td>
+      <td>&lt;2 min per query</td>
+      <td>85% less report time</td>
+      <td>25+ sources</td>
+      <td style="white-space: normal;">The organisation ran all data analysis through static dashboards and manual reporting workflows. Every ad hoc question needed a technical team and real-time decision-making was effectively impossible.</td>
+    </tr>
+    <tr>
+      <td>Hybrid Enterprise Search</td>
+      <td>80% faster search</td>
+      <td>~0% hallucination</td>
+      <td>10,000+ files</td>
+      <td style="white-space: normal;">Enterprises in regulated environments needed accurate search across millions of internal documents without sending data to the cloud. Existing keyword search returned irrelevant results and could not reason across documents.</td>
+    </tr>
+    <tr>
+      <td>Legal Contracts Assistant</td>
+      <td>15s Latency</td>
+      <td>500K+ contracts</td>
+      <td>Role-based access</td>
+      <td style="white-space: normal;">Over 500,000 legal contracts needed to be searchable and conversational for legal and business teams. Retrieving precise answers required extensive manual review, creating serious time cost and risk of oversight.</td>
+    </tr>
+    <tr>
+      <td>AI Governance &amp; Model Risk Framework</td>
+      <td>65% fewer incidents</td>
+      <td>70% faster audits</td>
+      <td>100% traceable</td>
+      <td style="white-space: normal;">Rapid AI adoption across business functions created risks around hallucinations, bias, and regulatory non-compliance. Each unit was deploying independently with no oversight, no audit trail, and no way to detect failures.</td>
+    </tr>
+    <tr>
+      <td>Vision Inspection: Assembly Line QC</td>
+      <td>95% defect precision</td>
+      <td>70% less rework</td>
+      <td>3x faster inspection</td>
+      <td style="white-space: normal;">Manual inspection on high-speed automotive assembly lines was creating defect leakage and inconsistent quality control. Inspectors could not maintain accuracy at line speed and defects were reaching downstream stages before being caught.</td>
+    </tr>
+    <tr>
+      <td>Vernacular-First Machine Translation</td>
+      <td>65% faster turnaround</td>
+      <td>85% cost saving</td>
+      <td>11 languages</td>
+      <td style="white-space: normal;">Enterprises operating across multilingual regions needed accurate translation of manuals, SOPs, and policies with consistent technical terminology. Generic tools produced inconsistent outputs, creating compliance risk and contradictory instructions across regions.</td>
+    </tr>
+    <tr>
+      <td>Product Taxonomy &amp; Attribute Enrichment</td>
+      <td>10x faster processing time</td>
+      <td>92% automated</td>
+      <td>4,000+ nodes</td>
+      <td style="white-space: normal;">A large KPO was classifying products across 4,000+ taxonomy nodes manually from PDFs, images, and supplier blueprints. Every supplier sent data differently and the process was too slow and inconsistent to scale.</td>
+    </tr>
+    <tr>
+      <td>Multimodal Clinical Document Intelligence</td>
+      <td>97% accuracy</td>
+      <td>100,000+ pages</td>
+      <td>5x faster review</td>
+      <td style="white-space: normal;">Legal and healthcare teams were manually reviewing 10,000+ pages of handwritten and scanned medical records per case. Critical clinical details buried in handwritten notes were being missed during case preparation.</td>
+    </tr>
+    <tr>
+      <td>Automated Loan disbursement</td>
+      <td>95% faster approval</td>
+      <td>80% less manual review</td>
+      <td>Zero site visits</td>
+      <td style="white-space: normal;">Financing institutions were verifying construction milestones through manual site visits and image review. The process was slow, subjective, and inconsistent across reviewers, increasing financial and operational risk for lenders and borrowers alike.</td>
+    </tr>
+  </tbody>
+</table>
