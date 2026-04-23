@@ -474,11 +474,11 @@
 
 @media (min-width: 1221px) {
   .case-home-preview-bottom {
-    align-items: center;
+    align-items: flex-end;
   }
 
   .case-home-preview-cta {
-    align-self: center;
+    align-self: flex-end;
     width: fit-content;
   }
 }
