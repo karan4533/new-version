@@ -8,10 +8,11 @@ export function Footer() {
 
   const serviceLinks = [
     ["Custom Agents", "#services"],
-    ["GenAI for Industry", "#services"],
-    ["AI Governance", "#services"],
-    ["AI Strategy", "#services"],
-    ["R&D as a Service", "#services"],
+    ["Data and AI Governance", "#services"],
+    ["AI Strategic Consulting", "#services"],
+    ["Applied R&D as a Service", "#services"],
+    ["Industrial Automation", "#services"],
+    ["AI CoE Enablement", "#services"],
   ];
 
   const companyLinks = [
