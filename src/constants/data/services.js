@@ -3,7 +3,7 @@ export const SERVICES = [
   {
     id: "01",
     emoji: "🤖",
-    name: "Custom AI Solutions",
+    name: "Custom Agents",
     timeline: "8-10 weeks",
     desc: "Bespoke agentic systems and RAG pipelines built for your data and workflows.",
     technicalTags: ["Agentic Systems", "RAG Pipelines", "Custom LLMs"],
