@@ -7,7 +7,7 @@ export function Footer() {
   const useNarrowTabletGrid = isTablet && !isMobile && width < 900;
 
   const serviceLinks = [
-    ["Custom AI Solutions", "#services"],
+    ["Custom Agents", "#services"],
     ["GenAI for Industry", "#services"],
     ["AI Governance", "#services"],
     ["AI Strategy", "#services"],
