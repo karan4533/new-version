@@ -163,7 +163,7 @@ function LandingPage({ onExit, onHome, onAbout, onService, onCaseStudies, onCont
       detail: "Roadmaps, use-case prioritization, and ROI planning for enterprise teams.",
     },
     {
-      title: "Custom AI Systems",
+      title: "Custom Agents",
       detail: "Secure copilots, agent workflows, and domain-tuned models built for production.",
     },
     {
