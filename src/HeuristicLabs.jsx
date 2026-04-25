@@ -1115,7 +1115,7 @@ function Footer() {
   const { isMobile, isTablet, isSmallMobile } = useViewport();
   const cols = [
     { title:"Navigate", links:[["About","#about"],["Services","#services"],["Case Studies","#case-studies"],["Team","#team"],["FAQ","#"]] },
-    { title:"Services", links:[["Custom Agents","#"],["Industrial GenAI","#"],["AI Governance","#"],["Strategic Consulting","#"],["R&D as a Service","#"]] },
+    { title:"Services", links:[["Custom AI Solutions","#"],["Industrial GenAI","#"],["AI Governance","#"],["Strategic Consulting","#"],["R&D as a Service","#"]] },
     { title:"Connect", links:[["Talk to us Call","#contact"],["Email Us","mailto:connect@heuristiclabs.ai"],["LinkedIn","#"],["Website","https://heuristiclabs.ai"]] },
   ];
   return (
