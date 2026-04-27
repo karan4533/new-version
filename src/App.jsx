@@ -53,6 +53,19 @@ const buildCaseUrl = (caseIndex) => {
   return `${url.pathname}${url.search}${url.hash}`;
 };
 
+const buildSectionUrl = (sectionId) => {
+  const url = new URL(window.location.href);
+  url.searchParams.delete("case");
+
+  if (!sectionId || sectionId === "home") {
+    url.hash = "";
+  } else {
+    url.hash = `#${sectionId}`;
+  }
+
+  return `${url.pathname}${url.search}${url.hash}`;
+};
+
 export default function App() {
   const [selectedCaseIndex, setSelectedCaseIndex] = useState(null);
 
@@ -98,13 +111,13 @@ export default function App() {
       scrollToSectionWithOffset(sectionId, extraGap);
     };
 
-    if (selectedCaseIndex !== null) {
-      const cleanUrl = buildCaseUrl(null);
-      const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-      if (cleanUrl !== currentUrl) {
-        window.history.pushState({}, "", cleanUrl);
-      }
+    const nextSectionUrl = buildSectionUrl(sectionId);
+    const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    if (nextSectionUrl !== currentUrl) {
+      window.history.pushState({}, "", nextSectionUrl);
+    }
 
+    if (selectedCaseIndex !== null) {
       setSelectedCaseIndex(null);
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(doScroll);
