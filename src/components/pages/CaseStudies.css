@@ -51,7 +51,7 @@
 
 .case-home-headline {
   font-family: "Playfair Display", serif;
-  font-size: clamp(2.125rem, calc(4.5vw + 0.125rem), 3.125rem);
+  font-size: clamp(1.925rem, calc(4.5vw + 0.125rem), 2.925rem);
   font-weight: 800;
   line-height: 1.1;
   color: var(--text);
@@ -65,7 +65,7 @@
 
 .case-home-subhead {
   margin: 0 auto;
-  font-size: calc(0.92rem + 2px);
+  font-size: calc(0.78rem + 2px);
   font-weight: 300;
   color: var(--muted2);
   line-height: 1.75;
