@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- White background so WhatsApp / social previews look clean -->
+  <rect width="200" height="200" fill="#ffffff" rx="32"/>
+
+  <!-- Speech-bubble "H" mark, scaled + centred in 200×200 -->
+  <!-- Original viewBox 0 0 48 46 → scaled ×3.8, offset (x+13, y+16) -->
+  <g transform="translate(13,16) scale(3.6)">
+    <!-- Outer speech-bubble shape -->
+    <path
+      fill="#111111"
+      d="
+        M 4 2
+        A 4 4 0 0 0 0 6
+        L 0 34
+        A 4 4 0 0 0 4 38
+        L 16 38
+        L 20 44
+        L 24 38
+        L 44 38
+        A 4 4 0 0 0 48 34
+        L 48 6
+        A 4 4 0 0 0 44 2
+        Z
+      "
+    />
+    <!-- H letter cut-out (white) -->
+    <rect x="10" y="11" width="8"  height="24" rx="1.5" fill="#ffffff"/>
+    <rect x="30" y="11" width="8"  height="24" rx="1.5" fill="#ffffff"/>
+    <rect x="10" y="21" width="28" height="6"  rx="1.5" fill="#ffffff"/>
+    <!-- Dot (colon accent) -->
+    <circle cx="42" cy="10" r="2.4" fill="#ffffff"/>
+  </g>
+</svg>
