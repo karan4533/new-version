@@ -258,14 +258,14 @@ export function Services() {
                         fontFamily: font.serif,
                         fontWeight: 600,
                         color: T.ink,
-                        fontSize: isSmallMobile ? 19 : isMobile ? 18 : isTablet ? 19 : 20,
+                        fontSize: isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 19 : 20,
                         lineHeight: 1.18,
                         letterSpacing: "-.01em",
                         width: "100%",
                         maxWidth: "100%",
                         minHeight: allowTwoLineTitle
-                          ? (isSmallMobile ? 48 : isMobile ? 48 : isTablet ? 50 : 54)
-                          : (isSmallMobile ? 40 : isMobile ? 38 : isTablet ? 40 : 44),
+                          ? (isSmallMobile ? 54 : isMobile ? 54 : isTablet ? 50 : 54)
+                          : (isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 40 : 44),
                         whiteSpace: "normal",
                         display: "block",
                         overflowWrap: "anywhere",
@@ -280,12 +280,12 @@ export function Services() {
                           margin: 0,
                           width: "100%",
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 13 : isMobile ? 12.5 : 13,
+                          fontSize: isSmallMobile ? 15.5 : isMobile ? 15.5 : 13,
                           fontWeight: 500,
-                          lineHeight: 1.5,
+                          lineHeight: 1.55,
                           letterSpacing: "0.01em",
                           color: "rgba(30,26,16,.82)",
-                          minHeight: isSmallMobile ? 72 : isMobile ? 68 : 72,
+                          minHeight: isSmallMobile ? 86 : isMobile ? 84 : 72,
                           overflowWrap: "anywhere",
                           marginTop: 2,
                         }}
