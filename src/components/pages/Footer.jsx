@@ -2,32 +2,39 @@ import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import companyLogo from "../../assets/logo-optimized.webp";
 
-export function Footer() {
+export function Footer({
+  onServicesClick,
+  onAboutClick,
+  onCaseStudiesClick,
+  onTeamClick,
+  onContactClick,
+  onIndustryClick,
+}) {
   const { width, isMobile, isTablet, isSmallMobile } = useViewport();
   const useNarrowTabletGrid = isTablet && !isMobile && width < 900;
 
   const serviceLinks = [
-    ["Custom Agents", "#services"],
-    ["Data and AI Governance", "#services"],
-    ["AI Strategic Consulting", "#services"],
-    ["Applied R&D as a Service", "#services"],
-    ["Industrial Automation", "#services"],
-    ["AI CoE Enablement", "#services"],
+    ["Custom Agents", "#services", onServicesClick],
+    ["Data and AI Governance", "#services", onServicesClick],
+    ["AI Strategic Consulting", "#services", onServicesClick],
+    ["Applied R&D as a Service", "#services", onServicesClick],
+    ["Industrial Automation", "#services", onServicesClick],
+    ["AI CoE Enablement", "#services", onServicesClick],
   ];
 
   const companyLinks = [
-    ["About", "#about"],
-    ["Case Studies", "#case-studies"],
-    ["Team", "#team"],
-    ["Contact", "#contact"],
+    ["About", "#about", onAboutClick],
+    ["Case Studies", "#case-studies", onCaseStudiesClick],
+    ["Team", "#team", onTeamClick],
+    ["Contact", "#contact", onContactClick],
   ];
 
   const industryLinks = [
-    ["Manufacturing", "#industry-footprint"],
-    ["Legal Tech", "#industry-footprint"],
-    ["Healthcare", "#industry-footprint"],
-    ["E-Commerce", "#industry-footprint"],
-    ["Enterprise", "#industry-footprint"],
+    ["Manufacturing", "#industry-footprint", onIndustryClick],
+    ["Legal Tech", "#industry-footprint", onIndustryClick],
+    ["Healthcare", "#industry-footprint", onIndustryClick],
+    ["E-Commerce", "#industry-footprint", onIndustryClick],
+    ["Enterprise", "#industry-footprint", onIndustryClick],
   ];
 
   const officeAddress =
@@ -54,6 +61,12 @@ export function Footer() {
     lineHeight: 1.5,
     display: "inline-block",
     transition: "color .2s, transform .2s",
+  };
+
+  const handleSectionNavigate = (event, onClickHandler) => {
+    if (!onClickHandler) return;
+    event.preventDefault();
+    onClickHandler();
   };
 
   return (
@@ -178,8 +191,13 @@ export function Footer() {
           <div style={{ padding: "4px 0" }}>
             <p style={columnHeading}>Services</p>
             <div style={{ display: "grid", gap: 10 }}>
-              {serviceLinks.map(([label, href]) => (
-                <a key={label} href={href} style={linkStyle}>
+              {serviceLinks.map(([label, href, onClickHandler]) => (
+                <a
+                  key={label}
+                  href={href}
+                  style={linkStyle}
+                  onClick={(event) => handleSectionNavigate(event, onClickHandler)}
+                >
                   {label}
                 </a>
               ))}
@@ -189,8 +207,13 @@ export function Footer() {
           <div style={{ padding: "4px 0" }}>
             <p style={columnHeading}>Company</p>
             <div style={{ display: "grid", gap: 10 }}>
-              {companyLinks.map(([label, href]) => (
-                <a key={label} href={href} style={linkStyle}>
+              {companyLinks.map(([label, href, onClickHandler]) => (
+                <a
+                  key={label}
+                  href={href}
+                  style={linkStyle}
+                  onClick={(event) => handleSectionNavigate(event, onClickHandler)}
+                >
                   {label}
                 </a>
               ))}
@@ -200,11 +223,12 @@ export function Footer() {
           <div style={{ padding: "4px 0" }}>
             <p style={columnHeading}>Industries</p>
             <div style={{ display: "grid", gap: 10 }}>
-              {industryLinks.map(([label, href]) => (
+              {industryLinks.map(([label, href, onClickHandler]) => (
                 <a
                   key={label}
                   href={href}
                   style={linkStyle}
+                  onClick={(event) => handleSectionNavigate(event, onClickHandler)}
                 >
                   {label}
                 </a>

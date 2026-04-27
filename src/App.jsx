@@ -159,6 +159,10 @@ export default function App() {
     scrollToSection("team");
   };
 
+  const handleIndustryClick = () => {
+    scrollToSection("industry-footprint");
+  };
+
   const handleExitLanding = () => {
     scrollToSection("about", 0);
   };
@@ -229,7 +233,14 @@ export default function App() {
           onBack={handleCloseCaseStudy}
         />
       )}
-      <Footer />
+      <Footer
+        onServicesClick={handleServicesClick}
+        onAboutClick={handleAboutClick}
+        onCaseStudiesClick={handleCaseStudiesClick}
+        onTeamClick={handleLeadershipClick}
+        onContactClick={handleContactClick}
+        onIndustryClick={handleIndustryClick}
+      />
     </>
   );
 }
