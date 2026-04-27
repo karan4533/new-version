@@ -417,10 +417,13 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     }))
     .filter((row) => row.value);
 
+  const detailTextColor = "rgba(30,26,16,.82)";
+  const detailSubtleTextColor = "rgba(30,26,16,.74)";
+
   const sectionLabelStyle = {
     margin: 0,
     fontFamily: font.sans,
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: 700,
     letterSpacing: ".02em",
     color: T.amber,
@@ -429,9 +432,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   const detailBodyTextStyle = {
     margin: 0,
     fontFamily: font.sans,
-    fontSize: isSmallMobile ? 14 : 15,
+    fontSize: isSmallMobile ? 16 : 17,
     lineHeight: 1.7,
-    color: T.ink60,
+    color: detailTextColor,
   };
 
   const detailSectionBlockStyle = {
@@ -600,9 +603,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                   style={{
                     margin: 0,
                     fontFamily: font.sans,
-                    fontSize: 14,
+                    fontSize: 16,
                     lineHeight: 1.6,
-                    color: T.ink60,
+                    color: detailTextColor,
                   }}
                 >
                   <span style={{ fontWeight: 700 }}>Industry:</span> {industryText}
@@ -766,9 +769,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                             display: "grid",
                             gap: row.why ? 6 : 0,
                             fontFamily: font.sans,
-                            fontSize: isSmallMobile ? 14 : 15,
+                            fontSize: isSmallMobile ? 16 : 17,
                             lineHeight: 1.6,
-                            color: T.ink60,
+                            color: detailTextColor,
                           }}
                         >
                           <span style={{ color: T.ink, fontWeight: 600 }}>{row.decision}</span>
@@ -822,9 +825,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           style={{
                             margin: "6px 0 0",
                             fontFamily: font.sans,
-                            fontSize: 13,
+                            fontSize: 15,
                             lineHeight: 1.55,
-                            color: T.ink60,
+                            color: detailSubtleTextColor,
                           }}
                         >
                           {row.context}
@@ -855,9 +858,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           alignItems: "flex-start",
                           gap: 8,
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 14 : 15,
+                          fontSize: isSmallMobile ? 16 : 17,
                           lineHeight: 1.65,
-                          color: T.ink60,
+                          color: detailTextColor,
                         }}
                       >
                         <span style={{ color: T.amber, lineHeight: 1.5 }}>•</span>
@@ -873,9 +876,9 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           alignItems: "flex-start",
                           gap: 8,
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 14 : 15,
+                          fontSize: isSmallMobile ? 16 : 17,
                           lineHeight: 1.65,
-                          color: T.ink60,
+                          color: detailTextColor,
                         }}
                       >
                         <span
