@@ -547,6 +547,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                       width: 1,
                       height: isSmallMobile ? 18 : isMobile ? 22 : 24,
                       background: `repeating-linear-gradient(to bottom, ${T.ink12} 0, ${T.ink12} 4px, transparent 4px, transparent 8px)`,
+                      opacity: 0,
                     }}
                   />
                 </div>

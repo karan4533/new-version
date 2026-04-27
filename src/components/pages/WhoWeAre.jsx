@@ -179,6 +179,37 @@ export function WhoWeAre() {
               const labelX = matrixIsMobile && anchor === "end"
                 ? x + (matrixIsSmallMobile ? 22 : 18)
                 : x;
+              const shouldSplitDevelopmentTime = matrixIsSmallMobile && lever.label === "Development Time";
+
+              if (shouldSplitDevelopmentTime) {
+                const timeX = anchor === "end" ? labelX - 6 : labelX;
+                return (
+                  <g key={lever.label}>
+                    <text
+                      x={labelX}
+                      y={y - 2}
+                      textAnchor={anchor}
+                      fill="#9e8f78"
+                      fontSize={matrixLabelFontSize}
+                      fontFamily="sans-serif"
+                      fontWeight="500"
+                    >
+                      Development
+                    </text>
+                    <text
+                      x={timeX}
+                      y={y + 10}
+                      textAnchor={anchor}
+                      fill="#9e8f78"
+                      fontSize={matrixLabelFontSize}
+                      fontFamily="sans-serif"
+                      fontWeight="500"
+                    >
+                      Time
+                    </text>
+                  </g>
+                );
+              }
 
               return (
                 <text
