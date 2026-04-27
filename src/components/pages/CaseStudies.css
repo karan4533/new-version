@@ -236,7 +236,7 @@
   border: 1px solid var(--border2);
   border-radius: 20px;
   overflow: hidden;
-  min-height: 510px;
+  min-height: clamp(420px, 52vh, 510px);
   display: flex;
   flex-direction: column;
 }
@@ -361,7 +361,7 @@
 }
 
 .case-home-preview-bottom {
-  margin-top: auto;
+  margin-top: clamp(14px, 2.2vh, 22px);
   display: flex;
   align-items: flex-end;
   gap: 12px;
