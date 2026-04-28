@@ -77,7 +77,7 @@ export function Services() {
                 color: "#B07845",
               }}
             >
-              What we do
+              What We Do
             </p>
             <h2
               style={{
@@ -93,7 +93,7 @@ export function Services() {
                 overflowWrap: "anywhere",
               }}
             >
-              Six ways we turn AI ambition into production reality.
+              Six Ways We Turn AI Ambition Into Production Reality.
             </h2>
           </div>
         </Reveal>

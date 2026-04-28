@@ -42,13 +42,13 @@ export function Team() {
             textAlign: "center",
             fontFamily: font.serif,
             color: T.ink,
-            fontWeight: 700,
+            fontWeight: 500,
             lineHeight: 1.1,
             letterSpacing: "-.02em",
             fontSize: isSmallMobile ? 30 : isMobile ? 38 : isLargeDesktop ? 64 : 50,
           }}
         >
-          You&apos;re in experienced hands.
+          You&apos;re In Experienced Hands.
         </h2>
       </Reveal>
 
