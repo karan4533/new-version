@@ -11,7 +11,7 @@
   --border2: #332f28;
   --active-bg: #1e1c17;
   color: var(--text);
-  font-family: "DM Sans", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .case-home-shell *,
@@ -50,7 +50,7 @@
 }
 
 .case-home-headline {
-  font-family: "Playfair Display", serif;
+  font-family: "Fraunces", serif;
   font-size: clamp(1.925rem, calc(4.5vw + 0.125rem), 2.925rem);
   font-weight: 800;
   line-height: 1.1;
@@ -333,7 +333,7 @@
 
 .case-home-preview-title {
   margin: 0 0 10px;
-  font-family: "Playfair Display", serif;
+  font-family: "Fraunces", serif;
   font-size: clamp(1.465rem, calc(2.6vw + 0.125rem), 1.965rem);
   font-weight: 800;
   line-height: 1.2;
@@ -386,7 +386,7 @@
 }
 
 .case-home-stat-val {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: clamp(1.075rem, calc(1.6vw + 0.125rem), 1.265rem);
   font-weight: 700;
   font-style: normal;

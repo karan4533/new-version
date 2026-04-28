@@ -69,7 +69,7 @@ const T = {
   w08:    "rgba(255,255,255,.08)",
 };
 
-const font = { serif: "'Playfair Display', serif", sans: "'DM Sans', sans-serif" };
+const font = { serif: "'Fraunces', serif", sans: "'Inter', sans-serif" };
 const HERO_BRAIN_IMG = new URL("./assets/brain.png", import.meta.url).href;
 
 /* ── shared components ── */
@@ -1211,7 +1211,7 @@ export default function App() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body { background: #E8E3D9; overflow-x: hidden; }

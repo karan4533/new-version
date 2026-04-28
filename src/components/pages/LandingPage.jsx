@@ -55,8 +55,8 @@ function HeroBtn({ label, onClick, primary }) {
       style={{
         borderRadius: 999,
         padding: "10px 18px",
-        border: primary ? `1px solid ${T.amber}` : `1px solid ${T.ink12}`,
-        background: primary ? T.amber : "transparent",
+        border: primary ? `1px solid ${T.ink}` : `1px solid ${T.ink12}`,
+        background: primary ? T.ink : "transparent",
         color: primary ? T.w : T.ink,
         fontFamily: font.sans,
         fontSize: 12,
@@ -117,24 +117,24 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTopPadding = isSmallMobile
     ? "10px"
     : isHeaderGuardMobileViewport
-    ? "28px"
-    : isHeroMobileLayout
-    ? "18px"
-    : isWideTabletGuardViewport
-    ? "18px"
-    : isTabletViewport
-    ? "10px"
-    : "clamp(10px, 2.8vh, 34px)";
+      ? "28px"
+      : isHeroMobileLayout
+        ? "18px"
+        : isWideTabletGuardViewport
+          ? "18px"
+          : isTabletViewport
+            ? "10px"
+            : "clamp(10px, 2.8vh, 34px)";
 
   const heroBottomPadding = isSmallMobile
     ? "10px"
     : isMobile
-    ? "14px"
-    : isWideTabletGuardViewport
-    ? "22px"
-    : isTabletViewport
-    ? "18px"
-    : "clamp(20px, 3.2vh, 38px)";
+      ? "14px"
+      : isWideTabletGuardViewport
+        ? "22px"
+        : isTabletViewport
+          ? "18px"
+          : "clamp(20px, 3.2vh, 38px)";
 
   const heroFlowGap = isSmallMobile ? 10 : isHeroMobileLayout ? 12 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 16 : 20;
   const heroTopClusterGap = isSmallMobile ? 10 : isHeroMobileLayout ? 12 : heroFlowGap;
@@ -349,75 +349,28 @@ export function LandingPage({ onCaseStudies, onContact }) {
               <Reveal delay={0.04} distance={14} blurFrom={10}>
                 <span
                   style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: isSmallMobile ? "7px 14px" : "8px 16px",
-                    borderRadius: 999,
-                    border: `1px solid ${T.ink12}`,
-                    background: "rgba(255,255,255,.72)",
-                    position: "relative",
-                    zIndex: 3,
-                    backdropFilter: "blur(2px)",
-                    WebkitBackdropFilter: "blur(2px)",
+                    display: "inline-block",
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 12 : 13,
-                    fontWeight: 600,
-                    letterSpacing: ".01em",
-                    color: T.ink,
+                    fontSize: isSmallMobile ? 11 : 12,
+                    fontWeight: 500,
+                    letterSpacing: ".18em",
+                    textTransform: "uppercase",
+                    color: T.ink50,
                     lineHeight: 1.2,
                   }}
                 >
-                  Your on-demand Applied AI Lab.
+                  Your on-demand Applied AI Lab
                 </span>
               </Reveal>
 
-              <Reveal delay={0.08} distance={10} blurFrom={8}>
-                <div
-                  style={{
-                    margin: 0,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: isSmallMobile ? 8 : 10,
-                  }}
-                  aria-hidden="true"
-                >
-                  <span
-                    style={{
-                      display: "block",
-                      width: isSmallMobile ? 42 : 58,
-                      height: 1,
-                      background: T.ink12,
-                    }}
-                  />
-                  <span
-                    style={{
-                      display: "block",
-                      width: 6,
-                      height: 6,
-                      border: `1px solid ${T.ink12}`,
-                      background: T.ink07,
-                      transform: "rotate(45deg)",
-                    }}
-                  />
-                  <span
-                    style={{
-                      display: "block",
-                      width: isSmallMobile ? 42 : 58,
-                      height: 1,
-                      background: T.ink12,
-                    }}
-                  />
-                </div>
-              </Reveal>
+
 
               <Reveal delay={0.12} distance={22} blurFrom={12}>
                 <h1
                   style={{
                     margin: 0,
                     fontFamily: font.serif,
-                    fontWeight: 600,
+                    fontWeight: 500,
                     letterSpacing: "-.02em",
                     color: T.ink,
                     lineHeight: 1.05,
@@ -428,9 +381,11 @@ export function LandingPage({ onCaseStudies, onContact }) {
                   <span
                     style={{
                       display: "block",
-                      color: "inherit",
-                      fontStyle: "italic",
-                      fontWeight: "inherit",
+                      color: T.amber,
+                      fontFamily: font.serif,
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      fontOpticalSizing: "auto",
                       whiteSpace: "nowrap",
                       fontSize: isMobile ? "1em" : "1.14em",
                     }}
@@ -558,8 +513,8 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     gridTemplateColumns: isMobile
                       ? "repeat(2, minmax(132px, 1fr))"
                       : isTablet
-                      ? "repeat(2, minmax(0, 1fr))"
-                      : "repeat(4, minmax(0, 1fr))",
+                        ? "repeat(2, minmax(0, 1fr))"
+                        : "repeat(4, minmax(0, 1fr))",
                     gap: heroStatsGridGap,
                     alignItems: "stretch",
                     overflow: isMobile ? "visible" : undefined,

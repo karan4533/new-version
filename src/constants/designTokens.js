@@ -23,6 +23,6 @@ export const T = {
 };
 
 export const font = {
-  serif: "'Playfair Display', serif",
-  sans: "'DM Sans', sans-serif",
+  serif: "'Fraunces', serif",
+  sans: "'Inter', sans-serif",
 };
