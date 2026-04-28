@@ -1,7 +1,7 @@
 /**
  * gen-og-logo.mjs
  * Generates a favicon PNG from the Heuristic Labs logo.
- * Produces a 512×512 transparent-background PNG with the logo rendered in near-black.
+ * Produces a 512x512 transparent-background PNG with the logo in white.
  *
  * Run: node scripts/gen-og-logo.mjs
  */
@@ -16,21 +16,16 @@ const ROOT = path.resolve(__dirname, "..");
 const INPUT  = path.join(ROOT, "src", "assets", "logo (1).webp");
 const OUTPUT = path.join(ROOT, "public", "og-logo.png");
 
-const SIZE = 512;          // final canvas size
-const LOGO = 480;          // logo fills more of the canvas for better tab visibility
+const SIZE = 512;   // final canvas size
+const LOGO = 480;   // logo fills ~94% of canvas for better tab visibility
 
 try {
-  // 1. Load the original logo, resize it with transparent background
+  // 1. Resize logo with transparent background — keep original white/light color (no negate)
   const logoBuffer = await sharp(INPUT)
     .resize(LOGO, LOGO, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .toBuffer();
 
-  // 2. Negate (invert) RGB only so the light-grey logo becomes dark on transparent
-  const darkLogo = await sharp(logoBuffer)
-    .negate({ alpha: false })   // invert RGB only, keep alpha
-    .toBuffer();
-
-  // 3. Composite dark logo centred on a 512x512 fully transparent canvas
+  // 2. Composite white logo centred on a fully transparent canvas
   const offset = Math.round((SIZE - LOGO) / 2);
 
   await sharp({
@@ -41,7 +36,7 @@ try {
       background: { r: 0, g: 0, b: 0, alpha: 0 },   // transparent
     },
   })
-    .composite([{ input: darkLogo, left: offset, top: offset }])
+    .composite([{ input: logoBuffer, left: offset, top: offset }])
     .png({ compressionLevel: 9 })
     .toFile(OUTPUT);
 
