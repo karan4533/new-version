@@ -2,22 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link id="favicon" rel="icon" type="image/png" href="/og-logo.png" />
-    <script>
-      (function () {
-        var favicon = document.getElementById('favicon');
-        var mq = window.matchMedia('(prefers-color-scheme: dark)');
-        var bust = '?v=' + Date.now();
-        function setIcon(e) {
-          favicon.href = (e.matches ? '/og-logo-light.png' : '/og-logo-dark.png') + bust;
-        }
-        setIcon(mq);
-        mq.addEventListener('change', function(e) {
-          bust = '?v=' + Date.now();
-          setIcon(e);
-        });
-      })();
-    </script>
+    <link rel="icon" id="favicon" type="image/png" href="/favicon-light.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Heuristic Labs | Applied AI Lab for Business Outcomes</title>
     <meta

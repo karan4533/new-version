@@ -14,6 +14,14 @@ export function Nav({
   onContactClick,
 }) {
   const { width, isTablet, isSmallMobile } = useViewport();
+  const [isDark, setIsDark] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e) => setIsDark(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isDesktop = !isTablet;
   const isCompactDesktop = isDesktop && width < 1260;
@@ -126,7 +134,7 @@ export function Nav({
               maxHeight: isSmallMobile ? 32 : 38,
               aspectRatio: "1 / 1",
               objectFit: "contain",
-              filter: "brightness(0) saturate(100%)",
+              filter: isDark ? "brightness(0) saturate(100%) invert(1)" : "brightness(0) saturate(100%)",
               flexShrink: 0,
               display: "block",
               transform: "scale(1)",
