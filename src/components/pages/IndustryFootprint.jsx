@@ -65,7 +65,7 @@ export function IndustryFootprint() {
         >
           <p
             style={{
-              margin: "0 auto",
+              margin: "0 auto 12px",
               textAlign: "center",
               fontFamily: font.sans,
               fontSize: isSmallMobile ? 12 : 13,
