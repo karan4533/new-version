@@ -310,16 +310,12 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     <line x1="-2%" y1={heroGuideBottomPct} x2="102%" y2={heroGuideBottomPct} />
                   </g>
                 </svg>
-              <div
-                style={{
-                  width: "100%",
-                  maxWidth: isTablet ? 760 : heroContainerMaxWidth,
-                  margin: "0 auto",
-                  transform: `translateY(${heroStatsNudgeY}px)`,
-                  paddingTop: `${S.md}px`,
-                  paddingBottom: `${S.md}px`,
-                }}
-              >
+              </div>
+            )}
+          </div>
+
+          <div
+            style={{
               minHeight: isHeroMobileLayout
                 ? `calc(100dvh - ${heroTopPadding} - ${heroBottomPadding})`
                 : "auto",
@@ -485,9 +481,11 @@ export function LandingPage({ onCaseStudies, onContact }) {
               <div
                 style={{
                   width: "100%",
-                  maxWidth: isTablet ? 800 : 1000,
+                  maxWidth: isTablet ? 800 : heroContainerMaxWidth,
                   margin: "0 auto",
                   transform: `translateY(${heroStatsNudgeY}px)`,
+                  paddingTop: `${S.md}px`,
+                  paddingBottom: `${S.md}px`,
                 }}
               >
                 <div
