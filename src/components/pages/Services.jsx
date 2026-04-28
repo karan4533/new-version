@@ -105,7 +105,7 @@ export function Services() {
                 margin: "0 auto",
                 maxWidth: 620,
                 fontFamily: font.sans,
-                fontSize: isSmallMobile ? 12 : 13,
+                fontSize: isSmallMobile ? 13 : isMobile ? 14 : 15,
                 lineHeight: 1.58,
                 color: T.ink60,
                 overflowWrap: "anywhere",

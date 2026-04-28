@@ -68,7 +68,7 @@ export function IndustryFootprint() {
               margin: "0 auto 12px",
               textAlign: "center",
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 12 : 13,
+              fontSize: isSmallMobile ? 13 : isMobile ? 14 : 15,
               lineHeight: 1.58,
               color: T.ink60,
               maxWidth: 620,
