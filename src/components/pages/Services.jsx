@@ -86,7 +86,7 @@ export function Services() {
                 fontWeight: 500,
                 lineHeight: 1.08,
                 letterSpacing: "-.02em",
-                color: T.ink,
+                color: "#0a0805",
                 fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 40 : isLargeDesktop ? 64 : 50,
                 whiteSpace: "normal",
                 maxWidth: isSmallMobile ? "100%" : 1060,

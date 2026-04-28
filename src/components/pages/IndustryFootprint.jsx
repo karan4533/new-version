@@ -45,7 +45,7 @@ export function IndustryFootprint() {
             margin: "0 0 16px",
             textAlign: "center",
             fontFamily: font.serif,
-            color: T.ink,
+            color: "#0a0805",
             fontWeight: 500,
             letterSpacing: "-.02em",
             fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 40 : isLargeDesktop ? 64 : 50,

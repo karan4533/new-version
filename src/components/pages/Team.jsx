@@ -41,7 +41,7 @@ export function Team() {
             margin: "0 0 14px",
             textAlign: "center",
             fontFamily: font.serif,
-            color: T.ink,
+            color: "#0a0805",
             fontWeight: 500,
             lineHeight: 1.1,
             letterSpacing: "-.02em",
