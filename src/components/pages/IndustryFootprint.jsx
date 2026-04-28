@@ -67,9 +67,10 @@ export function IndustryFootprint() {
               margin: "0 0 12px",
               textAlign: "center",
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 12 : 14,
+              fontSize: isSmallMobile ? 14 : 16,
+              fontWeight: 500,
               letterSpacing: ".04em",
-              color: T.ink40,
+              color: T.ink60,
             }}
           >
             Built for teams operating in complex, high-stakes domains
