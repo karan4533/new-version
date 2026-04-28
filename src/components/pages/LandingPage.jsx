@@ -367,12 +367,14 @@ export function LandingPage({ onCaseStudies, onContact }) {
                 <h1
                   style={{
                     margin: 0,
+                    width: "100%",
+                    maxWidth: "100%",
                     fontFamily: font.serif,
                     fontWeight: 500,
                     letterSpacing: "-.02em",
                     color: T.ink,
                     lineHeight: 1.05,
-                    fontSize: isMobile ? "clamp(38px, 12vw, 58px)" : "clamp(56px, 6.4vw, 110px)",
+                    fontSize: isSmallMobile ? "clamp(32px, 9.5vw, 44px)" : isMobile ? "clamp(34px, 10vw, 52px)" : "clamp(56px, 6.4vw, 110px)",
                   }}
                 >
                   Turn AI into real
@@ -384,7 +386,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                       fontStyle: "normal",
                       fontWeight: 400,
                       fontOpticalSizing: "auto",
-                      whiteSpace: "nowrap",
+                      whiteSpace: isMobile ? "normal" : "nowrap",
                       fontSize: isMobile ? "1em" : "1.14em",
                     }}
                   >
@@ -486,9 +488,6 @@ export function LandingPage({ onCaseStudies, onContact }) {
                   transform: `translateY(${heroStatsNudgeY}px)`,
                   paddingTop: `${S.md}px`,
                   paddingBottom: `${S.md}px`,
-                  paddingLeft: `${heroSidePadding}px`,
-                  paddingRight: `${heroSidePadding}px`,
-                  boxSizing: "border-box",
                 }}
               >
                 <div
@@ -500,15 +499,14 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     marginBottom: isSmallMobile ? 6 : isMobile ? 8 : 10,
                     width: "100%",
                     minWidth: 0,
-                    boxSizing: "border-box",
                   }}
                 >
                   <span
                     style={{
-                      width: "100%",
+                      flex: 1,
                       height: 1,
                       background: T.ink12,
-                      display: "block",
+                      maxWidth: "100%",
                     }}
                   />
                 </div>
@@ -526,8 +524,6 @@ export function LandingPage({ onCaseStudies, onContact }) {
                       gap: heroStatsGridGap,
                       alignItems: "stretch",
                       minWidth: 0,
-                      boxSizing: "border-box",
-                      width: "100%",
                   }}
                 >
                   {HERO_STATS.map((item, index) => {
