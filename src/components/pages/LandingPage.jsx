@@ -486,6 +486,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
                   transform: `translateY(${heroStatsNudgeY}px)`,
                   paddingTop: `${S.md}px`,
                   paddingBottom: `${S.md}px`,
+                  paddingLeft: `${heroSidePadding}px`,
+                  paddingRight: `${heroSidePadding}px`,
+                  boxSizing: "border-box",
                 }}
               >
                 <div
@@ -497,14 +500,15 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     marginBottom: isSmallMobile ? 6 : isMobile ? 8 : 10,
                     width: "100%",
                     minWidth: 0,
+                    boxSizing: "border-box",
                   }}
                 >
                   <span
                     style={{
-                      flex: 1,
+                      width: "100%",
                       height: 1,
                       background: T.ink12,
-                      maxWidth: "100%",
+                      display: "block",
                     }}
                   />
                 </div>
@@ -522,6 +526,8 @@ export function LandingPage({ onCaseStudies, onContact }) {
                       gap: heroStatsGridGap,
                       alignItems: "stretch",
                       minWidth: 0,
+                      boxSizing: "border-box",
+                      width: "100%",
                   }}
                 >
                   {HERO_STATS.map((item, index) => {
