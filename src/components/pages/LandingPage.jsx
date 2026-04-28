@@ -494,10 +494,9 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: isSmallMobile ? `${S.xs}px` : isMobile ? `${S.md}px` : `${S.md}px`,
+                    marginBottom: isSmallMobile ? 6 : isMobile ? 8 : 10,
                     width: "100%",
-                    paddingLeft: 0,
-                    paddingRight: 0,
+                    minWidth: 0,
                   }}
                 >
                   <span
@@ -505,6 +504,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                       flex: 1,
                       height: 1,
                       background: T.ink12,
+                      maxWidth: "100%",
                     }}
                   />
                 </div>
@@ -515,12 +515,13 @@ export function LandingPage({ onCaseStudies, onContact }) {
                       gridTemplateColumns: isSmallMobile
                         ? "repeat(2, minmax(0, 1fr))"
                         : isMobile
-                          ? "repeat(2, minmax(132px, 1fr))"
+                          ? "repeat(2, 1fr)"
                           : isTablet
-                            ? "repeat(2, minmax(0, 1fr))"
-                            : "repeat(4, minmax(0, 1fr))",
+                            ? "repeat(2, 1fr)"
+                            : "repeat(4, 1fr)",
                       gap: heroStatsGridGap,
                       alignItems: "stretch",
+                      minWidth: 0,
                   }}
                 >
                   {HERO_STATS.map((item, index) => {
