@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { T, font } from "../../constants/designTokens";
+import { T, font, S } from "../../constants/designTokens";
 // import { HERO_BRAIN_IMG } from "../../constants/assets";
 import { useViewport } from "../../hooks/useViewport";
 import { Reveal } from "../shared";
@@ -109,44 +109,40 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroGuideTopPct = `${(heroTopGuideLineY / heroGuideViewBoxHeight) * 100}%`;
   const heroGuideBottomPct = `${(heroBottomGuideLineY / heroGuideViewBoxHeight) * 100}%`;
   const heroGuideTailPct = `${(heroGuideLineTailY / heroGuideViewBoxHeight) * 100}%`;
-  const heroContainerMaxWidth = 1160;
+  const heroContainerMaxWidth = 1200;
 
   // ─── Spacing (mobile tightened so stats stay above fold on real devices) ───
   const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
 
   const heroTopPadding = isSmallMobile
-    ? "10px"
+    ? `${S.sm}px`
     : isHeaderGuardMobileViewport
-      ? "28px"
+      ? `${S.lg}px`
       : isHeroMobileLayout
-        ? "18px"
+        ? `${S.md}px`
         : isWideTabletGuardViewport
-          ? "18px"
+          ? `${S.lg}px`
           : isTabletViewport
-            ? "10px"
-            : "clamp(10px, 2.8vh, 34px)";
+            ? `${S.sm}px`
+            : `clamp(${S.sm}px, 2.8vh, ${S.xl}px)`;
 
   const heroBottomPadding = isSmallMobile
-    ? "10px"
+    ? `${S.sm}px`
     : isMobile
-      ? "14px"
+      ? `${S.md}px`
       : isWideTabletGuardViewport
-        ? "22px"
+        ? `${S.lg}px`
         : isTabletViewport
-          ? "18px"
-          : "clamp(20px, 3.2vh, 38px)";
+          ? `${S.lg}px`
+          : `clamp(${S.md}px, 3.2vh, ${S.xl}px)`;
 
   const heroFlowGap = isSmallMobile ? 10 : isHeroMobileLayout ? 12 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 16 : 20;
   const heroTopClusterGap = isSmallMobile ? 10 : isHeroMobileLayout ? 12 : heroFlowGap;
   const heroTitleScrollerSpacing = isSmallMobile ? 18 : isHeroMobileLayout ? 14 : 0;
   const heroCtaTopSpacing = isSmallMobile ? 50 : isHeroMobileLayout ? 38 : 0;
   const heroStatsNudgeY = isSmallMobile ? -40 : isMobile ? -24 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
-  // Use zero grid gap and consistent per-item horizontal padding so spacing between
-  // the visible separators is equal across all breakpoints.
-  const heroStatsGridGap = 0;
-  const heroStatsCardVerticalPadding = isSmallMobile ? 6 : isMobile ? 8 : 12;
-  const heroStatsCardHorizontalPadding = isSmallMobile ? 12 : isMobile ? 14 : 20;
-  const heroStatsCardPadding = `${heroStatsCardVerticalPadding}px ${heroStatsCardHorizontalPadding}px`;
+    const heroStatsGridGap = isSmallMobile ? S.xs : isMobile ? S.md : S.lg;
+    const heroStatsCardPadding = isSmallMobile ? `${S.xs}px ${S.xs}px` : isMobile ? `${S.md}px ${S.sm}px` : `${S.lg}px ${S.md}px`;
   const heroStatsCardMinHeight = isSmallMobile ? 60 : isMobile ? 68 : 82;
   const heroStatsValueFontSize = isSmallMobile ? 19 : isMobile ? 20 : isLargeDesktop ? 31 : 25;
   const heroStatsLabelFontSize = isSmallMobile ? 8 : isMobile ? 8.5 : 9.5;
@@ -314,14 +310,16 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     <line x1="-2%" y1={heroGuideBottomPct} x2="102%" y2={heroGuideBottomPct} />
                   </g>
                 </svg>
-              </div>
-            )}
-          </div>
-
-          <div
-            ref={textLayerRef}
-            style={{
-              width: "100%",
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: isTablet ? 760 : heroContainerMaxWidth,
+                  margin: "0 auto",
+                  transform: `translateY(${heroStatsNudgeY}px)`,
+                  paddingTop: `${S.md}px`,
+                  paddingBottom: `${S.md}px`,
+                }}
+              >
               minHeight: isHeroMobileLayout
                 ? `calc(100dvh - ${heroTopPadding} - ${heroBottomPadding})`
                 : "auto",

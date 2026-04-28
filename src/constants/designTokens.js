@@ -26,3 +26,14 @@ export const font = {
   serif: "'Fraunces', serif",
   sans: "'Inter', sans-serif",
 };
+
+// Spacing scale (small → large). Use these for consistent layout spacing.
+export const S = {
+  xxs: 4,
+  xs: 8,
+  sm: 12,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 48,
+};
