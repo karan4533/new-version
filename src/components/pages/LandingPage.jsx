@@ -72,7 +72,7 @@ function HeroBtn({ label, onClick, primary }) {
 }
 
 export function LandingPage({ onCaseStudies, onContact }) {
-  const { width, isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
+  const { width, isMobile, isTablet, isSmallMobile, isUltraMobile, isLargeDesktop } = useViewport();
   const isTabletViewport = isTablet && !isMobile;
   const isHeaderGuardMobileViewport = isMobile && width >= 500 && width <= 650;
   const isWideTabletGuardViewport = isTabletViewport && width >= 900 && width <= 1030;
@@ -84,7 +84,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const textLayerRef = useRef(null);
   const isPhoneViewport = isMobile;
   const isHeroMobileLayout = width <= 768;
-  const heroSubheadingFontSize = isSmallMobile ? 18 : isTablet ? 19 : isLargeDesktop ? 22 : 20;
+  const heroSubheadingFontSize = isUltraMobile ? 12 : isSmallMobile ? 14 : isTablet ? 18 : isLargeDesktop ? 22 : 20;
   const heroUseCaseFontSize = heroSubheadingFontSize + 1;
   const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
     isSmallMobile ? "220px" : isMobile ? "250px" : isTablet ? "280px" : "320px",
@@ -112,7 +112,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroContainerMaxWidth = 1200;
 
   // ─── Spacing (mobile tightened so stats stay above fold on real devices) ───
-  const heroSidePadding = isSmallMobile ? 16 : isMobile ? 20 : isTablet ? 28 : 40;
+  const heroSidePadding = isUltraMobile ? 8 : isSmallMobile ? 12 : isMobile ? 16 : isTablet ? 24 : 32;
 
   const heroTopPadding = isSmallMobile
     ? `${S.sm}px`
@@ -136,16 +136,16 @@ export function LandingPage({ onCaseStudies, onContact }) {
           ? `${S.lg}px`
           : `clamp(${S.md}px, 3.2vh, ${S.xl}px)`;
 
-  const heroFlowGap = isSmallMobile ? 10 : isHeroMobileLayout ? 12 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 16 : 20;
-  const heroTopClusterGap = isSmallMobile ? 10 : isHeroMobileLayout ? 12 : heroFlowGap;
-  const heroTitleScrollerSpacing = isSmallMobile ? 18 : isHeroMobileLayout ? 14 : 0;
-  const heroCtaTopSpacing = isSmallMobile ? 50 : isHeroMobileLayout ? 38 : 0;
-  const heroStatsNudgeY = isSmallMobile ? -40 : isMobile ? -24 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
-    const heroStatsGridGap = isSmallMobile ? S.xs : isMobile ? S.md : S.lg;
-    const heroStatsCardPadding = isSmallMobile ? `${S.xs}px ${S.xs}px` : isMobile ? `${S.md}px ${S.sm}px` : `${S.lg}px ${S.md}px`;
-  const heroStatsCardMinHeight = isSmallMobile ? 60 : isMobile ? 68 : 82;
-  const heroStatsValueFontSize = isSmallMobile ? 19 : isMobile ? 20 : isLargeDesktop ? 31 : 25;
-  const heroStatsLabelFontSize = isSmallMobile ? 8 : isMobile ? 8.5 : 9.5;
+  const heroFlowGap = isUltraMobile ? 6 : isSmallMobile ? 8 : isHeroMobileLayout ? 10 : isWideTabletGuardViewport ? 16 : isTabletViewport ? 14 : 18;
+  const heroTopClusterGap = isUltraMobile ? 6 : isSmallMobile ? 8 : isHeroMobileLayout ? 10 : heroFlowGap;
+  const heroTitleScrollerSpacing = isUltraMobile ? 10 : isSmallMobile ? 14 : isHeroMobileLayout ? 12 : 0;
+  const heroCtaTopSpacing = isUltraMobile ? 30 : isSmallMobile ? 40 : isHeroMobileLayout ? 30 : 0;
+  const heroStatsNudgeY = isUltraMobile ? -20 : isSmallMobile ? -32 : isMobile ? -20 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
+    const heroStatsGridGap = isUltraMobile ? S.xxs : isSmallMobile ? S.xs : isMobile ? S.md : S.lg;
+    const heroStatsCardPadding = isUltraMobile ? `${S.xxs}px ${S.xxs}px` : isSmallMobile ? `${S.xs}px ${S.xs}px` : isMobile ? `${S.md}px ${S.sm}px` : `${S.lg}px ${S.md}px`;
+  const heroStatsCardMinHeight = isUltraMobile ? 48 : isSmallMobile ? 56 : isMobile ? 64 : 80;
+  const heroStatsValueFontSize = isUltraMobile ? 14 : isSmallMobile ? 16 : isMobile ? 18 : isLargeDesktop ? 30 : 24;
+  const heroStatsLabelFontSize = isUltraMobile ? 6 : isSmallMobile ? 7.5 : isMobile ? 8 : 9.5;
   const heroCtaTopMargin = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 14 : 0;
   const heroContentNudgeY = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? -8 : isTabletViewport ? -14 : -24;
   const showHeroGuideLines = false;
@@ -349,7 +349,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                   style={{
                     display: "inline-block",
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 11 : isLargeDesktop ? 14 : 12,
+                    fontSize: isUltraMobile ? 9 : isSmallMobile ? 10 : isLargeDesktop ? 13 : 11,
                     fontWeight: 500,
                     letterSpacing: ".18em",
                     textTransform: "uppercase",
@@ -374,7 +374,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     letterSpacing: "-.02em",
                     color: T.ink,
                     lineHeight: 1.05,
-                    fontSize: isSmallMobile ? "clamp(32px, 9.5vw, 44px)" : isMobile ? "clamp(34px, 10vw, 52px)" : "clamp(56px, 6.4vw, 110px)",
+                    fontSize: isUltraMobile ? "clamp(20px, 10vw, 28px)" : isSmallMobile ? "clamp(32px, 9.5vw, 44px)" : isMobile ? "clamp(34px, 10vw, 52px)" : "clamp(56px, 6.4vw, 110px)",
                   }}
                 >
                   Turn AI into real

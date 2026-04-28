@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const buildViewportState = (width) => ({
   width,
+  isUltraMobile: width < 300,
   isSmallMobile: width < 480,
   isMobile: width < 768,
   isTablet: width < 1025,
