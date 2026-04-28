@@ -141,8 +141,12 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTitleScrollerSpacing = isSmallMobile ? 18 : isHeroMobileLayout ? 14 : 0;
   const heroCtaTopSpacing = isSmallMobile ? 50 : isHeroMobileLayout ? 38 : 0;
   const heroStatsNudgeY = isSmallMobile ? -40 : isMobile ? -24 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
-    const heroStatsGridGap = isSmallMobile ? 6 : isMobile ? 10 : 14;
-    const heroStatsCardPadding = isSmallMobile ? "6px 6px" : isMobile ? "10px 6px" : "12px 10px";
+  // Use zero grid gap and consistent per-item horizontal padding so spacing between
+  // the visible separators is equal across all breakpoints.
+  const heroStatsGridGap = 0;
+  const heroStatsCardVerticalPadding = isSmallMobile ? 6 : isMobile ? 8 : 12;
+  const heroStatsCardHorizontalPadding = isSmallMobile ? 12 : isMobile ? 14 : 20;
+  const heroStatsCardPadding = `${heroStatsCardVerticalPadding}px ${heroStatsCardHorizontalPadding}px`;
   const heroStatsCardMinHeight = isSmallMobile ? 60 : isMobile ? 68 : 82;
   const heroStatsValueFontSize = isSmallMobile ? 19 : isMobile ? 20 : isLargeDesktop ? 31 : 25;
   const heroStatsLabelFontSize = isSmallMobile ? 8 : isMobile ? 8.5 : 9.5;
