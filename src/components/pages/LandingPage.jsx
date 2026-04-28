@@ -494,13 +494,15 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: isSmallMobile ? 8 : isMobile ? 10 : 12,
+                    marginBottom: isSmallMobile ? `${S.xs}px` : isMobile ? `${S.md}px` : `${S.md}px`,
                     width: "100%",
+                    paddingLeft: 0,
+                    paddingRight: 0,
                   }}
                 >
                   <span
                     style={{
-                      width: "100%",
+                      flex: 1,
                       height: 1,
                       background: T.ink12,
                     }}
