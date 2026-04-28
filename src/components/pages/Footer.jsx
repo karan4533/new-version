@@ -118,7 +118,7 @@ export function Footer({
                   width: isSmallMobile ? 34 : 40,
                   height: isSmallMobile ? 34 : 40,
                   objectFit: "contain",
-                  filter: "brightness(0.78)",
+                  filter: "brightness(0) saturate(100%) invert(1)",
                   display: "block",
                   flexShrink: 0,
                 }}
