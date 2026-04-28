@@ -180,7 +180,7 @@ export function Contact() {
                 margin: 0,
                 fontFamily: font.serif,
                 fontWeight: 700,
-                fontSize: isSmallMobile ? 42 : isMobile ? 52 : 64,
+                fontSize: isSmallMobile ? 30 : isMobile ? 38 : 50,
                 lineHeight: 0.98,
                 letterSpacing: "-.02em",
                 color: T.ink,
