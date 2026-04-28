@@ -48,7 +48,8 @@ export function IndustryFootprint() {
             color: T.ink,
             fontWeight: 500,
             letterSpacing: "-.02em",
-            fontSize: isSmallMobile ? 30 : isMobile ? 38 : 48,
+            fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 40 : 50,
+            lineHeight: 1.08,
           }}
         >
           Industries We Serve.
@@ -64,13 +65,14 @@ export function IndustryFootprint() {
         >
           <p
             style={{
-              margin: "0 0 12px",
+              margin: "0 auto",
               textAlign: "center",
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 14 : 16,
-              fontWeight: 500,
-              letterSpacing: ".04em",
+              fontSize: isSmallMobile ? 12 : 13,
+              lineHeight: 1.58,
               color: T.ink60,
+              maxWidth: 620,
+              overflowWrap: "anywhere",
             }}
           >
             Built for teams operating in complex, high-stakes domains
