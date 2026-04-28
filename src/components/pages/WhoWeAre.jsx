@@ -5,7 +5,7 @@ import { Section } from "../shared";
 import { Reveal } from "../shared";
 
 export function WhoWeAre() {
-  const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const { isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
   const aboutSectionPaddingPx = isSmallMobile ? 12 : isMobile ? 16 : isTablet ? 20 : 24;
   const aboutSectionPadding = `${aboutSectionPaddingPx}px`;
   const [aboutNavOffset, setAboutNavOffset] = useState(
@@ -327,7 +327,7 @@ export function WhoWeAre() {
                 fontFamily: font.serif,
                 fontWeight: 500,
                 color: aboutText,
-                fontSize: isSmallMobile ? 32 : isMobile ? 42 : 52,
+                fontSize: isSmallMobile ? 32 : isMobile ? 42 : isLargeDesktop ? 66 : 52,
                 lineHeight: 1.08,
                 letterSpacing: "-.02em",
               }}

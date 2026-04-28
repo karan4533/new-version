@@ -6,7 +6,7 @@ import { SERVICES } from "../../constants/data/services";
 import { FiActivity, FiCompass, FiCpu, FiSettings, FiShield, FiUsers } from "react-icons/fi";
 
 export function Services() {
-  const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const { isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
   const servicesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
 
   const serviceIconById = {
@@ -87,7 +87,7 @@ export function Services() {
                 lineHeight: 1.08,
                 letterSpacing: "-.02em",
                 color: T.ink,
-                fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 40 : 50,
+                fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 40 : isLargeDesktop ? 64 : 50,
                 whiteSpace: "normal",
                 maxWidth: isSmallMobile ? "100%" : 1060,
                 overflowWrap: "anywhere",
@@ -105,7 +105,7 @@ export function Services() {
                 margin: "0 auto",
                 maxWidth: 620,
                 fontFamily: font.sans,
-                fontSize: isSmallMobile ? 13 : isMobile ? 14 : 15,
+                fontSize: isSmallMobile ? 13 : isMobile ? 14 : isLargeDesktop ? 17 : 15,
                 lineHeight: 1.58,
                 color: T.ink60,
                 overflowWrap: "anywhere",
@@ -258,7 +258,7 @@ export function Services() {
                         fontFamily: font.serif,
                         fontWeight: 600,
                         color: T.ink,
-                        fontSize: isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 19 : 20,
+                        fontSize: isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 19 : isLargeDesktop ? 24 : 20,
                         lineHeight: 1.18,
                         letterSpacing: "-.01em",
                         width: "100%",
@@ -370,7 +370,7 @@ export function Services() {
                         fontFamily: font.serif,
                         fontWeight: 600,
                         color: T.ink,
-                        fontSize: isSmallMobile ? 18 : isMobile ? 19 : isTablet ? 20 : 22,
+                        fontSize: isSmallMobile ? 18 : isMobile ? 19 : isTablet ? 20 : isLargeDesktop ? 26 : 22,
                         lineHeight: 1.12,
                         letterSpacing: "-.01em",
                         width: "100%",

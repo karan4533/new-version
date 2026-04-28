@@ -29,7 +29,7 @@ const industryTiles = [
 ];
 
 export function IndustryFootprint() {
-  const { isTablet, isMobile, isSmallMobile } = useViewport();
+  const { isTablet, isMobile, isSmallMobile, isLargeDesktop } = useViewport();
 
   const gridTemplateColumns = isMobile
     ? "repeat(2,minmax(0,1fr))"
@@ -48,7 +48,7 @@ export function IndustryFootprint() {
             color: T.ink,
             fontWeight: 500,
             letterSpacing: "-.02em",
-            fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 40 : 50,
+            fontSize: isSmallMobile ? 28 : isMobile ? 34 : isTablet ? 40 : isLargeDesktop ? 64 : 50,
             lineHeight: 1.08,
           }}
         >
@@ -68,7 +68,7 @@ export function IndustryFootprint() {
               margin: "0 auto 12px",
               textAlign: "center",
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 13 : isMobile ? 14 : 15,
+              fontSize: isSmallMobile ? 13 : isMobile ? 14 : isLargeDesktop ? 17 : 15,
               lineHeight: 1.58,
               color: T.ink60,
               maxWidth: 620,

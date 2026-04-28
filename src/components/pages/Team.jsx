@@ -6,7 +6,7 @@ import { TEAM } from "../../constants/data/team";
 import { FaLinkedinIn } from "react-icons/fa";
 
 export function Team() {
-  const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const { isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
   const leadershipTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
 
   return (
@@ -45,7 +45,7 @@ export function Team() {
             fontWeight: 700,
             lineHeight: 1.1,
             letterSpacing: "-.02em",
-            fontSize: isSmallMobile ? 30 : isMobile ? 38 : 50,
+            fontSize: isSmallMobile ? 30 : isMobile ? 38 : isLargeDesktop ? 64 : 50,
           }}
         >
           You&apos;re in experienced hands.
@@ -60,7 +60,7 @@ export function Team() {
               textAlign: "center",
               maxWidth: 860,
               fontFamily: font.sans,
-              fontSize: isSmallMobile ? 13 : isMobile ? 14 : 15,
+              fontSize: isSmallMobile ? 13 : isMobile ? 14 : isLargeDesktop ? 17 : 15,
               lineHeight: 1.6,
               color: T.ink60,
             }}

@@ -5,7 +5,7 @@ import { Reveal } from "../shared";
 import { FaCalendarAlt, FaEnvelope, FaLinkedinIn, FaMapMarkerAlt } from "react-icons/fa";
 
 export function Contact() {
-  const { isMobile, isTablet, isSmallMobile } = useViewport();
+  const { isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
   const LINKEDIN_URL = "https://www.linkedin.com/company/heuristic-labs-ai/";
   const OFFICE_ADDRESS =
     "Elnet Software City, TS 140 Block 2 & 9, Rajiv Gandhi Salai, Tharamani, Chennai, TN-600113";
@@ -180,7 +180,7 @@ export function Contact() {
                 margin: 0,
                 fontFamily: font.serif,
                 fontWeight: 700,
-                fontSize: isSmallMobile ? 30 : isMobile ? 38 : 50,
+                fontSize: isSmallMobile ? 30 : isMobile ? 38 : isLargeDesktop ? 64 : 50,
                 lineHeight: 0.98,
                 letterSpacing: "-.02em",
                 color: T.ink,

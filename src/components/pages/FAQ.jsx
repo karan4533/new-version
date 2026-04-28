@@ -5,7 +5,7 @@ import { Reveal, Pill, Btn, Section, Em } from "../shared";
 import { FAQS } from "../../constants/data/faqs";
 
 export function FAQ() {
-  const { isMobile, isSmallMobile } = useViewport();
+  const { isMobile, isSmallMobile, isLargeDesktop } = useViewport();
   const [activeIndex, setActiveIndex] = useState(0);
   const activeItem = FAQS[activeIndex] || FAQS[0];
 
@@ -112,7 +112,7 @@ export function FAQ() {
               style={{
                 margin: "0 0 12px",
                 fontFamily: font.serif,
-                fontSize: isSmallMobile ? 26 : isMobile ? 30 : 34,
+                fontSize: isSmallMobile ? 26 : isMobile ? 30 : isLargeDesktop ? 44 : 34,
                 fontWeight: 600,
                 lineHeight: 1.14,
                 letterSpacing: "-.01em",

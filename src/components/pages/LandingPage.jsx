@@ -72,7 +72,7 @@ function HeroBtn({ label, onClick, primary }) {
 }
 
 export function LandingPage({ onCaseStudies, onContact }) {
-  const { width, isMobile, isTablet, isSmallMobile } = useViewport();
+  const { width, isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
   const isTabletViewport = isTablet && !isMobile;
   const isHeaderGuardMobileViewport = isMobile && width >= 500 && width <= 650;
   const isWideTabletGuardViewport = isTabletViewport && width >= 900 && width <= 1030;
@@ -84,7 +84,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const textLayerRef = useRef(null);
   const isPhoneViewport = isMobile;
   const isHeroMobileLayout = width <= 768;
-  const heroSubheadingFontSize = isSmallMobile ? 18 : isTablet ? 19 : 20;
+  const heroSubheadingFontSize = isSmallMobile ? 18 : isTablet ? 19 : isLargeDesktop ? 22 : 20;
   const heroUseCaseFontSize = heroSubheadingFontSize + 1;
   const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
     isSmallMobile ? "220px" : isMobile ? "250px" : isTablet ? "280px" : "320px",
@@ -144,7 +144,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroStatsGridGap = isSmallMobile ? 8 : isMobile ? 10 : 14;
   const heroStatsCardPadding = isSmallMobile ? "8px 10px" : isMobile ? "10px 12px" : "12px 14px";
   const heroStatsCardMinHeight = isSmallMobile ? 60 : isMobile ? 68 : 82;
-  const heroStatsValueFontSize = isSmallMobile ? 20 : isMobile ? 22 : 26;
+  const heroStatsValueFontSize = isSmallMobile ? 20 : isMobile ? 22 : isLargeDesktop ? 32 : 26;
   const heroStatsLabelFontSize = isSmallMobile ? 10 : isMobile ? 10.5 : 11;
   const heroCtaTopMargin = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 14 : 0;
   const heroContentNudgeY = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? -8 : isTabletViewport ? -14 : -24;
@@ -351,7 +351,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                   style={{
                     display: "inline-block",
                     fontFamily: font.sans,
-                    fontSize: isSmallMobile ? 11 : 12,
+                    fontSize: isSmallMobile ? 11 : isLargeDesktop ? 14 : 12,
                     fontWeight: 500,
                     letterSpacing: ".18em",
                     textTransform: "uppercase",
@@ -374,7 +374,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     letterSpacing: "-.02em",
                     color: T.ink,
                     lineHeight: 1.05,
-                    fontSize: isMobile ? "clamp(38px, 12vw, 58px)" : "clamp(56px, 6.4vw, 92px)",
+                    fontSize: isMobile ? "clamp(38px, 12vw, 58px)" : "clamp(56px, 6.4vw, 110px)",
                   }}
                 >
                   Turn AI into real
