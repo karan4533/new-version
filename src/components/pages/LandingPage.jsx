@@ -141,11 +141,11 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTitleScrollerSpacing = isSmallMobile ? 18 : isHeroMobileLayout ? 14 : 0;
   const heroCtaTopSpacing = isSmallMobile ? 50 : isHeroMobileLayout ? 38 : 0;
   const heroStatsNudgeY = isSmallMobile ? -40 : isMobile ? -24 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
-  const heroStatsGridGap = isSmallMobile ? 8 : isMobile ? 10 : 14;
-  const heroStatsCardPadding = isSmallMobile ? "8px 10px" : isMobile ? "10px 12px" : "12px 14px";
+    const heroStatsGridGap = isSmallMobile ? 6 : isMobile ? 10 : 14;
+    const heroStatsCardPadding = isSmallMobile ? "6px 6px" : isMobile ? "10px 6px" : "12px 10px";
   const heroStatsCardMinHeight = isSmallMobile ? 60 : isMobile ? 68 : 82;
-  const heroStatsValueFontSize = isSmallMobile ? 20 : isMobile ? 22 : isLargeDesktop ? 32 : 26;
-  const heroStatsLabelFontSize = isSmallMobile ? 10 : isMobile ? 10.5 : 11;
+  const heroStatsValueFontSize = isSmallMobile ? 19 : isMobile ? 20 : isLargeDesktop ? 31 : 25;
+  const heroStatsLabelFontSize = isSmallMobile ? 8 : isMobile ? 8.5 : 9.5;
   const heroCtaTopMargin = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? 18 : isTabletViewport ? 14 : 0;
   const heroContentNudgeY = isHeroMobileLayout ? 0 : isWideTabletGuardViewport ? -8 : isTabletViewport ? -14 : -24;
   const showHeroGuideLines = false;
@@ -483,7 +483,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
               <div
                 style={{
                   width: "100%",
-                  maxWidth: isTablet ? 760 : 960,
+                  maxWidth: isTablet ? 800 : 1000,
                   margin: "0 auto",
                   transform: `translateY(${heroStatsNudgeY}px)`,
                 }}
@@ -495,14 +495,14 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     alignItems: "center",
                     justifyContent: "center",
                     marginBottom: isSmallMobile ? 8 : isMobile ? 10 : 12,
+                    width: "100%",
                   }}
                 >
                   <span
                     style={{
-                      width: 1,
-                      height: isSmallMobile ? 18 : isMobile ? 22 : 24,
-                      background: `repeating-linear-gradient(to bottom, ${T.ink12} 0, ${T.ink12} 4px, transparent 4px, transparent 8px)`,
-                      opacity: 0,
+                      width: "100%",
+                      height: 1,
+                      background: T.ink12,
                     }}
                   />
                 </div>
@@ -510,57 +510,68 @@ export function LandingPage({ onCaseStudies, onContact }) {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: isMobile
-                      ? "repeat(2, minmax(132px, 1fr))"
-                      : isTablet
+                      gridTemplateColumns: isSmallMobile
                         ? "repeat(2, minmax(0, 1fr))"
-                        : "repeat(4, minmax(0, 1fr))",
-                    gap: heroStatsGridGap,
-                    alignItems: "stretch",
-                    overflow: isMobile ? "visible" : undefined,
+                        : isMobile
+                          ? "repeat(2, minmax(132px, 1fr))"
+                          : isTablet
+                            ? "repeat(2, minmax(0, 1fr))"
+                            : "repeat(4, minmax(0, 1fr))",
+                      gap: heroStatsGridGap,
+                      alignItems: "stretch",
                   }}
                 >
-                  {HERO_STATS.map((item) => (
+                  {HERO_STATS.map((item, index) => {
+                      const columns = isMobile ? 2 : isTablet ? 2 : 4;
+                    const isRowEnd = (index + 1) % columns === 0;
+                    const isLast = index === HERO_STATS.length - 1;
+
+                    return (
                     <div
                       key={item.label}
                       style={{
                         width: "100%",
-                        border: `1px dashed ${T.ink12}`,
-                        borderRadius: 14,
+                        minWidth: 0,
                         padding: heroStatsCardPadding,
-                        textAlign: "left",
-                        background: "rgba(255,255,255,.2)",
+                        textAlign: "center",
                         minHeight: heroStatsCardMinHeight,
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
-                        overflow: isMobile ? "visible" : undefined,
+                        alignItems: "center",
+                        borderRight: !isRowEnd && !isLast ? `1px solid ${T.ink12}` : "none",
                       }}
                     >
                       <div
                         style={{
-                          fontFamily: font.serif,
-                          fontSize: heroStatsValueFontSize,
-                          lineHeight: 1,
-                          color: T.ink,
-                          marginBottom: isMobile ? 4 : 5,
-                        }}
-                      >
-                        {item.value}
-                      </div>
-                      <div
-                        style={{
                           fontFamily: font.sans,
                           fontSize: heroStatsLabelFontSize,
-                          lineHeight: 1.25,
-                          letterSpacing: ".02em",
-                          color: T.ink60,
+                          fontWeight: 600,
+                          textTransform: "uppercase",
+                          lineHeight: 1.3,
+                          letterSpacing: ".05em",
+                          color: "rgba(30,26,16,.7)",
+                          marginBottom: isMobile ? 6 : 8,
+                          maxWidth: "100%",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {item.label}
                       </div>
+                      <div
+                        style={{
+                          fontFamily: "'Fraunces', serif",
+                          fontSize: heroStatsValueFontSize,
+                          fontWeight: 600,
+                          lineHeight: 1,
+                          color: T.ink,
+                        }}
+                      >
+                        {item.value}
+                      </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </Reveal>
