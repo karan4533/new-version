@@ -432,7 +432,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
   const detailBodyTextStyle = {
     margin: 0,
     fontFamily: font.sans,
-    fontSize: isSmallMobile ? 15 : 16,
+    fontSize: isSmallMobile ? 14 : 15,
     lineHeight: 1.7,
     color: detailTextColor,
   };
@@ -769,7 +769,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                             display: "grid",
                             gap: row.why ? 6 : 0,
                             fontFamily: font.sans,
-                            fontSize: isSmallMobile ? 15 : 16,
+                            fontSize: isSmallMobile ? 14 : 15,
                             lineHeight: 1.6,
                             color: detailTextColor,
                           }}
@@ -858,7 +858,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           alignItems: "flex-start",
                           gap: 8,
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 15 : 16,
+                          fontSize: isSmallMobile ? 14 : 15,
                           lineHeight: 1.65,
                           color: detailTextColor,
                         }}
@@ -876,7 +876,7 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
                           alignItems: "flex-start",
                           gap: 8,
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 15 : 16,
+                          fontSize: isSmallMobile ? 14 : 15,
                           lineHeight: 1.65,
                           color: detailTextColor,
                         }}
