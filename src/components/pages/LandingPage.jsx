@@ -84,7 +84,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const textLayerRef = useRef(null);
   const isPhoneViewport = isMobile;
   const isHeroMobileLayout = width <= 768;
-  const heroSubheadingFontSize = isUltraMobile ? 12 : isSmallMobile ? 14 : isTablet ? 18 : isLargeDesktop ? 22 : 20;
+  const heroSubheadingFontSize = isUltraMobile ? 13 : isSmallMobile ? 16 : isTablet ? 20 : isLargeDesktop ? 22 : 20;
   const heroUseCaseFontSize = heroSubheadingFontSize + 1;
   const [heroUseCaseSlotWidth, setHeroUseCaseSlotWidth] = useState(
     isSmallMobile ? "220px" : isMobile ? "250px" : isTablet ? "280px" : "320px",
@@ -374,7 +374,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                     letterSpacing: "-.02em",
                     color: T.ink,
                     lineHeight: 1.05,
-                    fontSize: isUltraMobile ? "clamp(20px, 10vw, 28px)" : isSmallMobile ? "clamp(32px, 9.5vw, 44px)" : isMobile ? "clamp(34px, 10vw, 52px)" : "clamp(56px, 6.4vw, 110px)",
+                    fontSize: isUltraMobile ? "clamp(26px, 10vw, 34px)" : isSmallMobile ? "clamp(40px, 9.5vw, 52px)" : isMobile ? "clamp(42px, 10vw, 60px)" : "clamp(56px, 6.4vw, 110px)",
                   }}
                 >
                   Turn AI into real
