@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { T, font, S } from "../../constants/designTokens";
+import { T, font } from "../../constants/designTokens";
 import { useViewport } from "../../hooks/useViewport";
 import { Section, Reveal } from "../shared";
 import { SERVICES } from "../../constants/data/services";
@@ -142,8 +142,6 @@ export function Services() {
           display: "grid",
           gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2,minmax(0,1fr))" : "repeat(3,minmax(0,1fr))",
           gap: isSmallMobile ? 10 : 12,
-          minWidth: 0,
-          alignItems: "stretch",
         }}
       >
         {SERVICES.map((card, index) => {
@@ -170,7 +168,6 @@ export function Services() {
                   position: "relative",
                   width: "100%",
                   height: "100%",
-                  minWidth: 0,
                 }}
               >
                 <article
@@ -230,11 +227,11 @@ export function Services() {
                       background:
                         "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
                       borderRadius: 14,
-                      padding: isSmallMobile ? `${S.md}px ${S.sm}px ${S.xl}px` : isMobile ? `${S.md}px ${S.sm}px ${S.lg}px` : `18px 16px 42px`,
+                      padding: isSmallMobile ? "16px 14px 42px" : isMobile ? "16px 14px 40px" : "18px 16px 42px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: isSmallMobile ? S.sm : 12,
+                      gap: isSmallMobile ? 11 : 12,
                       transform: "rotateY(0deg) translateZ(1px)",
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
@@ -261,7 +258,7 @@ export function Services() {
                         fontFamily: font.serif,
                         fontWeight: 600,
                         color: T.ink,
-                        fontSize: isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 20 : isLargeDesktop ? 25 : 20,
+                        fontSize: isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 19 : isLargeDesktop ? 25 : 21,
                         lineHeight: 1.18,
                         letterSpacing: "-.01em",
                         width: "100%",
@@ -283,7 +280,7 @@ export function Services() {
                           margin: 0,
                           width: "100%",
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 15.5 : isMobile ? 15.5 : isTablet ? 14 : isLargeDesktop ? 14 : 13,
+                          fontSize: isSmallMobile ? 15.5 : isMobile ? 15.5 : 14,
                           fontWeight: 500,
                           lineHeight: 1.55,
                           letterSpacing: "0.01em",
@@ -309,8 +306,8 @@ export function Services() {
                       aria-label={`Learn more about ${card.name}`}
                       style={{
                         position: "absolute",
-                        right: isSmallMobile ? 8 : 12,
-                        bottom: isSmallMobile ? 8 : 12,
+                        right: isSmallMobile ? 10 : 12,
+                        bottom: isSmallMobile ? 10 : 12,
                         display: "inline-flex",
                         alignItems: "center",
                         gap: 6,
