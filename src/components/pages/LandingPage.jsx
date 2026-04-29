@@ -141,8 +141,17 @@ export function LandingPage({ onCaseStudies, onContact }) {
   const heroTitleScrollerSpacing = isUltraMobile ? 10 : isSmallMobile ? 14 : isHeroMobileLayout ? 12 : 0;
   const heroCtaTopSpacing = isUltraMobile ? 30 : isSmallMobile ? 40 : isHeroMobileLayout ? 30 : 0;
   const heroStatsNudgeY = isUltraMobile ? -20 : isSmallMobile ? -32 : isMobile ? -20 : isWideTabletGuardViewport ? 0 : isTabletViewport ? 0 : 0;
-    const heroStatsGridGap = isUltraMobile ? S.xxs : isSmallMobile ? S.xs : isMobile ? S.md : S.lg;
-    const heroStatsCardPadding = isUltraMobile ? `${S.xxs}px ${S.xxs}px` : isSmallMobile ? `${S.xs}px ${S.xs}px` : isMobile ? `${S.md}px ${S.sm}px` : `${S.lg}px ${S.md}px`;
+  const isNarrowHeroStats = width < 400;
+  const heroStatsGridGap = isUltraMobile ? S.xxs : isSmallMobile ? S.xs : isMobile ? S.md : S.lg;
+  const heroStatsCardPadding = isNarrowHeroStats
+    ? `${S.xs}px ${S.xxs}px`
+    : isUltraMobile
+      ? `${S.xxs}px ${S.xxs}px`
+      : isSmallMobile
+        ? `${S.xs}px ${S.xs}px`
+        : isMobile
+          ? `${S.md}px ${S.sm}px`
+          : `${S.lg}px ${S.md}px`;
   const heroStatsCardMinHeight = isUltraMobile ? 48 : isSmallMobile ? 56 : isMobile ? 64 : 80;
   const heroStatsValueFontSize = isUltraMobile ? 14 : isSmallMobile ? 16 : isMobile ? 18 : isLargeDesktop ? 30 : 24;
   const heroStatsLabelFontSize = isUltraMobile ? 6 : isSmallMobile ? 7.5 : isMobile ? 8 : 9.5;
@@ -550,15 +559,17 @@ export function LandingPage({ onCaseStudies, onContact }) {
                       <div
                         style={{
                           fontFamily: font.sans,
-                          fontSize: heroStatsLabelFontSize,
+                          fontSize: isNarrowHeroStats ? Math.max(heroStatsLabelFontSize + 0.2, 7.2) : heroStatsLabelFontSize,
                           fontWeight: 600,
                           textTransform: "uppercase",
-                          lineHeight: 1.3,
-                          letterSpacing: ".05em",
+                          lineHeight: isNarrowHeroStats ? 1.25 : 1.3,
+                          letterSpacing: isNarrowHeroStats ? ".035em" : ".05em",
                           color: "rgba(30,26,16,.78)",
                           marginBottom: isMobile ? 6 : 8,
-                          maxWidth: "100%",
-                          whiteSpace: "nowrap",
+                          maxWidth: isNarrowHeroStats ? "92%" : "100%",
+                          whiteSpace: isNarrowHeroStats ? "normal" : "nowrap",
+                          overflowWrap: "normal",
+                          wordBreak: "normal",
                         }}
                       >
                         {item.label}
