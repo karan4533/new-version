@@ -417,8 +417,8 @@ export function CaseStudyDetailPage({ caseStudy, caseIndex = 0, onBack }) {
     }))
     .filter((row) => row.value);
 
-  const detailTextColor = "rgba(30,26,16,.82)";
-  const detailSubtleTextColor = "rgba(30,26,16,.74)";
+  const detailTextColor = "rgba(30,26,16,.92)";
+  const detailSubtleTextColor = "rgba(30,26,16,.82)";
 
   const sectionLabelStyle = {
     margin: 0,
