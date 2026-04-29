@@ -22,6 +22,7 @@ export function Services() {
   const supportsHoverFlip = false;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
   const lastPointerTypeRef = useRef("mouse");
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -41,6 +42,43 @@ export function Services() {
     mediaQuery.addListener(syncInteractionMode);
     return () => mediaQuery.removeListener(syncInteractionMode);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleClickOutside = (event) => {
+      if (activeCardIndex === null) return;
+      if (!sectionRef.current) return;
+
+      const cardElements = sectionRef.current.querySelectorAll('article[aria-pressed="true"]');
+      let clickedOutside = true;
+
+      for (const card of cardElements) {
+        if (card.contains(event.target)) {
+          clickedOutside = false;
+          break;
+        }
+      }
+
+      if (clickedOutside) {
+        setActiveCardIndex(null);
+      }
+    };
+
+    const handleScroll = () => {
+      if (activeCardIndex !== null) {
+        setActiveCardIndex(null);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [activeCardIndex]);
 
   const isTouchLikePointer = (pointerType) => pointerType === "touch" || pointerType === "pen";
 
@@ -138,6 +176,7 @@ export function Services() {
       </div>
 
       <div
+        ref={sectionRef}
         style={{
           display: "grid",
           gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2,minmax(0,1fr))" : "repeat(3,minmax(0,1fr))",
