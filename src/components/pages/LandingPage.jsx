@@ -555,7 +555,7 @@ export function LandingPage({ onCaseStudies, onContact }) {
                           textTransform: "uppercase",
                           lineHeight: 1.3,
                           letterSpacing: ".05em",
-                          color: "rgba(30,26,16,.7)",
+                          color: "rgba(30,26,16,.85)",
                           marginBottom: isMobile ? 6 : 8,
                           maxWidth: "100%",
                           whiteSpace: "nowrap",
