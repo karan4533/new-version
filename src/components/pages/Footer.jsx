@@ -170,10 +170,10 @@ export function Footer({
             >
               <span
                 aria-hidden="true"
-                style={{ display: "inline-flex", marginTop: 2, flexShrink: 0 }}
+                style={{ display: "inline-flex", marginTop: 1, flexShrink: 0, color: "inherit" }}
               >
                 <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-                  <path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 3v13h10V5H7Zm5 15a1.25 1.25 0 1 0 0-2.5A1.25 1.25 0 0 0 12 20Z" />
+                  <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.49a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.19 2.2Z" />
                 </svg>
               </span>
               <span>+91 97399 86763</span>
