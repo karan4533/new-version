@@ -19,7 +19,7 @@ export function Services() {
   };
 
   const [hasHoverInput, setHasHoverInput] = useState(false);
-  const supportsHoverFlip = hasHoverInput;
+  const supportsHoverFlip = false;
   const [activeCardIndex, setActiveCardIndex] = useState(null);
   const lastPointerTypeRef = useRef("mouse");
 
