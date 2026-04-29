@@ -148,12 +148,94 @@ export function Footer({
               Applied AI Lab for GenAI Transformation
             </p>
 
-            <p style={{ margin: "0 0 4px", fontSize: 13, color: "rgba(255,255,255,.56)" }}>
-              +91 97399 86763
-            </p>
-            <p style={{ margin: "0 0 12px", fontSize: 13, color: "rgba(255,255,255,.56)" }}>
-              www.HeuristicLabs.ai
-            </p>
+            <a
+              href="tel:+919739986763"
+              aria-label="Call us"
+              style={{
+                margin: "0 0 4px",
+                fontSize: 13,
+                lineHeight: 1.5,
+                color: "rgba(255,255,255,.56)",
+                maxWidth: 300,
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 6,
+                textDecoration: "none",
+                transition: "color .2s",
+              }}
+              onMouseEnter={(e) => e.target.style.color = "rgba(255,255,255,.8)"}
+              onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,.56)"}
+            >
+              <span
+                aria-hidden="true"
+                style={{ display: "inline-flex", marginTop: 2, flexShrink: 0 }}
+              >
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                  <path d="M17.707 12.293a1 1 0 0 0-1.414 0L15.586 13.414a1 1 0 0 1-1.414 0c-1.973-1.973-4.121-4.121-6.094-6.094a1 1 0 0 1 0-1.414l1.121-1.121a1 1 0 0 0 0-1.414l-2.828-2.829a1 1 0 0 0-1.414 0L2 3a1 1 0 0 0-.293.707v13.586A1 1 0 0 0 2 18l4.586-4.586a1 1 0 0 1 1.414 0l6.094 6.094a1 1 0 0 0 1.414 0l1.121-1.121a1 1 0 0 1 1.414 0l2.828 2.828a1 1 0 0 0 1.414 0l2.121-2.121a1 1 0 0 0 0-1.414l-2.828-2.828Z" />
+                </svg>
+              </span>
+              <span>+91 97399 86763</span>
+            </a>
+
+            <a
+              href="https://www.HeuristicLabs.ai"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit our website"
+              style={{
+                margin: "0 0 4px",
+                fontSize: 13,
+                lineHeight: 1.5,
+                color: "rgba(255,255,255,.56)",
+                maxWidth: 300,
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 6,
+                textDecoration: "none",
+                transition: "color .2s",
+              }}
+              onMouseEnter={(e) => e.target.style.color = "rgba(255,255,255,.8)"}
+              onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,.56)"}
+            >
+              <span
+                aria-hidden="true"
+                style={{ display: "inline-flex", marginTop: 2, flexShrink: 0 }}
+              >
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5m-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11m3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5Z" />
+                </svg>
+              </span>
+              <span>www.HeuristicLabs.ai</span>
+            </a>
+
+            <a
+              href="mailto:info@heuristiclabs.ai"
+              aria-label="Email us"
+              style={{
+                margin: "0 0 12px",
+                fontSize: 13,
+                lineHeight: 1.5,
+                color: "rgba(255,255,255,.56)",
+                maxWidth: 300,
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 6,
+                textDecoration: "none",
+                transition: "color .2s",
+              }}
+              onMouseEnter={(e) => e.target.style.color = "rgba(255,255,255,.8)"}
+              onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,.56)"}
+            >
+              <span
+                aria-hidden="true"
+                style={{ display: "inline-flex", marginTop: 2, flexShrink: 0 }}
+              >
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+              </span>
+              <span>info@heuristiclabs.ai</span>
+            </a>
             <a
               href={officeMapLink}
               target="_blank"
