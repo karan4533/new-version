@@ -6,7 +6,8 @@ import { SERVICES } from "../../constants/data/services";
 import { FiActivity, FiCompass, FiCpu, FiSettings, FiShield, FiUsers } from "react-icons/fi";
 
 export function Services() {
-  const { isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
+  const { width, isMobile, isTablet, isSmallMobile, isLargeDesktop } = useViewport();
+  const isVerySmallScreen = width < 350;
   const servicesTopPadding = isSmallMobile ? "10px" : isMobile ? "14px" : "20px";
 
   const serviceIconById = {
@@ -246,7 +247,7 @@ export function Services() {
                   style={{
                     position: "relative",
                     width: "100%",
-                    minHeight: isSmallMobile ? 238 : isMobile ? 232 : isTablet ? 248 : 268,
+                    minHeight: isVerySmallScreen ? 240 : isSmallMobile ? 238 : isMobile ? 232 : isTablet ? 248 : 268,
                     height: "100%",
                     transformStyle: "preserve-3d",
                     WebkitTransformStyle: "preserve-3d",
@@ -266,11 +267,11 @@ export function Services() {
                       background:
                         "linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%)",
                       borderRadius: 14,
-                      padding: isSmallMobile ? "16px 14px 42px" : isMobile ? "16px 14px 40px" : "18px 16px 42px",
+                      padding: isVerySmallScreen ? "12px 10px 38px" : isSmallMobile ? "16px 14px 42px" : isMobile ? "16px 14px 40px" : "18px 16px 42px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: isSmallMobile ? 11 : 12,
+                      gap: isVerySmallScreen ? 8 : isSmallMobile ? 11 : 12,
                       transform: "rotateY(0deg) translateZ(1px)",
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
@@ -279,16 +280,16 @@ export function Services() {
                   >
                     <span
                       style={{
-                        width: isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 52 : 56,
-                        height: isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 52 : 56,
+                        width: isVerySmallScreen ? 36 : isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 52 : 56,
+                        height: isVerySmallScreen ? 36 : isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 52 : 56,
                         display: "inline-flex",
                         alignItems: "center",
                         justifyContent: "center",
                         color: T.amber,
-                        marginBottom: isSmallMobile ? 1 : 2,
+                        marginBottom: isVerySmallScreen ? 0 : isSmallMobile ? 1 : 2,
                       }}
                     >
-                      <ServiceTopicIcon size={isSmallMobile ? 28 : isMobile ? 28 : isTablet ? 31 : 34} />
+                      <ServiceTopicIcon size={isVerySmallScreen ? 22 : isSmallMobile ? 28 : isMobile ? 28 : isTablet ? 31 : 34} />
                     </span>
 
                     <h3
@@ -297,14 +298,14 @@ export function Services() {
                         fontFamily: font.serif,
                         fontWeight: 600,
                         color: T.ink,
-                        fontSize: isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 19 : isLargeDesktop ? 25 : 21,
+                        fontSize: isVerySmallScreen ? 18 : isSmallMobile ? 22 : isMobile ? 22 : isTablet ? 19 : isLargeDesktop ? 25 : 21,
                         lineHeight: 1.18,
                         letterSpacing: "-.01em",
                         width: "100%",
                         maxWidth: "100%",
                         minHeight: allowTwoLineTitle
-                          ? (isSmallMobile ? 54 : isMobile ? 54 : isTablet ? 50 : 54)
-                          : (isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 40 : 44),
+                          ? (isVerySmallScreen ? 44 : isSmallMobile ? 54 : isMobile ? 54 : isTablet ? 50 : 54)
+                          : (isVerySmallScreen ? 38 : isSmallMobile ? 46 : isMobile ? 46 : isTablet ? 40 : 44),
                         whiteSpace: "normal",
                         display: "block",
                         overflowWrap: "anywhere",
@@ -319,12 +320,12 @@ export function Services() {
                           margin: 0,
                           width: "100%",
                           fontFamily: font.sans,
-                          fontSize: isSmallMobile ? 15.5 : isMobile ? 15.5 : 14,
+                          fontSize: isVerySmallScreen ? 13 : isSmallMobile ? 15.5 : isMobile ? 15.5 : 14,
                           fontWeight: 500,
                           lineHeight: 1.55,
                           letterSpacing: "0.01em",
                           color: "rgba(30,26,16,.82)",
-                          minHeight: isSmallMobile ? 86 : isMobile ? 84 : 72,
+                          minHeight: isVerySmallScreen ? 70 : isSmallMobile ? 86 : isMobile ? 84 : 72,
                           overflowWrap: "anywhere",
                           marginTop: 2,
                         }}
@@ -345,18 +346,18 @@ export function Services() {
                       aria-label={`Learn more about ${card.name}`}
                       style={{
                         position: "absolute",
-                        right: isSmallMobile ? 10 : 12,
-                        bottom: isSmallMobile ? 10 : 12,
+                        right: isVerySmallScreen ? 8 : isSmallMobile ? 10 : 12,
+                        bottom: isVerySmallScreen ? 8 : isSmallMobile ? 10 : 12,
                         display: "inline-flex",
                         alignItems: "center",
-                        gap: 6,
-                        padding: isSmallMobile ? "5px 10px" : "6px 11px",
+                        gap: 4,
+                        padding: isVerySmallScreen ? "4px 8px" : isSmallMobile ? "5px 10px" : "6px 11px",
                         borderRadius: 999,
                         border: "1px solid rgba(176,120,69,.36)",
                         background: "linear-gradient(180deg, rgba(176,120,69,.14) 0%, rgba(176,120,69,.08) 100%)",
                         color: "rgba(30,26,16,.86)",
                         fontFamily: font.sans,
-                        fontSize: isSmallMobile ? 10 : 11,
+                        fontSize: isVerySmallScreen ? 9 : isSmallMobile ? 10 : 11,
                         fontWeight: 700,
                         letterSpacing: ".05em",
                         textTransform: "uppercase",
@@ -379,11 +380,11 @@ export function Services() {
                       background:
                         "linear-gradient(180deg, rgba(30,26,16,.94) 0%, rgba(40,35,24,.92) 100%)",
                       borderRadius: 14,
-                      padding: isSmallMobile ? "15px 13px 36px" : isMobile ? "16px 14px 38px" : "18px 16px 40px",
+                      padding: isVerySmallScreen ? "12px 10px 44px" : isSmallMobile ? "15px 13px 36px" : isMobile ? "16px 14px 38px" : "18px 16px 40px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: isSmallMobile ? 8 : 9,
+                      gap: isVerySmallScreen ? 6 : isSmallMobile ? 8 : 9,
                       transform: "rotateY(180deg)",
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
@@ -392,35 +393,16 @@ export function Services() {
                   >
                     <span
                       style={{
-                        width: isSmallMobile ? 48 : isMobile ? 50 : isTablet ? 54 : 60,
-                        height: isSmallMobile ? 48 : isMobile ? 50 : isTablet ? 54 : 60,
+                        width: isVerySmallScreen ? 38 : isSmallMobile ? 48 : isMobile ? 50 : isTablet ? 54 : 60,
+                        height: isVerySmallScreen ? 38 : isSmallMobile ? 48 : isMobile ? 50 : isTablet ? 54 : 60,
                         display: "inline-flex",
                         alignItems: "center",
                         justifyContent: "center",
                         color: T.amber,
                       }}
                     >
-                      <ServiceTopicIcon size={isSmallMobile ? 30 : isMobile ? 31 : isTablet ? 34 : 38} />
+                      <ServiceTopicIcon size={isVerySmallScreen ? 24 : isSmallMobile ? 30 : isMobile ? 31 : isTablet ? 34 : 38} />
                     </span>
-
-                    <h3
-                      style={{
-                        margin: 0,
-                        fontFamily: font.serif,
-                        fontWeight: 600,
-                        color: T.ink,
-                        fontSize: isSmallMobile ? 18 : isMobile ? 19 : isTablet ? 20 : isLargeDesktop ? 26 : 22,
-                        lineHeight: 1.12,
-                        letterSpacing: "-.01em",
-                        width: "100%",
-                        maxWidth: "100%",
-                        whiteSpace: "normal",
-                        overflowWrap: "anywhere",
-                        display: "none",
-                      }}
-                    >
-                      {card.name}
-                    </h3>
 
                     <ul
                       style={{
@@ -428,7 +410,7 @@ export function Services() {
                         padding: 0,
                         listStyle: "none",
                         display: "grid",
-                        gap: isSmallMobile ? 6 : 7,
+                        gap: isVerySmallScreen ? 4 : isSmallMobile ? 6 : 7,
                         width: "100%",
                       }}
                     >
@@ -438,14 +420,16 @@ export function Services() {
                           style={{
                             display: "flex",
                             alignItems: "flex-start",
-                            gap: 8,
+                            gap: isVerySmallScreen ? 6 : 8,
                             color: "rgba(255,255,255,.88)",
                             fontFamily: font.sans,
-                            fontSize: isSmallMobile ? 13 : 14,
+                            fontSize: isVerySmallScreen ? 11 : isSmallMobile ? 13 : 14,
                             lineHeight: 1.52,
+                            wordBreak: "break-word",
+                            overflowWrap: "break-word",
                           }}
                         >
-                          <span aria-hidden="true" style={{ color: T.amber, fontSize: 14 }}>
+                          <span aria-hidden="true" style={{ color: T.amber, fontSize: 14, flexShrink: 0 }}>
                             •
                           </span>
                           <span>{item}</span>
