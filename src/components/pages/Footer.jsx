@@ -41,6 +41,7 @@ export function Footer({
     "Elnet Software City, TS 140 Block 2 & 9, Rajiv Gandhi Salai, Tharamani, Chennai, TN-600113";
   const officeMapLink =
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`;
+  const footerLogoSize = isSmallMobile ? 34 : 40;
 
   const columnHeading = {
     margin: "0 0 14px",
@@ -115,8 +116,9 @@ export function Footer({
                 src={companyLogo}
                 alt="Heuristic Labs logo"
                 style={{
-                  width: isSmallMobile ? 34 : 40,
-                  height: isSmallMobile ? 34 : 40,
+                  width: footerLogoSize,
+                  height: footerLogoSize,
+                  aspectRatio: "1 / 1",
                   objectFit: "contain",
                   filter: "brightness(0) saturate(100%) invert(1)",
                   display: "block",
@@ -178,7 +180,7 @@ export function Footer({
             </a>
 
             <a
-              href="mailto:info@heuristiclabs.ai"
+              href="mailto:connect@heuristiclabs.ai"
               aria-label="Email us"
               style={{
                 margin: "0 0 12px",
@@ -203,7 +205,7 @@ export function Footer({
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
               </span>
-              <span>info@heuristiclabs.ai</span>
+              <span>connect@heuristiclabs.ai</span>
             </a>
             <a
               href={officeMapLink}
